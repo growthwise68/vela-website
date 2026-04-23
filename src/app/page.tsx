@@ -17,7 +17,7 @@ export default function HomePage() {
       <section className="w-full py-20 md:py-32 bg-gradient-to-b from-parchment/50 to-cream/50">
         <div className="max-w-4xl mx-auto px-6 md:px-8 text-center">
           <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-gold mb-4">
-            Long-haul cabin crew
+            By crew, for crew
           </p>
           <h1 className="font-display text-6xl md:text-7xl font-light leading-tight text-ink mb-6">
             Plan rest and readiness around your roster
@@ -73,7 +73,7 @@ export default function HomePage() {
               <SwiperSlide>
                 <div className="bg-gradient-to-br from-amber-100 to-amber-50 h-80 md:h-96 flex flex-col items-center justify-center text-inkMid px-6">
                   <h3 className="font-display text-3xl md:text-4xl text-ink mb-4">Day 1–2: Departure & Adaptation</h3>
-                  <p className="text-lg md:text-xl mb-4 max-w-md">Overnight flight + time zone shift. Sleep debt builds. Your body clock is disrupted.</p>
+                  <p className="text-lg md:text-xl mb-4 max-w-md">Overnight duty + time zone shift. Sleep debt builds. Your body clock is disrupted.</p>
                   <div className="flex gap-3 justify-center text-xs font-mono">
                     <span className="px-3 py-1 bg-blue-200 text-blue-900 rounded">Sleep</span>
                     <span className="px-3 py-1 bg-red-200 text-red-900 rounded">Flight</span>
@@ -217,7 +217,7 @@ export default function HomePage() {
             <div className="bg-cream border-l-2 border-gold rounded-xl p-6 shadow-sm">
               <h3 className="font-display text-3xl text-ink mb-3">Sleep Timing</h3>
               <p className="font-sans text-lg text-inkMid leading-relaxed">
-                Sleep window 22:00–06:00 will boost your readiness for Day 3 flying. Plan light exposure after waking.
+                Sleep window 22:00–06:00 will boost your readiness for Day 3 duty. Plan light exposure after waking.
               </p>
             </div>
             {/* Suggestion Card 2 */}
@@ -252,10 +252,10 @@ export default function HomePage() {
             {/* Testimonial quote */}
             <div>
               <p className="font-display text-3xl md:text-4xl italic text-gold mb-6 leading-relaxed">
-                &ldquo;Every feature in Vela is shaped by crew who fly these routes every month. It&rsquo;s transparent, it&rsquo;s science-backed, and it&rsquo;s built for us—not for airlines or regulators.&rdquo;
+                &ldquo;Every feature in Vela is shaped by cabin crew who work these routes every month. It&rsquo;s transparent, it&rsquo;s science-backed, and it&rsquo;s built for us—not for airlines or regulators.&rdquo;
               </p>
               <p className="font-sans text-lg text-inkMid">
-                <strong className="text-ink text-xl">Captain or First Officer</strong><br />
+                <strong className="text-ink text-xl">Flight Attendant or Pilot</strong><br />
                 <span className="text-base">International Carrier</span>
               </p>
             </div>
