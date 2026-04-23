@@ -16,14 +16,14 @@ export default function HomePage() {
       {/* HERO SECTION */}
       <section className="w-full py-20 md:py-32 bg-gradient-to-b from-parchment/50 to-cream/50">
         <div className="max-w-4xl mx-auto px-6 md:px-8 text-center">
-          <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-gold mb-4">
+          <p className="font-mono text-xs md:text-sm uppercase tracking-[0.2em] text-gold mb-4 font-semibold">
             By crew, for crew
           </p>
           <h1 className="font-display text-6xl md:text-7xl font-light leading-tight text-ink mb-6">
             Plan rest and readiness around your roster
           </h1>
           <p className="font-sans text-xl md:text-2xl font-light text-inkMid max-w-2xl mx-auto mb-8 leading-relaxed">
-            Vela helps you see how sleep timing and time zones may affect your readiness—using
+            Véla helps you see how sleep timing and time zones may affect your readiness—using
             transparent, schedule-based estimates. Built for crew, with science you can
             understand.
           </p>
@@ -37,14 +37,14 @@ export default function HomePage() {
       <section className="w-full py-12 md:py-16 bg-cream">
         <div className="max-w-4xl mx-auto px-6 md:px-8">
           <div className="rounded-[20px] border border-warmLine bg-parchment/80 p-8">
-            <p className="font-mono text-[9px] uppercase tracking-[0.2em] text-inkFaint mb-3">
+            <p className="font-mono text-xs md:text-sm uppercase tracking-[0.2em] text-inkFaint mb-3 font-semibold">
               Important
             </p>
             <p className="font-sans text-base md:text-lg text-inkMid leading-relaxed">
-              Vela is a <strong className="font-medium text-ink">personal lifestyle planning</strong> tool. It
+              Véla is a <strong className="font-medium text-ink">personal lifestyle planning</strong> tool. It
               is not a medical device and does not provide medical, health, or safety advice. Readiness
               scores are estimates for personal planning only—not for safety-critical or fitness-for-duty
-              decisions. Vela is not part of any airline Fatigue Risk Management System (FRMS) and does
+              decisions. Véla is not part of any airline Fatigue Risk Management System (FRMS) and does
               not replace your operator&rsquo;s fitness-for-duty requirements or professional medical advice.
             </p>
           </div>
@@ -118,7 +118,7 @@ export default function HomePage() {
             Knowledge is power. When you understand the mechanism—not just the symptom—you can make better choices for yourself.
           </p>
           <p className="font-sans text-xl md:text-2xl text-inkMid mb-8 leading-relaxed">
-            Vela doesn&rsquo;t tell you what to do. It shows you why you feel the way you do. By combining your actual roster with published sleep science, Vela reveals how sleep timing, time zones, and duty patterns affect your readiness. This is transparency you can trust.
+            Véla doesn&rsquo;t tell you what to do. It shows you why you feel the way you do. By combining your actual roster with published sleep science, Véla reveals how sleep timing, time zones, and duty patterns affect your readiness. This is transparency you can trust.
           </p>
           {/* Knowledge Section Carousel */}
           <div className="mb-6">
@@ -181,7 +181,7 @@ export default function HomePage() {
               <SwiperSlide>
                 <div className="bg-gradient-to-br from-blue-50 to-purple-50 h-80 md:h-96 flex flex-col items-center justify-center text-inkMid px-6">
                   <h3 className="font-display text-3xl md:text-4xl text-ink mb-4">Your Personal Insights</h3>
-                  <p className="text-lg md:text-xl mb-6 max-w-md">Over time, Vela learns your patterns and helps you understand what works for you.</p>
+                  <p className="text-lg md:text-xl mb-6 max-w-md">Over time, Véla learns your patterns and helps you understand what works for you.</p>
                   <div className="w-full max-w-md bg-white rounded-lg shadow-sm p-4 space-y-3">
                     <div className="flex items-start gap-3">
                       <div className="w-2 h-2 rounded-full bg-gold mt-2 flex-shrink-0"></div>
@@ -210,7 +210,7 @@ export default function HomePage() {
             Get practical guidance tailored to your roster
           </h2>
           <p className="font-sans text-xl md:text-2xl text-inkMid mb-12 leading-relaxed">
-            Based on your schedule, Vela suggests optimal sleep timing, light exposure windows, and meal timing to help you manage fatigue. These aren&rsquo;t medical directives—they&rsquo;re starting points you can test and refine. Over time, you&rsquo;ll learn what works for you.
+            Based on your schedule, Véla suggests optimal sleep timing, light exposure windows, and meal timing to help you manage fatigue. These aren&rsquo;t medical directives—they&rsquo;re starting points you can test and refine. Over time, you&rsquo;ll learn what works for you.
           </p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {/* Suggestion Card 1 */}
@@ -252,7 +252,7 @@ export default function HomePage() {
             {/* Testimonial quote */}
             <div>
               <p className="font-display text-3xl md:text-4xl italic text-gold mb-6 leading-relaxed">
-                &ldquo;Every feature in Vela is shaped by cabin crew who work these routes every month. It&rsquo;s transparent, it&rsquo;s science-backed, and it&rsquo;s built for us—not for airlines or regulators.&rdquo;
+                &ldquo;Every feature in Véla is shaped by cabin crew who work these routes every month. It&rsquo;s transparent, it&rsquo;s science-backed, and it&rsquo;s built for us—not for airlines or regulators.&rdquo;
               </p>
               <p className="font-sans text-lg text-inkMid">
                 <strong className="text-ink text-xl">Flight Attendant or Pilot</strong><br />
@@ -270,7 +270,7 @@ export default function HomePage() {
             Your personal readiness companion
           </h2>
           <p className="font-sans text-xl md:text-2xl text-inkMid max-w-2xl mx-auto mb-8 leading-relaxed">
-            Download Vela. Enter your roster. See your readiness forecast and sleep timing suggestions. No medical jargon. No airline bureaucracy. Just clear, understandable insights you can act on.
+            Download Véla. Enter your roster. See your readiness forecast and sleep timing suggestions. No medical jargon. No airline bureaucracy. Just clear, understandable insights you can act on.
           </p>
           <button className="inline-block px-6 py-3 bg-gold text-ink font-semibold rounded hover:bg-yellow-600 transition-all hover:scale-105">
             Get TestFlight Access
@@ -281,7 +281,7 @@ export default function HomePage() {
       {/* APP STORE LINKS */}
       <section className="w-full py-12 md:py-16 bg-cream border-t border-warmLine">
         <div className="max-w-4xl mx-auto px-6 md:px-8 flex flex-col md:flex-row items-center gap-6">
-          <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-inkFaint">
+          <span className="font-mono text-xs md:text-sm uppercase tracking-[0.2em] text-inkFaint font-semibold">
             App store links
           </span>
           <p className="font-sans text-sm text-inkMid">
