@@ -179,7 +179,7 @@ Re-run when legal text or domain changes.
 | Area | DRI | Notes |
 |------|-----|-------|
 | Website product & copy | Iain Giffen | Aligns with GTM |
-| Public support (name on `/support`) | Iain Giffen | Set `NEXT_PUBLIC_SUPPORT_EMAIL` in Vercel when the public inbox is ready |
+| Public support (name on `/support`) | Iain Giffen | Set `NEXT_PUBLIC_SUPPORT_EMAIL` in Vercel after the **final site URL** (and public inbox) are ready; same address in stores |
 | Legal / Privacy & Terms review | _TBD_ | Draft from repo first |
 | App Store Connect URLs | _TBD_ | Paired with iOS build owner |
 | Google Play URLs | _TBD_ | Paired with Android build owner |
@@ -220,6 +220,7 @@ Re-run when legal text or domain changes.
 | 1.0 | 2026-04-23 | Initial plan: objectives, context, stages 0–5, pass/fail, tests, DRIs |
 | 1.1 | 2026-04-23 | §10: Next.js MVP scaffold in this repo; Stages 3–5 remain human/console work |
 | 1.2 | 2026-04-23 | §6/§8: Stage 0 signed; support DRI Iain Giffen; `NEXT_PUBLIC_SUPPORT_EMAIL` documented |
+| 1.3 | 2026-04-23 | README/§6: finalize site URL before support email + store email fields |
 
 ## 10. Implementation status (this repository)
 

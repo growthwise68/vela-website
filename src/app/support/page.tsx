@@ -31,9 +31,10 @@ export default function SupportPage() {
           </p>
         ) : (
           <p className="mt-3 font-sans text-sm text-inkMid">
-            Set a public support address in your hosting environment as{" "}
-            <code className="font-mono text-ink">NEXT_PUBLIC_SUPPORT_EMAIL</code> so it appears
-            here (and use the <strong>same</strong> address in the stores).
+            When your <strong>final site URL</strong> and public support inbox are ready, set{" "}
+            <code className="font-mono text-ink">NEXT_PUBLIC_SUPPORT_EMAIL</code> in Vercel so it
+            appears here (use the <strong>same</strong> address in App Store Connect and Google
+            Play). It is normal to ship the site first and add the email afterward.
           </p>
         )}
       </div>

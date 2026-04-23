@@ -19,8 +19,10 @@ Open [http://localhost:3000](http://localhost:3000). Routes: `/`, `/privacy`, `/
 
 | Variable | Purpose |
 |----------|---------|
-| `NEXT_PUBLIC_SITE_URL` | Canonical site URL for `sitemap.xml` and `robots.txt`. Set in Vercel to your `*.vercel.app` or custom domain. |
-| `NEXT_PUBLIC_SUPPORT_EMAIL` | Public support inbox (e.g. `support@...`). Shown on `/support`; use the same address in App Store Connect / Play where required. |
+| `NEXT_PUBLIC_SITE_URL` | Canonical site URL for `sitemap.xml` and `robots.txt`. Set in Vercel to your `*.vercel.app` or custom domain. **Set this once the production URL is final** (redeploy after changing it). |
+| `NEXT_PUBLIC_SUPPORT_EMAIL` | Optional until you are ready. Public support inbox (e.g. `support@yourdomain...`). Shown on `/support` when set; use the **same** address in App Store Connect / Play. It is fine to **finalize the site URL first**, then add this when the public support address is live. |
+
+**Suggested order:** deploy → set `NEXT_PUBLIC_SITE_URL` → (optional) custom domain → add `NEXT_PUBLIC_SUPPORT_EMAIL` and store listings.
 
 ## Deploy (Vercel — free Hobby plan)
 
