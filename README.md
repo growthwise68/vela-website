@@ -2,6 +2,8 @@
 
 Marketing and compliance pages for the Vela app: Next.js 15 (App Router), Tailwind, Vercel. Design tokens align with `docs/UIUX/Vela_FlutterFlow_Spec.md` in the app repo.
 
+**Repository:** [github.com/growthwise68/vela-website](https://github.com/growthwise68/vela-website)
+
 **Master plan:** [vela_website_planning.md](./vela_website_planning.md) (stages, pass/fail, tests, human gates).
 
 ## Quick start
