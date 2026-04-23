@@ -19,10 +19,10 @@ export default function HomePage() {
           <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-gold mb-4">
             Long-haul cabin crew
           </p>
-          <h1 className="font-display text-5xl md:text-6xl font-light leading-tight text-ink mb-6">
+          <h1 className="font-display text-6xl md:text-7xl font-light leading-tight text-ink mb-6">
             Plan rest and readiness around your roster
           </h1>
-          <p className="font-sans text-lg font-light text-inkMid max-w-2xl mx-auto mb-8 leading-relaxed">
+          <p className="font-sans text-xl md:text-2xl font-light text-inkMid max-w-2xl mx-auto mb-8 leading-relaxed">
             Vela helps you see how sleep timing and time zones may affect your readiness—using
             transparent, schedule-based estimates. Built for crew, with science you can
             understand.
@@ -40,7 +40,7 @@ export default function HomePage() {
             <p className="font-mono text-[9px] uppercase tracking-[0.2em] text-inkFaint mb-3">
               Important
             </p>
-            <p className="font-sans text-sm text-inkMid leading-relaxed">
+            <p className="font-sans text-base md:text-lg text-inkMid leading-relaxed">
               Vela is a <strong className="font-medium text-ink">personal lifestyle planning</strong> tool. It
               is not a medical device and does not provide medical, health, or safety advice. Readiness
               scores are estimates for personal planning only—not for safety-critical or fitness-for-duty
@@ -54,10 +54,10 @@ export default function HomePage() {
       {/* PROBLEM SECTION */}
       <section className="w-full py-20 md:py-32 bg-cream">
         <div className="max-w-4xl mx-auto px-6 md:px-8">
-          <h2 className="font-display text-4xl md:text-5xl font-light text-ink mb-6 border-b-2 border-gold pb-4">
+          <h2 className="font-display text-5xl md:text-6xl font-light text-ink mb-6 border-b-2 border-gold pb-4">
             Your job breaks your body&rsquo;s clock
           </h2>
-          <p className="font-sans text-lg text-inkMid mb-8 leading-relaxed">
+          <p className="font-sans text-xl md:text-2xl text-inkMid mb-8 leading-relaxed">
             Crossing time zones, working at night, sleeping at odd hours—long-haul flying disrupts everything your body expects. You might feel exhausted after a short trip, alert after a long one. You don&rsquo;t know if it&rsquo;s jet lag, accumulated sleep debt, or the roster itself. This unpredictability means you&rsquo;re always guessing how ready you really are.
           </p>
           {/* Problem Section Carousel */}
@@ -72,8 +72,8 @@ export default function HomePage() {
             >
               <SwiperSlide>
                 <div className="bg-gradient-to-br from-amber-100 to-amber-50 h-80 md:h-96 flex flex-col items-center justify-center text-inkMid px-6">
-                  <h3 className="font-display text-2xl text-ink mb-4">Day 1–2: Departure & Adaptation</h3>
-                  <p className="text-sm mb-4 max-w-md">Overnight flight + time zone shift. Sleep debt builds. Your body clock is disrupted.</p>
+                  <h3 className="font-display text-3xl md:text-4xl text-ink mb-4">Day 1–2: Departure & Adaptation</h3>
+                  <p className="text-lg md:text-xl mb-4 max-w-md">Overnight flight + time zone shift. Sleep debt builds. Your body clock is disrupted.</p>
                   <div className="flex gap-3 justify-center text-xs font-mono">
                     <span className="px-3 py-1 bg-blue-200 text-blue-900 rounded">Sleep</span>
                     <span className="px-3 py-1 bg-red-200 text-red-900 rounded">Flight</span>
@@ -83,8 +83,8 @@ export default function HomePage() {
               </SwiperSlide>
               <SwiperSlide>
                 <div className="bg-gradient-to-br from-amber-100 to-amber-50 h-80 md:h-96 flex flex-col items-center justify-center text-inkMid px-6">
-                  <h3 className="font-display text-2xl text-ink mb-4">Day 3–4: Peak Fatigue Window</h3>
-                  <p className="text-sm mb-4 max-w-md">Sleep window doesn&rsquo;t align with your circadian rhythm. This is when readiness dips most.</p>
+                  <h3 className="font-display text-3xl md:text-4xl text-ink mb-4">Day 3–4: Peak Fatigue Window</h3>
+                  <p className="text-lg md:text-xl mb-4 max-w-md">Sleep window doesn&rsquo;t align with your circadian rhythm. This is when readiness dips most.</p>
                   <div className="flex gap-3 justify-center text-xs font-mono">
                     <span className="px-3 py-1 bg-blue-200 text-blue-900 rounded">Sleep</span>
                     <span className="px-3 py-1 bg-red-200 text-red-900 rounded">Flight</span>
@@ -94,8 +94,8 @@ export default function HomePage() {
               </SwiperSlide>
               <SwiperSlide>
                 <div className="bg-gradient-to-br from-amber-100 to-amber-50 h-80 md:h-96 flex flex-col items-center justify-center text-inkMid px-6">
-                  <h3 className="font-display text-2xl text-ink mb-4">Day 5+: Recovery Begins</h3>
-                  <p className="text-sm mb-4 max-w-md">Sleep timing starts to align. Readiness recovers if you prioritize rest. Understanding helps you act.</p>
+                  <h3 className="font-display text-3xl md:text-4xl text-ink mb-4">Day 5+: Recovery Begins</h3>
+                  <p className="text-lg md:text-xl mb-4 max-w-md">Sleep timing starts to align. Readiness recovers if you prioritize rest. Understanding helps you act.</p>
                   <div className="flex gap-3 justify-center text-xs font-mono">
                     <span className="px-3 py-1 bg-blue-200 text-blue-900 rounded">Sleep</span>
                     <span className="px-3 py-1 bg-red-200 text-red-900 rounded">Flight</span>
@@ -111,13 +111,13 @@ export default function HomePage() {
       {/* KNOWLEDGE SECTION */}
       <section className="w-full py-20 md:py-32 bg-parchment">
         <div className="max-w-4xl mx-auto px-6 md:px-8">
-          <h2 className="font-display text-4xl md:text-5xl font-light text-ink mb-6 border-b-2 border-gold pb-4">
+          <h2 className="font-display text-5xl md:text-6xl font-light text-ink mb-6 border-b-2 border-gold pb-4">
             Understand why you feel the way you do
           </h2>
-          <p className="font-display text-xl italic text-gold mb-8 pl-4 border-l-2 border-gold leading-relaxed">
+          <p className="font-display text-2xl md:text-3xl italic text-gold mb-8 pl-4 border-l-2 border-gold leading-relaxed">
             Knowledge is power. When you understand the mechanism—not just the symptom—you can make better choices for yourself.
           </p>
-          <p className="font-sans text-lg text-inkMid mb-8 leading-relaxed">
+          <p className="font-sans text-xl md:text-2xl text-inkMid mb-8 leading-relaxed">
             Vela doesn&rsquo;t tell you what to do. It shows you why you feel the way you do. By combining your actual roster with published sleep science, Vela reveals how sleep timing, time zones, and duty patterns affect your readiness. This is transparency you can trust.
           </p>
           {/* Knowledge Section Carousel */}
@@ -132,8 +132,8 @@ export default function HomePage() {
             >
               <SwiperSlide>
                 <div className="bg-gradient-to-br from-blue-50 to-purple-50 h-80 md:h-96 flex flex-col items-center justify-center text-inkMid px-6">
-                  <h3 className="font-display text-2xl text-ink mb-4">Your Readiness Forecast</h3>
-                  <p className="text-sm mb-6 max-w-md">A 7-day outlook shows how sleep timing and time zones affect your readiness score.</p>
+                  <h3 className="font-display text-3xl md:text-4xl text-ink mb-4">Your Readiness Forecast</h3>
+                  <p className="text-lg md:text-xl mb-6 max-w-md">A 7-day outlook shows how sleep timing and time zones affect your readiness score.</p>
                   <div className="w-full max-w-md h-32 bg-white rounded-lg shadow-sm border-l-4 border-gold flex items-end justify-around px-4 py-4">
                     <div className="flex flex-col items-center gap-1">
                       <div className="h-16 w-4 bg-gold rounded-t"></div>
@@ -160,8 +160,8 @@ export default function HomePage() {
               </SwiperSlide>
               <SwiperSlide>
                 <div className="bg-gradient-to-br from-blue-50 to-purple-50 h-80 md:h-96 flex flex-col items-center justify-center text-inkMid px-6">
-                  <h3 className="font-display text-2xl text-ink mb-4">Sleep Timing Suggestions</h3>
-                  <p className="text-sm mb-6 max-w-md">Get specific, schedule-based recommendations for sleep windows and light exposure.</p>
+                  <h3 className="font-display text-3xl md:text-4xl text-ink mb-4">Sleep Timing Suggestions</h3>
+                  <p className="text-lg md:text-xl mb-6 max-w-md">Get specific, schedule-based recommendations for sleep windows and light exposure.</p>
                   <div className="w-full max-w-md bg-white rounded-lg shadow-sm p-4 space-y-3">
                     <div className="border-l-4 border-gold pl-3">
                       <p className="text-xs font-semibold text-ink">Optimal Sleep: 22:00–06:00</p>
@@ -180,8 +180,8 @@ export default function HomePage() {
               </SwiperSlide>
               <SwiperSlide>
                 <div className="bg-gradient-to-br from-blue-50 to-purple-50 h-80 md:h-96 flex flex-col items-center justify-center text-inkMid px-6">
-                  <h3 className="font-display text-2xl text-ink mb-4">Your Personal Insights</h3>
-                  <p className="text-sm mb-6 max-w-md">Over time, Vela learns your patterns and helps you understand what works for you.</p>
+                  <h3 className="font-display text-3xl md:text-4xl text-ink mb-4">Your Personal Insights</h3>
+                  <p className="text-lg md:text-xl mb-6 max-w-md">Over time, Vela learns your patterns and helps you understand what works for you.</p>
                   <div className="w-full max-w-md bg-white rounded-lg shadow-sm p-4 space-y-3">
                     <div className="flex items-start gap-3">
                       <div className="w-2 h-2 rounded-full bg-gold mt-2 flex-shrink-0"></div>
@@ -206,31 +206,31 @@ export default function HomePage() {
       {/* SUGGESTIONS SECTION */}
       <section className="w-full py-20 md:py-32 bg-cream">
         <div className="max-w-4xl mx-auto px-6 md:px-8">
-          <h2 className="font-display text-4xl md:text-5xl font-light text-ink mb-6 border-b-2 border-gold pb-4">
+          <h2 className="font-display text-5xl md:text-6xl font-light text-ink mb-6 border-b-2 border-gold pb-4">
             Get practical guidance tailored to your roster
           </h2>
-          <p className="font-sans text-lg text-inkMid mb-12 leading-relaxed">
+          <p className="font-sans text-xl md:text-2xl text-inkMid mb-12 leading-relaxed">
             Based on your schedule, Vela suggests optimal sleep timing, light exposure windows, and meal timing to help you manage fatigue. These aren&rsquo;t medical directives—they&rsquo;re starting points you can test and refine. Over time, you&rsquo;ll learn what works for you.
           </p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {/* Suggestion Card 1 */}
             <div className="bg-cream border-l-2 border-gold rounded-xl p-6 shadow-sm">
-              <h3 className="font-display text-2xl text-ink mb-3">Sleep Timing</h3>
-              <p className="font-sans text-inkMid leading-relaxed">
+              <h3 className="font-display text-3xl text-ink mb-3">Sleep Timing</h3>
+              <p className="font-sans text-lg text-inkMid leading-relaxed">
                 Sleep window 22:00–06:00 will boost your readiness for Day 3 flying. Plan light exposure after waking.
               </p>
             </div>
             {/* Suggestion Card 2 */}
             <div className="bg-cream border-l-2 border-gold rounded-xl p-6 shadow-sm">
-              <h3 className="font-display text-2xl text-ink mb-3">Light Exposure</h3>
-              <p className="font-sans text-inkMid leading-relaxed">
+              <h3 className="font-display text-3xl text-ink mb-3">Light Exposure</h3>
+              <p className="font-sans text-lg text-inkMid leading-relaxed">
                 Seek light at 07:00 tomorrow to reset your circadian rhythm after the overnight flight.
               </p>
             </div>
             {/* Suggestion Card 3 */}
             <div className="bg-cream border-l-2 border-gold rounded-xl p-6 shadow-sm">
-              <h3 className="font-display text-2xl text-ink mb-3">Recovery Priority</h3>
-              <p className="font-sans text-inkMid leading-relaxed">
+              <h3 className="font-display text-3xl text-ink mb-3">Recovery Priority</h3>
+              <p className="font-sans text-lg text-inkMid leading-relaxed">
                 Post-flight: prioritize sleep over activity. Your fatigue debt is highest in the first 12 hours.
               </p>
             </div>
@@ -241,7 +241,7 @@ export default function HomePage() {
       {/* BY-CREW-FOR-CREW SECTION */}
       <section className="w-full py-20 md:py-32 bg-parchment">
         <div className="max-w-4xl mx-auto px-6 md:px-8">
-          <h2 className="font-display text-4xl md:text-5xl font-light text-ink mb-12 border-b-2 border-gold pb-4">
+          <h2 className="font-display text-5xl md:text-6xl font-light text-ink mb-12 border-b-2 border-gold pb-4">
             Built with people who live this
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
@@ -251,12 +251,12 @@ export default function HomePage() {
             </div>
             {/* Testimonial quote */}
             <div>
-              <p className="font-display text-2xl italic text-gold mb-6 leading-relaxed">
+              <p className="font-display text-3xl md:text-4xl italic text-gold mb-6 leading-relaxed">
                 &ldquo;Every feature in Vela is shaped by crew who fly these routes every month. It&rsquo;s transparent, it&rsquo;s science-backed, and it&rsquo;s built for us—not for airlines or regulators.&rdquo;
               </p>
-              <p className="font-sans text-inkMid">
-                <strong className="text-ink">Captain or First Officer</strong><br />
-                <span className="text-sm">International Carrier</span>
+              <p className="font-sans text-lg text-inkMid">
+                <strong className="text-ink text-xl">Captain or First Officer</strong><br />
+                <span className="text-base">International Carrier</span>
               </p>
             </div>
           </div>
@@ -266,10 +266,10 @@ export default function HomePage() {
       {/* FINAL CTA SECTION */}
       <section className="w-full py-20 md:py-32 bg-gradient-to-b from-parchment/50 to-cream/50">
         <div className="max-w-4xl mx-auto px-6 md:px-8 text-center">
-          <h2 className="font-display text-4xl md:text-5xl font-light text-ink mb-6">
+          <h2 className="font-display text-5xl md:text-6xl font-light text-ink mb-6">
             Your personal readiness companion
           </h2>
-          <p className="font-sans text-lg text-inkMid max-w-2xl mx-auto mb-8 leading-relaxed">
+          <p className="font-sans text-xl md:text-2xl text-inkMid max-w-2xl mx-auto mb-8 leading-relaxed">
             Download Vela. Enter your roster. See your readiness forecast and sleep timing suggestions. No medical jargon. No airline bureaucracy. Just clear, understandable insights you can act on.
           </p>
           <button className="inline-block px-6 py-3 bg-gold text-ink font-semibold rounded hover:bg-yellow-600 transition-all hover:scale-105">

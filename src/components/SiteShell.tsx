@@ -12,8 +12,9 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
     <div className="min-h-screen flex flex-col">
       <header className="border-b border-warmLine bg-cream/90 backdrop-blur-sm sticky top-0 z-10">
         <div className="mx-auto flex max-w-3xl items-center justify-between gap-4 px-6 py-4">
-          <Link href="/" className="font-display text-2xl font-light tracking-tight text-ink">
-            Vela
+          <Link href="/" className="flex items-center gap-2 font-display text-4xl font-medium tracking-tight text-ink hover:text-gold transition-colors">
+            <span className="text-gold text-3xl">★</span>
+            <span>VELA</span>
           </Link>
           <nav className="flex flex-wrap items-center justify-end gap-x-5 gap-y-2 font-mono text-[10px] uppercase tracking-[0.18em] text-inkFaint">
             {nav.map((item) => (
