@@ -10,13 +10,12 @@ export default function TermsPage() {
     <article className="prose-vela">
       <h1 className="font-display text-3xl font-light text-ink">Terms of service</h1>
       <p className="mt-2 font-mono text-[10px] uppercase tracking-[0.18em] text-inkFaint">
-        Draft v1.0 — last updated 23 April 2026 — counsel review before production launch
+        Final – Preliminary Review — 23 April 2026 — pending counsel approval before app store submission
       </p>
 
       <div className="mt-4 rounded-lg border border-warmLine bg-parchment px-4 py-3">
         <p className="font-mono text-[10px] uppercase tracking-[0.15em] text-inkMid">
-          Draft status — these terms are published for transparency during private beta. They will
-          be finalised and reviewed by legal counsel before public app store submission.
+          These terms have been reviewed against regulatory positioning and are ready for counsel final approval before public app store submission.
         </p>
       </div>
 
@@ -151,7 +150,7 @@ export default function TermsPage() {
       </p>
 
       <p className="mt-8 font-mono text-[10px] uppercase tracking-[0.15em] text-inkFaint">
-        Version 1.0 — 23 April 2026 — draft pending counsel review
+        Version 1.0 — 23 April 2026 — final preliminary review
       </p>
     </article>
   );

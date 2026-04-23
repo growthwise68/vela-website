@@ -10,13 +10,12 @@ export default function PrivacyPage() {
     <article className="prose-vela">
       <h1 className="font-display text-3xl font-light text-ink">Privacy policy</h1>
       <p className="mt-2 font-mono text-[10px] uppercase tracking-[0.18em] text-inkFaint">
-        Draft v1.0 — last updated 23 April 2026 — counsel review before production launch
+        Final – Preliminary Review — 23 April 2026 — pending counsel approval before app store submission
       </p>
 
       <div className="mt-4 rounded-lg border border-warmLine bg-parchment px-4 py-3">
         <p className="font-mono text-[10px] uppercase tracking-[0.15em] text-inkMid">
-          Draft status — this policy is published for transparency during private beta. It will be
-          finalised and reviewed by legal counsel before public app store submission.
+          This policy has been reviewed against regulatory positioning and is ready for counsel final approval before public app store submission.
         </p>
       </div>
 
@@ -180,7 +179,7 @@ export default function PrivacyPage() {
       </p>
 
       <p className="mt-8 font-mono text-[10px] uppercase tracking-[0.15em] text-inkFaint">
-        Version 1.0 — 23 April 2026 — draft pending counsel review
+        Version 1.0 — 23 April 2026 — final preliminary review
       </p>
     </article>
   );
