@@ -19,10 +19,14 @@ Open [http://localhost:3000](http://localhost:3000). Routes: `/`, `/privacy`, `/
 
 | Variable | Purpose |
 |----------|---------|
-| `NEXT_PUBLIC_SITE_URL` | Canonical site URL for `sitemap.xml` and `robots.txt`. Set in Vercel to your `*.vercel.app` or custom domain. **Set this once the production URL is final** (redeploy after changing it). |
+| `NEXT_PUBLIC_SITE_URL` | Canonical site URL for `sitemap.xml`, `robots.txt`, and `metadataBase`. Default in code is `https://vela-website-lilac.vercel.app`. Override in Vercel when you add a custom domain. |
 | `NEXT_PUBLIC_SUPPORT_EMAIL` | Optional until you are ready. Public support inbox (e.g. `support@yourdomain...`). Shown on `/support` when set; use the **same** address in App Store Connect / Play. It is fine to **finalize the site URL first**, then add this when the public support address is live. |
 
-**Suggested order:** deploy → set `NEXT_PUBLIC_SITE_URL` → (optional) custom domain → add `NEXT_PUBLIC_SUPPORT_EMAIL` and store listings.
+**Production domain (stable):** `https://vela-website-lilac.vercel.app` — use this in store and social “website” fields. A **deployment** URL (e.g. `vela-website-7xc4227i3-….vercel.app`) is per-build; it is not a good canonical link.
+
+**Suggested order:** deploy → confirm `NEXT_PUBLIC_SITE_URL` in Vercel matches the stable domain (optional, code already defaults correctly) → custom domain when ready → add `NEXT_PUBLIC_SUPPORT_EMAIL` and store listings.
+
+Copy [`.env.example`](./.env.example) to `.env.local` for local dev if you want to override defaults.
 
 ## Deploy (Vercel — free Hobby plan)
 

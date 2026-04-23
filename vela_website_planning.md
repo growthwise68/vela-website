@@ -221,9 +221,11 @@ Re-run when legal text or domain changes.
 | 1.1 | 2026-04-23 | §10: Next.js MVP scaffold in this repo; Stages 3–5 remain human/console work |
 | 1.2 | 2026-04-23 | §6/§8: Stage 0 signed; support DRI Iain Giffen; `NEXT_PUBLIC_SUPPORT_EMAIL` documented |
 | 1.3 | 2026-04-23 | README/§6: finalize site URL before support email + store email fields |
+| 1.4 | 2026-04-23 | Canonical Vercel domain `vela-website-lilac.vercel.app` in `src/lib/site.ts`, `.env.example` |
 
 ## 10. Implementation status (this repository)
 
 - **Code:** Next.js 15 (App Router) + Tailwind, Vercel-ready. See [`README.md`](./README.md) for `npm run dev`, `NEXT_PUBLIC_SITE_URL`, and deploy steps.
 - **Routes live:** `/`, `/privacy`, `/terms`, `/support` — draft legal copy; Stage 3 (counsel) before treating as production.
+- **Canonical URL (Vercel):** `https://vela-website-lilac.vercel.app` — default in [`src/lib/site.ts`](./src/lib/site.ts); sitemap/robots use this unless `NEXT_PUBLIC_SITE_URL` overrides (e.g. custom domain). Per-deployment hostnames are not canonical.
 - **Stages 4–5:** Set URLs in App Store Connect, Play Console, Facebook; then custom domain and env update.

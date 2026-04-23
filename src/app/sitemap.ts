@@ -1,11 +1,10 @@
 import type { MetadataRoute } from "next";
-
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://example.vercel.app";
+import { SITE_URL } from "@/lib/site";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const paths = ["/", "/privacy", "/terms", "/support"];
   return paths.map((path) => ({
-    url: `${siteUrl}${path}`,
+    url: `${SITE_URL}${path}`,
     lastModified: new Date(),
   }));
 }
