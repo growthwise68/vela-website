@@ -27,7 +27,7 @@ export default function HomePage() {
           is not a medical device and does not provide medical, health, or safety advice. Readiness
           scores are estimates for personal planning only—not for safety-critical or fitness-for-duty
           decisions. Vela is not part of any airline Fatigue Risk Management System (FRMS) and does
-          not replace your operator's fitness-for-duty requirements or professional medical advice.
+          not replace your operator&rsquo;s fitness-for-duty requirements or professional medical advice.
         </p>
       </div>
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
