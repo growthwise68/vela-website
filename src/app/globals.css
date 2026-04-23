@@ -1,0 +1,25 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --page-bg: #faf6f0;
+  --text: #2c2418;
+}
+
+body {
+  @apply bg-cream text-ink antialiased;
+}
+
+.prose-vela h2 {
+  @apply font-display text-2xl text-ink mt-10 mb-4;
+}
+
+.prose-vela p,
+.prose-vela li {
+  @apply font-sans text-[15px] leading-relaxed text-inkMid;
+}
+
+.prose-vela ul {
+  @apply list-disc pl-5 space-y-2;
+}
