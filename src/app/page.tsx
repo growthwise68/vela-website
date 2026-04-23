@@ -23,10 +23,11 @@ export default function HomePage() {
           Important
         </p>
         <p className="mt-2 font-sans text-sm text-inkMid">
-          Vela is a <strong className="font-medium text-ink">lifestyle planning</strong> tool. It
-          is not a medical device and does not provide medical or safety advice. Readiness
-          figures are estimates for personal planning, not for safety-critical or fitness-for-duty
-          decisions. Vela is not part of an airline Fatigue Risk Management System (FRMS).
+          Vela is a <strong className="font-medium text-ink">personal lifestyle planning</strong> tool. It
+          is not a medical device and does not provide medical, health, or safety advice. Readiness
+          scores are estimates for personal planning only—not for safety-critical or fitness-for-duty
+          decisions. Vela is not part of any airline Fatigue Risk Management System (FRMS) and does
+          not replace your operator's fitness-for-duty requirements or professional medical advice.
         </p>
       </div>
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
