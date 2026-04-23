@@ -29,7 +29,25 @@ Vercel’s **Hobby** plan is free for personal and small projects (fair-use limi
 - This folder is a **Next.js** app (already configured).
 - Code must live in a **Git** repo on **GitHub**, **GitLab**, or **Bitbucket** (Vercel deploys from git).
 
-If this `website` folder is **not** on git yet, from your machine in this directory:
+**If you are setting up GitHub for the first time** (this folder is already committed locally):
+
+1. On [github.com/new](https://github.com/new), create a **new repository**:
+   - Choose a name (e.g. `vela-website`).
+   - Leave it **empty**: do **not** add a README, `.gitignore`, or license (avoids merge conflicts).
+2. In a terminal, from **this** `website` folder, run (replace `USER` and `REPO` with yours):
+
+```bash
+git remote add origin https://github.com/USER/REPO.git
+git push -u origin main
+```
+
+Use **SSH** if you use SSH keys: `git remote add origin git@github.com:USER/REPO.git`
+
+If you need to fix the author on the first commit (name/email for GitHub), run `git config user.name` / `user.email` in this repo, then `git commit --amend --reset-author --no-edit`.
+
+---
+
+If this folder had **no** git history yet, you would run:
 
 ```bash
 git init
@@ -37,15 +55,7 @@ git add .
 git commit -m "Initial Vela website"
 ```
 
-Create a **new empty repository** on GitHub (no README needed), then:
-
-```bash
-git remote add origin https://github.com/<your-username>/<repo-name>.git
-git branch -M main
-git push -u origin main
-```
-
-(Use SSH if you prefer: `git@github.com:...`.)
+…then add `origin` and `git push` as above.
 
 ### Step-by-step: first deploy
 
