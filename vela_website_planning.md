@@ -104,6 +104,13 @@ flowchart LR
 **Work:** Implement responsive pages: home, Privacy, Terms, Support/Contact; deploy to Vercel; no placeholder lorem on public paths; HTTPS.  
 **Human gate:** Internal review on preview URL — **Pass** → promote to production Vercel deployment (still `*.vercel.app` until Stage 5).
 
+### Stage 2.5 — Waitlist Survey (in-scope extension)
+
+**Rationale:** Supports §1.1 "Enable soft conversion" — collects crew experience data before public launch and builds an early-access waitlist. Deliberately kept outside Stage 3 legal scope (survey is research, not a public product page).  
+**Work:** Full-screen survey at `/survey` (10 questions: energy, routes, time zones, fatigue challenges, recovery, coping, circadian awareness, utility score, willingness to pay, email capture); `/survey/thank-you` confirmation screen; API route `/api/survey` writing to Supabase `survey_responses` table; survey link in main nav and homepage CTA. All survey copy must pass regulatory language check against `REGULATORY_POSITIONING.md`.  
+**Status: ✅ Complete** — deployed to `main`, Supabase table live, pending Vercel env vars (`NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`).  
+**Human gate:** DRI confirms end-to-end submission on production URL and verifies data appears in Supabase dashboard.
+
 ### Stage 3 — Legal content
 
 **Work:** Expand draft legal pages from `REGULATORY_POSITIONING.md` and counsel as needed; add last-updated/version footer; optional “draft” banner until review completes.  
@@ -130,6 +137,7 @@ flowchart LR
 | **0** | This doc complete; DRIs named; stakeholders signed §8 | Missing sections; no DRI |
 | **1** | Sitemap includes `/`, `/privacy`, `/terms`, `/support` (or equivalent); tokens documented | Missing must-have routes; brand tokens ignored |
 | **2** | All public routes HTTP 200 on production; HTTPS; mobile-readable; no lorem | 404/5xx; broken SSL; placeholder text |
+| **2.5** | Survey end-to-end on production; data in Supabase; copy passes regulatory language check | Submission errors; banned terms in copy; env vars missing in Vercel |
 | **3** | Disclaimers consistent with `REGULATORY_POSITIONING.md`; dated footer; review status explicit | Banned terms; contradictions with app |
 | **4** | Store/Play/Page URLs match live site; in-app links match where required | Any console points to wrong host or 404 |
 | **5** | Custom domain works; consoles updated; redirects OK | Mixed content; stale `vercel.app` in production listings |

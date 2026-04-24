@@ -95,7 +95,7 @@ const questions: Question[] = [
     id: "coping",
     type: "multi",
     index: "06",
-    text: "What do you currently use to manage fatigue and sleep?",
+    text: "What do you currently use to support your sleep and recovery?",
     sub: "Select everything that applies.",
     options: [
       "Melatonin or sleep supplements",
@@ -125,7 +125,7 @@ const questions: Question[] = [
     id: "utility",
     type: "scale",
     index: "08",
-    text: "How useful would a personalised circadian management app be for your life?",
+    text: "How useful would a personalised readiness planning app be for your life?",
     sub: "One that uses your actual roster to give you specific guidance.",
     scaleMin: "Not useful",
     scaleMax: "Absolutely essential",
@@ -406,10 +406,10 @@ export default function SurveyPage() {
                 <div className="intro-body">
                   You spend your career flying across time zones.
                   <br />
-                  This is 3 minutes that might change how you&rsquo;ll recover.
+                  3 minutes to help us build something designed around your world.
                 </div>
                 <div className="intro-sub">
-                  We&rsquo;re building Vela — a fatigue management app built
+                  We&rsquo;re building Vela — a readiness planning app built
                   specifically for long-haul crew. Before we ship, we want to
                   understand your world. Your responses shape what we build.
                 </div>
