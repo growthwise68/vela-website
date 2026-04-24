@@ -38,14 +38,13 @@ export async function POST(req: NextRequest) {
       energy,
       route_type,
       timezone_crossings,
-      fatigue_challenge,
       recovery_time,
       coping_strategies,
-      circadian_awareness,
       app_utility,
       willingness_to_pay,
       email,
       name,
+      answers,
     } = body;
 
     // Validation checks
@@ -80,9 +79,7 @@ export async function POST(req: NextRequest) {
     const requiredFields = [
       "route_type",
       "timezone_crossings",
-      "fatigue_challenge",
       "recovery_time",
-      "circadian_awareness",
       "willingness_to_pay",
     ];
 
@@ -121,17 +118,14 @@ export async function POST(req: NextRequest) {
           energy: parseInt(energy),
           route_type,
           timezone_crossings,
-          fatigue_challenge,
           recovery_time,
-          coping_strategies: Array.isArray(coping_strategies)
-            ? coping_strategies
-            : [],
-          circadian_awareness,
+          coping_strategies: Array.isArray(coping_strategies) ? coping_strategies : [],
           app_utility: parseInt(app_utility),
           willingness_to_pay,
           email: email.toLowerCase(),
           name: name.trim(),
           ip_hash,
+          answers: answers ?? {},
         },
       ])
       .select();

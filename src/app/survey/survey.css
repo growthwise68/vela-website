@@ -186,6 +186,16 @@
 }
 
 /* Question */
+.survey-wrapper .q-section {
+  font-family: "DM Mono", monospace;
+  font-size: 0.58rem;
+  letter-spacing: 0.2em;
+  color: var(--amber);
+  text-transform: uppercase;
+  margin-bottom: 0.35rem;
+  opacity: 0.75;
+}
+
 .survey-wrapper .q-index {
   font-family: "DM Mono", monospace;
   font-size: 0.65rem;
@@ -449,6 +459,20 @@
 
 .survey-wrapper .text-input:focus {
   border-color: rgba(196, 151, 106, 0.4);
+}
+
+.survey-wrapper .opentext-input {
+  width: 100%;
+  min-height: 130px;
+  resize: vertical;
+  line-height: 1.6;
+  margin-top: 0.5rem;
+}
+
+.survey-wrapper .multi-max-hint {
+  color: var(--amber);
+  opacity: 0.8;
+  font-size: 0.85em;
 }
 
 /* CTA button */
