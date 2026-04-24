@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vela — Crew Fatigue Survey</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Mono:wght@300;400&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --navy:#040D1A;
+  --navy-mid:#081628;
+  --navy-card:rgba(255,255,255,0.04);
+  --navy-hover:rgba(255,255,255,0.07);
+  --amber:#C4976A;
+  --amber-light:#DEB98A;
+  --amber-glow:rgba(196,151,106,0.15);
+  --teal:#4ECDC4;
+  --teal-dim:#3BA9A1;
+  --text-primary:#E8E0D5;
+  --text-secondary:rgba(232,224,213,0.55);
+  --text-hint:rgba(232,224,213,0.35);
+  --border:rgba(255,255,255,0.08);
+  --border-selected:rgba(196,151,106,0.5);
+  --transition:0.4s cubic-bezier(0.4,0,0.2,1);
+}
+html,body{height:100%;overflow:hidden}
+body{
+  background:var(--navy);
+  color:var(--text-primary);
+  font-family:'Outfit',sans-serif;
+  font-weight:300;
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  position:relative;
+}
+
+/* Star field */
+.stars{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.star{position:absolute;background:#fff;border-radius:50%;animation:twinkle var(--d,3s) ease-in-out infinite var(--delay,0s)}
+@keyframes twinkle{0%,100%{opacity:var(--min-op,0.1)}50%{opacity:var(--max-op,0.6)}}
+
+/* Circadian arc */
+.arc-bg{
+  position:fixed;bottom:-60vw;left:50%;transform:translateX(-50%);
+  width:120vw;height:120vw;
+  border-radius:50%;
+  border:1px solid rgba(78,205,196,0.06);
+  pointer-events:none;z-index:0;
+}
+.arc-bg::before{
+  content:'';position:absolute;inset:8%;border-radius:50%;
+  border:1px solid rgba(196,151,106,0.05);
+}
+
+/* Layout */
+.shell{
+  position:relative;z-index:1;
+  width:100%;max-width:680px;
+  padding:2rem 1.5rem;
+  display:flex;flex-direction:column;
+  align-items:center;
+  min-height:100vh;
+  justify-content:space-between;
+}
+
+/* Header */
+.header{
+  width:100%;display:flex;align-items:center;justify-content:space-between;
+  padding-bottom:1.5rem;
+}
+.logo{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.5rem;font-weight:300;letter-spacing:0.12em;
+  color:var(--amber-light);
+  text-transform:uppercase;
+}
+.logo span{color:var(--text-secondary);font-size:0.75rem;font-family:'DM Mono',monospace;font-weight:300;letter-spacing:0.05em;display:block;margin-top:2px}
+
+/* Progress */
+.progress-wrap{width:100%;margin-bottom:0.5rem}
+.progress-track{
+  width:100%;height:1px;
+  background:var(--border);
+  position:relative;overflow:visible;
+}
+.progress-fill{
+  height:1px;background:linear-gradient(90deg,var(--teal),var(--amber));
+  transition:width 0.6s cubic-bezier(0.4,0,0.2,1);
+  position:relative;
+}
+.progress-fill::after{
+  content:'';position:absolute;right:-3px;top:-3px;
+  width:7px;height:7px;border-radius:50%;
+  background:var(--amber);
+  box-shadow:0 0 8px var(--amber);
+}
+.progress-label{
+  font-family:'DM Mono',monospace;font-size:0.65rem;
+  color:var(--text-hint);letter-spacing:0.1em;
+  margin-top:0.6rem;text-align:right;
+}
+
+/* Screen */
+.screen{
+  flex:1;width:100%;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  padding:1rem 0 2rem;
+}
+.screen-inner{
+  width:100%;
+  opacity:1;transform:translateY(0);
+  transition:opacity var(--transition),transform var(--transition);
+}
+.screen-inner.exit{opacity:0;transform:translateY(-24px)}
+.screen-inner.enter{opacity:0;transform:translateY(24px)}
+
+/* Question */
+.q-index{
+  font-family:'DM Mono',monospace;font-size:0.65rem;letter-spacing:0.15em;
+  color:var(--teal);margin-bottom:0.75rem;text-transform:uppercase;
+}
+.q-text{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(1.6rem,4vw,2.2rem);
+  font-weight:300;line-height:1.3;
+  color:var(--text-primary);
+  margin-bottom:0.5rem;
+}
+.q-sub{
+  font-size:0.85rem;color:var(--text-secondary);
+  margin-bottom:2rem;line-height:1.5;
+}
+
+/* Options */
+.options{display:flex;flex-direction:column;gap:0.6rem;width:100%}
+.option{
+  background:var(--navy-card);
+  border:1px solid var(--border);
+  border-radius:8px;
+  padding:0.9rem 1.2rem;
+  cursor:pointer;
+  display:flex;align-items:center;gap:0.75rem;
+  transition:all 0.2s ease;
+  font-size:0.9rem;
+  color:var(--text-primary);
+  user-select:none;
+}
+.option:hover{background:var(--navy-hover);border-color:rgba(255,255,255,0.15)}
+.option.selected{
+  background:var(--amber-glow);
+  border-color:var(--border-selected);
+  color:var(--amber-light);
+}
+.option-dot{
+  width:16px;height:16px;border-radius:50%;
+  border:1px solid var(--border);flex-shrink:0;
+  transition:all 0.2s ease;
+  display:flex;align-items:center;justify-content:center;
+}
+.option.selected .option-dot{
+  background:var(--amber);border-color:var(--amber);
+}
+.option-dot::after{
+  content:'';width:6px;height:6px;border-radius:50%;
+  background:#fff;opacity:0;transition:opacity 0.15s;
+}
+.option.selected .option-dot::after{opacity:1}
+
+/* Multi-select indicator */
+.option.multi .option-dot{border-radius:3px}
+.option.multi.selected .option-dot::after{
+  width:8px;height:6px;border-radius:0;
+  background:transparent;
+  border-left:2px solid #fff;border-bottom:2px solid #fff;
+  transform:rotate(-45deg) translate(1px,-1px);
+  opacity:1;
+}
+
+/* Grid options (for short labels) */
+.options.grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:0.6rem;
+}
+
+/* Scale */
+.scale-wrap{width:100%}
+.scale-labels{
+  display:flex;justify-content:space-between;
+  font-size:0.7rem;font-family:'DM Mono',monospace;
+  color:var(--text-hint);letter-spacing:0.05em;
+  margin-bottom:0.75rem;
+}
+.scale-options{display:flex;gap:0.5rem}
+.scale-btn{
+  flex:1;aspect-ratio:1;
+  background:var(--navy-card);border:1px solid var(--border);
+  border-radius:6px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'DM Mono',monospace;font-size:0.85rem;
+  color:var(--text-secondary);
+  transition:all 0.2s;
+}
+.scale-btn:hover{background:var(--navy-hover);color:var(--text-primary)}
+.scale-btn.selected{
+  background:var(--amber-glow);
+  border-color:var(--border-selected);
+  color:var(--amber-light);
+}
+
+/* Energy scale (intro) */
+.energy-scale{display:flex;gap:0.75rem;width:100%}
+.energy-btn{
+  flex:1;padding:1.1rem 0.5rem;
+  background:var(--navy-card);border:1px solid var(--border);
+  border-radius:8px;cursor:pointer;
+  display:flex;flex-direction:column;align-items:center;gap:0.4rem;
+  transition:all 0.2s;
+}
+.energy-btn:hover{background:var(--navy-hover)}
+.energy-btn.selected{background:var(--amber-glow);border-color:var(--border-selected)}
+.energy-icon{font-size:1.3rem;line-height:1}
+.energy-label{font-size:0.65rem;font-family:'DM Mono',monospace;
+  color:var(--text-secondary);letter-spacing:0.05em;text-align:center;
+}
+.energy-btn.selected .energy-label{color:var(--amber-light)}
+
+/* Email screen */
+.email-screen{width:100%;text-align:center}
+.email-intro{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(1.4rem,3.5vw,1.9rem);
+  font-weight:300;line-height:1.3;
+  margin-bottom:0.5rem;
+}
+.email-sub{font-size:0.85rem;color:var(--text-secondary);margin-bottom:2rem;line-height:1.6}
+.field-group{display:flex;flex-direction:column;gap:0.75rem;width:100%;margin-bottom:1.5rem}
+.field-label{
+  font-family:'DM Mono',monospace;font-size:0.65rem;letter-spacing:0.12em;
+  color:var(--text-hint);margin-bottom:0.3rem;text-transform:uppercase;
+}
+.field-wrap{display:flex;flex-direction:column}
+.text-input{
+  background:var(--navy-card);
+  border:1px solid var(--border);
+  border-radius:8px;
+  padding:0.85rem 1.1rem;
+  font-size:0.9rem;font-family:'Outfit',sans-serif;font-weight:300;
+  color:var(--text-primary);
+  outline:none;
+  transition:border-color 0.2s;
+  -webkit-appearance:none;
+}
+.text-input::placeholder{color:var(--text-hint)}
+.text-input:focus{border-color:rgba(196,151,106,0.4)}
+
+/* CTA button */
+.cta{
+  width:100%;padding:1rem;
+  background:linear-gradient(135deg,var(--amber),var(--amber-light));
+  border:none;border-radius:8px;cursor:pointer;
+  font-family:'Outfit',sans-serif;font-weight:500;font-size:0.9rem;
+  color:#1A0F00;letter-spacing:0.05em;
+  transition:opacity 0.2s,transform 0.15s;
+}
+.cta:hover{opacity:0.92;transform:translateY(-1px)}
+.cta:active{transform:translateY(0)}
+.cta:disabled{opacity:0.4;cursor:not-allowed;transform:none}
+
+/* Nav */
+.nav{
+  width:100%;display:flex;align-items:center;
+  justify-content:space-between;padding-top:1rem;
+}
+.nav-back{
+  background:none;border:none;cursor:pointer;
+  font-family:'DM Mono',monospace;font-size:0.75rem;
+  color:var(--text-hint);letter-spacing:0.08em;
+  display:flex;align-items:center;gap:0.4rem;
+  transition:color 0.2s;padding:0.5rem 0;
+}
+.nav-back:hover{color:var(--text-secondary)}
+.nav-back svg{width:14px;height:14px;stroke:currentColor;fill:none}
+.next-btn{
+  background:none;
+  border:1px solid var(--border-selected);
+  border-radius:6px;
+  padding:0.55rem 1.2rem;
+  font-family:'DM Mono',monospace;font-size:0.75rem;
+  color:var(--amber-light);letter-spacing:0.1em;
+  cursor:pointer;transition:all 0.2s;
+}
+.next-btn:hover{background:var(--amber-glow)}
+.next-btn:disabled{opacity:0.3;cursor:not-allowed}
+
+/* Thank you */
+.thankyou{text-align:center;padding:2rem 0}
+.thankyou-mark{
+  width:56px;height:56px;border-radius:50%;
+  border:1px solid var(--teal);
+  display:flex;align-items:center;justify-content:center;
+  margin:0 auto 1.5rem;
+  color:var(--teal);font-size:1.4rem;
+}
+.thankyou h2{
+  font-family:'Cormorant Garamond',serif;
+  font-size:2rem;font-weight:300;margin-bottom:0.75rem;
+}
+.thankyou p{font-size:0.9rem;color:var(--text-secondary);line-height:1.7;max-width:460px;margin:0 auto}
+.waitlist-badge{
+  display:inline-block;margin-top:1.5rem;
+  font-family:'DM Mono',monospace;font-size:0.7rem;letter-spacing:0.1em;
+  color:var(--teal);border:1px solid rgba(78,205,196,0.3);
+  border-radius:20px;padding:0.4rem 1rem;
+}
+
+/* Intro screen */
+.intro-screen{text-align:center;padding:1rem 0}
+.vela-wordmark{
+  font-family:'Cormorant Garamond',serif;
+  font-size:3.5rem;font-weight:300;letter-spacing:0.15em;
+  color:var(--amber-light);text-transform:uppercase;
+  margin-bottom:0.25rem;
+}
+.vela-tagline{
+  font-family:'DM Mono',monospace;font-size:0.7rem;letter-spacing:0.15em;
+  color:var(--text-hint);margin-bottom:2rem;
+}
+.intro-body{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.4rem;font-weight:300;line-height:1.5;
+  color:var(--text-primary);margin-bottom:0.75rem;
+}
+.intro-sub{font-size:0.82rem;color:var(--text-secondary);line-height:1.6;max-width:480px;margin:0 auto 2rem}
+.intro-time{
+  font-family:'DM Mono',monospace;font-size:0.7rem;
+  color:var(--text-hint);margin-bottom:2rem;letter-spacing:0.1em;
+}
+</style>
+</head>
+<body>
+
+<div class="stars" id="stars"></div>
+<div class="arc-bg"></div>
+
+<div class="shell">
+
+  <div class="header">
+    <div class="logo">
+      Vela
+      <span>Circadian Intelligence</span>
+    </div>
+    <div class="progress-wrap" style="max-width:220px">
+      <div class="progress-track">
+        <div class="progress-fill" id="progressFill" style="width:0%"></div>
+      </div>
+      <div class="progress-label" id="progressLabel"></div>
+    </div>
+  </div>
+
+  <div class="screen" id="screen">
+    <div class="screen-inner" id="screenInner"></div>
+  </div>
+
+  <div class="nav" id="nav">
+    <button class="nav-back" id="backBtn" onclick="goBack()">
+      <svg viewBox="0 0 16 16"><polyline points="10,3 5,8 10,13"/></svg>
+      Back
+    </button>
+    <button class="next-btn" id="nextBtn" onclick="goNext()">Continue →</button>
+  </div>
+
+</div>
+
+<script>
+const questions = [
+  {
+    id:'intro',
+    type:'intro'
+  },
+  {
+    id:'energy',
+    type:'energy',
+    index:'01',
+    text:'How are you feeling right now?',
+    sub:'Let\'s start with a baseline check-in.',
+    options:[
+      {label:'Running on fumes',icon:'🔋'},
+      {label:'Below par',icon:'🌤'},
+      {label:'Getting by',icon:'☀️'},
+      {label:'Pretty good',icon:'⚡'},
+      {label:'Fully charged',icon:'🚀'},
+    ]
+  },
+  {
+    id:'route',
+    type:'single',
+    index:'02',
+    text:'What best describes your typical flying pattern?',
+    sub:'Choose the option that fits most of your roster.',
+    options:[
+      'Short-haul only (< 4 hrs)',
+      'Mostly short with some long-haul',
+      'Long-haul focused (8–14 hrs)',
+      'Ultra long-haul specialist (14+ hrs)',
+      'Mixed — it varies widely'
+    ]
+  },
+  {
+    id:'zones',
+    type:'single',
+    index:'03',
+    text:'How many time zones do you cross in a typical month?',
+    sub:'Roughly — we\'re not auditing your logbook.',
+    options:[
+      '1 to 3 — mostly regional',
+      '4 to 8 — moderate crossing',
+      '9 to 12 — significant disruption',
+      '13 or more — full circadian chaos'
+    ],
+    grid:false
+  },
+  {
+    id:'challenge',
+    type:'single',
+    index:'04',
+    text:'What\'s your biggest fatigue challenge?',
+    sub:'The one that affects your life most consistently.',
+    options:[
+      'Sleeping on layovers, even when exhausted',
+      'Recovering and readjusting back home',
+      'Energy crashes mid-flight or mid-duty',
+      'Overall sleep quality — it\'s just poor',
+      'Managing social and family life around the roster',
+      'All of the above, honestly'
+    ]
+  },
+  {
+    id:'recovery',
+    type:'single',
+    index:'05',
+    text:'After a long-haul rotation, how long until you feel like yourself again?',
+    sub:'',
+    options:[
+      'Under 24 hours — I bounce back fast',
+      '1 to 2 days',
+      '3 to 4 days',
+      'Close to a week',
+      'What\'s feeling normal?'
+    ]
+  },
+  {
+    id:'coping',
+    type:'multi',
+    index:'06',
+    text:'What do you currently use to manage fatigue and sleep?',
+    sub:'Select everything that applies.',
+    options:[
+      'Melatonin or sleep supplements',
+      'Sleep mask and earplugs',
+      'Deliberate caffeine timing',
+      'Light exposure strategies',
+      'Exercise and movement',
+      'A fitness or sleep tracker',
+      'Nothing specific — just push through',
+      'I\'ve tried everything, nothing works well'
+    ]
+  },
+  {
+    id:'awareness',
+    type:'single',
+    index:'07',
+    text:'How familiar are you with circadian rhythm science for shift workers?',
+    sub:'',
+    options:[
+      'Deeply — I know the research',
+      'Somewhat — I\'ve read a bit',
+      'Heard of it, don\'t know the detail',
+      'Not at all familiar'
+    ]
+  },
+  {
+    id:'utility',
+    type:'scale',
+    index:'08',
+    text:'How useful would a personalised circadian management app be for your life?',
+    sub:'One that uses your actual roster to give you specific guidance.',
+    scaleMin:'Not useful',
+    scaleMax:'Absolutely essential',
+    scale:5
+  },
+  {
+    id:'pay',
+    type:'single',
+    index:'09',
+    text:'If it genuinely improved your sleep and recovery, what would you pay per month?',
+    sub:'Be honest — this helps us build something people actually use.',
+    options:[
+      'Nothing — it should be free',
+      'Under $5 / month',
+      '$5 to $10 / month',
+      '$10 to $20 / month',
+      'More than $20 if it really works'
+    ]
+  },
+  {
+    id:'email',
+    type:'email',
+    index:'10'
+  }
+];
+
+let current = 0;
+let answers = {};
+let animating = false;
+
+function makeStars(){
+  const c = document.getElementById('stars');
+  const count = 90;
+  for(let i=0;i<count;i++){
+    const s = document.createElement('div');
+    s.className = 'star';
+    const size = Math.random()*1.8+0.4;
+    s.style.cssText = `
+      width:${size}px;height:${size}px;
+      left:${Math.random()*100}%;top:${Math.random()*100}%;
+      --d:${2+Math.random()*4}s;
+      --delay:-${Math.random()*6}s;
+      --min-op:${0.05+Math.random()*0.1};
+      --max-op:${0.3+Math.random()*0.5};
+    `;
+    c.appendChild(s);
+  }
+}
+
+function updateProgress(){
+  const total = questions.length - 1;
+  const pct = current === 0 ? 0 : Math.round((current / total) * 100);
+  document.getElementById('progressFill').style.width = pct + '%';
+  if(current === 0){
+    document.getElementById('progressLabel').textContent = '';
+  } else {
+    document.getElementById('progressLabel').textContent = `${current} of ${total}`;
+  }
+}
+
+function renderQ(){
+  const q = questions[current];
+  const inner = document.getElementById('screenInner');
+  const nav = document.getElementById('nav');
+  const backBtn = document.getElementById('backBtn');
+  const nextBtn = document.getElementById('nextBtn');
+
+  backBtn.style.visibility = current === 0 ? 'hidden' : 'visible';
+  nextBtn.style.display = (q.type === 'email') ? 'none' : 'block';
+
+  let html = '';
+
+  if(q.type === 'intro'){
+    nav.style.display = 'none';
+    html = `
+      <div class="intro-screen">
+        <div class="vela-wordmark">Vela</div>
+        <div class="vela-tagline">Circadian Intelligence for Cabin Crew</div>
+        <div class="intro-body">You spend your career flying across time zones.<br>This is 3 minutes that might change how you recover.</div>
+        <div class="intro-sub">We're building Vela — a fatigue management app built specifically for long-haul crew. Before we ship, we want to understand your world. Your responses shape what we build.</div>
+        <div class="intro-time">⏱ Takes about 3 minutes · Completely anonymous</div>
+        <button class="cta" onclick="goNext()" style="max-width:320px;margin:0 auto;display:block">Begin the survey →</button>
+      </div>`;
+  } else if(q.type === 'email'){
+    nav.style.display = 'none';
+    const prevEmail = answers['email_addr'] || '';
+    const prevName = answers['email_name'] || '';
+    html = `
+      <div class="email-screen">
+        <div class="q-index">Final step</div>
+        <div class="email-intro">You're exactly who we're building this for.</div>
+        <div class="email-sub">Join the Vela waitlist and be first in line for beta access. We'll send you one email when we're ready — nothing else.</div>
+        <div class="field-group">
+          <div class="field-wrap">
+            <div class="field-label">First name</div>
+            <input class="text-input" id="nameInput" type="text" placeholder="Your first name" value="${prevName}" autocomplete="given-name">
+          </div>
+          <div class="field-wrap">
+            <div class="field-label">Email address</div>
+            <input class="text-input" id="emailInput" type="email" placeholder="you@example.com" value="${prevEmail}" autocomplete="email">
+          </div>
+        </div>
+        <button class="cta" id="submitBtn" onclick="submitSurvey()">Claim my early access →</button>
+        <div style="margin-top:0.75rem;font-size:0.72rem;color:var(--text-hint);font-family:'DM Mono',monospace;letter-spacing:0.05em">No spam. Unsubscribe anytime.</div>
+      </div>`;
+  } else if(q.type === 'energy'){
+    const sel = answers[q.id];
+    html = `
+      <div class="q-index">${q.index} / 09</div>
+      <div class="q-text">${q.text}</div>
+      <div class="q-sub">${q.sub}</div>
+      <div class="energy-scale">
+        ${q.options.map((o,i)=>`
+          <div class="energy-btn${sel===i?' selected':''}" onclick="selectEnergy(${i})">
+            <div class="energy-icon">${o.icon}</div>
+            <div class="energy-label">${o.label}</div>
+          </div>`).join('')}
+      </div>`;
+  } else if(q.type === 'single'){
+    const sel = answers[q.id];
+    html = `
+      <div class="q-index">${q.index} / 09</div>
+      <div class="q-text">${q.text}</div>
+      ${q.sub ? `<div class="q-sub">${q.sub}</div>` : '<div style="margin-bottom:2rem"></div>'}
+      <div class="options${q.grid?' grid':''}">
+        ${q.options.map((o,i)=>`
+          <div class="option${sel===i?' selected':''}" onclick="selectSingle('${q.id}',${i})">
+            <div class="option-dot"></div>
+            <span>${o}</span>
+          </div>`).join('')}
+      </div>`;
+  } else if(q.type === 'multi'){
+    const sel = answers[q.id] || [];
+    html = `
+      <div class="q-index">${q.index} / 09</div>
+      <div class="q-text">${q.text}</div>
+      <div class="q-sub">${q.sub}</div>
+      <div class="options">
+        ${q.options.map((o,i)=>`
+          <div class="option multi${sel.includes(i)?' selected':''}" onclick="toggleMulti('${q.id}',${i})">
+            <div class="option-dot"></div>
+            <span>${o}</span>
+          </div>`).join('')}
+      </div>`;
+  } else if(q.type === 'scale'){
+    const sel = answers[q.id];
+    html = `
+      <div class="q-index">${q.index} / 09</div>
+      <div class="q-text">${q.text}</div>
+      ${q.sub ? `<div class="q-sub">${q.sub}</div>` : '<div style="margin-bottom:2rem"></div>'}
+      <div class="scale-wrap">
+        <div class="scale-labels">
+          <span>${q.scaleMin}</span>
+          <span>${q.scaleMax}</span>
+        </div>
+        <div class="scale-options">
+          ${Array.from({length:q.scale},(_,i)=>`
+            <div class="scale-btn${sel===i+1?' selected':''}" onclick="selectScale('${q.id}',${i+1})">${i+1}</div>`).join('')}
+        </div>
+      </div>`;
+  }
+
+  inner.innerHTML = html;
+  updateNextBtn();
+}
+
+function updateNextBtn(){
+  const q = questions[current];
+  const btn = document.getElementById('nextBtn');
+  if(!btn) return;
+  let enabled = false;
+  if(q.type==='single' || q.type==='energy' || q.type==='scale'){
+    enabled = answers[q.id] !== undefined;
+  } else if(q.type==='multi'){
+    enabled = (answers[q.id]||[]).length > 0;
+  }
+  btn.disabled = !enabled;
+}
+
+function selectSingle(id,i){
+  answers[id] = i;
+  document.querySelectorAll('.option').forEach((el,idx)=>{
+    el.classList.toggle('selected', idx===i);
+  });
+  updateNextBtn();
+  setTimeout(goNext, 320);
+}
+function selectEnergy(i){
+  answers['energy'] = i;
+  document.querySelectorAll('.energy-btn').forEach((el,idx)=>{
+    el.classList.toggle('selected', idx===i);
+  });
+  updateNextBtn();
+  setTimeout(goNext, 320);
+}
+function selectScale(id,v){
+  answers[id] = v;
+  document.querySelectorAll('.scale-btn').forEach((el,idx)=>{
+    el.classList.toggle('selected', idx+1===v);
+  });
+  updateNextBtn();
+  setTimeout(goNext, 380);
+}
+function toggleMulti(id,i){
+  if(!answers[id]) answers[id]=[];
+  const idx = answers[id].indexOf(i);
+  if(idx>-1) answers[id].splice(idx,1);
+  else answers[id].push(i);
+  document.querySelectorAll('.option.multi').forEach((el,eidx)=>{
+    el.classList.toggle('selected', answers[id].includes(eidx));
+  });
+  updateNextBtn();
+}
+
+function transition(direction, cb){
+  if(animating) return;
+  animating = true;
+  const inner = document.getElementById('screenInner');
+  inner.classList.add('exit');
+  setTimeout(()=>{
+    cb();
+    inner.classList.remove('exit');
+    inner.classList.add('enter');
+    requestAnimationFrame(()=>requestAnimationFrame(()=>{
+      inner.classList.remove('enter');
+      animating = false;
+    }));
+  }, 320);
+}
+
+function goNext(){
+  if(animating) return;
+  const q = questions[current];
+  if(q.type==='email') return;
+  if(q.type==='intro'){
+    current++;
+    document.getElementById('nav').style.display='flex';
+    updateProgress();
+    renderQ();
+    return;
+  }
+  transition('next',()=>{
+    current = Math.min(current+1, questions.length-1);
+    updateProgress();
+    renderQ();
+  });
+}
+function goBack(){
+  if(current===0||animating) return;
+  transition('back',()=>{
+    current = Math.max(current-1,0);
+    if(current===0) document.getElementById('nav').style.display='none';
+    updateProgress();
+    renderQ();
+  });
+}
+
+function submitSurvey(){
+  const name = document.getElementById('nameInput').value.trim();
+  const email = document.getElementById('emailInput').value.trim();
+  if(!email || !email.includes('@')){
+    document.getElementById('emailInput').style.borderColor='rgba(229,115,115,0.5)';
+    return;
+  }
+  answers['email_name'] = name;
+  answers['email_addr'] = email;
+
+  const btn = document.getElementById('submitBtn');
+  btn.textContent = 'Saving...';
+  btn.disabled = true;
+
+  // Simulate submission (replace with actual endpoint)
+  setTimeout(()=>{
+    showThankYou(name);
+  }, 800);
+}
+
+function showThankYou(name){
+  const inner = document.getElementById('screenInner');
+  document.getElementById('nav').style.display='none';
+  document.getElementById('progressFill').style.width='100%';
+  document.getElementById('progressLabel').textContent='Complete';
+
+  inner.classList.add('exit');
+  setTimeout(()=>{
+    inner.innerHTML = `
+      <div class="thankyou">
+        <div class="thankyou-mark">✓</div>
+        <h2>${name ? 'Thank you, ' + name + '.' : 'Thank you.'}</h2>
+        <p>Your responses will directly shape how Vela is built. You'll be among the first to experience what circadian intelligence looks like when it's designed specifically for crew life.</p>
+        <div class="waitlist-badge">Early Access Confirmed</div>
+        <p style="margin-top:1.5rem;font-size:0.78rem;color:var(--text-hint);font-family:'DM Mono',monospace;letter-spacing:0.05em">Watch for a message from the Vela team.</p>
+      </div>`;
+    inner.classList.remove('exit');
+    inner.classList.add('enter');
+    requestAnimationFrame(()=>requestAnimationFrame(()=>inner.classList.remove('enter')));
+  },300);
+}
+
+makeStars();
+renderQ();
+</script>
+</body>
+</html>

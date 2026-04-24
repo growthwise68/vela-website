@@ -22,6 +22,9 @@ const config: Config = {
         night: "#1A2540",
         nightMid: "#253352",
         nightPale: "#E8ECF5",
+        navy: "#040D1A",
+        amber: "#C4976A",
+        teal: "#4ECDC4",
       },
       fontFamily: {
         display: ["var(--font-cormorant)", "Georgia", "serif"],

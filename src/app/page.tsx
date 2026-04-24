@@ -1,6 +1,7 @@
 "use client";
 
 import type { Metadata } from "next";
+import Link from "next/link";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import "swiper/css";
@@ -260,6 +261,27 @@ export default function HomePage() {
               </p>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* SURVEY SECTION */}
+      <section className="w-full py-20 md:py-32 bg-parchment border-t border-warmLine">
+        <div className="max-w-4xl mx-auto px-6 md:px-8 text-center">
+          <p className="font-mono text-xs md:text-sm uppercase tracking-[0.2em] text-gold mb-4 font-semibold">
+            Help shape Vela
+          </p>
+          <h2 className="font-display text-5xl md:text-6xl font-light text-ink mb-6">
+            Tell us about your fatigue
+          </h2>
+          <p className="font-sans text-xl md:text-2xl text-inkMid max-w-2xl mx-auto mb-8 leading-relaxed">
+            3 minutes. Your story. No spam. Your responses directly shape what we build next.
+          </p>
+          <Link
+            href="/survey"
+            className="inline-block px-6 py-3 bg-gold text-ink font-semibold rounded hover:bg-yellow-600 transition-all hover:scale-105"
+          >
+            Take the survey →
+          </Link>
         </div>
       </section>
 
