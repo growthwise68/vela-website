@@ -40,7 +40,7 @@ In QA mode, flag any code that doesn't match DESIGN.md (e.g., wrong color hex, u
 - **Build:** Next.js build with ESLint validation (must pass before deploy)
 
 ## Standards
-- Use HTML entity escaping for special characters in JSX (e.g., &rsquo; for apostrophes, &ldquo; for quotes)
+- **Apostrophes and quotes:** In **JavaScript string literals** (e.g. survey `questions` arrays), use Unicode escapes (`\u2019` for ’) or type the character directly — do **not** use HTML entities like `&rsquo;` (they show up literally). In JSX text nodes, `{"..."}` with `\u2019` is the safest pattern.
 - Commit message format: `type: description` (e.g., `feat: add narrative home page sections`, `fix: correct color hex in design tokens`)
 - No secrets in commits (.env files are git-ignored)
 

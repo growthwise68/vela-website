@@ -71,7 +71,9 @@ export default function ThankYouPage() {
                 maxWidth: "460px",
                 margin: "0 auto"
               }}>
-                Your responses will directly shape how Vela is built. You&rsquo;ll be among the first to experience what circadian intelligence looks like when it&rsquo;s designed specifically for crew life.
+                {
+                  "Your responses will directly shape how Vela is built. You\u2019ll be among the first to experience what circadian intelligence looks like when it\u2019s designed specifically for crew life."
+                }
               </p>
               <div className="waitlist-badge">Early Access Confirmed</div>
               <p style={{

@@ -35,7 +35,7 @@ const questions: Question[] = [
   },
   {
     id: "age", type: "single", index: "03", section: "About You",
-    text: "What&rsquo;s your age range?", sub: "",
+    text: "What\u2019s your age range?", sub: "",
     options: ["21–25", "26–30", "31–35", "36–40", "41–50", "51+"],
   },
   {
@@ -439,8 +439,10 @@ export default function SurveyPage() {
                   3 minutes to help us build something designed around your world.
                 </div>
                 <div className="intro-sub">
-                  We&rsquo;re building Vela — a readiness planning app built specifically for long-haul crew.
-                  Before we ship, we want to understand your world. Your responses shape what we build.
+                  {
+                    "We\u2019re building Vela — a readiness planning app built specifically for long-haul crew. " +
+                    "Before we ship, we want to understand your world. Your responses shape what we build."
+                  }
                 </div>
                 <div className="intro-time">⏱ About 4 minutes · Completely anonymous</div>
                 <button
@@ -566,10 +568,14 @@ export default function SurveyPage() {
             {q.type === "email" && (
               <div className="email-screen">
                 <div className="q-index">Final step</div>
-                <div className="email-intro">You&rsquo;re exactly who we&rsquo;re building this for.</div>
+                <div className="email-intro">
+                  {"You\u2019re exactly who we\u2019re building this for."}
+                </div>
                 <div className="email-sub">
-                  Join the Vela waitlist and be first in line for beta access.
-                  We&rsquo;ll send you one email when we&rsquo;re ready — nothing else.
+                  {
+                    "Join the Vela waitlist and be first in line for beta access. " +
+                    "We\u2019ll send you one email when we\u2019re ready — nothing else."
+                  }
                 </div>
                 {error && (
                   <div style={{
