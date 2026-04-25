@@ -1,254 +1,85 @@
-# Vela — Crew Fatigue & Wellbeing Survey
+# Véla — Crew fatigue & wellbeing survey
 
-**Help us build the tool you've never had.**
+**Help us build the tool you’ve never had.**
 
-This survey takes about 4 minutes. Your answers are anonymous and will directly shape how Vela works — built by crew, for crew.
-
----
-
-## Section 1 of 6 — About You
-
-*Basic profile — so we can understand fatigue patterns across different crew demographics.*
-
-**1. What is your current role?**
-
-- [ ] Economy
-- [ ] Business
-- [ ] First
-- [ ] Cabin Supervisor / Manager
-- [ ] Purser
+This document is the **question bank** for the public crew survey. The **live** experience is a shorter flow (about **3 minutes**); the version and field names are defined in `src/app/survey/questions.ts` and submitted with `survey_version: "15q_v1"`.
 
 ---
 
-**2. How many years of flying experience do you have?**
+## What is live now (`15q_v1`)
 
-- [ ] Under 1 year
-- [ ] 1–3 years
-- [ ] 4–7 years
-- [ ] 8–15 years
-- [ ] 16+ years
+- **15 answered questions** after the intro screen (plus one **intro** screen—no answer stored as a question row).
+- **Order:** engaging / emotional questions first; **role** and **flying experience** last.
+- **Branding:** **Véla**; product described as a **lifestyle and wellness companion** (not a “readiness planning app” in survey copy).
+- **Thank-you page:** optional email for beta / waitlist only; survey answers stay **anonymous** in how we describe them on the intro.
 
----
+### Included in production — 15 questions
 
-**3. What is your age range?**
-
-- [ ] 21–25
-- [ ] 26–30
-- [ ] 31–35
-- [ ] 36–40
-- [ ] 41–50
-
----
-
-**4. Where are you based?**
-
-- [ ] UAE (DXB / AUH)
-- [ ] Middle East (Other)
-- [ ] Europe
-- [ ] Asia-Pacific
-- [ ] Americas
-- [ ] Africa
+| # | `id` (code) | Short label |
+|---|-------------|-------------|
+| 01 | `energy` | How are you feeling right now? (emoji scale) |
+| 02 | `recovery` | After a long-haul rotation, how long until you feel like yourself again? |
+| 03 | `personal_life` | How often does fatigue from your roster affect your personal life on days off? |
+| 04 | `utility` | How useful would a lifestyle and wellness companion… (1–5 scale) |
+| 05 | `helpful_features` | What would help you most before a difficult trip? (up to 3) |
+| 06 | `bodyclock` | Do you know where your body clock actually is… |
+| 07 | `route` | What best describes your typical flying pattern? |
+| 08 | `zones` | How many time zones do you cross in a typical month? |
+| 09 | `roster_planning` | When you receive your roster, do you plan sleep and recovery… |
+| 10 | `coping` | What do you currently use to support sleep and recovery? (multi) |
+| 11 | `rested` | How often do you report for duty feeling genuinely well-rested? |
+| 12 | `crew_trust` | Would knowing the app was built by a fellow crew member… |
+| 13 | `pay` | What would you pay per month if it genuinely helped… |
+| 14 | `role` | What is your current role? |
+| 15 | `experience` | How many years have you been flying? |
 
 ---
 
-## Section 2 of 6 — Your Fatigue Reality
+## Full historical list (original long form) — included vs not in `15q_v1`
 
-*We want to understand what fatigue actually feels like in your day-to-day flying life.*
+Below is the **earlier 6-section / 23-question** design. Use this table to see what was **dropped**, **merged**, or **replaced** by the live 15-question set.
 
-**5. How often do you report for duty feeling genuinely well-rested?**
+| Orig. # | Topic (summary) | Status in `15q_v1` |
+|--------:|-----------------|-------------------|
+| 1 | Current role (Economy… Purser) | **Included** → `role` (Q14); options text updated |
+| 2 | Years of flying experience | **Included** → `experience` (Q15) |
+| 3 | Age range | **Not included** |
+| 4 | Where you are based | **Not included** |
+| 5 | How often well-rested reporting for duty | **Included** → `rested` (Q11) |
+| 6 | Involuntary microsleep in critical phases | **Not included** |
+| 7 | Struggle to stay awake on red-eye / ultra-long-haul | **Not included** |
+| 8 | Times in past month performance felt impaired by fatigue | **Not included** |
+| 9 | Concern about safety implications of fatigue (1–5) | **Not included** |
+| 10 | Days to feel “normal” after medium/long-haul | **Replaced** → `recovery` (Q02) uses long-haul *rotation* wording and different buckets |
+| 11 | Know where body clock is | **Included** → `bodyclock` (Q06) |
+| 12 | What you use to manage fatigue/sleep (multi) | **Replaced** → `coping` (Q10) with a different option list |
+| 13 | Fatigue affecting personal life on days off | **Included** → `personal_life` (Q03) |
+| 14 | Plan sleep/recovery around roster | **Included** → `roster_planning` (Q09) |
+| 15 | Dreaded routes or patterns | **Not included** |
+| 16 | Value of personalised alertness forecast (1–5) | **Not included** (related ground covered by `utility` + `helpful_features`) |
+| 17 | What would help most before a difficult trip (up to 3) | **Included** → `helpful_features` (Q05); option wording slightly adjusted |
+| 18 | Would you use an app with personalised fatigue plan | **Not included** |
+| 19 | Monthly price for a tool that helps fatigue / days off | **Included** → `pay` (Q13); price bands adjusted |
+| 20 | Rank features in order | **Not included** |
+| 21 | Trust if built by fellow crew | **Included** → `crew_trust` (Q12); wording adjusted |
+| 22 | Open text: moment fatigue scared you | **Not included** |
+| 23 | Open text: one thing you wish existed | **Not included** |
 
-- [ ] Almost never
-- [ ] Rarely (a few times a month)
-- [ ] Sometimes (about half)
-- [ ] Often
-- [ ] Almost always
+### New questions only in `15q_v1` (no direct “orig. #” match)
 
----
-
-**6. Have you ever experienced involuntary microsleep (eyes closing, head nodding) during critical flight phases?**
-
-*Taxi, takeoff, landing, or emergency briefings*
-
-- [ ] Never
-- [ ] Once or twice
-- [ ] Several times
-- [ ] Regularly
-- [ ] Prefer not to say
-
----
-
-**7. How often do you struggle to stay awake during red-eye / ultra-long-haul flights?**
-
-- [ ] Never
-- [ ] Occasionally
-- [ ] Frequently
-- [ ] Almost every time
-
----
-
-**8. In the past month, how many times have you felt your performance (service, safety awareness, decision-making) was noticeably impaired by fatigue?**
-
-- [ ] 0 times
-- [ ] 1–2 times
-- [ ] 3–5 times
-- [ ] 6–10 times
-- [ ] More than 10
+- **`energy`** — mood / energy check-in (engaging first screen).
+- **`utility`** — usefulness of a lifestyle and wellness companion (1–5).
+- **`route`** — typical flying pattern (short vs long-haul mix).
+- **`zones`** — time zones crossed per month.
 
 ---
 
-**9. How concerned are you about the safety implications of crew fatigue — for yourself or colleagues?**
+## Copy reference (intro screen, live site)
 
-*Rate 1–5, where 1 = Not concerned and 5 = Extremely concerned*
-
-1 — 2 — 3 — 4 — 5
-
----
-
-## Section 3 of 6 — Body Clock & Recovery
-
-*Understanding how time zones and irregular schedules affect your body.*
-
-**10. After a medium or long-haul flight, how many days does it typically take you to feel "normal" again?**
-
-- [ ] Less than 1 day
-- [ ] 1–2 days
-- [ ] 3–4 days
-- [ ] 5+ days
-- [ ] I never fully recover before the next trip
+- Duration: **About 3 minutes**
+- Privacy line: **Anonymous** (no “not shared with employer” on the intro; keep language simple)
+- Purpose: **To ensure we can help you** + understand your world; product = **Véla** as a **lifestyle and wellness companion**
 
 ---
 
-**11. Do you know where your body clock actually is at any given point in your roster?**
-
-- [ ] Yes — I always know
-- [ ] Roughly — I can estimate
-- [ ] Not really — I just know I'm tired
-- [ ] No idea — I've never thought about it
-
----
-
-**12. Which of these do you currently use to manage fatigue or sleep?** *(Select all that apply)*
-
-- [ ] Caffeine timing
-- [ ] Sleep tracking app
-- [ ] Melatonin / sleep aids
-- [ ] Napping strategies
-- [ ] Exercise routines
-- [ ] Light exposure management
-- [ ] Advice from other crew
-- [ ] Nothing — I just push through
-
----
-
-**13. How often does fatigue from your roster affect your personal life on days off?**
-
-- [ ] Almost never
-- [ ] Sometimes
-- [ ] Often
-- [ ] Almost always — I spend days off recovering
-
----
-
-## Section 4 of 6 — Roster & Planning
-
-*How you interact with your schedule — and what's missing.*
-
-**14. When you receive your roster, do you plan your sleep and recovery around it?**
-
-- [ ] Yes — I plan carefully
-- [ ] I try, but I don't know the best approach
-- [ ] Occasionally — only for tough trips
-- [ ] No — I just show up and cope
-
----
-
-**15. Are there specific routes or patterns in your roster that you dread because of how they make you feel physically?**
-
-- [ ] Yes — several
-- [ ] One or two
-- [ ] Not really
-
----
-
-**16. If you could see a personalised alertness forecast based on your roster, how valuable would that be?**
-
-*Rate 1–5, where 1 = Not valuable and 5 = Extremely valuable*
-
-1 — 2 — 3 — 4 — 5
-
----
-
-**17. What would help you most before a difficult trip?** *(Select up to 3)*
-
-- [ ] When to sleep before departure
-- [ ] When to seek or avoid light
-- [ ] Caffeine timing advice
-- [ ] Nap strategy for layover
-- [ ] Alertness danger window warnings
-- [ ] Recovery plan for after the trip
-
----
-
-## Section 5 of 6 — The App You'd Actually Use
-
-*Help us understand what matters to you in a tool — and what it's worth.*
-
-**18. If an app could analyse your roster and give you a personalised fatigue plan (when to sleep, when to avoid light, when your danger windows are), would you use it?**
-
-- [ ] Definitely
-- [ ] Probably
-- [ ] Maybe — depends on the price
-- [ ] Unlikely
-
----
-
-**19. How much would you pay per month for a tool that genuinely helped you manage fatigue and feel better on days off?**
-
-- [ ] I wouldn't pay
-- [ ] Up to $5/month
-- [ ] $5–$10/month
-- [ ] $10–$15/month
-- [ ] $15+/month if it works
-
----
-
-**20. Which features matter most to you?** *(Rank in order of priority — 1 = most important)*
-
-- [ ] Alertness forecasting
-- [ ] Sleep timing recommendations
-- [ ] Light exposure guidance
-- [ ] Danger window alerts
-- [ ] Layover recovery plans
-- [ ] Days-off recovery optimisation
-
----
-
-**21. Would knowing the app was built by a fellow crew member (not a corporation) make you more likely to trust and try it?**
-
-- [ ] Yes — significantly
-- [ ] Somewhat
-- [ ] Doesn't matter to me
-
----
-
-## Section 6 of 6 — In Your Own Words
-
-*These answers are gold — they help us understand what numbers can't capture.*
-
-**22. Describe a moment where fatigue genuinely scared you or affected your ability to do your job.**
-
-*Optional — but your story could help shape the app for thousands of crew.*
-
-> *(Open text response)*
-
----
-
-**23. What's the one thing you wish existed to help you manage your energy and wellbeing as crew?**
-
-> *(Open text response)*
-
----
-
-*All responses are completely anonymous. No personal data is collected.*
-
-*Thank you, crew. Your answers are now part of building something that should have existed years ago.*
+*Responses are treated as confidential research input. The full legal treatment of data is described on the site’s Privacy page.*

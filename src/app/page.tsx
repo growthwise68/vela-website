@@ -268,7 +268,7 @@ export default function HomePage() {
       <section className="w-full py-20 md:py-32 bg-parchment border-t border-warmLine">
         <div className="max-w-4xl mx-auto px-6 md:px-8 text-center">
           <p className="font-mono text-xs md:text-sm uppercase tracking-[0.2em] text-gold mb-4 font-semibold">
-            Help shape Vela
+            Help shape Véla
           </p>
           <h2 className="font-display text-5xl md:text-6xl font-light text-ink mb-6">
             Tell us about your fatigue

@@ -24,6 +24,7 @@ const config: Config = {
         nightPale: "#E8ECF5",
         navy: "#040D1A",
         amber: "#C4976A",
+        coral: "#C45A4A",
         teal: "#4ECDC4",
       },
       fontFamily: {

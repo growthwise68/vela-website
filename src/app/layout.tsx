@@ -28,11 +28,11 @@ const dmMono = DM_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "Vela — Readiness planning for long-haul crew",
-    template: "%s — Vela",
+    default: "Véla — Wellness companion for long-haul crew",
+    template: "%s — Véla",
   },
   description:
-    "Vela is a lifestyle and readiness planning tool for people who travel across time zones, informed by published sleep science. Not a medical device.",
+    "Véla is a lifestyle and wellness companion for people who travel across time zones, informed by published sleep science. Not a medical device.",
 };
 
 export default function RootLayout({
