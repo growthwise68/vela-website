@@ -52,6 +52,7 @@ const questions: Question[] = [
     options: [
       "Short-haul only (< 4 hrs)",
       "Mostly short with some long-haul",
+      "Mostly long-haul, some short",
       "Long-haul focused (8–14 hrs)",
       "Ultra long-haul specialist (14+ hrs)",
       "Mixed — it varies widely",
