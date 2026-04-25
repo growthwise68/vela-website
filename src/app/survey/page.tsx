@@ -6,7 +6,7 @@ import "./survey.css";
 
 type Question = {
   id: string;
-  type: "intro" | "energy" | "single" | "multi" | "scale" | "email" | "opentext";
+  type: "intro" | "energy" | "single" | "multi" | "scale" | "opentext";
   index?: string;
   section?: string;
   text?: string;
@@ -212,9 +212,6 @@ const questions: Question[] = [
     sub: "Optional — your answer could be the thing we build next.",
     optional: true,
   },
-
-  // Email capture
-  { id: "email", type: "email" },
 ];
 
 export default function SurveyPage() {
@@ -247,7 +244,7 @@ export default function SurveyPage() {
   };
 
   const q = questions[current];
-  const questionCount = questions.filter((q) => q.type !== "intro" && q.type !== "email").length;
+  const questionCount = questions.filter((q) => q.type !== "intro").length;
   const total = questions.length - 1;
   const progress = current === 0 ? 0 : Math.round((current / total) * 100);
 
@@ -272,8 +269,12 @@ export default function SurveyPage() {
   };
 
   const goNext = () => {
-    if (animating || q.type === "email") return;
+    if (animating || isSubmitting) return;
     if (q.type === "intro") { setCurrent(1); return; }
+    if (current >= questions.length - 1) {
+      submitSurvey();
+      return;
+    }
     handleTransition(() => setCurrent(Math.min(current + 1, questions.length - 1)));
   };
 
@@ -319,18 +320,7 @@ export default function SurveyPage() {
     indices.map((i) => getLabel(qId, i));
 
   const submitSurvey = async () => {
-    const nameInput = document.getElementById("nameInput") as HTMLInputElement;
-    const emailInput = document.getElementById("emailInput") as HTMLInputElement;
-    const name = nameInput?.value.trim() || "";
-    const email = emailInput?.value.trim() || "";
-
-    if (!email || !email.includes("@")) {
-      setError("Please enter a valid email");
-      if (emailInput) emailInput.style.borderColor = "rgba(229,115,115,0.5)";
-      return;
-    }
-    if (!name) { setError("Please enter your name"); return; }
-
+    if (isSubmitting) return;
     setIsSubmitting(true);
     setError(null);
 
@@ -344,8 +334,8 @@ export default function SurveyPage() {
       coping_strategies: getLabels("coping", (answers.coping as number[]) || []),
       app_utility: (answers.utility as number) || 0,
       willingness_to_pay: getLabel("pay", answers.pay as number),
-      email,
-      name,
+      email: null as string | null,
+      name: null as string | null,
       answers: {
         role: getLabel("role", answers.role as number),
         experience: getLabel("experience", answers.experience as number),
@@ -375,16 +365,17 @@ export default function SurveyPage() {
       const result = await response.json();
 
       if (!response.ok) {
-        if (response.status === 409) {
-          setError("This email has already been registered. Thank you for your interest!");
-        } else {
-          setError(result.error || "Something went wrong. Please try again.");
-        }
+        setError(result.error || "Something went wrong. Please try again.");
         setIsSubmitting(false);
         return;
       }
 
-      router.push("/survey/thank-you");
+      const id = result.id as string | undefined;
+      if (id) {
+        router.push(`/survey/thank-you?rid=${encodeURIComponent(id)}`);
+      } else {
+        router.push("/survey/thank-you");
+      }
     } catch {
       setError("Failed to submit survey. Please try again.");
       setIsSubmitting(false);
@@ -421,7 +412,7 @@ export default function SurveyPage() {
               <div className="progress-fill" style={{ width: `${progress}%` }}></div>
             </div>
             <div className="progress-label">
-              {q.type === "email" ? "Complete" : current > 0 ? `${current} of ${questionCount}` : ""}
+              {current > 0 ? `${current} of ${questionCount}` : ""}
             </div>
           </div>
         </div>
@@ -429,6 +420,21 @@ export default function SurveyPage() {
         {/* Screen */}
         <div className="screen">
           <div className="screen-inner" id="screenInner">
+            {error && q.type !== "intro" && (
+              <div
+                style={{
+                  margin: "0 auto 1rem",
+                  maxWidth: "400px",
+                  padding: "0.75rem",
+                  borderRadius: "8px",
+                  backgroundColor: "rgba(229,115,115,0.1)",
+                  color: "#ff6b6b",
+                  fontSize: "0.85rem",
+                }}
+              >
+                {error}
+              </div>
+            )}
 
             {q.type === "intro" && (
               <div className="intro-screen">
@@ -445,7 +451,9 @@ export default function SurveyPage() {
                     "Before we ship, we want to understand your world. Your responses shape what we build."
                   }
                 </div>
-                <div className="intro-time">⏱ About 4 minutes · Completely anonymous</div>
+                <div className="intro-time">
+                  ⏱ About 4 minutes · Not shared with your employer. Optional waitlist on the thank-you page.
+                </div>
                 <button
                   className="cta"
                   onClick={goNext}
@@ -566,48 +574,6 @@ export default function SurveyPage() {
               </div>
             )}
 
-            {q.type === "email" && (
-              <div className="email-screen">
-                <div className="q-index">Final step</div>
-                <div className="email-intro">
-                  {"You\u2019re exactly who we\u2019re building this for."}
-                </div>
-                <div className="email-sub">
-                  {
-                    "Join the Vela waitlist and be first in line for beta access. " +
-                    "We\u2019ll send you one email when we\u2019re ready — nothing else."
-                  }
-                </div>
-                {error && (
-                  <div style={{
-                    marginBottom: "1rem", padding: "0.75rem", borderRadius: "8px",
-                    backgroundColor: "rgba(229,115,115,0.1)", color: "#ff6b6b", fontSize: "0.85rem",
-                  }}>
-                    {error}
-                  </div>
-                )}
-                <div className="field-group">
-                  <div className="field-wrap">
-                    <div className="field-label">First name</div>
-                    <input className="text-input" id="nameInput" type="text" placeholder="Your first name" autoComplete="given-name" />
-                  </div>
-                  <div className="field-wrap">
-                    <div className="field-label">Email address</div>
-                    <input className="text-input" id="emailInput" type="email" placeholder="you@example.com" autoComplete="email" />
-                  </div>
-                </div>
-                <button
-                  className="cta" id="submitBtn" onClick={submitSurvey}
-                  disabled={isSubmitting} style={{ opacity: isSubmitting ? 0.5 : 1 }}
-                >
-                  {isSubmitting ? "Saving..." : "Claim my early access →"}
-                </button>
-                <div style={{ marginTop: "0.75rem", fontSize: "0.72rem", fontFamily: "'DM Mono', monospace", letterSpacing: "0.05em" }} className="text-hint">
-                  No spam. Unsubscribe anytime.
-                </div>
-              </div>
-            )}
-
           </div>
         </div>
 
@@ -615,7 +581,7 @@ export default function SurveyPage() {
         <div
           className="nav"
           id="nav"
-          style={{ display: q.type === "intro" || q.type === "email" ? "none" : "flex" }}
+          style={{ display: q.type === "intro" ? "none" : "flex" }}
         >
           <button
             className="nav-back"
@@ -625,8 +591,16 @@ export default function SurveyPage() {
             <svg viewBox="0 0 16 16"><polyline points="10,3 5,8 10,13" /></svg>
             Back
           </button>
-          <button className="next-btn" onClick={goNext} disabled={isNextDisabled()}>
-            Continue →
+          <button
+            className="next-btn"
+            onClick={goNext}
+            disabled={isNextDisabled() || isSubmitting}
+          >
+            {isSubmitting
+              ? "Sending…"
+              : current >= questions.length - 1
+                ? "Finish →"
+                : "Continue →"}
           </button>
         </div>
 

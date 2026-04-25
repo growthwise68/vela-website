@@ -47,19 +47,17 @@ export async function POST(req: NextRequest) {
       answers,
     } = body;
 
-    // Validation checks
-    if (!email || !validateEmail(email)) {
-      return NextResponse.json(
-        { error: "Invalid email address" },
-        { status: 400 }
-      );
-    }
+    const emailTrimmed = typeof email === "string" ? email.trim().toLowerCase() : "";
+    const nameTrimmed = typeof name === "string" ? name.trim() : "";
+    const hasContact = emailTrimmed.length > 0;
 
-    if (!name || name.trim().length === 0) {
-      return NextResponse.json(
-        { error: "Name is required" },
-        { status: 400 }
-      );
+    if (hasContact) {
+      if (!validateEmail(emailTrimmed)) {
+        return NextResponse.json({ error: "Invalid email address" }, { status: 400 });
+      }
+      if (!nameTrimmed) {
+        return NextResponse.json({ error: "Name is required when email is provided" }, { status: 400 });
+      }
     }
 
     if (!energy || energy < 1 || energy > 5) {
@@ -92,18 +90,19 @@ export async function POST(req: NextRequest) {
       }
     }
 
-    // Check if email already exists
-    const { data: existing } = await supabase
-      .from("survey_responses")
-      .select("email")
-      .eq("email", email)
-      .single();
+    if (hasContact) {
+      const { data: existing } = await supabase
+        .from("survey_responses")
+        .select("email")
+        .eq("email", emailTrimmed)
+        .maybeSingle();
 
-    if (existing) {
-      return NextResponse.json(
-        { error: "This email has already submitted a survey" },
-        { status: 409 }
-      );
+      if (existing) {
+        return NextResponse.json(
+          { error: "This email has already been used" },
+          { status: 409 }
+        );
+      }
     }
 
     // Hash IP for spam detection
@@ -122,13 +121,13 @@ export async function POST(req: NextRequest) {
           coping_strategies: Array.isArray(coping_strategies) ? coping_strategies : [],
           app_utility: parseInt(app_utility),
           willingness_to_pay,
-          email: email.toLowerCase(),
-          name: name.trim(),
+          email: hasContact ? emailTrimmed : null,
+          name: hasContact ? nameTrimmed : null,
           ip_hash,
           answers: answers ?? {},
         },
       ])
-      .select();
+      .select("id");
 
     if (error) {
       console.error("Supabase insert error:", error);
@@ -138,11 +137,12 @@ export async function POST(req: NextRequest) {
       );
     }
 
+    const row = data?.[0];
     return NextResponse.json(
       {
         success: true,
         message: "Survey submitted successfully",
-        email: email,
+        id: row?.id ?? null,
       },
       { status: 201 }
     );
