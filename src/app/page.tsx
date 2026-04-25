@@ -17,15 +17,20 @@ export default function HomePage() {
       {/* HERO SECTION */}
       <section className="w-full py-20 md:py-32 bg-gradient-to-b from-parchment/50 to-cream/50">
         <div className="max-w-4xl mx-auto px-6 md:px-8 text-center">
-          <p className="font-mono text-xs md:text-sm uppercase tracking-[0.2em] text-gold mb-4 font-semibold">
+          <p className="font-mono text-xs md:text-sm uppercase tracking-[0.2em] text-gold mb-2 font-semibold">
             By crew, for crew
+          </p>
+          <p className="font-sans text-sm md:text-base text-inkMid max-w-2xl mx-auto mb-4 leading-relaxed">
+            Shaped with former crew, survey and feedback, and the latest circadian and sleep science — the
+            same field of research that underpins high-performance space and military sleep and
+            alertness work.
           </p>
           <h1 className="font-display text-6xl md:text-7xl font-light leading-tight text-ink mb-6">
             Plan rest and readiness around your roster
           </h1>
           <p className="font-sans text-xl md:text-2xl font-light text-inkMid max-w-2xl mx-auto mb-8 leading-relaxed">
-            Véla helps you see how sleep timing and time zones may affect your readiness—using
-            transparent, schedule-based estimates. Built for crew, with science you can
+            Véla helps you see how sleep timing and time zones may affect your readiness — using
+            transparent, schedule-based estimates. Built for cabin crew, with science you can
             understand.
           </p>
           <button className="inline-block px-6 py-3 bg-gold text-ink font-semibold rounded hover:bg-yellow-600 transition-all hover:scale-105">
@@ -119,7 +124,7 @@ export default function HomePage() {
             Knowledge is power. When you understand the mechanism—not just the symptom—you can make better choices for yourself.
           </p>
           <p className="font-sans text-xl md:text-2xl text-inkMid mb-8 leading-relaxed">
-            Véla doesn&rsquo;t tell you what to do. It shows you why you feel the way you do. By combining your actual roster with published sleep science, Véla reveals how sleep timing, time zones, and duty patterns affect your readiness. This is transparency you can trust.
+            Véla doesn&rsquo;t tell you what to do. It shows you why you feel the way you do. By combining your actual roster with published circadian and sleep science — the same research tradition used in demanding operational settings, from space-crew scheduling to military fatigue management — Véla reveals how sleep timing, time zones, and duty patterns affect your readiness. Transparency you can trust.
           </p>
           {/* Knowledge Section Carousel */}
           <div className="mb-6">
@@ -243,7 +248,7 @@ export default function HomePage() {
       <section className="w-full py-20 md:py-32 bg-parchment">
         <div className="max-w-4xl mx-auto px-6 md:px-8">
           <h2 className="font-display text-5xl md:text-6xl font-light text-ink mb-12 border-b-2 border-gold pb-4">
-            Built with people who live this
+            Former crew, feedback, and science
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             {/* Placeholder for crew photo */}
@@ -253,11 +258,11 @@ export default function HomePage() {
             {/* Testimonial quote */}
             <div>
               <p className="font-display text-3xl md:text-4xl italic text-gold mb-6 leading-relaxed">
-                &ldquo;Every feature in Véla is shaped by cabin crew who work these routes every month. It&rsquo;s transparent, it&rsquo;s science-backed, and it&rsquo;s built for us—not for airlines or regulators.&rdquo;
+                &ldquo;Véla is being shaped with former crew and the cabin community — survey by survey. It&rsquo;s transparent, science-backed, and built for us, not the airline.&rdquo;
               </p>
               <p className="font-sans text-lg text-inkMid">
-                <strong className="text-ink text-xl">Flight Attendant or Pilot</strong><br />
-                <span className="text-base">International Carrier</span>
+                <strong className="text-ink text-xl">Cabin crew perspective</strong><br />
+                <span className="text-base">Long-haul international</span>
               </p>
             </div>
           </div>
@@ -274,7 +279,9 @@ export default function HomePage() {
             Tell us about your fatigue
           </h2>
           <p className="font-sans text-xl md:text-2xl text-inkMid max-w-2xl mx-auto mb-8 leading-relaxed">
-            3 minutes. Your story. No spam. Your responses directly shape what we build next.
+            About 3 minutes. Anonymous. We combine your answers with input from former crew and published
+            circadian science (the same field used in space and military alertness work) to decide what
+            to build. No spam.
           </p>
           <Link
             href="/survey"

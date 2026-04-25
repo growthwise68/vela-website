@@ -235,8 +235,9 @@ export default function SurveyPage() {
                 </div>
                 <div className="intro-sub">
                   {
-                    "We\u2019re building Véla — a lifestyle and wellness companion for long-haul crew, rooted in how you actually work and rest. " +
-                    "To ensure we can help you, we need to understand your world. Your responses stay anonymous and shape what we build."
+                    "By crew, for crew: we\u2019re building with input from former crew and the latest circadian and sleep research — the same field that informs high-performance space and military sleep and alertness work. " +
+                    "Véla is a lifestyle and wellness companion: this survey and your ongoing feedback will drive what we build. " +
+                    "To make sure it helps, we need to understand your world. Your answers stay anonymous."
                   }
                 </div>
                 <div className="intro-time">⏱ About 3 minutes · Anonymous</div>

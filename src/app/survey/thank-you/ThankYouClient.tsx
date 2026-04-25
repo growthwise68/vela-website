@@ -68,16 +68,15 @@ export default function ThankYouClient() {
       <h2 className="text-center font-display text-3xl font-light text-ink">Thank you.</h2>
       <p className="mt-3 text-center text-[15px] leading-relaxed text-inkMid">
         {
-          "Your answers will help us improve Véla. We keep them confidential and do not use them to sell unrelated products or services."
+          "Your answers are anonymised and are ONLY used to make Véla better for cabin crew."
         }
       </p>
 
       {rid && status !== "success" && (
         <div className="mt-8 rounded-[18px] border border-warmLine bg-parchment/90 p-6 shadow-sm">
           <p className="text-[0.9rem] leading-relaxed text-ink">
-            <span className="font-medium text-ink">Optional waitlist.</span>{" "}
             {
-              "What you shared in the survey is not published with your name. If you want a single email when the beta opens, add your details below — for the waitlist only. We will not use your address for other marketing. You can skip: your response is already saved."
+              "What you shared in the survey is anonymised and not associated with your details. If you would like to be advised when Véla is due to be launched, then add your details below to be added to the waitlist. Otherwise you can skip this step — your responses have been saved."
             }
           </p>
           <form onSubmit={submitWaitlist} className="mt-5 space-y-4">

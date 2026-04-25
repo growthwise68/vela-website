@@ -11,16 +11,16 @@ This document is the **question bank** for the public crew survey. The **live** 
 - **15 answered questions** after the intro screen (plus one **intro** screen—no answer stored as a question row).
 - **Order:** engaging / emotional questions first; **role** and **flying experience** last.
 - **Branding:** **Véla**; product described as a **lifestyle and wellness companion** (not a “readiness planning app” in survey copy).
-- **Thank-you page:** optional email for beta / waitlist only; survey answers stay **anonymous** in how we describe them on the intro.
+- **Thank-you page:** optional email for launch notice; survey answers described as **anonymised** and only for improving Véla for cabin crew.
 
 ### Included in production — 15 questions
 
 | # | `id` (code) | Short label |
 |---|-------------|-------------|
-| 01 | `energy` | How are you feeling right now? (emoji scale) |
+| 01 | `energy` | How are you feeling right now? (emoji scale; sub frames “this week in your flying life”) |
 | 02 | `recovery` | After a long-haul rotation, how long until you feel like yourself again? |
 | 03 | `personal_life` | How often does fatigue from your roster affect your personal life on days off? |
-| 04 | `utility` | How useful would a lifestyle and wellness companion… (1–5 scale) |
+| 04 | `utility` | “Something that can make roster and time off a little better” — interest 1–5; sub frames idea + circadian/sleep science (incl. space/military field) |
 | 05 | `helpful_features` | What would help you most before a difficult trip? (up to 3) |
 | 06 | `bodyclock` | Do you know where your body clock actually is… |
 | 07 | `route` | What best describes your typical flying pattern? |
@@ -28,9 +28,9 @@ This document is the **question bank** for the public crew survey. The **live** 
 | 09 | `roster_planning` | When you receive your roster, do you plan sleep and recovery… |
 | 10 | `coping` | What do you currently use to support sleep and recovery? (multi) |
 | 11 | `rested` | How often do you report for duty feeling genuinely well-rested? |
-| 12 | `crew_trust` | Would knowing the app was built by a fellow crew member… |
+| 12 | `crew_trust` | Trust if designed with input from **former** crew members |
 | 13 | `pay` | What would you pay per month if it genuinely helped… |
-| 14 | `role` | What is your current role? |
+| 14 | `role` | What is your current role? (sub: aggregate patterns across cabin; built for whole community) |
 | 15 | `experience` | How many years have you been flying? |
 
 ---
@@ -61,24 +61,25 @@ Below is the **earlier 6-section / 23-question** design. Use this table to see w
 | 18 | Would you use an app with personalised fatigue plan | **Not included** |
 | 19 | Monthly price for a tool that helps fatigue / days off | **Included** → `pay` (Q13); price bands adjusted |
 | 20 | Rank features in order | **Not included** |
-| 21 | Trust if built by fellow crew | **Included** → `crew_trust` (Q12); wording adjusted |
+| 21 | Trust if built by fellow crew | **Included** → `crew_trust` (Q12); rephrased to **former** crew input |
 | 22 | Open text: moment fatigue scared you | **Not included** |
 | 23 | Open text: one thing you wish existed | **Not included** |
 
 ### New questions only in `15q_v1` (no direct “orig. #” match)
 
 - **`energy`** — mood / energy check-in (engaging first screen).
-- **`utility`** — usefulness of a lifestyle and wellness companion (1–5).
+- **`utility`** — interest in “something that could make life a little better” (1–5), framed as idea not finished app, with science context.
 - **`route`** — typical flying pattern (short vs long-haul mix).
 - **`zones`** — time zones crossed per month.
 
 ---
 
-## Copy reference (intro screen, live site)
+## Copy reference (intro screen, live site, home)
 
-- Duration: **About 3 minutes**
-- Privacy line: **Anonymous** (no “not shared with employer” on the intro; keep language simple)
-- Purpose: **To ensure we can help you** + understand your world; product = **Véla** as a **lifestyle and wellness companion**
+- Duration: **About 3 minutes** · **Anonymous**
+- **By crew, for crew** + **former crew** + **ongoing feedback** drive the roadmap; **published circadian and sleep science** (same research field as high-performance **space and military** sleep/alertness work) — as on the home page.
+- Product = **Véla** as a **lifestyle and wellness companion**
+- Thank-you: answers **anonymised**; used **only** to improve Véla for cabin crew; waitlist copy explains email is separate from survey identity.
 
 ---
 
