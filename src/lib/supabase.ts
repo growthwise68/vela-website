@@ -26,5 +26,6 @@ export type SurveyResponse = {
   willingness_to_pay: string;
   email: string;
   name: string;
+  airline?: string | null;
   ip_hash?: string;
 };

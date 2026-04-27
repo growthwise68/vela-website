@@ -17,11 +17,15 @@ export async function POST(req: NextRequest) {
     );
 
     const body = await req.json();
-    const { responseId, email, name } = body as {
+    const { responseId, email, name, airline } = body as {
       responseId?: string;
       email?: string;
       name?: string;
+      airline?: string | null;
     };
+
+    const airlineNormalized =
+      typeof airline === "string" && airline.trim().length > 0 ? airline.trim() : null;
 
     if (!responseId || typeof responseId !== "string") {
       return NextResponse.json({ error: "Missing response id" }, { status: 400 });
@@ -70,6 +74,7 @@ export async function POST(req: NextRequest) {
       .update({
         email: email.toLowerCase(),
         name: name.trim(),
+        airline: airlineNormalized,
       })
       .eq("id", responseId)
       .is("email", null);

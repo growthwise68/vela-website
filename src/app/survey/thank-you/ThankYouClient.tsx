@@ -14,6 +14,7 @@ export default function ThankYouClient() {
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [airline, setAirline] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [message, setMessage] = useState<string | null>(null);
 
@@ -40,6 +41,7 @@ export default function ThankYouClient() {
           responseId: rid,
           email: email.trim(),
           name: name.trim(),
+          airline: airline.trim() || null,
         }),
       });
       const data = await res.json();
@@ -107,6 +109,25 @@ export default function ThankYouClient() {
                 autoComplete="email"
                 disabled={status === "loading"}
               />
+            </div>
+            <div>
+              <label className="mb-1.5 block font-mono text-[10px] uppercase tracking-[0.18em] text-inkFaint">
+                Airline <span className="font-sans normal-case tracking-normal text-inkFaint/90">(optional)</span>
+              </label>
+              <input
+                className="w-full rounded-xl border border-warmLine bg-cream px-3 py-2.5 text-ink placeholder:text-inkFaint/80 outline-none focus:border-gold/60"
+                type="text"
+                value={airline}
+                onChange={(e) => setAirline(e.target.value)}
+                placeholder="e.g. Emirates, United, Qantas"
+                autoComplete="organization"
+                disabled={status === "loading"}
+              />
+              <p className="mt-2 text-[0.8rem] leading-snug text-inkMid">
+                {
+                  "If you tell us, we can let you know when Véla is upgraded with features relevant to your airline."
+                }
+              </p>
             </div>
             {message && status === "error" && (
               <p className="text-sm text-coral">{message}</p>
