@@ -3,10 +3,13 @@
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useState } from "react";
+import { THANK_YOU_COPY as copy } from "./thank-you-copy";
 
 /**
  * High-contrast copy on the site’s cream / parchment system (root layout),
  * not survey.css variables (those target navy-only surfaces).
+ *
+ * Strings live in `./thank-you-copy.ts` (v1 preserved; active bundle switched there).
  */
 export default function ThankYouClient() {
   const searchParams = useSearchParams();
@@ -67,80 +70,101 @@ export default function ThankYouClient() {
           <span className="text-2xl leading-none">✓</span>
         </div>
       </div>
-      <h2 className="text-center font-display text-3xl font-light text-ink">Thank you.</h2>
-      <p className="mt-3 text-center text-[15px] leading-relaxed text-inkMid">
-        {
-          "Your answers are anonymised and are ONLY used to make Véla better for cabin crew."
-        }
-      </p>
+      <h2 className="text-center font-display text-3xl font-light text-ink">{copy.heading}</h2>
+      {copy.leadParagraphs.map((paragraph, i) => (
+        <p
+          key={i}
+          className={`text-center text-[15px] leading-relaxed text-inkMid ${i === 0 ? "mt-3" : "mt-4"}`}
+        >
+          {paragraph}
+        </p>
+      ))}
+
+      {copy.legalLine && (
+        <p className="mt-4 text-center text-[15px] leading-relaxed text-inkMid">
+          {copy.legalLine.before}
+          <Link
+            href="/privacy"
+            className="text-ink underline decoration-warmLine underline-offset-[5px] transition-colors hover:text-gold hover:decoration-gold/50"
+          >
+            {copy.legalLine.privacyLinkText}
+          </Link>
+          {copy.legalLine.middle}
+          <Link
+            href="/terms"
+            className="text-ink underline decoration-warmLine underline-offset-[5px] transition-colors hover:text-gold hover:decoration-gold/50"
+          >
+            {copy.legalLine.termsLinkText}
+          </Link>
+          {copy.legalLine.after}
+        </p>
+      )}
 
       {rid && status !== "success" && (
         <div className="mt-8 rounded-[18px] border border-warmLine bg-parchment/90 p-6 shadow-sm">
-          <p className="text-[0.9rem] leading-relaxed text-ink">
-            {
-              "What you shared in the survey is anonymised and not associated with your details. If you would like to be advised when Véla is due to be launched, then add your details below to be added to the waitlist. Otherwise you can skip this step — your responses have been saved."
-            }
+          {copy.waitlistTitle && (
+            <h3 className="text-center font-display text-xl font-light text-ink">{copy.waitlistTitle}</h3>
+          )}
+          <p
+            className={`text-[0.9rem] leading-relaxed text-ink ${copy.waitlistTitle ? "mt-3 text-center" : ""}`}
+          >
+            {copy.waitlistLead}
           </p>
           <form onSubmit={submitWaitlist} className="mt-5 space-y-4">
             <div>
               <label className="mb-1.5 block font-mono text-[10px] uppercase tracking-[0.18em] text-inkFaint">
-                First name
+                {copy.labels.firstName}
               </label>
               <input
                 className="w-full rounded-xl border border-warmLine bg-cream px-3 py-2.5 text-ink placeholder:text-inkFaint/80 outline-none focus:border-gold/60"
                 type="text"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                placeholder="Your first name"
+                placeholder={copy.placeholders.firstName}
                 autoComplete="given-name"
                 disabled={status === "loading"}
               />
             </div>
             <div>
               <label className="mb-1.5 block font-mono text-[10px] uppercase tracking-[0.18em] text-inkFaint">
-                Email
+                {copy.labels.email}
               </label>
               <input
                 className="w-full rounded-xl border border-warmLine bg-cream px-3 py-2.5 text-ink placeholder:text-inkFaint/80 outline-none focus:border-gold/60"
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="you@example.com"
+                placeholder={copy.placeholders.email}
                 autoComplete="email"
                 disabled={status === "loading"}
               />
             </div>
             <div>
               <label className="mb-1.5 block font-mono text-[10px] uppercase tracking-[0.18em] text-inkFaint">
-                Airline <span className="font-sans normal-case tracking-normal text-inkFaint/90">(optional)</span>
+                {copy.labels.airlineOptional}{" "}
+                <span className="font-sans normal-case tracking-normal text-inkFaint/90">(optional)</span>
               </label>
               <input
                 className="w-full rounded-xl border border-warmLine bg-cream px-3 py-2.5 text-ink placeholder:text-inkFaint/80 outline-none focus:border-gold/60"
                 type="text"
                 value={airline}
                 onChange={(e) => setAirline(e.target.value)}
-                placeholder="e.g. Emirates, United, Qantas"
+                placeholder={copy.placeholders.airline}
                 autoComplete="organization"
                 disabled={status === "loading"}
               />
-              <p className="mt-2 text-[0.8rem] leading-snug text-inkMid">
-                {
-                  "If you tell us, we can let you know when Véla is upgraded with features relevant to your airline."
-                }
-              </p>
+              <p className="mt-2 text-[0.8rem] leading-snug text-inkMid">{copy.airlineHelper}</p>
             </div>
-            {message && status === "error" && (
-              <p className="text-sm text-coral">{message}</p>
-            )}
+            {message && status === "error" && <p className="text-sm text-coral">{message}</p>}
             <button
               type="submit"
               disabled={status === "loading"}
               className="w-full rounded-xl bg-night py-3.5 font-mono text-xs uppercase tracking-[0.2em] text-cream transition-opacity hover:bg-nightMid disabled:opacity-50"
             >
-              {status === "loading" ? "Saving…" : "Join the waitlist"}
+              {status === "loading" ? copy.submitLoading : copy.submitButton}
             </button>
             <p className="text-center font-mono text-[0.65rem] uppercase tracking-[0.1em] text-inkFaint">
-              One message when we are ready. Unsubscribe anytime.
+              {copy.formFooter}
             </p>
           </form>
         </div>
@@ -148,16 +172,12 @@ export default function ThankYouClient() {
 
       {rid && status === "success" && (
         <p className="mt-6 text-center font-mono text-xs uppercase tracking-[0.18em] text-gold">
-          You are on the waitlist
+          {copy.successLine}
         </p>
       )}
 
       {!rid && (
-        <p className="mt-6 text-center text-sm text-inkMid">
-          {
-            "If you completed the survey, thank you. To join the waitlist later, use the Support page."
-          }
-        </p>
+        <p className="mt-6 text-center text-sm text-inkMid">{copy.noRidMessage}</p>
       )}
 
       <div className="mt-8 text-center">
@@ -165,7 +185,7 @@ export default function ThankYouClient() {
           href="/"
           className="inline-block rounded-lg border border-warmLine bg-cream/50 px-5 py-2.5 font-mono text-xs uppercase tracking-[0.12em] text-inkMid transition-colors hover:border-gold/50 hover:text-ink"
         >
-          {rid && status !== "success" ? "Skip — back to Véla" : "Back to Véla"}
+          {rid && status !== "success" ? copy.linkSkip : copy.linkBack}
         </Link>
       </div>
     </div>

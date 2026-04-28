@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { SURVEY_QUESTIONS } from "./questions";
+import { SURVEY_QUESTIONS, runningEmptyIndexToEnergyLegacy } from "./questions";
 import "./survey.css";
 
 const questions = SURVEY_QUESTIONS;
@@ -81,11 +81,6 @@ export default function SurveyPage() {
     setTimeout(goNext, 320);
   };
 
-  const selectEnergy = (index: number) => {
-    setAnswers({ ...answers, energy: index });
-    setTimeout(goNext, 320);
-  };
-
   const selectScale = (id: string, value: number) => {
     setAnswers({ ...answers, [id]: value });
     setTimeout(goNext, 380);
@@ -117,29 +112,43 @@ export default function SurveyPage() {
     setIsSubmitting(true);
     setError(null);
 
-    const energyLabels = ["Running on fumes", "Below par", "Getting by", "Pretty good", "Fully charged"];
-
+    const roIdx = answers.running_on_empty as number;
     const surveyData = {
-      energy: (answers.energy as number ?? -1) + 1,
-      route_type: getLabel("route", answers.route as number),
-      timezone_crossings: getLabel("zones", answers.zones as number),
-      recovery_time: getLabel("recovery", answers.recovery as number),
-      coping_strategies: getLabels("coping", (answers.coping as number[]) || []),
-      app_utility: (answers.utility as number) || 0,
-      willingness_to_pay: getLabel("pay", answers.pay as number),
+      energy: runningEmptyIndexToEnergyLegacy(typeof roIdx === "number" ? roIdx : 0),
+      route_type: "Not collected — survey v2",
+      timezone_crossings: "Not collected — survey v2",
+      recovery_time: getLabel("recovery_after_haul", answers.recovery_after_haul as number),
+      coping_strategies: getLabels("tools_issue", (answers.tools_issue as number[]) || []),
+      app_utility: (answers.tiredness_worry as number) || 0,
+      willingness_to_pay: "Not collected — survey v2",
       email: null as string | null,
       name: null as string | null,
       answers: {
+        survey_version: "15q_v2",
+        running_on_empty: getLabel("running_on_empty", answers.running_on_empty as number),
+        leaving_job: getLabel("leaving_job", answers.leaving_job as number),
+        airline_acknowledgment: getLabel(
+          "airline_acknowledgment",
+          answers.airline_acknowledgment as number
+        ),
+        wrong_moment_fatigue: getLabel(
+          "wrong_moment_fatigue",
+          answers.wrong_moment_fatigue as number
+        ),
+        tiredness_episodes_month: getLabel(
+          "tiredness_episodes_month",
+          answers.tiredness_episodes_month as number
+        ),
+        tiredness_worry: (answers.tiredness_worry as number) || 0,
+        recovery_after_haul: getLabel("recovery_after_haul", answers.recovery_after_haul as number),
+        bodyclock_tz: getLabel("bodyclock_tz", answers.bodyclock_tz as number),
+        roster_planning: getLabel("roster_planning", answers.roster_planning as number),
+        roster_heads_up_use: getLabel("roster_heads_up_use", answers.roster_heads_up_use as number),
+        tools_issue: getLabels("tools_issue", (answers.tools_issue as number[]) || []),
+        job_taken_from_life: String(answers.job_taken_from_life || "").trim(),
+        one_thing_energy_help: String(answers.one_thing_energy_help || "").trim(),
         role: getLabel("role", answers.role as number),
         experience: getLabel("experience", answers.experience as number),
-        energy_label: energyLabels[answers.energy as number] ?? "Not specified",
-        rested: getLabel("rested", answers.rested as number),
-        bodyclock: getLabel("bodyclock", answers.bodyclock as number),
-        personal_life: getLabel("personal_life", answers.personal_life as number),
-        roster_planning: getLabel("roster_planning", answers.roster_planning as number),
-        helpful_features: getLabels("helpful_features", (answers.helpful_features as number[]) || []),
-        crew_trust: getLabel("crew_trust", answers.crew_trust as number),
-        survey_version: "15q_v1",
       },
     };
 
@@ -171,8 +180,10 @@ export default function SurveyPage() {
   };
 
   const isNextDisabled = () => {
-    if (q.type === "opentext") return false;
-    if (q.type === "single" || q.type === "energy" || q.type === "scale") {
+    if (q.type === "opentext") {
+      return String(answers[q.id] || "").trim().length === 0;
+    }
+    if (q.type === "single" || q.type === "scale") {
       return answers[q.id] === undefined;
     }
     if (q.type === "multi") {
@@ -248,27 +259,6 @@ export default function SurveyPage() {
                 >
                   Begin the survey →
                 </button>
-              </div>
-            )}
-
-            {q.type === "energy" && (
-              <div>
-                {q.section && <div className="q-section">{q.section}</div>}
-                <div className="q-index">{q.index} / {questionCount}</div>
-                <div className="q-text">{q.text}</div>
-                <div className="q-sub">{q.sub}</div>
-                <div className="energy-scale">
-                  {(q.options as Array<{ label: string; icon: string }>).map((o, i) => (
-                    <div
-                      key={i}
-                      className={`energy-btn${answers.energy === i ? " selected" : ""}`}
-                      onClick={() => selectEnergy(i)}
-                    >
-                      <div className="energy-icon">{o.icon}</div>
-                      <div className="energy-label">{o.label}</div>
-                    </div>
-                  ))}
-                </div>
               </div>
             )}
 
@@ -355,7 +345,11 @@ export default function SurveyPage() {
                   className="text-input opentext-input"
                   value={(answers[q.id] as string) || ""}
                   onChange={(e) => setAnswers({ ...answers, [q.id]: e.target.value })}
-                  placeholder="Your thoughts here..."
+                  placeholder={
+                    q.id === "job_taken_from_life"
+                      ? "Share as much as you\u2019re comfortable with\u2026"
+                      : "One sentence is enough\u2026"
+                  }
                   rows={5}
                 />
               </div>

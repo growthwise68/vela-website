@@ -2,6 +2,13 @@ import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
 import crypto from "crypto";
 
+/**
+ * survey_responses legacy columns:
+ * - For answers.survey_version "15q_v2", `app_utility` stores the Q6 tiredness worry scale (1–5);
+ *   `route_type`, `timezone_crossings`, and `willingness_to_pay` use placeholder strings.
+ * Full question labels and open text live in `answers` JSON.
+ */
+
 function hashIP(ip: string): string {
   return crypto.createHash("sha256").update(ip).digest("hex");
 }

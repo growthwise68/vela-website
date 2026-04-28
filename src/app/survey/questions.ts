@@ -1,16 +1,15 @@
 /**
  * Live survey: 15 questions (excludes intro; email is on thank-you page).
- * Order: engaging / emotional first, demographics last.
- * See /public/vela_crew_survey.md for full inventory and included/excluded list.
+ * Copy source: /public/vela_crew_survey_v2.md
  */
 export type SurveyQuestion = {
   id: string;
-  type: "intro" | "energy" | "single" | "multi" | "scale" | "opentext";
+  type: "intro" | "single" | "multi" | "scale" | "opentext";
   index?: string;
   section?: string;
   text?: string;
   sub?: string;
-  options?: string[] | Array<{ label: string; icon: string }>;
+  options?: string[];
   scaleMin?: string;
   scaleMax?: string;
   scale?: number;
@@ -21,212 +20,200 @@ export type SurveyQuestion = {
 export const SURVEY_QUESTIONS: SurveyQuestion[] = [
   { id: "intro", type: "intro" },
 
-  // 1–5 — open with feeling + product vision
+  // 1–6 — Be honest — nobody's watching
   {
-    id: "energy",
-    type: "energy",
+    id: "running_on_empty",
+    type: "single",
     index: "01",
-    section: "Your world",
-    text: "How are you feeling right now?",
-    sub: "A quick check-in: think about this week in your flying life, not a random \u201coff-day\u201d mood.",
+    section: "Be honest — nobody\u2019s watching",
+    text: "How often do you show up to work already running on empty?",
+    sub: "",
     options: [
-      { label: "Running on fumes", icon: "🔋" },
-      { label: "Below par", icon: "🌤" },
-      { label: "Getting by", icon: "☀️" },
-      { label: "Pretty good", icon: "⚡" },
-      { label: "Fully charged", icon: "🚀" },
+      "Almost every duty",
+      "More often than not",
+      "Sometimes",
+      "Rarely",
     ],
   },
   {
-    id: "recovery",
+    id: "leaving_job",
     type: "single",
     index: "02",
-    section: "Your world",
-    text: "After a long-haul rotation, how long until you feel like yourself again?",
+    section: "Be honest — nobody\u2019s watching",
+    text: "Has the fatigue ever made you seriously think about leaving the job?",
     sub: "",
     options: [
-      "Under 24 hours — I bounce back fast",
-      "1 to 2 days",
-      "3 to 4 days",
-      "Close to a week",
-      "What\u2019s feeling normal?",
+      "Yes — I\u2019ve actively looked at other options",
+      "I think about it more than I\u2019d like to",
+      "It crosses my mind occasionally",
+      "No — I love the job despite it",
     ],
   },
   {
-    id: "personal_life",
+    id: "airline_acknowledgment",
     type: "single",
     index: "03",
-    section: "Your world",
-    text: "How often does fatigue from your roster affect your personal life on days off?",
+    section: "Be honest — nobody\u2019s watching",
+    text:
+      "Has your airline ever actually sat down with you and acknowledged what the schedule does to your body?",
     sub: "",
+    options: ["Never", "Once or twice, kind of", "Yes, properly"],
+  },
+  {
+    id: "wrong_moment_fatigue",
+    type: "single",
+    index: "04",
+    section: "Be honest — nobody\u2019s watching",
+    text:
+      "You know that feeling when your body just wants to give up at exactly the wrong moment on a flight?",
+    sub: "Boarding. Taxi. Takeoff. Landing. Those moments.",
     options: [
-      "Almost never",
-      "Sometimes",
-      "Often",
-      "Almost always — I spend my days off recovering",
+      "Never happens to me",
+      "Occasionally",
+      "More than I\u2019d like to admit",
+      "It\u2019s just part of the job now",
+      "Rather not say",
     ],
   },
   {
-    id: "utility",
+    id: "tiredness_episodes_month",
+    type: "single",
+    index: "05",
+    section: "Be honest — nobody\u2019s watching",
+    text:
+      "In the past month — how many times did tiredness actually get the better of you? On a flight, a layover, days off?",
+    sub: "",
+    options: [
+      "Honestly, zero",
+      "Once or twice",
+      "A handful of times",
+      "I stopped counting",
+    ],
+  },
+  {
+    id: "tiredness_worry",
     type: "scale",
-    index: "04",
-    section: "The idea",
-    text: "Imagine something that can make your roster and time off a little better. How much would you want that kind of help?",
-    sub: "You have not used Véla yet — this is about the idea. It draws on published circadian and sleep science, the same body of research that informs high-performance space and military sleep and alertness work. Not medical advice.",
-    scaleMin: "Not for me",
-    scaleMax: "I want it a lot",
+    index: "06",
+    section: "Be honest — nobody\u2019s watching",
+    text: "How much does the tiredness in this job worry you?",
+    sub: "1 = doesn\u2019t cross my mind — 5 = genuinely keeps me up at night",
+    scaleMin: "Doesn\u2019t cross my mind",
+    scaleMax: "Keeps me up at night",
     scale: 5,
   },
-  {
-    id: "helpful_features",
-    type: "multi",
-    index: "05",
-    section: "The idea",
-    text: "What would help you most before a difficult trip?",
-    sub: "Select up to 3.",
-    options: [
-      "When to sleep before departure",
-      "When to seek or avoid light",
-      "Caffeine timing suggestions",
-      "Nap strategy for layover",
-      "Low alertness window estimates",
-      "Recovery plan for after the trip",
-    ],
-    maxSelect: 3,
-  },
 
-  // 6–12 — body, flying, planning
+  // 7–9 — Your body clock
   {
-    id: "bodyclock",
-    type: "single",
-    index: "06",
-    section: "Your body and rhythm",
-    text: "Do you know where your body clock actually is at any point in your roster?",
-    sub: "",
-    options: [
-      "Yes — I always know",
-      "Roughly — I can estimate",
-      "Not really — I just know I\u2019m tired",
-      "No idea — I\u2019ve never thought about it",
-    ],
-  },
-  {
-    id: "route",
+    id: "recovery_after_haul",
     type: "single",
     index: "07",
-    section: "Your body and rhythm",
-    text: "What best describes your typical flying pattern?",
-    sub: "Choose the option that fits most of your roster.",
+    section: "Your body clock",
+    text:
+      "After a long or medium-haul flight, how long before you actually feel like yourself again?",
+    sub: "",
     options: [
-      "Short-haul only (< 4 hrs)",
-      "Mostly short with some long-haul",
-      "Mostly long-haul, some short",
-      "Long-haul focused (8–14 hrs)",
-      "Ultra long-haul specialist (14+ hrs)",
-      "Mixed — it varies widely",
+      "Less than a day",
+      "A day or two",
+      "Three or four days",
+      "Five days or more",
+      "I\u2019m never fully back before the next trip",
     ],
   },
   {
-    id: "zones",
+    id: "bodyclock_tz",
     type: "single",
     index: "08",
-    section: "Your body and rhythm",
-    text: "How many time zones do you cross in a typical month?",
-    sub: "Roughly — we\u2019re not auditing your logbook.",
+    section: "Your body clock",
+    text:
+      "At any given point in your roster — do you actually know what time zone your body thinks it\u2019s in?",
+    sub: "",
     options: [
-      "1 to 3 — mostly regional",
-      "4 to 8 — moderate crossing",
-      "9 to 12 — significant disruption",
-      "13 or more — full circadian chaos",
+      "Yeah, I track it",
+      "Roughly",
+      "Not really — I just know I\u2019m tired",
+      "Never even thought about it",
     ],
   },
   {
     id: "roster_planning",
     type: "single",
     index: "09",
-    section: "Planning",
-    text: "When you receive your roster, do you plan your sleep and recovery around it?",
+    section: "Your body clock",
+    text: "When your roster drops, do you plan around it — sleep, recovery, all of it?",
     sub: "",
     options: [
-      "Yes — I plan carefully",
-      "I try, but I don\u2019t know the best approach",
-      "Occasionally — only for tough trips",
-      "No — I just show up and cope",
+      "Yes, I\u2019m pretty deliberate about it",
+      "I try, but I\u2019m guessing most of the time",
+      "Only when I know a trip\u2019s going to destroy me",
+      "No — I just show up and deal with it",
     ],
-  },
-  {
-    id: "coping",
-    type: "multi",
-    index: "10",
-    section: "Planning",
-    text: "What do you currently use to support your sleep and recovery?",
-    sub: "Select everything that applies.",
-    options: [
-      "Melatonin or sleep supplements",
-      "Sleep mask and earplugs",
-      "Deliberate caffeine timing",
-      "Light exposure strategies",
-      "Napping strategies",
-      "Exercise and movement",
-      "A fitness or sleep tracker",
-      "Advice from other crew",
-      "Nothing — I just push through",
-      "I\u2019ve tried everything, nothing works well",
-    ],
-  },
-  {
-    id: "rested",
-    type: "single",
-    index: "11",
-    section: "Planning",
-    text: "How often do you report for duty feeling genuinely well-rested?",
-    sub: "",
-    options: [
-      "Almost never",
-      "Rarely — a few times a month",
-      "About half the time",
-      "Often",
-      "Almost always",
-    ],
-  },
-  {
-    id: "crew_trust",
-    type: "single",
-    index: "12",
-    section: "Trust",
-    text: "Would knowing the app was designed with input from former crew members make you more likely to trust it?",
-    sub: "",
-    options: ["Yes — significantly", "Somewhat", "Doesn\u2019t matter to me"],
   },
 
-  // 13–15 — business + who you are
+  // 10–11 — What would actually help
   {
-    id: "pay",
+    id: "roster_heads_up_use",
     type: "single",
-    index: "13",
-    section: "Practical",
-    text: "If it genuinely helped your sleep and how you feel on the job, what would you pay per month?",
-    sub: "Be honest — this helps us build something people actually use.",
+    index: "10",
+    section: "What would actually help",
+    text:
+      "If something could read your roster and give you a heads up — when to sleep, when to get light, when your body\u2019s going to hit a wall — would you use it?",
+    sub: "",
     options: [
-      "Nothing — it should be free",
-      "Under $5 / month",
-      "$5 to $10 / month",
-      "$10 to $20 / month",
-      "More than $20 if it really works",
+      "I\u2019d download it today",
+      "Probably yes",
+      "Maybe — I\u2019d want to try it first",
+      "Doubt it",
     ],
   },
+  {
+    id: "tools_issue",
+    type: "multi",
+    index: "11",
+    section: "What would actually help",
+    text: "What\u2019s your issue with the sleep and fatigue tools that already exist?",
+    sub: "Pick everything that applies.",
+    options: [
+      "They\u2019re made for people with normal schedules",
+      "They track stuff but never tell me what to actually do",
+      "Nothing ever connects to my actual roster",
+      "There\u2019s genuinely nothing out there for crew",
+      "I don\u2019t use anything — I just push through",
+    ],
+  },
+
+  // 12–13 — Two things we really want to know
+  {
+    id: "job_taken_from_life",
+    type: "opentext",
+    index: "12",
+    section: "Two things we really want to know",
+    text:
+      "What has this job actually taken from you — not your career, but your life?",
+    sub: "Your days off. Your relationships. The person you are when you\u2019re not exhausted.",
+  },
+  {
+    id: "one_thing_energy_help",
+    type: "opentext",
+    index: "13",
+    section: "Two things we really want to know",
+    text:
+      "If you could have one thing to help you manage your energy as crew — what would it be?",
+    sub: "",
+  },
+
+  // 14–15 — About you
   {
     id: "role",
     type: "single",
     index: "14",
-    section: "About you",
-    text: "What is your current role?",
-    sub: "We use this in aggregate to see how patterns differ across the cabin. Véla is for the full crew community — from economy to first.",
+    section: "Last two — just so we know who we\u2019re talking to",
+    text: "What\u2019s your current role?",
+    sub: "",
     options: [
-      "Economy cabin crew",
-      "Business class crew",
-      "First class crew",
-      "Cabin supervisor or manager",
+      "Economy",
+      "Business",
+      "First",
+      "Cabin Supervisor / Manager",
       "Purser",
     ],
   },
@@ -234,9 +221,15 @@ export const SURVEY_QUESTIONS: SurveyQuestion[] = [
     id: "experience",
     type: "single",
     index: "15",
-    section: "About you",
-    text: "How many years have you been flying?",
+    section: "Last two — just so we know who we\u2019re talking to",
+    text: "How long have you been flying?",
     sub: "",
-    options: ["Under 1 year", "1–3 years", "4–7 years", "8–15 years", "16 or more years"],
+    options: ["Under 1 year", "1–3 years", "4–7 years", "8–15 years", "16+ years"],
   },
 ];
+
+/** Maps running_on_empty option index (0–3) to legacy energy column 1–5 for DB compatibility. */
+export function runningEmptyIndexToEnergyLegacy(idx: number): number {
+  const map: Record<number, number> = { 0: 1, 1: 2, 2: 3, 3: 5 };
+  return map[idx] ?? 1;
+}
