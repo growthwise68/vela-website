@@ -78,11 +78,10 @@ export const THANK_YOU_COPY_V1: ThankYouCopyBundle = {
 
 export const THANK_YOU_COPY_V2: ThankYouCopyBundle = {
   id: "v2",
-  heading: "Thank you.",
+  heading: "Done. And genuinely appreciated.",
   leadParagraphs: [
-    "All anonymous. Nothing you\u2019ve written can be traced back to you.",
-    "Genuinely — thank you. This is exactly the kind of thing that\u2019s going to make Véla worth building.",
-    "Your survey answers are anonymised. We use them only to improve Véla for cabin crew.",
+    "Thank you from 38,000 feet. What you\u2019ve just shared is exactly why Véla needs to exist.",
+    "All anonymous. Nothing you\u2019ve written can be traced back to you. We use your answers only to improve Véla for cabin crew.",
   ],
   legalLine: {
     before:
@@ -92,9 +91,9 @@ export const THANK_YOU_COPY_V2: ThankYouCopyBundle = {
     termsLinkText: "Terms page",
     after: ".",
   },
-  waitlistTitle: "Want to know when Véla launches?",
+  waitlistTitle: "Be the first to know.",
   waitlistLead:
-    "If you\u2019d like to be notified when Véla is due to be launched, add your details below. This is waitlist only: we don\u2019t connect your name or email to your survey answers. You can skip this step — your survey responses are already saved.",
+    "Add your details and we\u2019ll bring you along as this gets built. A few emails from the crew member behind Véla, and a front-row seat when it\u2019s ready.",
   labels: THANK_YOU_COPY_V1.labels,
   placeholders: THANK_YOU_COPY_V1.placeholders,
   airlineHelper: THANK_YOU_COPY_V1.airlineHelper,
