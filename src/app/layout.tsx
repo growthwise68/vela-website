@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Cormorant_Garamond, DM_Mono, Outfit } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import { SiteShell } from "@/components/SiteShell";
 import { SITE_URL } from "@/lib/site";
 import "./globals.css";
@@ -49,6 +50,7 @@ export default function RootLayout({
       <body>
         <SiteShell>{children}</SiteShell>
         <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
