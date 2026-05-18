@@ -4,8 +4,6 @@ Marketing and compliance pages for the Vela app: Next.js 15 (App Router), Tailwi
 
 **Repository:** [github.com/growthwise68/vela-website](https://github.com/growthwise68/vela-website)
 
-**Master plan:** [vela_website_planning.md](./vela_website_planning.md) (stages, pass/fail, tests, human gates).
-
 ## Quick start
 
 ```bash
