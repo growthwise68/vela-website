@@ -37,7 +37,7 @@ export default function ThankYouClient() {
     setStatus("loading");
     setMessage(null);
     try {
-      const res = await fetch("/api/survey/waitlist", {
+      const res = await fetch("/api/subscribe", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
