@@ -1,0 +1,64 @@
+<svg width="160" height="160" viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="160" height="160" rx="36" fill="#080604"/>
+  <defs>
+    <radialGradient id="halo" cx="50%" cy="50%" r="50%">
+      <stop offset="0%"   stop-color="#c49a3c" stop-opacity="0"/>
+      <stop offset="52%"  stop-color="#c49a3c" stop-opacity="0"/>
+      <stop offset="74%"  stop-color="#c49a3c" stop-opacity="0.09"/>
+      <stop offset="100%" stop-color="#c49a3c" stop-opacity="0.28"/>
+    </radialGradient>
+    <radialGradient id="ring-glow" cx="50%" cy="50%" r="50%">
+      <stop offset="56%"  stop-color="#c49a3c" stop-opacity="0"/>
+      <stop offset="64%"  stop-color="#c49a3c" stop-opacity="0.14"/>
+      <stop offset="70%"  stop-color="#c49a3c" stop-opacity="0.06"/>
+      <stop offset="100%" stop-color="#c49a3c" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="trail" gradientUnits="userSpaceOnUse" x1="16" y1="80" x2="128" y2="40">
+      <stop offset="0%"   stop-color="#d4a94a" stop-opacity="0"/>
+      <stop offset="30%"  stop-color="#d4a94a" stop-opacity="0.25"/>
+      <stop offset="70%"  stop-color="#d4a94a" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#ffcc55" stop-opacity="1"/>
+    </linearGradient>
+    <linearGradient id="trail-bloom" gradientUnits="userSpaceOnUse" x1="16" y1="80" x2="128" y2="40">
+      <stop offset="0%"   stop-color="#c49a3c" stop-opacity="0"/>
+      <stop offset="60%"  stop-color="#c49a3c" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#c49a3c" stop-opacity="0.4"/>
+    </linearGradient>
+    <radialGradient id="face" cx="50%" cy="45%" r="50%">
+      <stop offset="0%"   stop-color="#c49a3c" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="#c49a3c" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="plane-glow" x="-150%" y="-150%" width="400%" height="400%">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="gold-glow" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="2.5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <circle cx="80" cy="80" r="80" fill="url(#halo)"/>
+  <circle cx="80" cy="80" r="80" fill="url(#ring-glow)"/>
+  <circle cx="80" cy="80" r="63" stroke="#c49a3c" stroke-width="0.9" fill="none" opacity="0.35"/>
+  <path d="M17 80 A63 63 0 0 1 135 48" stroke="url(#trail-bloom)" stroke-width="9" fill="none" stroke-linecap="round" opacity="0.6"/>
+  <path d="M17 80 A63 63 0 0 1 135 48" stroke="url(#trail)" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+  <circle cx="80" cy="80" r="34" fill="url(#face)"/>
+  <circle cx="80" cy="80" r="34" stroke="rgba(212,169,74,0.38)" stroke-width="1.6" fill="rgba(8,6,4,0.97)"/>
+  <line x1="80" y1="46"  x2="80" y2="52"  stroke="rgba(250,246,240,0.75)" stroke-width="2"   stroke-linecap="round"/>
+  <line x1="114" y1="80" x2="108" y2="80" stroke="rgba(250,246,240,0.28)" stroke-width="1.2" stroke-linecap="round"/>
+  <line x1="80" y1="114" x2="80" y2="108" stroke="rgba(250,246,240,0.28)" stroke-width="1.2" stroke-linecap="round"/>
+  <line x1="46" y1="80"  x2="52" y2="80"  stroke="rgba(250,246,240,0.28)" stroke-width="1.2" stroke-linecap="round"/>
+  <line x1="80" y1="80" x2="67" y2="62" stroke="rgba(250,246,240,0.88)" stroke-width="2.6" stroke-linecap="round"/>
+  <line x1="80" y1="80" x2="95" y2="62" stroke="#e8b84b" stroke-width="2" stroke-linecap="round" filter="url(#gold-glow)"/>
+  <circle cx="80" cy="80" r="4.5" fill="#d4a94a" filter="url(#gold-glow)"/>
+  <circle cx="80" cy="80" r="2"   fill="rgba(8,6,4,0.9)"/>
+  <g transform="translate(135,48) rotate(138)" filter="url(#plane-glow)">
+    <rect x="-3" y="-10" width="6" height="20" rx="3" fill="#ffcc55"/>
+    <path d="M-3 -1 L-14 5.5 L-14 8.5 L-3 4.5 Z" fill="#ffcc55"/>
+    <path d="M 3 -1 L 14 5.5 L 14 8.5 L  3 4.5 Z" fill="#ffcc55"/>
+    <path d="M-3 8  L-7  13 L-3 11.5 Z" fill="#ffcc55"/>
+    <path d="M 3 8  L 7  13 L  3 11.5 Z" fill="#ffcc55"/>
+  </g>
+  <circle cx="135" cy="48" r="3" fill="#ffcc55" opacity="0.3"/>
+</svg>

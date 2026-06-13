@@ -238,18 +238,12 @@ export default function SurveyPage() {
             {q.type === "intro" && (
               <div className="intro-screen">
                 <div className="vela-wordmark">Véla</div>
-                <div className="vela-tagline">Circadian Intelligence for Cabin Crew</div>
+                <div className="vela-tagline">By crew, for crew.</div>
                 <div className="intro-body">
-                  You spend your career flying across time zones.
-                  <br />
-                  About 3 minutes to help us build something designed around your world.
+                  Three minutes. Your experience. Our blueprint.
                 </div>
                 <div className="intro-sub">
-                  {
-                    "By crew, for crew: we\u2019re building with input from former crew and the latest circadian and sleep research — the same field that informs high-performance space and military sleep and alertness work. " +
-                    "Véla is a lifestyle and wellness companion: this survey and your ongoing feedback will drive what we build. " +
-                    "To make sure it helps, we need to understand your world. Your answers stay anonymous."
-                  }
+                  {"Your roster. Your patterns. Your experience of what this job really does to you. That\u2019s what we\u2019re building from.\n\nNo one has ever put crew at the centre of something like this. Every answer you give goes directly into what Véla becomes — and stays completely anonymous."}
                 </div>
                 <div className="intro-time">⏱ About 3 minutes · Anonymous</div>
                 <button
@@ -257,7 +251,7 @@ export default function SurveyPage() {
                   onClick={goNext}
                   style={{ maxWidth: "320px", margin: "0 auto", display: "block" }}
                 >
-                  Begin the survey →
+                  Add your voice →
                 </button>
               </div>
             )}
