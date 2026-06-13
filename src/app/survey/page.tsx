@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { SURVEY_QUESTIONS, runningEmptyIndexToEnergyLegacy } from "./questions";
 import "./survey.css";
@@ -11,6 +11,7 @@ export default function SurveyPage() {
   const router = useRouter();
   const [current, setCurrent] = useState(0);
   const [answers, setAnswers] = useState<Record<string, any>>({});
+  const answersRef = useRef<Record<string, any>>({});
   const [animating, setAnimating] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -76,13 +77,18 @@ export default function SurveyPage() {
     handleTransition(() => setCurrent(Math.max(current - 1, 0)));
   };
 
+  const syncAnswers = (newAnswers: Record<string, any>) => {
+    answersRef.current = newAnswers;
+    setAnswers(newAnswers);
+  };
+
   const selectSingle = (id: string, index: number) => {
-    setAnswers({ ...answers, [id]: index });
+    syncAnswers({ ...answers, [id]: index });
     setTimeout(goNext, 320);
   };
 
   const selectScale = (id: string, value: number) => {
-    setAnswers({ ...answers, [id]: value });
+    syncAnswers({ ...answers, [id]: value });
     setTimeout(goNext, 380);
   };
 
@@ -91,10 +97,10 @@ export default function SurveyPage() {
     const curr: number[] = answers[id] || [];
     const idx = curr.indexOf(index);
     if (idx > -1) {
-      setAnswers({ ...answers, [id]: curr.filter((i) => i !== index) });
+      syncAnswers({ ...answers, [id]: curr.filter((i) => i !== index) });
     } else {
       if (qDef?.maxSelect && curr.length >= qDef.maxSelect) return;
-      setAnswers({ ...answers, [id]: [...curr, index] });
+      syncAnswers({ ...answers, [id]: [...curr, index] });
     }
   };
 
@@ -112,6 +118,9 @@ export default function SurveyPage() {
     setIsSubmitting(true);
     setError(null);
 
+    // Always read from ref so we get the latest answers even if called
+    // from a stale closure (e.g. the auto-advance on the last question).
+    const answers = answersRef.current;
     const roIdx = answers.running_on_empty as number;
     const surveyData = {
       energy: runningEmptyIndexToEnergyLegacy(typeof roIdx === "number" ? roIdx : 0),
@@ -119,7 +128,7 @@ export default function SurveyPage() {
       timezone_crossings: "Not collected — survey v2",
       recovery_time: getLabel("recovery_after_haul", answers.recovery_after_haul as number),
       coping_strategies: getLabels("tools_issue", (answers.tools_issue as number[]) || []),
-      app_utility: (answers.tiredness_worry as number) || 0,
+      app_utility: (answers.tiredness_worry as number) || 1,
       willingness_to_pay: "Not collected — survey v2",
       email: null as string | null,
       name: null as string | null,
@@ -139,7 +148,7 @@ export default function SurveyPage() {
           "tiredness_episodes_month",
           answers.tiredness_episodes_month as number
         ),
-        tiredness_worry: (answers.tiredness_worry as number) || 0,
+        tiredness_worry: (answers.tiredness_worry as number) || 1,
         recovery_after_haul: getLabel("recovery_after_haul", answers.recovery_after_haul as number),
         bodyclock_tz: getLabel("bodyclock_tz", answers.bodyclock_tz as number),
         roster_planning: getLabel("roster_planning", answers.roster_planning as number),
@@ -338,7 +347,7 @@ export default function SurveyPage() {
                 <textarea
                   className="text-input opentext-input"
                   value={(answers[q.id] as string) || ""}
-                  onChange={(e) => setAnswers({ ...answers, [q.id]: e.target.value })}
+                  onChange={(e) => syncAnswers({ ...answers, [q.id]: e.target.value })}
                   placeholder={
                     q.id === "job_taken_from_life"
                       ? "Share as much as you\u2019re comfortable with\u2026"
