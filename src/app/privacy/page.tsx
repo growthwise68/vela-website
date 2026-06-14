@@ -36,8 +36,12 @@ export default function PrivacyPage() {
         </li>
         <li>
           <strong>Schedule and roster data</strong> — duty periods, layover locations, and shift
-          patterns you enter to generate readiness estimates. This information stays on your
-          device or in your private account and is not shared with your employer or airline.
+          patterns you enter to generate readiness estimates. When you enter a flight number,
+          it is sent to a third-party public flight data service (AeroDataBox) to retrieve route
+          and timing information; the flight number is publicly available information and no
+          personal data is included in that request. Your assembled roster — the combination of
+          your flights and schedule — stays on your device or in your private account and is
+          never shared with your employer, airline, or any aviation authority.
         </li>
         <li>
           <strong>Preferences and settings</strong> — sleep timing preferences, notification
@@ -129,6 +133,11 @@ export default function PrivacyPage() {
               communications. Only subscribers who have explicitly signed up receive emails.
             </li>
             <li>
+              <strong>AeroDataBox</strong> — a public flight data API used to look up route
+              and timing information from a flight number. Only the flight number is sent;
+              no personal data is transmitted.
+            </li>
+            <li>
               <strong>Vercel</strong> — website hosting and pseudonymous web analytics.
             </li>
           </ul>
@@ -148,6 +157,24 @@ export default function PrivacyPage() {
       <p>
         We do not share your roster or schedule data with your employer, airline, or any
         regulatory authority unless required by law.
+      </p>
+
+      <h2>Independence from your airline</h2>
+      <p>
+        VÉLA has no connection to your airline, employer, or any aviation authority — and
+        that is by design.
+      </p>
+      <ul>
+        <li>We do not request, access, or store any internal airline systems data, crew management data, scheduling system data, or operational information.</li>
+        <li>We do not ask for your employee ID, crew ID, staff number, or any airline-issued credential.</li>
+        <li>We do not share any information with your airline, employer, union, regulator, or any third party acting on their behalf.</li>
+        <li>Your use of VÉLA is entirely private. No one at your airline can see that you use it, what your schedule looks like in the app, or what your readiness estimates are.</li>
+        <li>VÉLA is not affiliated with, endorsed by, or integrated into any airline&rsquo;s systems or Fatigue Risk Management programme.</li>
+      </ul>
+      <p>
+        The only flight information VÉLA retrieves externally is public route and timing data
+        looked up by flight number (see &ldquo;Schedule and roster data&rdquo; above). This
+        is the same information available on any public flight tracker.
       </p>
 
       <h2>Data retention</h2>

@@ -56,6 +56,15 @@ export default function TermsPage() {
         FRMS.
       </p>
 
+      <h2>Independence from your airline</h2>
+      <p>
+        VÉLA operates entirely independently of your airline, employer, and any aviation
+        authority. We do not access, request, or store internal airline systems data, crew
+        management data, or any airline-issued credentials. Your use of VÉLA is private —
+        no information is shared with your employer or any party acting on their behalf.
+        See our <a className="text-gold underline decoration-gold/40" href="/privacy">Privacy Policy</a> for full details.
+      </p>
+
       <h2>Accuracy of estimates</h2>
       <p>
         Readiness scores and fatigue estimates are based on population-level sleep science
