@@ -2,9 +2,8 @@
 
 import Link from "next/link";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Navigation, Pagination } from "swiper/modules";
+import { Autoplay, Pagination } from "swiper/modules";
 import "swiper/css";
-import "swiper/css/navigation";
 import "swiper/css/pagination";
 
 export default function HomePage() {
@@ -67,15 +66,14 @@ export default function HomePage() {
           </p>
           <div className="mb-6">
             <Swiper
-              modules={[Autoplay, Navigation, Pagination]}
-              autoplay={{ delay: 5000, disableOnInteraction: false }}
+              modules={[Autoplay, Pagination]}
+              autoplay={{ delay: 8000, disableOnInteraction: false, pauseOnMouseEnter: true }}
               pagination={{ clickable: true, dynamicBullets: true }}
-              navigation={true}
               loop={true}
               className="rounded-lg overflow-hidden"
             >
               <SwiperSlide>
-                <div className="bg-gradient-to-br from-amber-100 to-amber-50 h-80 md:h-96 flex flex-col items-center justify-center text-inkMid px-6">
+                <div className="bg-gradient-to-br from-amber-100 to-amber-50 min-h-[320px] md:min-h-[384px] flex flex-col items-center justify-center py-8 text-inkMid px-6">
                   <h3 className="font-display text-3xl md:text-4xl text-ink mb-4">The Departure</h3>
                   <p className="text-lg md:text-xl mb-4 max-w-md text-center">
                     Your report time is 02:00. Your body thinks it&rsquo;s the middle of the night — because
@@ -89,7 +87,7 @@ export default function HomePage() {
                 </div>
               </SwiperSlide>
               <SwiperSlide>
-                <div className="bg-gradient-to-br from-amber-100 to-amber-50 h-80 md:h-96 flex flex-col items-center justify-center text-inkMid px-6">
+                <div className="bg-gradient-to-br from-amber-100 to-amber-50 min-h-[320px] md:min-h-[384px] flex flex-col items-center justify-center py-8 text-inkMid px-6">
                   <h3 className="font-display text-3xl md:text-4xl text-ink mb-4">The Layover</h3>
                   <p className="text-lg md:text-xl mb-4 max-w-md text-center">
                     30 hours in Melbourne. Your body clock is sitting somewhere over the Indian Ocean.
@@ -103,7 +101,7 @@ export default function HomePage() {
                 </div>
               </SwiperSlide>
               <SwiperSlide>
-                <div className="bg-gradient-to-br from-amber-100 to-amber-50 h-80 md:h-96 flex flex-col items-center justify-center text-inkMid px-6">
+                <div className="bg-gradient-to-br from-amber-100 to-amber-50 min-h-[320px] md:min-h-[384px] flex flex-col items-center justify-center py-8 text-inkMid px-6">
                   <h3 className="font-display text-3xl md:text-4xl text-ink mb-4">The Return</h3>
                   <p className="text-lg md:text-xl mb-4 max-w-md text-center">
                     You&rsquo;re home. Your days off start now. V&Eacute;LA shows you why the first 24 hours
@@ -139,15 +137,14 @@ export default function HomePage() {
           </p>
           <div className="mb-6">
             <Swiper
-              modules={[Autoplay, Navigation, Pagination]}
-              autoplay={{ delay: 5000, disableOnInteraction: false }}
+              modules={[Autoplay, Pagination]}
+              autoplay={{ delay: 8000, disableOnInteraction: false, pauseOnMouseEnter: true }}
               pagination={{ clickable: true, dynamicBullets: true }}
-              navigation={true}
               loop={true}
               className="rounded-lg overflow-hidden"
             >
               <SwiperSlide>
-                <div className="bg-gradient-to-br from-blue-50 to-purple-50 h-80 md:h-96 flex flex-col items-center justify-center text-inkMid px-6">
+                <div className="bg-gradient-to-br from-blue-50 to-purple-50 min-h-[320px] md:min-h-[384px] flex flex-col items-center justify-center py-8 text-inkMid px-6">
                   <h3 className="font-display text-3xl md:text-4xl text-ink mb-4">DXB&ndash;JFK</h3>
                   <p className="text-lg md:text-xl mb-6 max-w-md text-center">
                     Your DXB&ndash;JFK pattern pushes your low point to 04:00 body time on day two.
@@ -178,7 +175,7 @@ export default function HomePage() {
                 </div>
               </SwiperSlide>
               <SwiperSlide>
-                <div className="bg-gradient-to-br from-blue-50 to-purple-50 h-80 md:h-96 flex flex-col items-center justify-center text-inkMid px-6">
+                <div className="bg-gradient-to-br from-blue-50 to-purple-50 min-h-[320px] md:min-h-[384px] flex flex-col items-center justify-center py-8 text-inkMid px-6">
                   <h3 className="font-display text-3xl md:text-4xl text-ink mb-4">Flying East</h3>
                   <p className="text-lg md:text-xl mb-6 max-w-md text-center">
                     Flying east is harder than flying west. Here&rsquo;s exactly why your Melbourne turns
@@ -201,7 +198,7 @@ export default function HomePage() {
                 </div>
               </SwiperSlide>
               <SwiperSlide>
-                <div className="bg-gradient-to-br from-blue-50 to-purple-50 h-80 md:h-96 flex flex-col items-center justify-center text-inkMid px-6">
+                <div className="bg-gradient-to-br from-blue-50 to-purple-50 min-h-[320px] md:min-h-[384px] flex flex-col items-center justify-center py-8 text-inkMid px-6">
                   <h3 className="font-display text-3xl md:text-4xl text-ink mb-4">Your Day Off</h3>
                   <p className="text-lg md:text-xl mb-6 max-w-md text-center">
                     Your body clock didn&rsquo;t reset on your day off. V&Eacute;LA shows you where it actually
