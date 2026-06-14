@@ -23,9 +23,12 @@ export default function HomePage() {
             V&eacute;la reads your schedule and shows you what your body clock will be doing — duty by duty,
             timezone by timezone. What to expect. How to prepare. Built by crew, because someone had to.
           </p>
-          <button className="inline-block px-6 py-3 bg-gold text-ink font-semibold rounded hover:bg-yellow-600 transition-all hover:scale-105">
+          <Link
+            href="/early-access"
+            className="inline-block px-6 py-3 bg-gold text-ink font-semibold rounded hover:bg-yellow-600 transition-all hover:scale-105"
+          >
             Get Early Access
-          </button>
+          </Link>
         </div>
       </section>
 
@@ -337,9 +340,12 @@ export default function HomePage() {
               clinical advice, and not a replacement for your airline&rsquo;s fatigue management requirements.
             </p>
           </div>
-          <button className="inline-block px-6 py-3 bg-gold text-ink font-semibold rounded hover:bg-yellow-600 transition-all hover:scale-105">
+          <Link
+            href="/early-access"
+            className="inline-block px-6 py-3 bg-gold text-ink font-semibold rounded hover:bg-yellow-600 transition-all hover:scale-105"
+          >
             Get Early Access
-          </button>
+          </Link>
         </div>
       </section>
 
