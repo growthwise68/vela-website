@@ -212,7 +212,7 @@ export default function SurveyPage() {
         {/* Header */}
         <div className="header" style={{ display: q.type === "intro" ? "none" : "flex" }}>
           <div className="logo">
-            Véla
+            VÉLA
             <span>Circadian Intelligence</span>
           </div>
           <div className="progress-wrap" style={{ maxWidth: "220px" }}>
@@ -246,13 +246,13 @@ export default function SurveyPage() {
 
             {q.type === "intro" && (
               <div className="intro-screen">
-                <div className="vela-wordmark">Véla</div>
+                <div className="vela-wordmark">VÉLA</div>
                 <div className="vela-tagline">By crew, for crew.</div>
                 <div className="intro-body">
                   Three minutes. Your experience. Our blueprint.
                 </div>
                 <div className="intro-sub">
-                  {"Your roster. Your patterns. Your experience of what this job really does to you. That\u2019s what we\u2019re building from.\n\nNo one has ever put crew at the centre of something like this. Every answer you give goes directly into what Véla becomes — and stays completely anonymous."}
+                  {"Your roster. Your patterns. Your experience of what this job really does to you. That\u2019s what we\u2019re building from.\n\nNo one has ever put crew at the centre of something like this. Every answer you give goes directly into what VÉLA becomes — and stays completely anonymous."}
                 </div>
                 <div className="intro-time">⏱ About 3 minutes · Anonymous</div>
                 <button

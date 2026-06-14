@@ -30,11 +30,11 @@ const dmMono = DM_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "Véla — Wellness companion for long-haul crew",
-    template: "%s — Véla",
+    default: "VÉLA — Wellness companion for long-haul crew",
+    template: "%s — VÉLA",
   },
   description:
-    "Véla is a lifestyle and wellness companion for people who travel across time zones — shaped with former crew and circadian and sleep research from the same field used in high-performance space and military operations. Not a medical device.",
+    "VÉLA is a lifestyle and wellness companion for people who travel across time zones — shaped with former crew and circadian and sleep research from the same field used in high-performance space and military operations. Not a medical device.",
 };
 
 export default function RootLayout({

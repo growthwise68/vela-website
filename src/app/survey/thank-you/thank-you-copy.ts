@@ -48,12 +48,12 @@ export const THANK_YOU_COPY_V1: ThankYouCopyBundle = {
   id: "v1",
   heading: "Thank you.",
   leadParagraphs: [
-    "Your answers are anonymised and are ONLY used to make Véla better for cabin crew.",
+    "Your answers are anonymised and are ONLY used to make VÉLA better for cabin crew.",
   ],
   legalLine: null,
   waitlistTitle: null,
   waitlistLead:
-    "What you shared in the survey is anonymised and not associated with your details. If you would like to be advised when Véla is due to be launched, then add your details below to be added to the waitlist. Otherwise you can skip this step — your responses have been saved.",
+    "What you shared in the survey is anonymised and not associated with your details. If you would like to be advised when VÉLA is due to be launched, then add your details below to be added to the waitlist. Otherwise you can skip this step — your responses have been saved.",
   labels: {
     firstName: "First name",
     email: "Email",
@@ -65,23 +65,23 @@ export const THANK_YOU_COPY_V1: ThankYouCopyBundle = {
     airline: "e.g. Emirates, United, Qantas",
   },
   airlineHelper:
-    "If you tell us, we can let you know when Véla is upgraded with features relevant to your airline.",
+    "If you tell us, we can let you know when VÉLA is upgraded with features relevant to your airline.",
   submitButton: "Join the waitlist",
   submitLoading: "Saving…",
-  formFooter: "One message when we are ready. Unsubscribe anytime.",
+  formFooter: "Unsubscribe anytime.",
   successLine: "You are on the waitlist",
   noRidMessage:
     "If you completed the survey, thank you. To join the waitlist later, use the Support page.",
-  linkSkip: "Skip — back to Véla",
-  linkBack: "Back to Véla",
+  linkSkip: "Skip — back to VÉLA",
+  linkBack: "Back to VÉLA",
 };
 
 export const THANK_YOU_COPY_V2: ThankYouCopyBundle = {
   id: "v2",
   heading: "Done. And genuinely appreciated.",
   leadParagraphs: [
-    "Thank you from 38,000 feet. What you\u2019ve just shared is exactly why Véla needs to exist.",
-    "All anonymous. Nothing you\u2019ve written can be traced back to you. We use your answers only to improve Véla for cabin crew.",
+    "Thank you from 38,000 feet. What you\u2019ve just shared is exactly why VÉLA needs to exist.",
+    "All anonymous. Nothing you\u2019ve written can be traced back to you. We use your answers only to improve VÉLA for cabin crew.",
   ],
   legalLine: {
     before:
@@ -93,7 +93,7 @@ export const THANK_YOU_COPY_V2: ThankYouCopyBundle = {
   },
   waitlistTitle: "Be the first to know.",
   waitlistLead:
-    "Add your details and we\u2019ll bring you along as this gets built. A few emails from the crew member behind Véla, and a front-row seat when it\u2019s ready.",
+    "Add your details and we\u2019ll bring you along as this gets built. A few emails from the crew member behind VÉLA, and a front-row seat when it\u2019s ready.",
   labels: THANK_YOU_COPY_V1.labels,
   placeholders: THANK_YOU_COPY_V1.placeholders,
   airlineHelper: THANK_YOU_COPY_V1.airlineHelper,

@@ -61,15 +61,15 @@ export default function EarlyAccessClient() {
       </div>
 
       <h2 className="text-center font-display text-3xl font-light text-ink">
-        Be the first to fly with Véla.
+        Be the first to fly with VÉLA.
       </h2>
       <p className="mt-3 text-center text-[15px] leading-relaxed text-inkMid">
-        Véla is built by crew, for crew — a personal tool that reads your roster and shows you what
+        VÉLA is built by crew, for crew — a personal tool that reads your roster and shows you what
         your body clock will be doing, duty by duty.
       </p>
       <p className="mt-4 text-center text-[15px] leading-relaxed text-inkMid">
         Add your details below and we&rsquo;ll bring you along as this gets built. A few emails from
-        the crew member behind Véla, and a front-row seat when it&rsquo;s ready.
+        the crew member behind VÉLA, and a front-row seat when it&rsquo;s ready.
       </p>
 
       {status !== "success" && (
@@ -121,7 +121,7 @@ export default function EarlyAccessClient() {
                 disabled={status === "loading"}
               />
               <p className="mt-2 text-[0.8rem] leading-snug text-inkMid">
-                If you tell us, we can let you know when Véla adds features relevant to your airline.
+                If you tell us, we can let you know when VÉLA adds features relevant to your airline.
               </p>
             </div>
             {message && status === "error" && (
@@ -135,7 +135,7 @@ export default function EarlyAccessClient() {
               {status === "loading" ? "Saving…" : "Let me know"}
             </button>
             <p className="text-center font-mono text-[0.65rem] uppercase tracking-[0.1em] text-inkFaint">
-              One message when we are ready. Unsubscribe anytime.
+              Unsubscribe anytime.
             </p>
           </form>
         </div>
