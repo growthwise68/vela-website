@@ -20,7 +20,7 @@ export default function HomePage() {
             Your roster, mapped before you fly it.
           </h1>
           <p className="font-sans text-xl md:text-2xl font-light text-inkMid max-w-2xl mx-auto mb-8 leading-relaxed">
-            V&eacute;la reads your schedule and shows you what your body clock will be doing — duty by duty,
+            V&Eacute;LA reads your schedule and shows you what your body clock will be doing — duty by duty,
             timezone by timezone. What to expect. How to prepare. Built by crew, because someone had to.
           </p>
           <Link
@@ -40,10 +40,10 @@ export default function HomePage() {
               Important
             </p>
             <p className="font-sans text-base md:text-lg text-inkMid leading-relaxed">
-              V&eacute;la is a <strong className="font-medium text-ink">personal lifestyle planning</strong> tool. It
+              V&Eacute;LA is a <strong className="font-medium text-ink">personal lifestyle planning</strong> tool. It
               is not a medical device and does not provide medical, health, or safety advice. Readiness
               scores are estimates for personal planning only&mdash;not for safety-critical or fitness-for-duty
-              decisions. V&eacute;la is not part of any airline Fatigue Risk Management System (FRMS) and does
+              decisions. V&Eacute;LA is not part of any airline Fatigue Risk Management System (FRMS) and does
               not replace your operator&rsquo;s fitness-for-duty requirements or professional medical advice.
             </p>
           </div>
@@ -62,7 +62,7 @@ export default function HomePage() {
             something that tells you what to do about it — before you&rsquo;re already in it.
           </p>
           <p className="font-sans text-xl md:text-2xl text-inkMid mb-8 leading-relaxed">
-            V&eacute;la reads your roster and shows you what your body clock will be doing, duty by duty.
+            V&Eacute;LA reads your roster and shows you what your body clock will be doing, duty by duty.
             Not after the fact. Before you even pack your bag.
           </p>
           <div className="mb-6">
@@ -79,7 +79,7 @@ export default function HomePage() {
                   <h3 className="font-display text-3xl md:text-4xl text-ink mb-4">The Departure</h3>
                   <p className="text-lg md:text-xl mb-4 max-w-md text-center">
                     Your report time is 02:00. Your body thinks it&rsquo;s the middle of the night — because
-                    it is. V&eacute;la saw this coming three days ago.
+                    it is. V&Eacute;LA saw this coming three days ago.
                   </p>
                   <div className="flex gap-3 justify-center text-xs font-mono">
                     <span className="px-3 py-1 bg-blue-200 text-blue-900 rounded">Sleep</span>
@@ -93,7 +93,7 @@ export default function HomePage() {
                   <h3 className="font-display text-3xl md:text-4xl text-ink mb-4">The Layover</h3>
                   <p className="text-lg md:text-xl mb-4 max-w-md text-center">
                     30 hours in Melbourne. Your body clock is sitting somewhere over the Indian Ocean.
-                    V&eacute;la tells you exactly when to sleep to actually use this layover.
+                    V&Eacute;LA tells you exactly when to sleep to actually use this layover.
                   </p>
                   <div className="flex gap-3 justify-center text-xs font-mono">
                     <span className="px-3 py-1 bg-blue-200 text-blue-900 rounded">Sleep</span>
@@ -106,7 +106,7 @@ export default function HomePage() {
                 <div className="bg-gradient-to-br from-amber-100 to-amber-50 h-80 md:h-96 flex flex-col items-center justify-center text-inkMid px-6">
                   <h3 className="font-display text-3xl md:text-4xl text-ink mb-4">The Return</h3>
                   <p className="text-lg md:text-xl mb-4 max-w-md text-center">
-                    You&rsquo;re home. Your days off start now. V&eacute;la shows you why the first 24 hours
+                    You&rsquo;re home. Your days off start now. V&Eacute;LA shows you why the first 24 hours
                     matter most — and what to do with them.
                   </p>
                   <div className="flex gap-3 justify-center text-xs font-mono">
@@ -125,7 +125,7 @@ export default function HomePage() {
       <section className="w-full py-20 md:py-32 bg-parchment">
         <div className="max-w-4xl mx-auto px-6 md:px-8">
           <h2 className="font-display text-5xl md:text-6xl font-light text-ink mb-6 border-b-2 border-gold pb-4">
-            Your body clock has a logic. V&eacute;la speaks it.
+            Your body clock has a logic. V&Eacute;LA speaks it.
           </h2>
           <p className="font-display text-2xl md:text-3xl italic text-gold mb-8 pl-4 border-l-2 border-gold leading-relaxed">
             Every time you feel wrecked after a short trip, or strangely fine after a long one — that&rsquo;s
@@ -133,7 +133,7 @@ export default function HomePage() {
           </p>
           <p className="font-sans text-xl md:text-2xl text-inkMid mb-8 leading-relaxed">
             It&rsquo;s not random. It&rsquo;s not just &ldquo;jet lag.&rdquo; And it&rsquo;s not something you have to keep
-            figuring out alone. V&eacute;la combines your actual roster with the same circadian science used in
+            figuring out alone. V&Eacute;LA combines your actual roster with the same circadian science used in
             space and military operational planning — and translates it into something you can actually use.
             No jargon. No guesswork. Just your body clock, made readable.
           </p>
@@ -204,7 +204,7 @@ export default function HomePage() {
                 <div className="bg-gradient-to-br from-blue-50 to-purple-50 h-80 md:h-96 flex flex-col items-center justify-center text-inkMid px-6">
                   <h3 className="font-display text-3xl md:text-4xl text-ink mb-4">Your Day Off</h3>
                   <p className="text-lg md:text-xl mb-6 max-w-md text-center">
-                    Your body clock didn&rsquo;t reset on your day off. V&eacute;la shows you where it actually
+                    Your body clock didn&rsquo;t reset on your day off. V&Eacute;LA shows you where it actually
                     is before your next duty starts.
                   </p>
                   <div className="w-full max-w-md bg-white rounded-lg shadow-sm p-4 space-y-3">
@@ -235,8 +235,8 @@ export default function HomePage() {
             Know what&rsquo;s coming. Know what to do.
           </h2>
           <p className="font-sans text-xl md:text-2xl text-inkMid mb-12 leading-relaxed">
-            Most crew go into every trip reacting. V&eacute;la puts you a step ahead. Upload your roster and
-            V&eacute;la gives you a clear picture of what your body clock will need — and when. Simple,
+            Most crew go into every trip reacting. V&Eacute;LA puts you a step ahead. Upload your roster and
+            V&Eacute;LA gives you a clear picture of what your body clock will need — and when. Simple,
             specific, and built around your actual schedule. Not generic advice. Yours.
           </p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -272,7 +272,7 @@ export default function HomePage() {
             Built by crew.
           </h2>
           <p className="font-sans text-xl md:text-2xl text-inkMid mb-10 leading-relaxed">
-            This is where V&eacute;la came from. Not a strategy session. A crew member who got tired of
+            This is where V&Eacute;LA came from. Not a strategy session. A crew member who got tired of
             asking the same questions as everyone else — and getting nothing back.
           </p>
           <div className="bg-cream rounded-2xl p-8 md:p-12 mb-16 border border-warmLine">
@@ -286,7 +286,7 @@ export default function HomePage() {
             </p>
             <p className="font-display text-2xl md:text-3xl italic text-gold mb-6 leading-relaxed">
               So I decided to build it myself. Using what I was living, and what crew around me were telling
-              me. V&eacute;la exists because that question had no answer.
+              me. V&Eacute;LA exists because that question had no answer.
             </p>
             <p className="font-display text-2xl md:text-3xl italic text-gold mb-8 leading-relaxed">
               But I can only see so far from where I&rsquo;m standing. Now I need you too.&rdquo;
@@ -299,14 +299,14 @@ export default function HomePage() {
           {/* Survey CTA */}
           <div className="text-center">
             <p className="font-mono text-xs md:text-sm uppercase tracking-[0.2em] text-gold mb-4 font-semibold">
-              Help shape V&eacute;la
+              Help shape V&Eacute;LA
             </p>
             <h3 className="font-display text-4xl md:text-5xl font-light text-ink mb-6">
               Your experience should shape this.
             </h3>
             <p className="font-sans text-xl md:text-2xl text-inkMid max-w-2xl mx-auto mb-8 leading-relaxed">
               Three minutes. Completely anonymous. Tell us what this job really feels like — and help make
-              V&eacute;la better for every crew member who needs it.
+              V&Eacute;LA better for every crew member who needs it.
             </p>
             <Link
               href="/survey"
@@ -325,7 +325,7 @@ export default function HomePage() {
             Your roster. Your body clock. Finally, both in one place.
           </h2>
           <p className="font-sans text-xl md:text-2xl text-inkMid max-w-2xl mx-auto mb-6 leading-relaxed">
-            Download V&eacute;la. Upload your roster. And for the first time, see exactly what&rsquo;s coming
+            Download V&Eacute;LA. Upload your roster. And for the first time, see exactly what&rsquo;s coming
             — before it hits you.
           </p>
           <p className="font-sans text-xl md:text-2xl text-inkMid max-w-2xl mx-auto mb-10 leading-relaxed">
@@ -334,7 +334,7 @@ export default function HomePage() {
           </p>
           <div className="rounded-[20px] border border-warmLine bg-parchment/80 p-6 mb-8 max-w-2xl mx-auto text-left">
             <p className="font-sans text-sm text-inkMid leading-relaxed">
-              A note before you download: V&eacute;la is a{" "}
+              A note before you download: V&Eacute;LA is a{" "}
               <strong className="font-medium text-ink">personal lifestyle planning</strong> tool, not a
               medical device. What you&rsquo;ll find here is roster-based insight to help you plan — not
               clinical advice, and not a replacement for your airline&rsquo;s fatigue management requirements.

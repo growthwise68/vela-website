@@ -34,7 +34,7 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
       <footer className="border-t border-warmLine bg-parchment/60">
         <div className="mx-auto max-w-3xl px-6 py-8">
           <p className="font-mono text-xs uppercase tracking-[0.2em] text-inkFaint font-semibold">
-            &copy; {new Date().getFullYear()} Véla. Lifestyle planning for long-haul crew.
+            &copy; {new Date().getFullYear()} VÉLA. Lifestyle planning for long-haul crew.
           </p>
         </div>
       </footer>

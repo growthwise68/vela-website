@@ -2,10 +2,10 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Support",
-  description: "Contact and support for Vela.",
+  description: "Contact and support for VÉLA.",
 };
 
-const supportName = "Iain Giffen";
+const supportName = "Vela4Crew Inc.";
 const supportEmail = process.env.NEXT_PUBLIC_SUPPORT_EMAIL?.trim() ?? "";
 
 export default function SupportPage() {
@@ -13,7 +13,7 @@ export default function SupportPage() {
     <div className="space-y-6">
       <h1 className="font-display text-3xl font-light text-ink">Support</h1>
       <p className="font-sans text-inkMid">
-        For product help, Vela&rsquo;s public contact is below. This page is intended to match what
+        For product help, VÉLA&rsquo;s public contact is below. This page is intended to match what
         you list in App Store Connect and Google Play (support URL and email, where required).
       </p>
       <div className="rounded-[18px] border border-warmLine bg-parchment/80 p-6">

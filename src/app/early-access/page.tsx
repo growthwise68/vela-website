@@ -10,8 +10,8 @@ function Fallback() {
 }
 
 export const metadata = {
-  title: "Get Early Access — Véla",
-  description: "Be the first to know when Véla is ready. Built by crew, for crew.",
+  title: "Get Early Access — VÉLA",
+  description: "Be the first to know when VÉLA is ready. Built by crew, for crew.",
 };
 
 export default function EarlyAccessPage() {
