@@ -48,10 +48,18 @@ export default function PrivacyPage() {
           settings, and planning configuration you choose within the app.
         </li>
         <li>
+          <strong>Adherence feedback</strong> — the app allows you to optionally record how
+          well you followed guidance (for example, sleep timing, light exposure, or nutrition
+          suggestions). This information is stored in your private account and is used solely
+          to update your personal readiness estimates within the app. It is not shared, sold,
+          or used for any other purpose.
+        </li>
+        <li>
           <strong>Survey responses</strong> — if you complete our cabin crew survey, your answers
-          are stored anonymously. No personally identifiable information is linked to your
-          answers unless you separately and explicitly choose to join the waitlist at the end of
-          the survey.
+          are stored anonymously and are never linked to your identity. If you choose to join
+          the waitlist at the end of the survey, your contact details are stored in a completely
+          separate record with no reference back to your survey answers. It is architecturally
+          impossible for us — or anyone else — to connect your survey responses to your identity.
         </li>
         <li>
           <strong>Waitlist and early access sign-ups</strong> — if you join our waitlist or
