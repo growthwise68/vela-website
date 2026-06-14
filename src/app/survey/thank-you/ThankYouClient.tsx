@@ -41,7 +41,6 @@ export default function ThankYouClient() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          responseId: rid,
           email: email.trim(),
           name: name.trim(),
           airline: airline.trim() || null,
