@@ -21,10 +21,8 @@ import { createClient } from "@supabase/supabase-js";
  * Env vars:
  *   NEXT_PUBLIC_SUPABASE_URL          — Supabase project URL
  *   NEXT_PUBLIC_SUPABASE_ANON_KEY     — Supabase anon key
- *   MAILERLITE_API_KEY                — MailerLite API token (server-side only)
- *   MAILERLITE_EARLY_ACCESS_GROUP_ID  — MailerLite group for standalone signups
- *   MAILERLITE_GROUP_ID               — MailerLite group for survey-linked signups
- *                                       (falls back to MAILERLITE_EARLY_ACCESS_GROUP_ID)
+ *   MAILERLITE_API_KEY   — MailerLite API token (server-side only)
+ *   MAILERLITE_GROUP_ID  — MailerLite group ID; used by both flows
  */
 
 function validateEmail(email: string): boolean {
@@ -150,8 +148,7 @@ export async function POST(req: NextRequest) {
         return NextResponse.json({ error: "Failed to save your details" }, { status: 500 });
       }
 
-      const groupId =
-        process.env.MAILERLITE_GROUP_ID ?? process.env.MAILERLITE_EARLY_ACCESS_GROUP_ID;
+      const groupId = process.env.MAILERLITE_GROUP_ID;
       await addToMailerLite(emailNorm, nameNorm, airlineNorm, groupId).catch((e) =>
         console.error("MailerLite error (non-fatal):", e)
       );
@@ -187,7 +184,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Failed to save" }, { status: 500 });
     }
 
-    const groupId = process.env.MAILERLITE_EARLY_ACCESS_GROUP_ID;
+    const groupId = process.env.MAILERLITE_GROUP_ID;
     await addToMailerLite(emailNorm, nameNorm, airlineNorm, groupId).catch((e) =>
       console.error("MailerLite error (non-fatal):", e)
     );
