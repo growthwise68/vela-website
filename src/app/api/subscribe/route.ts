@@ -159,19 +159,9 @@ export async function POST(req: NextRequest) {
     // ----------------------------------------------------------------
     // Flow B: standalone signup (no responseId — early-access form etc.)
     // ----------------------------------------------------------------
-    const { data: dup } = await supabase
-      .from("waitlist_signups")
-      .select("id")
-      .eq("email", emailNorm)
-      .maybeSingle();
-
-    if (dup) {
-      return NextResponse.json(
-        { error: "This email is already on our list" },
-        { status: 409 }
-      );
-    }
-
+    // Note: waitlist_signups RLS allows anon INSERT but not SELECT, so we
+    // cannot pre-check for duplicates. Instead we rely on the UNIQUE constraint
+    // on the email column and handle the violation (code 23505) as a 409.
     const { error: insertErr } = await supabase.from("waitlist_signups").insert({
       email: emailNorm,
       name: nameNorm,
@@ -180,7 +170,13 @@ export async function POST(req: NextRequest) {
     });
 
     if (insertErr) {
-      console.error("Waitlist insert error:", insertErr);
+      if (insertErr.code === "23505") {
+        return NextResponse.json(
+          { error: "This email is already on our list" },
+          { status: 409 }
+        );
+      }
+      console.error("Waitlist insert error:", insertErr.code, insertErr.message);
       return NextResponse.json({ error: "Failed to save" }, { status: 500 });
     }
 
