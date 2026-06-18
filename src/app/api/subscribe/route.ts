@@ -38,25 +38,40 @@ async function addToMailerLite(
   groupId: string | undefined
 ) {
   const apiKey = process.env.MAILERLITE_API_KEY;
-  if (!apiKey) return;
+  if (!apiKey) {
+    console.warn("[subscribe] MAILERLITE_API_KEY not set — skipping");
+    return;
+  }
+
+  // Treat empty string (common when Vercel env var saved with no value) the same as undefined
+  const gid = typeof groupId === "string" ? groupId.trim() : undefined;
+  const groups = gid ? [gid] : [];
+
+  console.log(`[subscribe] MailerLite request — email=${email} groupId=${gid ?? "(none)"}`);
 
   const fields: Record<string, string> = { name };
   if (airline) fields.company = airline;
 
-  await fetch("https://connect.mailerlite.com/api/subscribers", {
+  const payload: Record<string, unknown> = { email, fields, status: "active" };
+  if (groups.length > 0) payload.groups = groups;
+
+  const res = await fetch("https://connect.mailerlite.com/api/subscribers", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
       Accept: "application/json",
       Authorization: `Bearer ${apiKey}`,
     },
-    body: JSON.stringify({
-      email,
-      fields,
-      status: "active",
-      ...(groupId ? { groups: [groupId] } : {}),
-    }),
+    body: JSON.stringify(payload),
   });
+
+  const body = await res.json().catch(() => ({}));
+
+  if (!res.ok) {
+    console.error(`[subscribe] MailerLite error ${res.status}:`, JSON.stringify(body));
+  } else {
+    console.log(`[subscribe] MailerLite ok — status=${res.status} groups=${JSON.stringify(groups)}`);
+  }
 }
 
 export async function POST(req: NextRequest) {
