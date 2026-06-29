@@ -34,7 +34,7 @@ export const metadata: Metadata = {
     template: "%s — VÉLA",
   },
   description:
-    "VÉLA is a lifestyle and wellness companion for people who travel across time zones — shaped with former crew and circadian and sleep research from the same field used in high-performance space and military operations. Not a medical device.",
+    "VÉLA is a lifestyle and wellness companion for people who travel across time zones — shaped with former crew and grounded in published circadian and sleep science. Not a medical device.",
 };
 
 export default function RootLayout({

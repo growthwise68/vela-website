@@ -91,7 +91,7 @@ export default function HomePage() {
                   <h3 className="font-display text-3xl md:text-4xl text-ink mb-4">The Layover</h3>
                   <p className="text-lg md:text-xl mb-4 max-w-md text-center">
                     30 hours in Melbourne. Your body clock is sitting somewhere over the Indian Ocean.
-                    V&Eacute;LA tells you exactly when to sleep to actually use this layover.
+                    V&Eacute;LA shows you when rest will help most, so you can actually use this layover.
                   </p>
                   <div className="flex gap-3 justify-center text-xs font-mono">
                     <span className="px-3 py-1 bg-blue-200 text-blue-900 rounded">Sleep</span>
@@ -131,8 +131,8 @@ export default function HomePage() {
           </p>
           <p className="font-sans text-xl md:text-2xl text-inkMid mb-8 leading-relaxed">
             It&rsquo;s not random. It&rsquo;s not just &ldquo;jet lag.&rdquo; And it&rsquo;s not something you have to keep
-            figuring out alone. V&Eacute;LA combines your actual roster with the same circadian science used in
-            space and military operational planning — and translates it into something you can actually use.
+            figuring out alone. V&Eacute;LA combines your actual roster with published circadian science
+            — and translates it into something you can actually use.
             No jargon. No guesswork. Just your body clock, made readable.
           </p>
           <div className="mb-6">
@@ -240,8 +240,8 @@ export default function HomePage() {
             <div className="bg-cream border-l-2 border-gold rounded-xl p-6 shadow-sm">
               <h3 className="font-display text-3xl text-ink mb-3">Sleep Timing</h3>
               <p className="font-sans text-lg text-inkMid leading-relaxed">
-                Your best sleep window before Day 3 duty is 22:00&ndash;06:00. Hit that and you&rsquo;ll feel
-                the difference on the jumpseat.
+                Your estimated best sleep window before Day 3 duty is 22:00&ndash;06:00. Planning around it
+                can help you feel more rested for the jumpseat.
               </p>
             </div>
             <div className="bg-cream border-l-2 border-gold rounded-xl p-6 shadow-sm">
@@ -322,8 +322,8 @@ export default function HomePage() {
             Your roster. Your body clock. Finally, both in one place.
           </h2>
           <p className="font-sans text-xl md:text-2xl text-inkMid max-w-2xl mx-auto mb-6 leading-relaxed">
-            Download V&Eacute;LA. Upload your roster. And for the first time, see exactly what&rsquo;s coming
-            — before it hits you.
+            Download V&Eacute;LA. Upload your roster. And for the first time, see what&rsquo;s coming
+            — so you can plan for it.
           </p>
           <p className="font-sans text-xl md:text-2xl text-inkMid max-w-2xl mx-auto mb-10 leading-relaxed">
             This is what it feels like to stop reacting and start preparing. To actually use your layovers.
