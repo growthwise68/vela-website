@@ -2,9 +2,11 @@ import Link from "next/link";
 
 const nav = [
   { href: "/", label: "Home" },
+  { href: "/pricing", label: "Pricing" },
   { href: "/survey", label: "Survey" },
   { href: "/privacy", label: "Privacy" },
   { href: "/terms", label: "Terms" },
+  { href: "/refund-policy", label: "Refunds" },
   { href: "/support", label: "Support" },
 ];
 
