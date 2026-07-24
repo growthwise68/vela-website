@@ -13,7 +13,7 @@ import { THANK_YOU_COPY as copy } from "./thank-you-copy";
  */
 export default function ThankYouClient() {
   const searchParams = useSearchParams();
-  const rid = searchParams.get("rid");
+  const rid = searchParams?.get("rid") ?? null;
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
