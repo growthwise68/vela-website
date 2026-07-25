@@ -33,7 +33,7 @@ const plans: Plan[] = [
     note: "Includes a 14-day free trial",
     features: [
       "Everything in Core Monthly",
-      "Two months free versus paying monthly",
+      "Save 37% versus paying monthly",
     ],
   },
   {
