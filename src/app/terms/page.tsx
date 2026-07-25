@@ -25,13 +25,12 @@ export default function TermsPage() {
 
       <h2>What VÉLA is</h2>
       <p>
-        VÉLA is a <strong>lifestyle and readiness planning</strong> tool for people who work
+        VÉLA is a <strong>personal lifestyle planning</strong> tool for people who work
         across time zones, primarily long-haul cabin crew. It uses published sleep science
-        models and your schedule to generate readiness estimates and sleep timing suggestions.
+        models and your schedule to generate body-clock and sleep timing estimates.
       </p>
       <p>
-        All outputs — including readiness scores, fatigue estimates, and sleep timing
-        suggestions — are <strong>informational estimates for personal planning purposes
+        All outputs — including body-clock, sleep timing, and other planning estimates — are <strong>informational estimates for personal planning purposes
         only</strong>. They are not medical assessments, diagnostic results, or safety
         determinations.
       </p>
@@ -46,7 +45,7 @@ export default function TermsPage() {
       <h2>No safety or operational guarantee</h2>
       <p>
         VÉLA is <strong>not a safety system</strong>. You remain solely responsible for your
-        own fitness for duty. Readiness estimates do not replace your employer&rsquo;s
+        own fitness for duty. The app&rsquo;s estimates do not replace your employer&rsquo;s
         fitness-for-duty assessments, crew scheduling requirements, or applicable regulations.
       </p>
       <p>
@@ -67,10 +66,10 @@ export default function TermsPage() {
 
       <h2>Accuracy of estimates</h2>
       <p>
-        Readiness scores and fatigue estimates are based on population-level sleep science
+        The app&rsquo;s estimates are based on population-level sleep science
         models and the schedule information you enter. They reflect assumed patterns, not
         measured physiological data. Individual results may vary significantly. Estimates are
-        not guarantees of actual readiness, alertness, or performance.
+        not guarantees of actual alertness or performance.
       </p>
 
       <h2>Your account</h2>
@@ -105,12 +104,40 @@ export default function TermsPage() {
         <a className="text-gold underline decoration-gold/40" href="/privacy">Privacy Policy</a>.
       </p>
 
+      <h2>Subscriptions, billing and cancellation</h2>
+      <p>
+        VÉLA offers paid subscriptions on a monthly or annual basis. Prices are listed in USD on
+        our{" "}
+        <a className="text-gold underline decoration-gold/40" href="/pricing">pricing page</a> and
+        are the same in every market. Depending on your country, sales tax or VAT may be added at
+        checkout; the exact total payable is shown before you confirm payment.
+      </p>
+      <p>
+        <strong>Subscriptions renew automatically</strong> at the end of each billing period at the
+        then-current price for your plan, until cancelled. You may cancel at any time. If you
+        subscribed through the App Store or Google Play, cancel in your device&rsquo;s subscription
+        settings. If you subscribed directly through this website, use the manage-subscription link
+        in your purchase receipt or contact us and we will cancel it for you. Cancellation stops
+        future renewals and takes effect at the end of the current billing period; it does not by
+        itself trigger a refund, which is governed by our{" "}
+        <a className="text-gold underline decoration-gold/40" href="/refund-policy">Refund Policy</a>.
+      </p>
+      <p>
+        Purchases made directly through this website are sold by{" "}
+        <strong>Paddle.com</strong>, our authorised reseller and{" "}
+        <strong>merchant of record</strong>. Paddle handles payment processing, invoicing and
+        applicable sales tax or VAT for those purchases, and appears as the seller on your
+        statement and receipt. Those transactions are additionally subject to Paddle&rsquo;s own
+        buyer terms. Purchases made through the App Store or Google Play are governed by the terms
+        of the respective store.
+      </p>
+
       <h2>Third-party services</h2>
       <p>
         VÉLA uses third-party infrastructure (including Google Firebase, Supabase, MailerLite,
-        and Vercel) to operate the service. Those services are governed by their own terms and
-        privacy policies. We are not responsible for the practices of third-party services we
-        use to operate VÉLA.
+        and Vercel) to operate the service, and Paddle for payments made through this website.
+        Those services are governed by their own terms and privacy policies. We are not
+        responsible for the practices of third-party services we use to operate VÉLA.
       </p>
 
       <h2>Limitation of liability</h2>
@@ -118,7 +145,7 @@ export default function TermsPage() {
         To the maximum extent permitted by applicable law, Vela4Crew Inc. and its officers,
         employees, and contractors shall not be liable for any direct, indirect, incidental,
         special, or consequential loss arising from your use of, or inability to use, the app
-        or website — including any decisions made based on readiness estimates or planning
+        or website — including any decisions made based on any estimates or planning
         suggestions provided by VÉLA.
       </p>
       <p>

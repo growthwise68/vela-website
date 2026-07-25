@@ -59,9 +59,12 @@ export default function RefundPolicyPage() {
 
       <h2>Cancelling instead of refunding</h2>
       <p>
-        You can cancel your subscription at any time from your device&rsquo;s subscription
-        settings (App Store or Google Play) or from your account settings if you subscribed
-        directly. Cancelling stops future renewals; it does not itself trigger a refund for the
+        You can cancel your subscription at any time. If you subscribed through the App Store or
+        Google Play, cancel from your device&rsquo;s subscription settings. If you subscribed
+        directly on this site, use the manage-subscription link in the receipt Paddle emailed you,
+        or contact us at{" "}
+        <a href="mailto:founder@velaforcrew.com">founder@velaforcrew.com</a> and we will cancel it
+        for you. Cancelling stops future renewals; it does not itself trigger a refund for the
         current billing period unless approved per the policy above.
       </p>
 

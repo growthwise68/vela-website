@@ -15,7 +15,7 @@ export default function PrivacyPage() {
 
       <h2>Who we are</h2>
       <p>
-        VÉLA is a <strong>lifestyle and readiness planning</strong> tool for people who work
+        VÉLA is a <strong>personal lifestyle planning</strong> tool for people who work
         across time zones. It is operated by Vela4Crew Inc., a Delaware corporation
         (&ldquo;VÉLA&rdquo;, &ldquo;we&rdquo;, &ldquo;us&rdquo;, or &ldquo;our&rdquo;).
         VÉLA is not a medical device and does not provide medical, health, or clinical advice.
@@ -36,7 +36,7 @@ export default function PrivacyPage() {
         </li>
         <li>
           <strong>Schedule and roster data</strong> — duty periods, layover locations, and shift
-          patterns you enter to generate readiness estimates. When you enter a flight number,
+          patterns you enter to generate planning estimates. When you enter a flight number,
           it is sent to a third-party public flight data service (AeroDataBox) to retrieve route
           and timing information; the flight number is publicly available information and no
           personal data is included in that request. Your assembled roster — the combination of
@@ -51,7 +51,7 @@ export default function PrivacyPage() {
           <strong>Adherence feedback</strong> — the app allows you to optionally record how
           well you followed guidance (for example, sleep timing, light exposure, or nutrition
           suggestions). This information is stored in your private account and is used solely
-          to update your personal readiness estimates within the app. It is not shared, sold,
+          to update your personal planning estimates within the app. It is not shared, sold,
           or used for any other purpose.
         </li>
         <li>
@@ -99,7 +99,7 @@ export default function PrivacyPage() {
       <h3>What we do not collect</h3>
       <p>
         VÉLA does not collect biometric data, vital signs, or clinical health measurements.
-        Readiness scores are estimates derived from your schedule and published sleep science
+        The app&rsquo;s estimates are derived from your schedule and published sleep science
         models — they are not health measurements. We do not access HealthKit, Google Fit, or
         wearable sensor data in the current version of the app.
       </p>
@@ -107,7 +107,7 @@ export default function PrivacyPage() {
       <h2>How we use your information</h2>
       <ul>
         <li>To provide and operate the VÉLA service.</li>
-        <li>To generate readiness and sleep timing estimates based on your schedule.</li>
+        <li>To generate body-clock and sleep timing estimates based on your schedule.</li>
         <li>To respond to support requests and communications.</li>
         <li>To improve the app using aggregated usage insights.</li>
         <li>To send service-related notifications if you opt in.</li>
@@ -176,7 +176,7 @@ export default function PrivacyPage() {
         <li>We do not request, access, or store any internal airline systems data, crew management data, scheduling system data, or operational information.</li>
         <li>We do not ask for your employee ID, crew ID, staff number, or any airline-issued credential.</li>
         <li>We do not share any information with your airline, employer, union, regulator, or any third party acting on their behalf.</li>
-        <li>Your use of VÉLA is entirely private. No one at your airline can see that you use it, what your schedule looks like in the app, or what your readiness estimates are.</li>
+        <li>Your use of VÉLA is entirely private. No one at your airline can see that you use it, what your schedule looks like in the app, or what the app estimates for you.</li>
         <li>VÉLA is not affiliated with, endorsed by, or integrated into any airline&rsquo;s systems or Fatigue Risk Management programme.</li>
       </ul>
       <p>

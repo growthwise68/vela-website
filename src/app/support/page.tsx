@@ -14,7 +14,7 @@ const faqs: { q: string; a: React.ReactNode }[] = [
     a: (
       <>
         VÉLA is a lifestyle and wellness companion for people who travel across time zones. It
-        turns your roster into clear, personalised body-clock insights and readiness estimates so
+        turns your roster into clear, personalised body-clock insights and planning estimates so
         you can plan rest and light around your schedule. VÉLA is informational only — it is{" "}
         <strong>not a medical device</strong> and does not provide medical, health, or clinical
         advice.
@@ -36,7 +36,7 @@ const faqs: { q: string; a: React.ReactNode }[] = [
     a: (
       <>
         You build your roster inside the app using the interactive roster builder — add your duties,
-        layovers, and flights and VÉLA generates your readiness estimates from them. Your schedule
+        layovers, and flights and VÉLA generates your planning estimates from them. Your schedule
         stays in your private account; it is not shared with your employer or airline.
       </>
     ),
@@ -72,10 +72,13 @@ const faqs: { q: string; a: React.ReactNode }[] = [
     q: "How do billing and subscriptions work?",
     a: (
       <>
-        VÉLA is free to start. Where paid plans are offered, they are managed through your App Store
-        or Google Play account, and you can view or cancel a subscription from your device&rsquo;s
-        subscription settings. For billing questions we can&rsquo;t resolve, email us and we&rsquo;ll
-        point you in the right direction.
+        VÉLA is free to start. Paid plans can be bought through the App Store, Google Play, or
+        directly on this site. Subscriptions bought through a store are managed in your
+        device&rsquo;s subscription settings. Subscriptions bought directly on this site are
+        processed by Paddle, our merchant of record &mdash; use the manage-subscription link in your
+        purchase receipt, or email us and we will cancel it for you. Prices are shown in USD; sales
+        tax or VAT may be added at checkout depending on your country, and the exact total is always
+        shown before you pay.
       </>
     ),
   },
@@ -83,7 +86,7 @@ const faqs: { q: string; a: React.ReactNode }[] = [
     q: "Is VÉLA medical or fitness-for-duty advice?",
     a: (
       <>
-        No. VÉLA&rsquo;s readiness estimates and insights are for{" "}
+        No. VÉLA&rsquo;s estimates and insights are for{" "}
         <strong>personal planning only</strong>. They are not medical assessments, diagnostic
         results, or a substitute for your operator&rsquo;s fitness-for-duty requirements or
         professional medical advice. Always follow your airline&rsquo;s and regulator&rsquo;s

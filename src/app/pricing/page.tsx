@@ -98,8 +98,19 @@ export default function PricingPage() {
           Good to know
         </p>
         <p className="font-sans text-sm text-inkMid">
-          All prices are in USD. Subscriptions renew automatically and can be cancelled at any time
-          from your account settings.
+          All prices are in USD and are the same in every market. Depending on where you live, sales
+          tax or VAT may be added at checkout &mdash; the exact total for your country is always shown
+          before you pay, and nothing is charged until you confirm it.
+        </p>
+        <p className="font-sans text-sm text-inkMid">
+          Subscriptions renew automatically until cancelled. You can cancel at any time: if you
+          subscribed through the App Store or Google Play, use your device&rsquo;s subscription
+          settings; if you subscribed directly on this site, use the manage-subscription link in your
+          purchase receipt, or{" "}
+          <a className="text-gold underline decoration-gold/40" href="/support">
+            contact us
+          </a>{" "}
+          and we will cancel it for you. Cancelling stops future renewals.
         </p>
         <p className="font-sans text-sm text-inkMid">
           VÉLA subscriptions are available through the App Store, Google Play, or directly at
