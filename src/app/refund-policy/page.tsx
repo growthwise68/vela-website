@@ -10,7 +10,7 @@ export default function RefundPolicyPage() {
     <article className="prose-vela">
       <h1 className="font-display text-3xl font-light text-ink">Refund policy</h1>
       <p className="mt-2 font-mono text-[10px] uppercase tracking-[0.18em] text-inkFaint">
-        Version 1.0 — 24 July 2026
+        Version 1.1 — 25 July 2026
       </p>
 
       <p>
@@ -42,10 +42,8 @@ export default function RefundPolicyPage() {
           Paddle.com
         </a>
         , our authorized reseller and merchant of record. If you contact us within{" "}
-        <strong>14 days</strong> of purchase, we&rsquo;ll consider refund requests on a
-        case-by-case basis — particularly for technical issues, accidental purchases, or billing
-        errors. Where a refund is approved, Paddle processes it back to your original payment
-        method.
+        <strong>14 days</strong> of purchase, we&rsquo;ll issue a full refund to your original
+        payment method, processed by Paddle.
       </p>
 
       <h2>How to request one</h2>
@@ -72,7 +70,7 @@ export default function RefundPolicyPage() {
       </p>
 
       <p className="mt-8 font-mono text-[10px] uppercase tracking-[0.15em] text-inkFaint">
-        Version 1.0 — 24 July 2026
+        Version 1.1 — 25 July 2026
       </p>
     </article>
   );
