@@ -59,12 +59,16 @@ const faqs: { q: string; a: React.ReactNode }[] = [
     q: "How do I delete my account?",
     a: (
       <>
-        You can request deletion of your account and associated data at any time from within the
-        app&rsquo;s settings, or by emailing{" "}
+        You can delete your account and associated data at any time from within the app under
+        Profile, or by emailing{" "}
         <a className="text-gold underline decoration-gold/40" href={`mailto:${supportEmail}`}>
           {supportEmail}
-        </a>
-        . We&rsquo;ll confirm once your data has been removed.
+        </a>{" "}
+        if you can&rsquo;t open the app. See our{" "}
+        <a className="text-gold underline decoration-gold/40" href="/delete-account">
+          account deletion page
+        </a>{" "}
+        for full details and what gets deleted.
       </>
     ),
   },

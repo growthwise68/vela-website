@@ -328,16 +328,15 @@ export default function PrivacyPage() {
       <ul>
         <li>
           <strong>Account deletion</strong> — you can delete your account and associated data
-          at any time from within the app, under Settings. Deletion is permanent and cannot be
-          undone. You can also request deletion without opening the app by emailing{" "}
-          <a className="text-gold underline decoration-gold/40" href="mailto:founder@velaforcrew.com">
-            founder@velaforcrew.com
+          at any time from within the app, under Profile. Deletion is permanent and cannot be
+          undone. If you can&rsquo;t open the app, you can request deletion by email — see our{" "}
+          <a className="text-gold underline decoration-gold/40" href="/delete-account">
+            account deletion page
           </a>{" "}
-          or using the{" "}
-          <a className="text-gold underline decoration-gold/40" href="/support">support page</a>.
-          Deleting your account does not automatically cancel a subscription bought through
-          Google Play, the App Store, or this website — cancel that in your store subscription
-          settings or via the manage-subscription link in your receipt.
+          for both options and what gets deleted. Deleting your account does not automatically
+          cancel a subscription bought through Google Play, the App Store, or this website —
+          cancel that in your store subscription settings or via the manage-subscription link in
+          your receipt.
         </li>
         <li>
           <strong>Research data</strong> — the optional &ldquo;Help improve future
