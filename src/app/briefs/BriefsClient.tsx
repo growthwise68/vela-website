@@ -69,7 +69,7 @@ export default function BriefsClient() {
             You&rsquo;re in. First to know, every time.
           </p>
         ) : (
-          <form onSubmit={handleSubmit} className="flex gap-2.5 max-w-md mx-auto">
+          <form onSubmit={handleSubmit} className="flex flex-col gap-2.5 max-w-md mx-auto sm:flex-row">
             <input
               type="email"
               value={email}
