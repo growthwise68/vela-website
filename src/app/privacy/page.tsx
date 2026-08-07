@@ -10,12 +10,12 @@ export default function PrivacyPage() {
     <article className="prose-vela">
       <h1 className="font-display text-3xl font-light text-ink">Privacy policy</h1>
       <p className="mt-2 font-mono text-[10px] uppercase tracking-[0.18em] text-inkFaint">
-        Version 2.0 — 14 June 2026
+        Version 2.1 — 27 July 2026
       </p>
 
       <h2>Who we are</h2>
       <p>
-        VÉLA is a <strong>lifestyle and readiness planning</strong> tool for people who work
+        VÉLA is a <strong>personal lifestyle planning</strong> tool for people who work
         across time zones. It is operated by Vela4Crew Inc., a Delaware corporation
         (&ldquo;VÉLA&rdquo;, &ldquo;we&rdquo;, &ldquo;us&rdquo;, or &ldquo;our&rdquo;).
         VÉLA is not a medical device and does not provide medical, health, or clinical advice.
@@ -36,7 +36,7 @@ export default function PrivacyPage() {
         </li>
         <li>
           <strong>Schedule and roster data</strong> — duty periods, layover locations, and shift
-          patterns you enter to generate readiness estimates. When you enter a flight number,
+          patterns you enter to generate planning estimates. When you enter a flight number,
           it is sent to a third-party public flight data service (AeroDataBox) to retrieve route
           and timing information; the flight number is publicly available information and no
           personal data is included in that request. Your assembled roster — the combination of
@@ -51,7 +51,7 @@ export default function PrivacyPage() {
           <strong>Adherence feedback</strong> — the app allows you to optionally record how
           well you followed guidance (for example, sleep timing, light exposure, or nutrition
           suggestions). This information is stored in your private account and is used solely
-          to update your personal readiness estimates within the app. It is not shared, sold,
+          to update your personal planning estimates within the app. It is not shared, sold,
           or used for any other purpose.
         </li>
         <li>
@@ -68,6 +68,15 @@ export default function PrivacyPage() {
           related updates.
         </li>
         <li>
+          <strong>Subscription and purchase information</strong> — if you buy a VÉLA
+          subscription, we receive a record of <em>what you bought and whether it is still
+          active</em> (plan, purchase and renewal dates, trial status, and whether the
+          subscription is current, cancelled, or expired), linked to your account so the app
+          can unlock the right features. <strong>We never see or store your full card number,
+          CVC, or bank details</strong> — those go directly to the payment platform you buy
+          through and are never sent to us. See &ldquo;Subscriptions and payments&rdquo; below.
+        </li>
+        <li>
           <strong>Support communications</strong> — messages you send us via the support page
           or email.
         </li>
@@ -78,8 +87,12 @@ export default function PrivacyPage() {
         <li>
           <strong>Usage analytics</strong> — aggregated or pseudonymous data about features
           used, session length, and error events. We use this to understand how the app and
-          website are used and to improve them. We do not build individual profiles for
-          advertising. Website analytics are provided by Vercel Analytics.
+          website are used and to improve them. These events do not include flight numbers,
+          names, email addresses, or raw roster text. We do not build individual profiles for
+          advertising. In the app, a <strong>Data use</strong> notice explains this and offers
+          an <strong>optional research toggle</strong> (&ldquo;Help improve future
+          guidance&rdquo;) that is <strong>off unless you turn it on</strong>. App analytics
+          are stored in Supabase; website analytics are provided by Vercel Analytics.
         </li>
         <li>
           <strong>Crash and performance reports</strong> — technical diagnostics that help us
@@ -99,16 +112,31 @@ export default function PrivacyPage() {
       <h3>What we do not collect</h3>
       <p>
         VÉLA does not collect biometric data, vital signs, or clinical health measurements.
-        Readiness scores are estimates derived from your schedule and published sleep science
+        The app&rsquo;s estimates are derived from your schedule and published sleep science
         models — they are not health measurements. We do not access HealthKit, Google Fit, or
         wearable sensor data in the current version of the app.
+      </p>
+      <p>
+        VÉLA also does <strong>not</strong> collect your location (the app requests no location
+        permission), does <strong>not</strong> access your camera, photos, microphone, contacts,
+        calendar, or files, does <strong>not</strong> contain advertising or advertising
+        identifiers, does <strong>not</strong> track you across other companies&rsquo; apps or
+        websites, and does <strong>not</strong> store full payment card numbers.
       </p>
 
       <h2>How we use your information</h2>
       <ul>
         <li>To provide and operate the VÉLA service.</li>
-        <li>To generate readiness and sleep timing estimates based on your schedule.</li>
+        <li>To generate body-clock and sleep timing estimates based on your schedule.</li>
         <li>To respond to support requests and communications.</li>
+        <li>
+          To generate personalised advice, including advice written with the help of a language
+          model (see &ldquo;Personalised advice and AI&rdquo; below).
+        </li>
+        <li>
+          To sell and manage subscriptions, unlock the features you paid for, restore purchases,
+          and handle billing support.
+        </li>
         <li>To improve the app using aggregated usage insights.</li>
         <li>To send service-related notifications if you opt in.</li>
         <li>To contact waitlist and early access subscribers about the VÉLA launch.</li>
@@ -117,6 +145,84 @@ export default function PrivacyPage() {
       <p>
         We do not sell your personal information. We do not use your data to provide medical
         advice, diagnostic assessments, or safety-critical guidance.
+      </p>
+
+      <h2>Subscriptions and payments</h2>
+      <p>
+        VÉLA is free to download and offers paid subscriptions. <strong>We do not process
+        payments ourselves and we never receive your full card number, CVC, or bank
+        details.</strong> Depending on where you subscribe, your payment is handled by:
+      </p>
+      <ul>
+        <li>
+          <strong>Google Play Billing</strong> — for subscriptions bought inside the Android
+          app. Google handles the payment and holds your payment details under Google&rsquo;s
+          own privacy policy.
+        </li>
+        <li>
+          <strong>Apple App Store billing</strong> — for subscriptions bought inside the iOS
+          app, on the same basis, under Apple&rsquo;s privacy policy.
+        </li>
+        <li>
+          <strong>Paddle</strong> — our authorised reseller and merchant of record for
+          subscriptions bought directly on this website, under Paddle&rsquo;s privacy policy.
+        </li>
+      </ul>
+      <p>
+        <strong>RevenueCat</strong> sits behind all of these. It is a subscription-management
+        service that tells the app whether your subscription is active so the right features
+        unlock. To do that it receives an account identifier for you, the device platform, and
+        the purchase and renewal events reported by the store — <strong>not</strong> your card
+        details, and <strong>not</strong> your roster, schedule, or advice content. We use this
+        information only to give you the access you paid for, to restore purchases on a new
+        device, and to handle support and refund requests.
+      </p>
+      <p>
+        Cancelling and refunds are covered in our{" "}
+        <a className="text-gold underline decoration-gold/40" href="/terms">terms</a> and{" "}
+        <a className="text-gold underline decoration-gold/40" href="/refund-policy">
+          refund policy
+        </a>
+        .
+      </p>
+
+      <h2>Personalised advice and AI</h2>
+      <p>
+        Some of VÉLA&rsquo;s personalised guidance is produced with the help of a{" "}
+        <strong>large language model (LLM)</strong>. This happens on our backend, hosted by{" "}
+        <strong>Supabase</strong>: the app sends your planning context to our own secure
+        function, which builds a prompt and calls an LLM provider — currently{" "}
+        <strong>Google (Gemini)</strong>, with <strong>Anthropic (Claude)</strong> as an
+        alternative — and returns the wording to your app.
+      </p>
+      <p>
+        <strong>What is sent.</strong> Only the context needed to write the advice: your
+        roster and schedule context (flight times, airports, duty and rest periods, time-zone
+        shifts) and your planning preferences (for example chronotype, target sleep hours, and
+        caffeine cut-off), together with the app&rsquo;s own calculated body-clock estimates.
+      </p>
+      <p>
+        <strong>What is not sent.</strong> Your password, or any password (we never have access
+        to your password in any form), your name, your email address, your payment details, and
+        your account identifier are <strong>not</strong> included in the prompt sent to the LLM
+        provider. Your account is checked for a valid session and an active subscription before
+        the request runs, but that check happens on our backend and the identifier used is
+        stored only in one-way hashed form in our own logs. We do not permit the LLM provider to
+        use your content to train its models.
+      </p>
+      <p>
+        <strong>The output is generated, not human-written.</strong> Advice text produced this
+        way is generated automatically by a language model. It is general lifestyle and
+        wellness information based on your schedule and published sleep science — it is{" "}
+        <strong>not medical advice</strong>, not a diagnosis, not written or reviewed by a
+        clinician before you see it, and not operational or regulatory guidance. Generated text
+        can be wrong or incomplete. Always use your own judgement, follow your airline&rsquo;s
+        procedures, and consult a qualified professional for medical concerns. If a piece of
+        generated advice looks wrong, offensive, or unsafe, please tell us at{" "}
+        <a className="text-gold underline decoration-gold/40" href="mailto:founder@velaforcrew.com">
+          founder@velaforcrew.com
+        </a>{" "}
+        so we can investigate.
       </p>
 
       <h2>Information sharing</h2>
@@ -129,12 +235,32 @@ export default function PrivacyPage() {
           operate the service:
           <ul>
             <li>
-              <strong>Google Firebase</strong> — authentication, data storage, and analytics
-              for the mobile app.
+              <strong>Google Firebase</strong> — sign-in and account management (Firebase
+              Authentication), storage of your account, roster, and settings (Firestore),
+              crash reports (Crashlytics), and performance diagnostics (Performance
+              Monitoring) for the mobile app.
             </li>
             <li>
-              <strong>Supabase</strong> — storage of survey responses and waitlist sign-ups on
-              the website.
+              <strong>Supabase</strong> — our backend. It hosts the advice function described
+              above (including the call to the LLM provider), roster enrichment and lookup
+              services, product-usage analytics for the app, and storage of survey responses
+              and waitlist sign-ups from the website.
+            </li>
+            <li>
+              <strong>Google (Gemini) / Anthropic (Claude)</strong> — the large language model
+              providers our backend calls to write personalised advice. They receive the
+              roster and preference context described in &ldquo;Personalised advice and
+              AI&rdquo; above, and no account, contact, or payment details.
+            </li>
+            <li>
+              <strong>RevenueCat</strong> — subscription status and entitlement management, so
+              the app knows which features to unlock. See &ldquo;Subscriptions and
+              payments&rdquo; above.
+            </li>
+            <li>
+              <strong>Google Play Billing, Apple App Store billing, and Paddle</strong> — the
+              payment platforms that process subscription purchases. They hold your payment
+              details; we do not.
             </li>
             <li>
               <strong>MailerLite</strong> — email delivery for early access and waitlist
@@ -176,7 +302,7 @@ export default function PrivacyPage() {
         <li>We do not request, access, or store any internal airline systems data, crew management data, scheduling system data, or operational information.</li>
         <li>We do not ask for your employee ID, crew ID, staff number, or any airline-issued credential.</li>
         <li>We do not share any information with your airline, employer, union, regulator, or any third party acting on their behalf.</li>
-        <li>Your use of VÉLA is entirely private. No one at your airline can see that you use it, what your schedule looks like in the app, or what your readiness estimates are.</li>
+        <li>Your use of VÉLA is entirely private. No one at your airline can see that you use it, what your schedule looks like in the app, or what the app estimates for you.</li>
         <li>VÉLA is not affiliated with, endorsed by, or integrated into any airline&rsquo;s systems or Fatigue Risk Management programme.</li>
       </ul>
       <p>
@@ -191,7 +317,10 @@ export default function PrivacyPage() {
         active. Survey responses are retained indefinitely in anonymised form for product
         research. Waitlist and early access contact details are retained until you unsubscribe
         or request deletion. You may request deletion of your account and associated data at
-        any time (see &ldquo;Your choices&rdquo; below). Aggregated analytics data that cannot
+        any time (see &ldquo;Your choices&rdquo; below). Subscription and transaction records
+        are retained by our payment platforms and by RevenueCat for as long as required for
+        billing, tax, and accounting purposes, even after an account is deleted. Aggregated
+        analytics data that cannot
         identify you individually may be retained for longer to support product improvement.
       </p>
 
@@ -199,7 +328,20 @@ export default function PrivacyPage() {
       <ul>
         <li>
           <strong>Account deletion</strong> — you can delete your account and associated data
-          from within the app settings. Deletion is permanent and cannot be undone.
+          at any time from within the app, under Profile. Deletion is permanent and cannot be
+          undone. If you can&rsquo;t open the app, you can request deletion by email — see our{" "}
+          <a className="text-gold underline decoration-gold/40" href="/delete-account">
+            account deletion page
+          </a>{" "}
+          for both options and what gets deleted. Deleting your account does not automatically
+          cancel a subscription bought through Google Play, the App Store, or this website —
+          cancel that in your store subscription settings or via the manage-subscription link in
+          your receipt.
+        </li>
+        <li>
+          <strong>Research data</strong> — the optional &ldquo;Help improve future
+          guidance&rdquo; toggle in the app&rsquo;s Data use notice is off unless you turn it
+          on, and you can turn it off again at any time.
         </li>
         <li>
           <strong>Access and correction</strong> — you can update your account details and
@@ -256,7 +398,7 @@ export default function PrivacyPage() {
       </p>
 
       <p className="mt-8 font-mono text-[10px] uppercase tracking-[0.15em] text-inkFaint">
-        Version 2.0 — 14 June 2026
+        Version 2.1 — 27 July 2026
       </p>
     </article>
   );
