@@ -107,38 +107,42 @@ export default function BriefsClient() {
         </p>
 
         {/* Brief 001 */}
-        <div className="mb-5 flex flex-wrap items-center gap-6 rounded-[18px] border border-warmLine bg-parchment/60 px-8 py-7 transition-colors hover:border-gold/50">
-          <span className="w-12 flex-shrink-0 font-display text-3xl font-light text-gold">001</span>
-          <div className="min-w-0 flex-1">
-            <h3 className="mb-1 font-display text-xl font-medium text-ink">
-              Preparing for a 2am Wake-Up
-            </h3>
-            <p className="text-[13.5px] leading-relaxed text-inkMid">
-              A full 24-hour plan for the earliest, hardest reports — what to do the day before,
-              the moment you wake, and how to protect the rest of your trip.
-            </p>
+        <div className="mb-5 rounded-[18px] border border-warmLine bg-parchment/60 px-6 py-6 sm:px-8 sm:py-7 transition-colors hover:border-gold/50">
+          <div className="sm:flex sm:items-center sm:gap-6">
+            <span className="block font-display text-3xl font-light text-gold mb-2 sm:mb-0 sm:w-12 sm:flex-shrink-0">001</span>
+            <div className="sm:flex-1 sm:min-w-0">
+              <h3 className="mb-1 font-display text-xl font-medium text-ink">
+                Preparing for a 2am Wake-Up
+              </h3>
+              <p className="text-[13.5px] leading-relaxed text-inkMid">
+                A full 24-hour plan for the earliest, hardest reports — what to do the day before,
+                the moment you wake, and how to protect the rest of your trip.
+              </p>
+            </div>
+            <a
+              href="/downloads/vela-recovery-brief-001-2am-wakeup.pdf"
+              download
+              className="mt-4 block text-center sm:mt-0 sm:flex-shrink-0 rounded-xl bg-night px-5 py-3 font-mono text-[10px] uppercase tracking-[0.12em] text-cream transition-colors hover:bg-gold hover:text-ink sm:whitespace-nowrap"
+            >
+              Download PDF
+            </a>
           </div>
-          <a
-            href="/downloads/vela-recovery-brief-001-2am-wakeup.pdf"
-            download
-            className="flex-shrink-0 rounded-xl bg-night px-5 py-3 font-mono text-[10px] uppercase tracking-[0.12em] text-cream transition-colors hover:bg-gold hover:text-ink whitespace-nowrap"
-          >
-            Download PDF
-          </a>
         </div>
 
         {/* Brief 002 — Coming soon */}
-        <div className="flex flex-wrap items-center gap-6 rounded-[18px] border border-dashed border-warmLine px-8 py-7 opacity-50">
-          <span className="w-12 flex-shrink-0 font-display text-3xl font-light text-gold">002</span>
-          <div className="min-w-0 flex-1">
-            <h3 className="mb-1 font-display text-xl font-medium text-ink">Coming soon</h3>
-            <p className="text-[13.5px] leading-relaxed text-inkMid">
-              Sign up above to be the first to know when the next brief lands.
-            </p>
+        <div className="rounded-[18px] border border-dashed border-warmLine px-6 py-6 sm:px-8 sm:py-7 opacity-50">
+          <div className="sm:flex sm:items-center sm:gap-6">
+            <span className="block font-display text-3xl font-light text-gold mb-2 sm:mb-0 sm:w-12 sm:flex-shrink-0">002</span>
+            <div className="sm:flex-1 sm:min-w-0">
+              <h3 className="mb-1 font-display text-xl font-medium text-ink">Coming soon</h3>
+              <p className="text-[13.5px] leading-relaxed text-inkMid">
+                Sign up above to be the first to know when the next brief lands.
+              </p>
+            </div>
+            <span className="mt-4 block text-center sm:mt-0 sm:flex-shrink-0 rounded-xl border border-warmLine px-5 py-3 font-mono text-[10px] uppercase tracking-[0.12em] text-inkFaint sm:whitespace-nowrap">
+              Not yet available
+            </span>
           </div>
-          <span className="flex-shrink-0 rounded-xl border border-warmLine px-5 py-3 font-mono text-[10px] uppercase tracking-[0.12em] text-inkFaint whitespace-nowrap">
-            Not yet available
-          </span>
         </div>
       </div>
 
