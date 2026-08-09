@@ -300,13 +300,13 @@ export default function HomePage() {
       {/* FINAL CTA SECTION */}
       <section className="w-full py-20 md:py-32 bg-gradient-to-b from-parchment/50 to-cream/50">
         <div className="max-w-4xl mx-auto px-6 md:px-8 text-center">
-          <p className="font-display text-5xl md:text-6xl font-light text-ink mb-4">
+          <p className="font-display text-5xl md:text-6xl font-light text-ink mb-2">
             Your job shouldn&rsquo;t get to decide how you feel on your days off.
           </p>
-          <h2 className="font-display text-3xl md:text-4xl font-light text-inkMid mb-6">
+          <h2 className="font-display text-3xl md:text-4xl font-light text-inkMid mb-3">
             Your roster. Your body clock. Finally, both in one place.
           </h2>
-          <p className="font-sans text-xl md:text-2xl text-inkMid max-w-2xl mx-auto mb-10 leading-relaxed">
+          <p className="font-sans text-xl md:text-2xl text-inkMid max-w-2xl mx-auto mb-7 leading-relaxed">
             Stop reacting. Start preparing. Use your layovers. Show up for your life outside the aircraft.
           </p>
           <Link
@@ -315,7 +315,7 @@ export default function HomePage() {
           >
             Get Early Access
           </Link>
-          <p className="font-mono text-xs uppercase tracking-[0.15em] text-inkFaint mt-4">
+          <p className="font-mono text-xs uppercase tracking-[0.15em] text-inkFaint mt-2">
             V&Eacute;LA is currently in early access &mdash; join now to be first when it&rsquo;s ready.
           </p>
         </div>
