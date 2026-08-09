@@ -35,7 +35,14 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
       </header>
       <main className="mx-auto w-full max-w-3xl flex-1 px-6 py-12">{children}</main>
       <footer className="border-t border-warmLine bg-parchment/60">
-        <div className="mx-auto max-w-3xl px-6 py-8">
+        <div className="mx-auto max-w-3xl px-6 py-8 space-y-3">
+          <p className="font-sans text-xs text-inkFaint leading-relaxed">
+            A note on V&Eacute;LA: it provides personal planning insights based on your roster. It isn&rsquo;t
+            medical advice or a substitute for your airline&rsquo;s fatigue-management requirements.{" "}
+            <Link href="/terms" className="underline underline-offset-2 hover:text-inkMid transition-colors">
+              Full details &rarr;
+            </Link>
+          </p>
           <p className="font-mono text-xs uppercase tracking-[0.2em] text-inkFaint font-semibold">
             &copy; {new Date().getFullYear()} VÉLA. Lifestyle planning for long-haul crew.
           </p>

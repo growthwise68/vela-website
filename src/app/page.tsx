@@ -34,17 +34,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* DISCLAIMER — quiet inline note */}
-      <div className="max-w-4xl mx-auto px-6 md:px-8 pt-2 pb-8 text-center">
-        <p className="font-sans text-xs text-inkFaint leading-relaxed">
-          A note on V&Eacute;LA: it provides personal planning insights based on your roster. It isn&rsquo;t
-          medical advice or a substitute for your airline&rsquo;s fatigue-management requirements.{" "}
-          <Link href="/terms" className="underline underline-offset-2 hover:text-inkMid transition-colors">
-            Full details &rarr;
-          </Link>
-        </p>
-      </div>
-
       {/* PROBLEM SECTION */}
       <section className="w-full py-20 md:py-32 bg-cream">
         <div className="max-w-4xl mx-auto px-6 md:px-8">
