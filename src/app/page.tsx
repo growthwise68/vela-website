@@ -248,7 +248,7 @@ export default function HomePage() {
       </section>
 
       {/* BUILT BY CREW SECTION */}
-      <section className="w-full py-20 md:py-32 bg-parchment">
+      <section className="w-full pt-20 md:pt-32 pb-12 md:pb-16 bg-parchment">
         <div className="max-w-4xl mx-auto px-6 md:px-8">
           <h2 className="font-display text-5xl md:text-6xl font-light text-ink mb-6 border-b-2 border-gold pb-4">
             Built by crew.
@@ -257,7 +257,7 @@ export default function HomePage() {
             This is where V&Eacute;LA came from. Not a strategy session. A crew member who got tired of
             asking the same questions as everyone else — and getting nothing back.
           </p>
-          <div className="bg-cream rounded-2xl p-8 md:p-12 mb-16 border border-warmLine">
+          <div className="bg-cream rounded-2xl p-8 md:p-12 mb-8 border border-warmLine">
             <p className="font-display text-2xl md:text-3xl italic text-gold mb-6 leading-relaxed">
               &ldquo;Early in my flying career, I was struggling to adjust to the job. Not the service. Not
               the passengers. The schedule. What it was doing to my body, my sleep, my life outside the
@@ -279,7 +279,7 @@ export default function HomePage() {
           </div>
 
           {/* Survey CTA — secondary, optional */}
-          <div className="text-center pt-4 border-t border-warmLine">
+          <div className="text-center pt-6 border-t border-warmLine">
             <p className="font-sans text-base text-inkMid mb-3">
               Want a say in what we build?{" "}
               <Link
