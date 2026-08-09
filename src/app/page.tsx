@@ -278,17 +278,20 @@ export default function HomePage() {
             </p>
           </div>
 
-          {/* Survey CTA — secondary, optional */}
-          <div className="text-center pt-6 border-t border-warmLine">
-            <p className="font-sans text-base text-inkMid mb-3">
-              Want a say in what we build?{" "}
+          {/* Survey CTA — continuation of founder quote */}
+          <div className="pt-8">
+            <p className="font-sans text-xl md:text-2xl text-ink leading-relaxed mb-4">
+              V&Eacute;LA started with my own struggle &mdash; and it&rsquo;s kept growing because of yours too.
+              That hasn&rsquo;t changed. It&rsquo;s still how V&Eacute;LA gets built.
+            </p>
+            <p className="font-sans text-xl md:text-2xl text-ink leading-relaxed">
               <Link
                 href="/survey"
                 className="text-gold underline underline-offset-2 hover:opacity-80 transition-opacity"
               >
                 Take the 3-minute survey
               </Link>{" "}
-              &mdash; completely anonymous.
+              &rarr; <span className="text-inkMid">(completely anonymous)</span>
             </p>
           </div>
         </div>
