@@ -303,7 +303,7 @@ export default function HomePage() {
           <p className="font-display text-5xl md:text-6xl font-light text-ink mb-2">
             Your job shouldn&rsquo;t get to decide how you feel on your days off.
           </p>
-          <h2 className="font-display text-3xl md:text-4xl font-light text-inkMid mb-3">
+          <h2 className="font-display text-3xl md:text-4xl font-light italic text-gold mb-3">
             Your roster. Your body clock. Finally, both in one place.
           </h2>
           <p className="font-sans text-xl md:text-2xl text-inkMid max-w-2xl mx-auto mb-7 leading-relaxed">
@@ -311,7 +311,7 @@ export default function HomePage() {
           </p>
           <Link
             href="/early-access"
-            className="inline-block px-8 py-4 bg-gold text-ink font-semibold rounded-xl text-base hover:bg-yellow-600 transition-all hover:scale-105"
+            className="inline-block px-8 py-4 bg-night text-cream font-semibold rounded-xl text-base hover:opacity-90 transition-all hover:scale-105"
           >
             Get Early Access
           </Link>
