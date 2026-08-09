@@ -24,10 +24,13 @@ export default function HomePage() {
           </p>
           <Link
             href="/early-access"
-            className="inline-block px-6 py-3 bg-gold text-ink font-semibold rounded hover:bg-yellow-600 transition-all hover:scale-105"
+            className="inline-block px-8 py-4 bg-gold text-ink font-semibold rounded-xl text-base hover:bg-yellow-600 transition-all hover:scale-105"
           >
             Get Early Access
           </Link>
+          <p className="font-mono text-xs uppercase tracking-[0.15em] text-inkFaint mt-4">
+            V&Eacute;LA is currently in early access &mdash; join now to be first when it&rsquo;s ready.
+          </p>
         </div>
       </section>
 
@@ -293,24 +296,18 @@ export default function HomePage() {
             </p>
           </div>
 
-          {/* Survey CTA */}
-          <div className="text-center">
-            <p className="font-mono text-xs md:text-sm uppercase tracking-[0.2em] text-gold mb-4 font-semibold">
-              Help shape V&Eacute;LA
+          {/* Survey CTA — secondary, optional */}
+          <div className="text-center pt-4 border-t border-warmLine">
+            <p className="font-sans text-base text-inkMid mb-3">
+              Want a say in what we build?{" "}
+              <Link
+                href="/survey"
+                className="text-gold underline underline-offset-2 hover:opacity-80 transition-opacity"
+              >
+                Take the 3-minute survey
+              </Link>{" "}
+              &mdash; completely anonymous.
             </p>
-            <h3 className="font-display text-4xl md:text-5xl font-light text-ink mb-6">
-              Your experience should shape this.
-            </h3>
-            <p className="font-sans text-xl md:text-2xl text-inkMid max-w-2xl mx-auto mb-8 leading-relaxed">
-              Three minutes. Completely anonymous. Tell us what this job really feels like — and help make
-              V&Eacute;LA better for every crew member who needs it.
-            </p>
-            <Link
-              href="/survey"
-              className="inline-block px-6 py-3 bg-gold text-ink font-semibold rounded hover:bg-yellow-600 transition-all hover:scale-105"
-            >
-              Take the survey &rarr;
-            </Link>
           </div>
         </div>
       </section>
@@ -321,39 +318,17 @@ export default function HomePage() {
           <h2 className="font-display text-5xl md:text-6xl font-light text-ink mb-6">
             Your roster. Your body clock. Finally, both in one place.
           </h2>
-          <p className="font-sans text-xl md:text-2xl text-inkMid max-w-2xl mx-auto mb-6 leading-relaxed">
-            Download V&Eacute;LA. Upload your roster. And for the first time, see what&rsquo;s coming
-            — so you can plan for it.
-          </p>
           <p className="font-sans text-xl md:text-2xl text-inkMid max-w-2xl mx-auto mb-10 leading-relaxed">
-            This is what it feels like to stop reacting and start preparing. To actually use your layovers.
-            To show up for your life outside the aircraft.
+            Stop reacting. Start preparing. Use your layovers. Show up for your life outside the aircraft.
           </p>
-          <div className="rounded-[20px] border border-warmLine bg-parchment/80 p-6 mb-8 max-w-2xl mx-auto text-left">
-            <p className="font-sans text-sm text-inkMid leading-relaxed">
-              A note before you download: V&Eacute;LA is a{" "}
-              <strong className="font-medium text-ink">personal lifestyle planning</strong> tool, not a
-              medical device. What you&rsquo;ll find here is roster-based insight to help you plan — not
-              clinical advice, and not a replacement for your airline&rsquo;s fatigue management requirements.
-            </p>
-          </div>
           <Link
             href="/early-access"
-            className="inline-block px-6 py-3 bg-gold text-ink font-semibold rounded hover:bg-yellow-600 transition-all hover:scale-105"
+            className="inline-block px-8 py-4 bg-gold text-ink font-semibold rounded-xl text-base hover:bg-yellow-600 transition-all hover:scale-105"
           >
             Get Early Access
           </Link>
-        </div>
-      </section>
-
-      {/* APP STORE LINKS */}
-      <section className="w-full py-12 md:py-16 bg-cream border-t border-warmLine">
-        <div className="max-w-4xl mx-auto px-6 md:px-8 flex flex-col md:flex-row items-center gap-6">
-          <span className="font-mono text-xs md:text-sm uppercase tracking-[0.2em] text-inkFaint font-semibold">
-            App store links
-          </span>
-          <p className="font-sans text-sm text-inkMid">
-            TestFlight, App Store, and Play Store links coming soon
+          <p className="font-mono text-xs uppercase tracking-[0.15em] text-inkFaint mt-4">
+            V&Eacute;LA is currently in early access &mdash; join now to be first when it&rsquo;s ready.
           </p>
         </div>
       </section>
