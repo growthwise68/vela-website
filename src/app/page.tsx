@@ -300,10 +300,7 @@ export default function HomePage() {
       {/* FINAL CTA SECTION */}
       <section className="w-full py-20 md:py-32 bg-gradient-to-b from-parchment/50 to-cream/50">
         <div className="max-w-4xl mx-auto px-6 md:px-8 text-center">
-          <p className="font-display text-5xl md:text-6xl font-light text-ink mb-3">
-            Your job shouldn&rsquo;t get to decide how you feel on your days off.
-          </p>
-          <h2 className="font-display text-3xl md:text-4xl font-light italic text-gold mb-4">
+          <h2 className="font-display text-5xl md:text-6xl font-light text-ink mb-6">
             Your roster. Your body clock. Finally, both in one place.
           </h2>
           <p className="font-sans text-xl md:text-2xl text-inkMid max-w-2xl mx-auto mb-10 leading-relaxed">
@@ -311,11 +308,11 @@ export default function HomePage() {
           </p>
           <Link
             href="/early-access"
-            className="inline-block px-8 py-4 bg-night text-cream font-semibold rounded-xl text-base hover:opacity-90 transition-all hover:scale-105"
+            className="inline-block px-8 py-4 bg-gold text-ink font-semibold rounded-xl text-base hover:bg-yellow-600 transition-all hover:scale-105"
           >
             Get Early Access
           </Link>
-          <p className="font-mono text-xs uppercase tracking-[0.15em] text-inkFaint mt-2">
+          <p className="font-mono text-xs uppercase tracking-[0.15em] text-inkFaint mt-4">
             V&Eacute;LA is currently in early access &mdash; join now to be first when it&rsquo;s ready.
           </p>
         </div>
