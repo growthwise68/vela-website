@@ -300,7 +300,10 @@ export default function HomePage() {
       {/* FINAL CTA SECTION */}
       <section className="w-full py-20 md:py-32 bg-gradient-to-b from-parchment/50 to-cream/50">
         <div className="max-w-4xl mx-auto px-6 md:px-8 text-center">
-          <h2 className="font-display text-5xl md:text-6xl font-light text-ink mb-6">
+          <p className="font-display text-5xl md:text-6xl font-light text-ink mb-4">
+            Your job shouldn&rsquo;t get to decide how you feel on your days off.
+          </p>
+          <h2 className="font-display text-3xl md:text-4xl font-light text-inkMid mb-6">
             Your roster. Your body clock. Finally, both in one place.
           </h2>
           <p className="font-sans text-xl md:text-2xl text-inkMid max-w-2xl mx-auto mb-10 leading-relaxed">
