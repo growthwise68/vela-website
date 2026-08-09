@@ -34,23 +34,16 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* DISCLAIMER BOX */}
-      <section className="w-full py-12 md:py-16 bg-cream">
-        <div className="max-w-4xl mx-auto px-6 md:px-8">
-          <div className="rounded-[20px] border border-warmLine bg-parchment/80 p-8">
-            <p className="font-mono text-xs md:text-sm uppercase tracking-[0.2em] text-inkFaint mb-3 font-semibold">
-              Important
-            </p>
-            <p className="font-sans text-base md:text-lg text-inkMid leading-relaxed">
-              V&Eacute;LA is a <strong className="font-medium text-ink">personal lifestyle planning</strong> tool. It
-              is not a medical device and does not provide medical, health, or safety advice. The app
-              contains estimates for personal planning only&mdash;not for safety-critical or fitness-for-duty
-              decisions. V&Eacute;LA is not part of any airline Fatigue Risk Management System (FRMS) and does
-              not replace your operator&rsquo;s fitness-for-duty requirements or professional medical advice.
-            </p>
-          </div>
-        </div>
-      </section>
+      {/* DISCLAIMER — quiet inline note */}
+      <div className="max-w-4xl mx-auto px-6 md:px-8 pt-2 pb-8 text-center">
+        <p className="font-sans text-xs text-inkFaint leading-relaxed">
+          A note on V&Eacute;LA: it provides personal planning insights based on your roster. It isn&rsquo;t
+          medical advice or a substitute for your airline&rsquo;s fatigue-management requirements.{" "}
+          <Link href="/terms" className="underline underline-offset-2 hover:text-inkMid transition-colors">
+            Full details &rarr;
+          </Link>
+        </p>
+      </div>
 
       {/* PROBLEM SECTION */}
       <section className="w-full py-20 md:py-32 bg-cream">
