@@ -129,10 +129,33 @@ export default function BriefsClient() {
           </div>
         </div>
 
-        {/* Brief 002 — Coming soon */}
-        <div className="rounded-[18px] border border-dashed border-warmLine px-6 py-6 sm:px-8 sm:py-7 opacity-50">
+        {/* Brief 002 */}
+        <div className="mb-5 rounded-[18px] border border-warmLine bg-parchment/60 px-6 py-6 sm:px-8 sm:py-7 transition-colors hover:border-gold/50">
           <div className="sm:flex sm:items-center sm:gap-6">
             <span className="block font-display text-3xl font-light text-gold mb-2 sm:mb-0 sm:w-12 sm:flex-shrink-0">002</span>
+            <div className="sm:flex-1 sm:min-w-0">
+              <h3 className="mb-1 font-display text-xl font-medium text-ink">
+                Eating Across Time Zones
+              </h3>
+              <p className="text-[13.5px] leading-relaxed text-inkMid">
+                Why bloating, cramping, and mismatched appetite happen on trips — and simple,
+                evidence-backed ways to keep your gut on schedule, wherever you&rsquo;re flying.
+              </p>
+            </div>
+            <a
+              href="/downloads/vela-recovery-brief-002-eating-across-time-zones.pdf"
+              download
+              className="mt-4 block text-center sm:mt-0 sm:flex-shrink-0 rounded-xl bg-night px-5 py-3 font-mono text-[10px] uppercase tracking-[0.12em] text-cream transition-colors hover:bg-gold hover:text-ink sm:whitespace-nowrap"
+            >
+              Download PDF
+            </a>
+          </div>
+        </div>
+
+        {/* Brief 003 — Coming soon */}
+        <div className="rounded-[18px] border border-dashed border-warmLine px-6 py-6 sm:px-8 sm:py-7 opacity-50">
+          <div className="sm:flex sm:items-center sm:gap-6">
+            <span className="block font-display text-3xl font-light text-gold mb-2 sm:mb-0 sm:w-12 sm:flex-shrink-0">003</span>
             <div className="sm:flex-1 sm:min-w-0">
               <h3 className="mb-1 font-display text-xl font-medium text-ink">Coming soon</h3>
               <p className="text-[13.5px] leading-relaxed text-inkMid">
