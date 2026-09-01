@@ -23,7 +23,7 @@ const plans: Plan[] = [
       "Full roster integration",
       "Day-by-day sleep, light & caffeine guidance",
       "Insights, including full history",
-      "Hydration tracking",
+      "Meal timing",
     ],
   },
   {
