@@ -28,12 +28,12 @@ const plans: Plan[] = [
   },
   {
     name: "Core — Annual",
-    price: "$149.99",
+    price: "$179.99",
     period: "/ year",
     note: "Includes a 14-day free trial",
     features: [
       "Everything in Core Monthly",
-      "Save 37% versus paying monthly",
+      "Save 25% versus paying monthly",
     ],
   },
   {
