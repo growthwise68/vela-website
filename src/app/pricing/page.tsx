@@ -43,9 +43,9 @@ const plans: Plan[] = [
     note: "Limited, time-boxed founding rate — locked in for as long as you stay subscribed",
     features: [
       "Everything in Core Annual",
-      "Save 58% versus paying monthly",
+      "50% discount versus paying monthly",
       "Founding member status, locked-in price",
-      "Charges immediately — no trial",
+      "Includes a 14-day free trial",
     ],
     highlight: true,
   },
