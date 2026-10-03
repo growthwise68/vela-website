@@ -299,6 +299,96 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* FAQ SECTION */}
+      <section className="w-full py-20 md:py-32 bg-cream">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "FAQPage",
+              mainEntity: [
+                { "@type": "Question", name: "What is VÉLA?", acceptedAnswer: { "@type": "Answer", text: "VÉLA is a body-clock planning app for long-haul cabin crew. It reads your roster and predicts what your body clock will be doing on every duty, layover and day off, then tells you when to sleep, get light, have caffeine and eat." } },
+                { "@type": "Question", name: "Who is VÉLA for?", acceptedAnswer: { "@type": "Answer", text: "Long-haul cabin crew whose rosters cross time zones, with early reports, night sectors and back-to-back trips. It's built around how crew actually work, not around a single holiday flight." } },
+                { "@type": "Question", name: "How is VÉLA different from a jet lag app?", acceptedAnswer: { "@type": "Answer", text: "Jet lag apps plan one trip and assume you recover afterwards. Crew rarely do: the next trip starts before your body clock has caught up. VÉLA follows your body clock across your whole roster, including days off, so each plan starts from where your body actually is." } },
+                { "@type": "Question", name: "How does VÉLA get my roster?", acceptedAnswer: { "@type": "Answer", text: "You add each duty by entering the date and flight number. VÉLA looks up the departure and arrival times and airports automatically, so there's no need to upload your full roster." } },
+                { "@type": "Question", name: "Does it work with my airline?", acceptedAnswer: { "@type": "Answer", text: "Yes, if your airline uses public flight numbers. VÉLA works with any airline's flights, so it isn't limited to one carrier." } },
+                { "@type": "Question", name: "Is VÉLA based on science?", acceptedAnswer: { "@type": "Answer", text: "Yes. VÉLA's guidance is built on published circadian and sleep science, including NASA and US Navy fatigue research, and shaped by what crew told us about their own experience." } },
+                { "@type": "Question", name: "Is VÉLA medical advice?", acceptedAnswer: { "@type": "Answer", text: "No. VÉLA gives personal planning insights based on your roster. It isn't medical advice and doesn't replace your airline's fatigue-management requirements." } },
+                { "@type": "Question", name: "Can my airline see my data?", acceptedAnswer: { "@type": "Answer", text: "No. VÉLA is independent and not affiliated with any airline. You only enter dates and flight numbers, and your data stays private to your account." } },
+                { "@type": "Question", name: "Why is flying east harder than flying west?", acceptedAnswer: { "@type": "Answer", text: "Your body clock naturally runs slightly longer than 24 hours, so it finds it easier to stay up later (flying west) than to go to sleep earlier (flying east). Eastbound trips ask your body to shift in the direction it resists most." } },
+                { "@type": "Question", name: "How much does VÉLA cost?", acceptedAnswer: { "@type": "Answer", text: "VÉLA Core is $19.99 a month or $179.99 a year. Founding Crew members get the annual plan for $99.99 a year, locked in for as long as they stay subscribed. All plans include a 14-day free trial." } },
+                { "@type": "Question", name: "When can I get VÉLA?", acceptedAnswer: { "@type": "Answer", text: "VÉLA is in early access now. Join the list to be first in when it opens to everyone." } },
+              ],
+            }),
+          }}
+        />
+        <div className="max-w-4xl mx-auto px-6 md:px-8">
+          <h2 className="font-display text-5xl md:text-6xl font-light text-ink mb-10 border-b-2 border-gold pb-4">
+            Questions crew ask
+          </h2>
+          <div className="space-y-3">
+            {[
+              {
+                q: "What is VÉLA?",
+                a: <>V&Eacute;LA is a body-clock planning app for long-haul cabin crew. It reads your roster and predicts what your body clock will be doing on every duty, layover and day off, then tells you when to sleep, get light, have caffeine and eat.</>,
+              },
+              {
+                q: "Who is VÉLA for?",
+                a: <>Long-haul cabin crew whose rosters cross time zones, with early reports, night sectors and back-to-back trips. It&rsquo;s built around how crew actually work, not around a single holiday flight.</>,
+              },
+              {
+                q: "How is VÉLA different from a jet lag app?",
+                a: <>Jet lag apps plan one trip and assume you recover afterwards. Crew rarely do: the next trip starts before your body clock has caught up. V&Eacute;LA follows your body clock across your whole roster, including days off, so each plan starts from where your body actually is.</>,
+              },
+              {
+                q: "How does VÉLA get my roster?",
+                a: <>You add each duty by entering the date and flight number. V&Eacute;LA looks up the departure and arrival times and airports automatically, so there&rsquo;s no need to upload your full roster.</>,
+              },
+              {
+                q: "Does it work with my airline?",
+                a: <>Yes, if your airline uses public flight numbers. V&Eacute;LA works with any airline&rsquo;s flights, so it isn&rsquo;t limited to one carrier.</>,
+              },
+              {
+                q: "Is VÉLA based on science?",
+                a: <>Yes. V&Eacute;LA&rsquo;s guidance is built on published circadian and sleep science, including NASA and US Navy fatigue research, and shaped by what crew told us about their own experience.</>,
+              },
+              {
+                q: "Is VÉLA medical advice?",
+                a: <>No. V&Eacute;LA gives personal planning insights based on your roster. It isn&rsquo;t medical advice and doesn&rsquo;t replace your airline&rsquo;s fatigue-management requirements.</>,
+              },
+              {
+                q: "Can my airline see my data?",
+                a: <>No. V&Eacute;LA is independent and not affiliated with any airline. You only enter dates and flight numbers, and your data stays private to your account.</>,
+              },
+              {
+                q: "Why is flying east harder than flying west?",
+                a: <>Your body clock naturally runs slightly longer than 24 hours, so it finds it easier to stay up later (flying west) than to go to sleep earlier (flying east). Eastbound trips ask your body to shift in the direction it resists most.</>,
+              },
+              {
+                q: "How much does VÉLA cost?",
+                a: <><Link href="/pricing" className="text-gold underline underline-offset-2 hover:opacity-80 transition-opacity">V&Eacute;LA Core</Link> is $19.99 a month or $179.99 a year. Founding Crew members get the annual plan for $99.99 a year, locked in for as long as they stay subscribed. All plans include a 14-day free trial.</>,
+              },
+              {
+                q: "When can I get VÉLA?",
+                a: <>V&Eacute;LA is in early access now. <Link href="/early-access" className="text-gold underline underline-offset-2 hover:opacity-80 transition-opacity">Join the list</Link> to be first in when it opens to everyone.</>,
+              },
+            ].map(({ q, a }) => (
+              <details
+                key={q}
+                className="group rounded-[18px] border border-warmLine bg-parchment/60 open:bg-parchment/80 transition-colors"
+              >
+                <summary className="flex cursor-pointer items-center justify-between gap-4 px-6 py-5 list-none">
+                  <h3 className="font-display text-xl font-light text-ink">{q}</h3>
+                  <span className="flex-shrink-0 font-mono text-lg text-gold transition-transform group-open:rotate-45">+</span>
+                </summary>
+                <p className="px-6 pb-5 font-sans text-base text-inkMid leading-relaxed">{a}</p>
+              </details>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* FINAL CTA SECTION */}
       <section className="w-full py-20 md:py-32 bg-gradient-to-b from-parchment/50 to-cream/50">
         <div className="max-w-4xl mx-auto px-6 md:px-8 text-center">

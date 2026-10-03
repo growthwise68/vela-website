@@ -19,6 +19,7 @@ const plans: Plan[] = [
     name: "Core — Monthly",
     price: "$19.99",
     period: "/ month",
+    note: "Includes a 14-day free trial",
     features: [
       "Full roster integration",
       "Day-by-day sleep, light & caffeine guidance",
