@@ -248,9 +248,9 @@ export default function SurveyPage() {
               <div className="intro-screen">
                 <div className="vela-wordmark">VÉLA</div>
                 <div className="vela-tagline">By crew, for crew.</div>
-                <div className="intro-body">
-                  Three minutes. Your experience. Our blueprint.
-                </div>
+                <h1 className="intro-body">
+                  The 3-minute crew survey
+                </h1>
                 <div className="intro-sub">
                   {"Your roster. Your patterns. Your experience of what this job really does to you. That\u2019s what we\u2019re building from.\n\nNo one has ever put crew at the centre of something like this. Every answer you give goes directly into what VÉLA becomes — and stays completely anonymous."}
                 </div>

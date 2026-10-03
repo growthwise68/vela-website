@@ -2,7 +2,7 @@ import { Suspense } from "react";
 import BriefsClient from "./BriefsClient";
 
 export const metadata = {
-  title: "Recovery Briefs — Véla",
+  title: "Recovery Briefs",
   description:
     "Short, practical guides for the exact moments this job tests you most. Free to download, no strings attached.",
 };

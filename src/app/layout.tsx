@@ -30,11 +30,11 @@ const dmMono = DM_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "VÉLA — Wellness companion for long-haul crew",
+    default: "VÉLA — Body-Clock Planning App for Long-Haul Cabin Crew",
     template: "%s — VÉLA",
   },
   description:
-    "VÉLA is a lifestyle and wellness companion for people who travel across time zones — shaped with former crew and grounded in published circadian and sleep science. Not a medical device.",
+    "VÉLA reads your roster and maps your body clock duty by duty, with sleep, light, caffeine and meal timing for every trip. Built by crew, for long-haul cabin crew.",
 };
 
 export default function RootLayout({
