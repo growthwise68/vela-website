@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { mobileApplication } from "@/lib/structured-data";
 
 export const metadata: Metadata = {
   title: "Pricing and Free Trial",
@@ -56,6 +57,12 @@ const plans: Plan[] = [
 export default function PricingPage() {
   return (
     <div className="space-y-10">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({ "@context": "https://schema.org", ...mobileApplication }),
+        }}
+      />
       <header className="space-y-3">
         <h1 className="font-display text-3xl font-light text-ink">Pricing</h1>
         <p className="font-sans text-inkMid">

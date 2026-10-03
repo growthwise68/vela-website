@@ -5,10 +5,20 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
+import { organization, mobileApplication } from "@/lib/structured-data";
 
 export default function HomePage() {
   return (
     <div className="w-full">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify([
+            { "@context": "https://schema.org", ...organization },
+            { "@context": "https://schema.org", ...mobileApplication },
+          ]),
+        }}
+      />
       {/* HERO SECTION */}
       <section className="w-full py-20 md:py-32 bg-gradient-to-b from-parchment/50 to-cream/50">
         <div className="max-w-4xl mx-auto px-6 md:px-8 text-center">
