@@ -5,6 +5,9 @@ export const metadata = {
   title: "Recovery Briefs",
   description:
     "Short, practical guides for the exact moments this job tests you most. Free to download, no strings attached.",
+  alternates: {
+    canonical: "https://velaforcrew.com/briefs",
+  },
 };
 
 function Fallback() {

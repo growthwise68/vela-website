@@ -1,4 +1,4 @@
-# VÉLA
+# VÉLA (VÉLA for Crew)
 
 > VÉLA is a body-clock planning app for long-haul cabin crew. It reads your roster and shows what your body clock will be doing, duty by duty and timezone by timezone, with sleep, light, caffeine and meal timing for every trip. Built by crew, for crew. VÉLA is a lifestyle planning tool, not a medical device, and is independent of any airline.
 

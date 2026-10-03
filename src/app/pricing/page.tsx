@@ -4,6 +4,9 @@ import { mobileApplication } from "@/lib/structured-data";
 export const metadata: Metadata = {
   title: "Pricing and Free Trial",
   description: "VÉLA Core is $19.99/month or $179.99/year. Founding Crew is $99.99/year, locked in for as long as you stay. Every plan starts with a 14-day free trial.",
+  alternates: {
+    canonical: "https://velaforcrew.com/pricing",
+  },
 };
 
 type Plan = {

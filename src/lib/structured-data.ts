@@ -3,6 +3,7 @@ const SITE = "https://velaforcrew.com";
 export const organization = {
   "@type": "Organization",
   name: "VÉLA",
+  alternateName: ["VÉLA for Crew", "Vela for Crew", "Vela4Crew"],
   legalName: "Vela4Crew Inc.",
   url: SITE,
   logo: `${SITE}/vela-icon.svg`,
@@ -20,6 +21,7 @@ export const organization = {
 export const mobileApplication = {
   "@type": "MobileApplication",
   name: "VÉLA",
+  alternateName: ["VÉLA for Crew", "Vela for Crew", "Vela4Crew"],
   description:
     "VÉLA is a body-clock planning app for long-haul cabin crew. It reads your roster and shows you what your body clock will be doing — duty by duty, timezone by timezone — with sleep, light, caffeine and meal timing for every trip.",
   applicationCategory: "HealthApplication",
