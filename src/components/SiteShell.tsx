@@ -5,6 +5,7 @@ const nav = [
   { href: "/briefs", label: "Briefs" },
   { href: "/pricing", label: "Pricing" },
   { href: "/survey", label: "Survey" },
+  { href: "/research/crew-fatigue-survey-2026", label: "Research" },
   { href: "/privacy", label: "Privacy" },
   { href: "/terms", label: "Terms" },
   { href: "/refund-policy", label: "Refunds" },

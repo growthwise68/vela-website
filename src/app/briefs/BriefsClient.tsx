@@ -169,6 +169,16 @@ export default function BriefsClient() {
           </div>
         </div>
 
+        {/* Research link */}
+        <div className="mt-8 pt-6 border-t border-warmLine text-center">
+          <Link
+            href="/research/crew-fatigue-survey-2026"
+            className="font-mono text-[10px] uppercase tracking-[0.18em] text-inkFaint hover:text-gold transition-colors"
+          >
+            Read what 93 crew told us &rarr;
+          </Link>
+        </div>
+
         {/* Brief 003 — Coming soon */}
         <div className="rounded-[18px] border border-dashed border-warmLine px-6 py-6 sm:px-8 sm:py-7 opacity-50">
           <div className="sm:flex sm:items-center sm:gap-6">

@@ -305,6 +305,14 @@ export default function HomePage() {
               </Link>{" "}
               &rarr; <span className="text-inkMid">(completely anonymous)</span>
             </p>
+            <p className="font-sans text-xl md:text-2xl text-inkMid leading-relaxed mt-4">
+              <Link
+                href="/research/crew-fatigue-survey-2026"
+                className="text-gold underline underline-offset-2 hover:opacity-80 transition-opacity"
+              >
+                Read what 93 crew told us &rarr;
+              </Link>
+            </p>
           </div>
         </div>
       </section>
