@@ -2,6 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import Link from "next/link";
 
 export default function EarlyAccessClient() {
   const router = useRouter();
@@ -146,6 +147,65 @@ export default function EarlyAccessClient() {
           You are on the list — taking you home
         </p>
       )}
+
+      {/* Additional info sections */}
+      <div className="mt-16 space-y-10 border-t border-warmLine pt-12">
+        <section>
+          <h2 className="font-display text-2xl font-light text-ink mb-3">What is V&Eacute;LA?</h2>
+          <p className="font-sans text-base text-inkMid leading-relaxed">
+            V&Eacute;LA is a body-clock planning app for long-haul cabin crew. It turns your roster into a
+            personalised body-clock plan, with sleep, light, caffeine and meal timing for every duty,
+            layover and day off.
+          </p>
+        </section>
+
+        <section>
+          <h2 className="font-display text-2xl font-light text-ink mb-4">What you get when you join</h2>
+          <ul className="space-y-4">
+            {[
+              { label: "First access at launch.", body: "You'll hear the moment VÉLA opens, before it's available to everyone." },
+              { label: "Founding Crew pricing.", body: "$99.99 a year instead of $179.99, locked in for as long as you stay subscribed. Available until VÉLA opens to everyone, then it's gone." },
+              { label: "A 14-day free trial.", body: "Try it on your real roster before you pay anything." },
+              { label: "A few emails while you wait.", body: "How your body clock actually works, and what crew told us about fatigue. No spam, unsubscribe anytime." },
+            ].map(({ label, body }) => (
+              <li key={label} className="flex gap-3 items-baseline">
+                <span className="text-gold font-mono text-xs flex-shrink-0">—</span>
+                <span className="font-sans text-base text-inkMid leading-relaxed">
+                  <strong className="font-medium text-ink">{label}</strong>{" "}{body}
+                </span>
+              </li>
+            ))}
+          </ul>
+        </section>
+
+        <section>
+          <h2 className="font-display text-2xl font-light text-ink mb-3">What happens next</h2>
+          <p className="font-sans text-base text-inkMid leading-relaxed">
+            Join the list now. When V&Eacute;LA opens, you&rsquo;ll get an email with everything you need
+            to start: download the app, add your next few duties with the date and flight number, and
+            see your first plan.
+          </p>
+        </section>
+
+        <section>
+          <h2 className="font-display text-2xl font-light text-ink mb-3">Built by crew, for crew</h2>
+          <p className="font-sans text-base text-inkMid leading-relaxed mb-6">
+            V&Eacute;LA is independent of any airline. You only ever enter dates and flight numbers, and
+            your data stays private to your account.
+          </p>
+          <div className="flex flex-wrap gap-4 font-sans text-sm">
+            <Link href="/how-vela-works" className="text-gold underline underline-offset-2 hover:opacity-80 transition-opacity">
+              How V&Eacute;LA works &rarr;
+            </Link>
+            <Link href="/research/crew-fatigue-survey-2026" className="text-gold underline underline-offset-2 hover:opacity-80 transition-opacity">
+              Read what 93 crew told us &rarr;
+            </Link>
+            <Link href="/pricing" className="text-gold underline underline-offset-2 hover:opacity-80 transition-opacity">
+              See pricing &rarr;
+            </Link>
+          </div>
+        </section>
+      </div>
     </div>
   );
 }

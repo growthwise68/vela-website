@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Terms of Service",
   description: "Terms governing use of the VÉLA website and app.",
+  alternates: { canonical: "https://velaforcrew.com/terms" },
 };
 
 export default function TermsPage() {

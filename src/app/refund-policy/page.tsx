@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Refund Policy",
   description: "How refunds work for VÉLA subscriptions.",
+  alternates: { canonical: "https://velaforcrew.com/refund-policy" },
 };
 
 export default function RefundPolicyPage() {

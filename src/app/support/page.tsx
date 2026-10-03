@@ -4,6 +4,7 @@ export const metadata: Metadata = {
   title: "Support",
   description:
     "Get help with VÉLA — contact, frequently asked questions, and how we handle your account and data.",
+  alternates: { canonical: "https://velaforcrew.com/support" },
 };
 
 const supportEmail = "founder@velaforcrew.com";
