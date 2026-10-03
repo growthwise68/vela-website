@@ -44,7 +44,7 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
             </Link>
           </p>
           <p className="font-mono text-xs uppercase tracking-[0.2em] text-inkFaint font-semibold">
-            &copy; {new Date().getFullYear()} VÉLA. Lifestyle planning for long-haul crew.
+            &copy; {new Date().getFullYear()} VÉLA. V&Eacute;LA is a body-clock planning app for long-haul cabin crew.
           </p>
         </div>
       </footer>

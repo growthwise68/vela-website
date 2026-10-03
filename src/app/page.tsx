@@ -19,8 +19,10 @@ export default function HomePage() {
             Your roster, mapped before you fly it.
           </h1>
           <p className="font-sans text-xl md:text-2xl font-light text-inkMid max-w-2xl mx-auto mb-8 leading-relaxed">
-            V&Eacute;LA reads your schedule and shows you what your body clock will be doing — duty by duty,
-            timezone by timezone. What to expect. How to prepare. Built by crew, because someone had to.
+            <strong className="font-medium text-ink">V&Eacute;LA is a body-clock planning app for long-haul cabin crew.</strong>{" "}
+            It reads your roster and shows you what your body clock will be doing — duty by duty,
+            timezone by timezone — with sleep, light, caffeine and meal timing for every trip.
+            Built by crew, because someone had to.
           </p>
           <Link
             href="/early-access"
