@@ -111,21 +111,29 @@ export default function BriefsClient() {
           <div className="sm:flex sm:items-center sm:gap-6">
             <span className="block font-display text-3xl font-light text-gold mb-2 sm:mb-0 sm:w-12 sm:flex-shrink-0">001</span>
             <div className="sm:flex-1 sm:min-w-0">
-              <h3 className="mb-1 font-display text-xl font-medium text-ink">
-                Preparing for a 2am Wake-Up
-              </h3>
+              <Link href="/briefs/2am-wake-up" className="group">
+                <h3 className="mb-1 font-display text-xl font-medium text-ink group-hover:text-gold transition-colors">
+                  Preparing for a 2am Wake-Up
+                </h3>
+              </Link>
               <p className="text-[13.5px] leading-relaxed text-inkMid">
                 A full 24-hour plan for the earliest, hardest reports — what to do the day before,
                 the moment you wake, and how to protect the rest of your trip.
               </p>
+              <a
+                href="/downloads/vela-recovery-brief-001-2am-wakeup.pdf"
+                download
+                className="mt-2 inline-block font-mono text-[10px] uppercase tracking-[0.12em] text-inkFaint underline underline-offset-2 hover:text-gold transition-colors"
+              >
+                Download PDF
+              </a>
             </div>
-            <a
-              href="/downloads/vela-recovery-brief-001-2am-wakeup.pdf"
-              download
+            <Link
+              href="/briefs/2am-wake-up"
               className="mt-4 block text-center sm:mt-0 sm:flex-shrink-0 rounded-xl bg-night px-5 py-3 font-mono text-[10px] uppercase tracking-[0.12em] text-cream transition-colors hover:bg-gold hover:text-ink sm:whitespace-nowrap"
             >
-              Download PDF
-            </a>
+              Read brief
+            </Link>
           </div>
         </div>
 
