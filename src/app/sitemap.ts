@@ -7,6 +7,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/briefs",
     "/briefs/2am-wake-up",
     "/briefs/eating-across-time-zones",
+    "/how-vela-works",
     "/research/crew-fatigue-survey-2026",
     "/early-access",
     "/pricing",

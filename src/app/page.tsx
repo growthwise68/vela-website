@@ -352,7 +352,7 @@ export default function HomePage() {
                 { "@type": "Question", name: "How is VÉLA different from a jet lag app?", acceptedAnswer: { "@type": "Answer", text: "Jet lag apps plan one trip and assume you recover afterwards. Crew rarely do: the next trip starts before your body clock has caught up. VÉLA follows your body clock across your whole roster, including days off, so each plan starts from where your body actually is." } },
                 { "@type": "Question", name: "How does VÉLA get my roster?", acceptedAnswer: { "@type": "Answer", text: "You add each duty by entering the date and flight number. VÉLA looks up the departure and arrival times and airports automatically, so there's no need to upload your full roster." } },
                 { "@type": "Question", name: "Does it work with my airline?", acceptedAnswer: { "@type": "Answer", text: "Yes, if your airline uses public flight numbers. VÉLA works with any airline's flights, so it isn't limited to one carrier." } },
-                { "@type": "Question", name: "Is VÉLA based on science?", acceptedAnswer: { "@type": "Answer", text: "Yes. VÉLA's guidance is built on published circadian and sleep science, including NASA and US Navy fatigue research, and shaped by what crew told us about their own experience." } },
+                { "@type": "Question", name: "Is VÉLA based on science?", acceptedAnswer: { "@type": "Answer", text: "Yes. VÉLA is built on the Three Process Model of alertness from sleep science, with body-clock adjustment rates from CDC jet lag guidance, and shaped by what crew told us about their own experience. Read how VÉLA works at https://velaforcrew.com/how-vela-works." } },
                 { "@type": "Question", name: "Is VÉLA medical advice?", acceptedAnswer: { "@type": "Answer", text: "No. VÉLA gives personal planning insights based on your roster. It isn't medical advice and doesn't replace your airline's fatigue-management requirements." } },
                 { "@type": "Question", name: "Can my airline see my data?", acceptedAnswer: { "@type": "Answer", text: "No. VÉLA is independent and not affiliated with any airline. You only enter dates and flight numbers, and your data stays private to your account." } },
                 { "@type": "Question", name: "Why is flying east harder than flying west?", acceptedAnswer: { "@type": "Answer", text: "Your body clock naturally runs slightly longer than 24 hours, so it finds it easier to stay up later (flying west) than to go to sleep earlier (flying east). Eastbound trips ask your body to shift in the direction it resists most." } },
@@ -390,7 +390,7 @@ export default function HomePage() {
               },
               {
                 q: "Is VÉLA based on science?",
-                a: <>Yes. V&Eacute;LA&rsquo;s guidance is built on published circadian and sleep science, including NASA and US Navy fatigue research, and shaped by what crew told us about their own experience.</>,
+                a: <>Yes. V&Eacute;LA is built on the Three Process Model of alertness from sleep science, with body-clock adjustment rates from CDC jet lag guidance, and shaped by what crew told us about their own experience.{" "}<Link href="/how-vela-works" className="text-gold underline underline-offset-2 hover:opacity-80 transition-opacity">Read how V&Eacute;LA works</Link>.</>,
               },
               {
                 q: "Is VÉLA medical advice?",
