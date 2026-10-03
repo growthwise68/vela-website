@@ -5,7 +5,7 @@ const URL = "https://velaforcrew.com/briefs/2am-wake-up";
 const PDF = "/downloads/vela-recovery-brief-001-2am-wakeup.pdf";
 
 export const metadata: Metadata = {
-  title: "How to Prepare for a 2am Wake-Up: A Cabin Crew Guide — VÉLA Recovery Brief 001",
+  title: "How to Prepare for a 2am Wake-Up: A Cabin Crew Guide — Recovery Brief 001",
   description:
     "A 24-hour plan for cabin crew facing a 2am wake-up: when to stop caffeine, how to fall asleep at 7pm, what to do the moment your alarm goes, and how to recover after landing.",
   alternates: { canonical: URL },

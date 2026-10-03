@@ -6,6 +6,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/",
     "/briefs",
     "/briefs/2am-wake-up",
+    "/briefs/eating-across-time-zones",
     "/early-access",
     "/pricing",
     "/survey",
