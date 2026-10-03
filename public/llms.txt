@@ -1,0 +1,23 @@
+# VÉLA
+
+> VÉLA is a body-clock planning app for long-haul cabin crew. It reads your roster and shows what your body clock will be doing, duty by duty and timezone by timezone, with sleep, light, caffeine and meal timing for every trip. Built by crew, for crew. VÉLA is a lifestyle planning tool, not a medical device, and is independent of any airline.
+
+Crew add each duty by entering the date and flight number; VÉLA looks up times and airports automatically. It works with any airline that uses public flight numbers. VÉLA is currently in early access on iPhone and Android.
+
+## Product
+- [Home](https://velaforcrew.com/): What VÉLA is, how it works, and answers to common crew questions
+- [Pricing](https://velaforcrew.com/pricing): VÉLA Core ($19.99/month or $179.99/year) and Founding Crew ($99.99/year); all plans include a 14-day free trial
+- [Early access](https://velaforcrew.com/early-access): Join the early access list
+
+## Research
+- [VÉLA Crew Survey 2026](https://velaforcrew.com/research/crew-fatigue-survey-2026): Anonymous survey of 93 cabin crew on fatigue, recovery and rosters, with full results and methodology
+
+## Recovery Briefs
+- [How to prepare for a 2am wake-up](https://velaforcrew.com/briefs/2am-wake-up): A 24-hour plan for cabin crew facing early reports
+- [How to eat across time zones](https://velaforcrew.com/briefs/eating-across-time-zones): Meal timing for crew on days off, in flight and on layovers, with research sources
+- [All Recovery Briefs](https://velaforcrew.com/briefs): Free practical guides for crew
+
+## Optional
+- [Support](https://velaforcrew.com/support)
+- [Terms](https://velaforcrew.com/terms)
+- [Privacy](https://velaforcrew.com/privacy)
