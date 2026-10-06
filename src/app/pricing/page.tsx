@@ -108,14 +108,14 @@ export default function PricingPage() {
       {/* PLAN CARDS */}
       <FullBleed className="bg-cream pb-16 md:pb-24">
         <div className="max-w-5xl mx-auto px-6 md:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-6 items-stretch">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-6 md:items-end">
             {plans.map((plan) => (
               <div key={plan.id} className={plan.order}>
                 <div
-                  className={`h-full flex flex-col rounded-[18px] p-6 md:p-7 ${
+                  className={`flex flex-col rounded-[18px] ${
                     plan.style === "solid"
-                      ? "border-2 border-gold bg-parchment shadow-lg md:-translate-y-3 md:py-9"
-                      : "border border-warmLine bg-parchment/50"
+                      ? "p-7 md:p-9 border-2 border-gold bg-gradient-to-br from-goldPale/70 to-parchment shadow-[0_12px_32px_rgba(44,36,24,0.12)]"
+                      : "p-6 md:p-7 border border-warmLine bg-parchment/50"
                   }`}
                 >
                   {plan.tag ? (
@@ -131,7 +131,11 @@ export default function PricingPage() {
                   </p>
 
                   <div className="mt-3 flex items-baseline gap-2 flex-wrap">
-                    <span className="font-display text-4xl md:text-5xl font-light text-ink">
+                    <span
+                      className={`font-display font-light text-ink ${
+                        plan.style === "solid" ? "text-5xl md:text-6xl" : "text-4xl md:text-5xl"
+                      }`}
+                    >
                       {plan.price}
                     </span>
                     {plan.strikePrice && (
@@ -164,7 +168,7 @@ export default function PricingPage() {
 
                   <Link
                     href="/early-access"
-                    className={`mt-8 inline-flex items-center justify-center rounded-xl px-5 py-3 font-mono text-[10px] uppercase tracking-[0.15em] transition-colors ${
+                    className={`mt-8 inline-flex min-h-11 items-center justify-center rounded-xl px-5 py-3 font-mono text-[10px] uppercase tracking-[0.15em] transition-colors ${
                       plan.style === "solid"
                         ? "bg-gold text-ink font-semibold hover:bg-yellow-600"
                         : "border border-gold text-gold hover:bg-gold hover:text-ink"
