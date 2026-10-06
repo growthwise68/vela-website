@@ -6,31 +6,59 @@ type Point = { hour: number; time: string; label: string; side: "above" | "below
 
 const points: Point[] = [
   { hour: 2, time: "02:00", label: "Report", side: "below" },
-  { hour: 4, time: "04:00", label: "Low point", side: "above" },
-  { hour: 8, time: "08:00", label: "Light", side: "below" },
+  { hour: 4, time: "04:00", label: "Low point", side: "below" },
+  { hour: 8, time: "08:00", label: "Light", side: "above" },
   { hour: 14, time: "14:00", label: "Layover", side: "above" },
   { hour: 22, time: "22:00", label: "Sleep", side: "below" },
 ];
 
 const WIDTH = 640;
-const HEIGHT = 170;
-const MARGIN = 28;
-const Y = 90;
+const HEIGHT = 280;
+const MARGIN_X = 24;
+const MID_Y = 130;
+const AMPLITUDE = 56;
+// Circadian low point ~04:00, peak ~16:00 — a simple cosine is enough to
+// read as "a gentle wave," not a literal physiological model.
+const PEAK_HOUR = 16;
 
 function x(hour: number) {
-  return MARGIN + (hour / 24) * (WIDTH - MARGIN * 2);
+  return MARGIN_X + (hour / 24) * (WIDTH - MARGIN_X * 2);
 }
 
-export function BodyClockTimeline({
-  size = "large",
-  className = "",
-}: {
-  size?: "large" | "small";
-  className?: string;
-}) {
+function y(hour: number) {
+  const elevation = Math.cos((2 * Math.PI * (hour - PEAK_HOUR)) / 24);
+  return MID_Y - AMPLITUDE * elevation;
+}
+
+function buildWavePath() {
+  const steps = 96;
+  let d = "";
+  for (let i = 0; i <= steps; i++) {
+    const hour = (i / steps) * 24;
+    const cmd = i === 0 ? "M" : "L";
+    d += `${cmd} ${x(hour).toFixed(1)} ${y(hour).toFixed(1)} `;
+  }
+  return d.trim();
+}
+
+function buildAreaPath() {
+  return `${buildWavePath()} L ${x(24)} ${HEIGHT} L ${x(0)} ${HEIGHT} Z`;
+}
+
+const wavePath = buildWavePath();
+const areaPath = buildAreaPath();
+
+export function BodyClockTimeline({ className = "" }: { className?: string }) {
   const pathRef = useRef<SVGPathElement>(null);
   const wrapRef = useRef<HTMLDivElement>(null);
   const [drawn, setDrawn] = useState(false);
+  const [pathLength, setPathLength] = useState(0);
+
+  useEffect(() => {
+    if (pathRef.current) {
+      setPathLength(pathRef.current.getTotalLength());
+    }
+  }, []);
 
   useEffect(() => {
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -56,71 +84,68 @@ export function BodyClockTimeline({
     return () => observer.disconnect();
   }, []);
 
-  const dotRadius = size === "large" ? 4 : 3;
-  const labelSize = size === "large" ? 11 : 9;
-  const timeSize = size === "large" ? 12 : 10;
-
   return (
     <div ref={wrapRef} className={className}>
       <svg
         viewBox={`0 0 ${WIDTH} ${HEIGHT}`}
         className="w-full h-auto"
         role="img"
-        aria-label="A 24-hour body-clock timeline showing report time, circadian low point, light exposure, layover and sleep window"
+        aria-label="A circadian wave across a 24-hour axis, low at night and high in the day, marking report time, circadian low point, light exposure, layover and sleep window"
       >
-        <line
-          x1={MARGIN}
-          y1={Y}
-          x2={WIDTH - MARGIN}
-          y2={Y}
-          stroke="currentColor"
-          className="text-gold/25"
-          strokeWidth={1}
-        />
+        {/* Night shading — wraps the 0–24 boundary, so two rects */}
+        <rect x={x(0)} y={0} width={x(6) - x(0)} height={HEIGHT} className="fill-ink/[0.035]" />
+        <rect x={x(20)} y={0} width={x(24) - x(20)} height={HEIGHT} className="fill-ink/[0.035]" />
+
+        <path d={areaPath} className="fill-gold/[0.06]" stroke="none" />
+
         <path
           ref={pathRef}
-          d={`M ${MARGIN} ${Y} L ${WIDTH - MARGIN} ${Y}`}
+          d={wavePath}
           fill="none"
           stroke="currentColor"
           className="text-gold"
-          strokeWidth={1.5}
+          strokeWidth={2}
           strokeLinecap="round"
-          style={{
-            strokeDasharray: WIDTH - MARGIN * 2,
-            strokeDashoffset: drawn ? 0 : WIDTH - MARGIN * 2,
-            transition: drawn ? "stroke-dashoffset 1.4s ease-out" : "none",
-          }}
+          strokeLinejoin="round"
+          style={
+            pathLength
+              ? {
+                  strokeDasharray: pathLength,
+                  strokeDashoffset: drawn ? 0 : pathLength,
+                  transition: drawn ? "stroke-dashoffset 1.6s ease-out" : "none",
+                }
+              : undefined
+          }
         />
 
         {points.map((p, i) => {
           const cx = x(p.hour);
-          const labelY = p.side === "above" ? Y - 20 : Y + 32;
-          const timeY = p.side === "above" ? Y - 34 : Y + 46;
+          const cy = y(p.hour);
+          const labelY = p.side === "above" ? cy - 34 : cy + 46;
+          const timeY = p.side === "above" ? cy - 18 : cy + 28;
           return (
             <g
               key={p.hour}
               style={{
                 opacity: drawn ? 1 : 0,
-                transition: drawn ? `opacity 0.5s ease-out ${0.3 + i * 0.15}s` : "none",
+                transition: drawn ? `opacity 0.5s ease-out ${0.4 + i * 0.15}s` : "none",
               }}
             >
               <line
                 x1={cx}
-                y1={Y}
+                y1={cy}
                 x2={cx}
-                y2={p.side === "above" ? Y - 10 : Y + 10}
+                y2={p.side === "above" ? cy - 10 : cy + 10}
                 stroke="currentColor"
                 className="text-gold/40"
                 strokeWidth={1}
               />
-              <circle cx={cx} cy={Y} r={dotRadius} fill="currentColor" className="text-gold" />
+              <circle cx={cx} cy={cy} r={5} className="fill-cream stroke-gold" strokeWidth={2} />
               <text
                 x={cx}
                 y={timeY}
                 textAnchor="middle"
-                fontSize={timeSize}
-                fontFamily="var(--font-dm-mono), ui-monospace, monospace"
-                className="fill-current text-gold"
+                className="fill-ink font-mono text-[12px] md:text-[13px]"
               >
                 {p.time}
               </text>
@@ -128,12 +153,10 @@ export function BodyClockTimeline({
                 x={cx}
                 y={labelY}
                 textAnchor="middle"
-                fontSize={labelSize}
-                fontFamily="var(--font-dm-mono), ui-monospace, monospace"
                 letterSpacing="0.05em"
-                className="fill-current text-inkFaint"
+                className="fill-gold font-mono text-[11px] md:text-[12px] uppercase"
               >
-                {p.label.toUpperCase()}
+                {p.label}
               </text>
             </g>
           );

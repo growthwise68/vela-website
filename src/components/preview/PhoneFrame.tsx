@@ -4,49 +4,41 @@ import { useState } from "react";
 
 type Screen = {
   tab: string;
+  context: string;
   title: string;
-  body: string;
-  chips: { label: string; tone: "navy" | "gold" | "sand" }[];
+  note: string;
 };
 
 const screens: Screen[] = [
   {
     tab: "Departure",
+    context: "DXB → MEL · Day 1",
     title: "The Departure",
-    body: "Your report time is 02:00. Your body thinks it’s the middle of the night — because it is. VÉLA saw this coming three days ago.",
-    chips: [
-      { label: "Sleep", tone: "navy" },
-      { label: "Flight", tone: "gold" },
-      { label: "Rest", tone: "sand" },
-    ],
+    note: "Your report time is 02:00. Your body thinks it’s the middle of the night — because it is. VÉLA saw this coming three days ago.",
   },
   {
     tab: "Layover",
+    context: "MEL layover · Day 2",
     title: "The Layover",
-    body: "30 hours in Melbourne. Your body clock is sitting somewhere over the Indian Ocean. VÉLA shows you when rest will help most, so you can actually use this layover.",
-    chips: [
-      { label: "Sleep", tone: "navy" },
-      { label: "Flight", tone: "gold" },
-      { label: "Rest", tone: "sand" },
-    ],
+    note: "30 hours in Melbourne. Your body clock is sitting somewhere over the Indian Ocean. VÉLA shows you when rest will help most, so you can actually use this layover.",
   },
   {
     tab: "Return",
+    context: "Home · Day 1 off",
     title: "The Return",
-    body: "You’re home. Your days off start now. VÉLA shows you why the first 24 hours matter most — and what to do with them.",
-    chips: [
-      { label: "Sleep", tone: "navy" },
-      { label: "Flight", tone: "gold" },
-      { label: "Rest", tone: "sand" },
-    ],
+    note: "You’re home. Your days off start now. VÉLA shows you why the first 24 hours matter most — and what to do with them.",
   },
 ];
 
-const chipClasses: Record<Screen["chips"][number]["tone"], string> = {
-  navy: "bg-night text-cream",
-  gold: "bg-gold text-ink",
-  sand: "bg-warmMid text-inkMid",
-};
+// Reuses times that already appear elsewhere on the page (Sleep Timing,
+// Light Exposure and the Flying East card), so the app screen and the
+// page copy stay consistent rather than inventing a second set of numbers.
+const planRows = [
+  { label: "Sleep window", value: "22:00–06:00" },
+  { label: "Light", value: "08:00" },
+  { label: "Caffeine cut-off", value: "14:00" },
+  { label: "Recovery priority", value: "Sleep first" },
+];
 
 export function PhoneFrame() {
   const [active, setActive] = useState(0);
@@ -56,29 +48,33 @@ export function PhoneFrame() {
     <div className="flex flex-col items-center">
       {/* Phone — ink bezel (not navy) with a gold rim, so it reads as a
           distinct object against the section's navy background */}
-      <div className="relative w-[280px] rounded-[2.5rem] border-[6px] border-ink bg-ink p-2 ring-1 ring-gold/30 shadow-[0_24px_60px_rgba(0,0,0,0.45)]">
+      <div className="relative w-[300px] rounded-[2.5rem] border-[6px] border-ink bg-ink p-2 ring-1 ring-gold/30 shadow-[0_24px_60px_rgba(0,0,0,0.45)]">
         <div className="absolute left-1/2 top-2 -translate-x-1/2 w-20 h-5 rounded-full bg-ink z-10" />
-        <div className="rounded-[2rem] bg-cream overflow-hidden min-h-[400px] flex flex-col">
-          <div className="px-5 pt-9 pb-4 border-b border-warmLine">
-            <p className="font-mono text-[9px] uppercase tracking-[0.2em] text-gold font-semibold">
+        <div className="rounded-[2rem] bg-cream overflow-hidden flex flex-col">
+          <div className="px-5 pt-8 pb-4 border-b border-warmLine">
+            <p className="font-mono text-[9px] uppercase tracking-[0.2em] text-gold font-semibold mb-1">
               Tonight&rsquo;s plan
             </p>
+            <p className="font-mono text-[10px] text-inkFaint">{screen.context}</p>
           </div>
-          <div className="flex-1 px-5 py-6 flex flex-col justify-center">
-            <h3 className="font-display text-2xl font-light text-ink mb-3 leading-snug">
+
+          <div className="px-5 py-5">
+            <h3 className="font-display text-xl font-light text-ink mb-4 leading-snug">
               {screen.title}
             </h3>
-            <p className="font-sans text-sm text-inkMid leading-relaxed mb-5">{screen.body}</p>
-            <div className="flex gap-2 flex-wrap">
-              {screen.chips.map((chip) => (
-                <span
-                  key={chip.label}
-                  className={`px-3 py-1 rounded-full font-mono text-[10px] uppercase tracking-[0.1em] ${chipClasses[chip.tone]}`}
-                >
-                  {chip.label}
-                </span>
+
+            <div className="divide-y divide-warmLine/70">
+              {planRows.map((row) => (
+                <div key={row.label} className="flex items-baseline justify-between py-2.5">
+                  <span className="font-sans text-xs text-inkMid">{row.label}</span>
+                  <span className="font-mono text-xs text-ink">{row.value}</span>
+                </div>
               ))}
             </div>
+          </div>
+
+          <div className="px-5 pb-6 pt-1">
+            <p className="font-sans text-[11px] text-inkFaint leading-relaxed">{screen.note}</p>
           </div>
         </div>
       </div>

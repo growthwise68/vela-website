@@ -6,8 +6,10 @@ import { Autoplay, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import { organization, mobileApplication } from "@/lib/structured-data";
+import { FullBleed } from "@/components/FullBleed";
 import { BodyClockTimeline } from "@/components/preview/BodyClockTimeline";
 import { PhoneFrame } from "@/components/preview/PhoneFrame";
+import { CircadianShiftDemo } from "@/components/preview/CircadianShiftDemo";
 
 export default function PreviewHomeClient() {
   return (
@@ -23,9 +25,9 @@ export default function PreviewHomeClient() {
       />
 
       {/* HERO SECTION — split layout: copy left, timeline right on desktop */}
-      <section className="w-full py-20 md:py-28 bg-gradient-to-b from-parchment/50 to-cream/50">
-        <div className="max-w-6xl mx-auto px-6 md:px-8">
-          <div className="grid md:grid-cols-[1.1fr_0.9fr] gap-12 md:gap-16 items-center">
+      <FullBleed className="py-20 md:py-28 bg-gradient-to-b from-parchment/50 to-cream/50">
+        <div className="max-w-[1120px] mx-auto px-6 md:px-10">
+          <div className="grid md:grid-cols-[55fr_45fr] gap-12 md:gap-16 items-center">
             <div className="text-center md:text-left">
               <p className="font-mono text-xs md:text-sm uppercase tracking-[0.25em] text-gold mb-6 font-semibold">
                 By crew, for crew
@@ -33,7 +35,7 @@ export default function PreviewHomeClient() {
               <h1 className="font-display text-6xl md:text-7xl font-light leading-tight text-ink mb-6">
                 Your roster, mapped before you fly it.
               </h1>
-              <p className="font-sans text-xl md:text-2xl font-light text-inkMid mx-auto md:mx-0 max-w-2xl mb-8 leading-relaxed">
+              <p className="font-sans text-xl md:text-2xl font-light text-inkMid mx-auto md:mx-0 max-w-[65ch] mb-8 leading-relaxed">
                 <strong className="font-medium text-ink">VÉLA is a body-clock planning app for long-haul cabin crew.</strong>{" "}
                 It turns your roster into a personalised body-clock plan, showing what your body clock will be doing — duty by duty,
                 timezone by timezone — with sleep, light, caffeine and meal timing for every trip.
@@ -50,21 +52,21 @@ export default function PreviewHomeClient() {
               </p>
             </div>
 
-            <div className="hidden md:block">
-              <BodyClockTimeline size="large" />
+            <div className="hidden md:block md:min-w-[480px]">
+              <BodyClockTimeline />
             </div>
           </div>
 
           {/* Mobile: timeline below the CTA */}
           <div className="md:hidden mt-14">
-            <BodyClockTimeline size="large" />
+            <BodyClockTimeline />
           </div>
         </div>
-      </section>
+      </FullBleed>
 
       {/* KEY FACTS SECTION */}
-      <section className="w-full py-10 md:py-14 bg-gradient-to-b from-parchment/50 to-cream/50">
-        <div className="max-w-4xl mx-auto px-6 md:px-8">
+      <FullBleed className="py-10 md:py-14 bg-gradient-to-b from-parchment/50 to-cream/50">
+        <div className="max-w-[1120px] mx-auto px-6 md:px-10">
           <h2 className="font-mono text-xs md:text-sm uppercase tracking-[0.25em] text-gold font-semibold text-center mb-8">
             At a glance
           </h2>
@@ -103,54 +105,52 @@ export default function PreviewHomeClient() {
             ))}
           </dl>
         </div>
-      </section>
+      </FullBleed>
 
-      {/* PROBLEM SECTION — navy "night" band, phone frame replaces carousel */}
-      <section className="w-full py-20 md:py-32 bg-night">
-        <div className="max-w-6xl mx-auto px-6 md:px-8">
-          <div className="grid md:grid-cols-[1.05fr_0.95fr] gap-12 md:gap-16 items-center">
+      {/* PROBLEM SECTION — navy "night" band, runs edge to edge, phone frame replaces carousel */}
+      <FullBleed className="py-20 md:py-32 bg-night">
+        <div className="max-w-[1120px] mx-auto px-6 md:px-10">
+          <div className="grid md:grid-cols-[55fr_45fr] gap-12 md:gap-16 items-center">
             <div>
               <h2 className="font-display text-5xl md:text-6xl font-light text-cream mb-6 border-b-2 border-gold pb-4">
                 Your job breaks your body&rsquo;s clock
               </h2>
-              <p className="font-sans text-xl md:text-2xl text-cream/80 mb-6 leading-relaxed">
+              <p className="font-sans text-xl md:text-2xl text-cream/80 mb-6 leading-relaxed max-w-[65ch]">
                 The galley at 3am. The jumpseat during taxi. The layover that should have been a city but was
                 just blackout curtains and room service. You know the feeling. What&rsquo;s been missing is
                 something that tells you what to do about it — before you&rsquo;re already in it.
               </p>
-              <p className="font-sans text-xl md:text-2xl text-cream/80 leading-relaxed">
+              <p className="font-sans text-xl md:text-2xl text-cream/80 leading-relaxed max-w-[65ch]">
                 VÉLA reads your roster and shows you what your body clock will be doing, duty by duty.
                 Not after the fact. Before you even pack your bag.
               </p>
             </div>
 
-            <PhoneFrame />
+            <div className="flex justify-center md:justify-start">
+              <PhoneFrame />
+            </div>
           </div>
         </div>
-      </section>
+      </FullBleed>
 
       {/* KNOWLEDGE SECTION */}
-      <section className="w-full py-20 md:py-32 bg-parchment">
-        <div className="max-w-4xl mx-auto px-6 md:px-8">
-          <h2 className="font-display text-5xl md:text-6xl font-light text-ink mb-6 border-b-2 border-gold pb-4">
+      <FullBleed className="py-20 md:py-32 bg-parchment">
+        <div className="max-w-[1120px] mx-auto px-6 md:px-10">
+          <h2 className="font-display text-5xl md:text-6xl font-light text-ink mb-6 border-b-2 border-gold pb-4 max-w-[900px]">
             Your body clock has a logic. VÉLA speaks it.
           </h2>
-          <p className="font-display text-2xl md:text-3xl italic text-gold mb-8 pl-4 border-l-2 border-gold leading-relaxed">
+          <p className="font-display text-2xl md:text-3xl italic text-gold mb-8 pl-4 border-l-2 border-gold leading-relaxed max-w-[65ch]">
             Every time you feel wrecked after a short trip, or strangely fine after a long one — that&rsquo;s
             your circadian rhythm doing something specific and predictable.
           </p>
-          <p className="font-sans text-xl md:text-2xl text-inkMid mb-10 leading-relaxed">
+          <p className="font-sans text-xl md:text-2xl text-inkMid mb-10 leading-relaxed max-w-[65ch]">
             It&rsquo;s not random. It&rsquo;s not just &ldquo;jet lag.&rdquo; And it&rsquo;s not something you have to keep
             figuring out alone. VÉLA combines your actual roster with published circadian science
             — and translates it into something you can actually use.
             No jargon. No guesswork. Just your body clock, made readable.
           </p>
 
-          <div className="mb-10 max-w-md mx-auto">
-            <BodyClockTimeline size="small" />
-          </div>
-
-          <div className="mb-6 preview-gold-swiper">
+          <div className="mb-6 max-w-2xl mx-auto preview-gold-swiper">
             <Swiper
               modules={[Autoplay, Pagination]}
               autoplay={{ delay: 8000, disableOnInteraction: false, pauseOnMouseEnter: true }}
@@ -159,38 +159,17 @@ export default function PreviewHomeClient() {
               className="rounded-lg overflow-hidden"
             >
               <SwiperSlide>
-                <div className="bg-gradient-to-br from-amber-100 to-amber-50 min-h-[320px] md:min-h-[384px] flex flex-col items-center justify-center py-8 text-inkMid px-6">
+                <div className="bg-gradient-to-br from-amber-100 to-amber-50 min-h-[320px] md:min-h-[420px] flex flex-col items-center justify-center py-8 text-inkMid px-6">
                   <h3 className="font-display text-3xl md:text-4xl text-ink mb-4">DXB&ndash;JFK</h3>
                   <p className="text-lg md:text-xl mb-6 max-w-md text-center">
                     Your DXB&ndash;JFK pattern pushes your low point to 04:00 body time on day two.
                     Here&rsquo;s what that means for your layover.
                   </p>
-                  <div className="w-full max-w-md h-32 bg-white rounded-lg shadow-sm border-l-4 border-gold flex items-end justify-around px-4 py-4">
-                    <div className="flex flex-col items-center gap-1">
-                      <div className="h-16 w-4 bg-gold rounded-t"></div>
-                      <span className="text-xs">Day 1</span>
-                    </div>
-                    <div className="flex flex-col items-center gap-1">
-                      <div className="h-8 w-4 bg-gold/60 rounded-t"></div>
-                      <span className="text-xs">Day 2</span>
-                    </div>
-                    <div className="flex flex-col items-center gap-1">
-                      <div className="h-4 w-4 bg-gold/30 rounded-t"></div>
-                      <span className="text-xs">Day 3</span>
-                    </div>
-                    <div className="flex flex-col items-center gap-1">
-                      <div className="h-6 w-4 bg-gold/40 rounded-t"></div>
-                      <span className="text-xs">Day 4</span>
-                    </div>
-                    <div className="flex flex-col items-center gap-1">
-                      <div className="h-20 w-4 bg-gold rounded-t"></div>
-                      <span className="text-xs">Day 5</span>
-                    </div>
-                  </div>
+                  <CircadianShiftDemo />
                 </div>
               </SwiperSlide>
               <SwiperSlide>
-                <div className="bg-gradient-to-br from-amber-100 to-amber-50 min-h-[320px] md:min-h-[384px] flex flex-col items-center justify-center py-8 text-inkMid px-6">
+                <div className="bg-gradient-to-br from-amber-100 to-amber-50 min-h-[320px] md:min-h-[420px] flex flex-col items-center justify-center py-8 text-inkMid px-6">
                   <h3 className="font-display text-3xl md:text-4xl text-ink mb-4">Flying East</h3>
                   <p className="text-lg md:text-xl mb-6 max-w-md text-center">
                     Flying east is harder than flying west. Here&rsquo;s exactly why your Melbourne turns
@@ -213,7 +192,7 @@ export default function PreviewHomeClient() {
                 </div>
               </SwiperSlide>
               <SwiperSlide>
-                <div className="bg-gradient-to-br from-amber-100 to-amber-50 min-h-[320px] md:min-h-[384px] flex flex-col items-center justify-center py-8 text-inkMid px-6">
+                <div className="bg-gradient-to-br from-amber-100 to-amber-50 min-h-[320px] md:min-h-[420px] flex flex-col items-center justify-center py-8 text-inkMid px-6">
                   <h3 className="font-display text-3xl md:text-4xl text-ink mb-4">Your Day Off</h3>
                   <p className="text-lg md:text-xl mb-6 max-w-md text-center">
                     Your body clock didn&rsquo;t reset on your day off. VÉLA shows you where it actually
@@ -238,17 +217,17 @@ export default function PreviewHomeClient() {
             </Swiper>
           </div>
         </div>
-      </section>
+      </FullBleed>
 
       {/* SUGGESTIONS SECTION — asymmetric split, cards stacked right */}
-      <section className="w-full py-20 md:py-32 bg-cream">
-        <div className="max-w-5xl mx-auto px-6 md:px-8">
+      <FullBleed className="py-20 md:py-32 bg-cream">
+        <div className="max-w-[1120px] mx-auto px-6 md:px-10">
           <div className="grid md:grid-cols-[0.8fr_1.2fr] gap-10 md:gap-16">
             <div>
               <h2 className="font-display text-5xl md:text-6xl font-light text-ink mb-6 border-b-2 border-gold pb-4">
                 Know what&rsquo;s coming. Know what to do.
               </h2>
-              <p className="font-sans text-xl text-inkMid leading-relaxed">
+              <p className="font-sans text-xl text-inkMid leading-relaxed max-w-[65ch]">
                 Most crew go into every trip reacting. VÉLA puts you a step ahead. Upload your roster and
                 VÉLA gives you a clear picture of what your body clock will need — and when. Simple,
                 specific, and built around your actual schedule. Not generic advice. Yours.
@@ -279,19 +258,19 @@ export default function PreviewHomeClient() {
             </div>
           </div>
         </div>
-      </section>
+      </FullBleed>
 
       {/* BUILT BY CREW SECTION */}
-      <section className="w-full pt-20 md:pt-32 pb-12 md:pb-16 bg-parchment">
-        <div className="max-w-4xl mx-auto px-6 md:px-8">
+      <FullBleed className="pt-20 md:pt-32 pb-12 md:pb-16 bg-parchment">
+        <div className="max-w-[1120px] mx-auto px-6 md:px-10">
           <h2 className="font-display text-5xl md:text-6xl font-light text-ink mb-6 border-b-2 border-gold pb-4">
             Built by crew.
           </h2>
-          <p className="font-sans text-xl md:text-2xl text-inkMid mb-10 leading-relaxed">
+          <p className="font-sans text-xl md:text-2xl text-inkMid mb-10 leading-relaxed max-w-[65ch]">
             This is where VÉLA came from. Not a strategy session. A crew member who got tired of
             asking the same questions as everyone else — and getting nothing back.
           </p>
-          <div className="relative bg-cream rounded-2xl p-8 md:p-12 mb-8 border border-warmLine">
+          <div className="relative bg-cream rounded-2xl p-8 md:p-12 mb-8 border border-warmLine max-w-3xl">
             <span
               aria-hidden="true"
               className="absolute top-4 left-6 font-display text-gold text-7xl md:text-8xl leading-none select-none"
@@ -322,7 +301,7 @@ export default function PreviewHomeClient() {
 
           {/* Survey CTA — continuation of founder quote */}
           <div className="pt-8">
-            <p className="font-sans text-xl md:text-2xl text-ink leading-relaxed mb-4">
+            <p className="font-sans text-xl md:text-2xl text-ink leading-relaxed mb-4 max-w-[65ch]">
               VÉLA started with my own struggle — and it&rsquo;s kept growing because of yours too.
               That hasn&rsquo;t changed. It&rsquo;s still how VÉLA gets built.
             </p>
@@ -345,11 +324,11 @@ export default function PreviewHomeClient() {
             </p>
           </div>
         </div>
-      </section>
+      </FullBleed>
 
-      {/* FINAL CTA SECTION — navy "night" band */}
-      <section className="w-full py-20 md:py-32 bg-night">
-        <div className="max-w-4xl mx-auto px-6 md:px-8 text-center">
+      {/* FINAL CTA SECTION — navy "night" band, edge to edge */}
+      <FullBleed className="py-20 md:py-32 bg-night">
+        <div className="max-w-[1120px] mx-auto px-6 md:px-10 text-center">
           <h2 className="font-display text-5xl md:text-6xl font-light text-cream mb-6">
             Your roster. Your body clock. Finally, both in one place.
           </h2>
@@ -366,10 +345,10 @@ export default function PreviewHomeClient() {
             VÉLA is currently in early access — join now to be first when it&rsquo;s ready.
           </p>
         </div>
-      </section>
+      </FullBleed>
 
       {/* FAQ SECTION */}
-      <section className="w-full py-20 md:py-32 bg-cream">
+      <FullBleed className="py-20 md:py-32 bg-cream">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -392,7 +371,7 @@ export default function PreviewHomeClient() {
             }),
           }}
         />
-        <div className="max-w-4xl mx-auto px-6 md:px-8">
+        <div className="max-w-3xl mx-auto px-6 md:px-10">
           <h2 className="font-display text-5xl md:text-6xl font-light text-ink mb-10 border-b-2 border-gold pb-4">
             Questions crew ask
           </h2>
@@ -456,7 +435,7 @@ export default function PreviewHomeClient() {
             ))}
           </div>
         </div>
-      </section>
+      </FullBleed>
     </div>
   );
 }
