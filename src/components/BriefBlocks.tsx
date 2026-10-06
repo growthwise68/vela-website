@@ -2,6 +2,30 @@
 
 import { useState } from "react";
 
+export function TimelineTrack({
+  items,
+}: {
+  items: { time: string; label: string; href: string }[];
+}) {
+  return (
+    <ol className="not-prose mt-3 mb-6 flex flex-col gap-3 md:grid md:grid-cols-5 md:gap-x-3 md:gap-y-6">
+      {items.map((item) => (
+        <li key={item.time} className="flex items-baseline gap-3 md:flex-col md:items-start md:gap-0">
+          <span className="w-2 h-2 rounded-full bg-gold flex-shrink-0 md:mb-2" />
+          <a href={item.href} className="group flex items-baseline gap-3 md:flex-col md:items-start md:gap-0">
+            <time className="font-mono text-[11px] uppercase tracking-[0.1em] text-gold flex-shrink-0 w-12 md:w-auto group-hover:underline">
+              {item.time}
+            </time>
+            <span className="font-sans text-sm md:text-xs leading-snug text-inkMid group-hover:text-gold transition-colors">
+              {item.label}
+            </span>
+          </a>
+        </li>
+      ))}
+    </ol>
+  );
+}
+
 export function CrewNote({ children }: { children: React.ReactNode }) {
   return (
     <aside className="not-prose relative rounded-[10px] border border-warmLine bg-parchment/80 px-6 py-5 my-8 shadow-sm md:-rotate-1">

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { BriefLayout, type BriefStage } from "@/components/BriefLayout";
-import { CrewNote, ChecklistScore } from "@/components/BriefBlocks";
+import { CrewNote, ChecklistScore, TimelineTrack } from "@/components/BriefBlocks";
 
 const URL = "https://velaforcrew.com/briefs/2am-wake-up";
 const PDF = "/downloads/vela-recovery-brief-001-2am-wakeup.pdf";
@@ -76,19 +76,9 @@ const stages: BriefStage[] = [
     children: (
       <>
         <h2>The 24-hour timeline (for a 02:00 wake, 03:30 report)</h2>
-        <ol className="not-prose mt-3 mb-6 space-y-2">
-          {timeline.map(([time, step]) => (
-            <li
-              key={time}
-              className="flex items-baseline gap-3 font-sans text-[15px] leading-relaxed text-inkMid"
-            >
-              <time className="font-mono text-[11px] uppercase tracking-[0.12em] text-gold flex-shrink-0 w-10">
-                {time}
-              </time>
-              <span>{step}</span>
-            </li>
-          ))}
-        </ol>
+        <TimelineTrack
+          items={timeline.map(([time, step]) => ({ time, label: step, href: mapHref(time) }))}
+        />
       </>
     ),
   },
@@ -346,7 +336,6 @@ export default function Brief001() {
           tomorrow. It&apos;s preparing today.
         </p>
       }
-      map={timeline.map(([time, step]) => ({ time, label: step, href: mapHref(time) }))}
       stages={stages}
       closing={{
         bigLine: (

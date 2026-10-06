@@ -27,12 +27,6 @@ export type BriefStage = {
   children: React.ReactNode;
 };
 
-export type BriefMapItem = {
-  time: string;
-  label: string;
-  href: string;
-};
-
 export type BriefClosing = {
   bigLine: React.ReactNode;
   paragraph: React.ReactNode;
@@ -47,7 +41,6 @@ export function BriefLayout({
   title,
   shortVersion,
   hook,
-  map,
   stages,
   closing,
 }: {
@@ -56,7 +49,6 @@ export function BriefLayout({
   title: string;
   shortVersion: React.ReactNode;
   hook: React.ReactNode;
-  map?: BriefMapItem[];
   stages: BriefStage[];
   closing: BriefClosing;
 }) {
@@ -65,6 +57,8 @@ export function BriefLayout({
   const startSentinelRef = useRef<HTMLDivElement>(null);
   const endSentinelRef = useRef<HTMLDivElement>(null);
   const stageRefs = useRef<Record<string, HTMLDivElement | null>>({});
+  const pastStartRef = useRef(false);
+  const pastEndRef = useRef(false);
   const [activeStage, setActiveStage] = useState<string | null>(null);
   const [strip, setStrip] = useState<"hidden" | "visible">("hidden");
   const [headerHeight, setHeaderHeight] = useState(64);
@@ -123,13 +117,23 @@ export function BriefLayout({
     const visibilityObserver = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
+          // A sentinel scrolled above the viewport (top < 0) counts as "passed";
+          // still below the viewport (top >= 0) counts as "not yet reached" — this
+          // keeps the strip correct when scrolling back up, not just scrolling down.
+          const passed = !entry.isIntersecting && entry.boundingClientRect.top < 0;
+          const notYet = !entry.isIntersecting && entry.boundingClientRect.top >= 0;
           if (entry.target === startSentinelRef.current) {
-            setStrip((prev) => (entry.isIntersecting ? "hidden" : prev === "hidden" ? "visible" : prev));
+            if (entry.isIntersecting) pastStartRef.current = false;
+            else if (passed) pastStartRef.current = true;
+            else if (notYet) pastStartRef.current = false;
           }
-          if (entry.target === endSentinelRef.current && entry.isIntersecting) {
-            setStrip("hidden");
+          if (entry.target === endSentinelRef.current) {
+            if (entry.isIntersecting) pastEndRef.current = false;
+            else if (passed) pastEndRef.current = true;
+            else if (notYet) pastEndRef.current = false;
           }
         });
+        setStrip(pastStartRef.current && !pastEndRef.current ? "visible" : "hidden");
       },
       { rootMargin: "0px", threshold: 0 }
     );
@@ -195,86 +199,64 @@ export function BriefLayout({
             {hook}
           </div>
         </div>
-
-        {map && map.length > 0 && (
-          <div className="max-w-4xl mx-auto px-6 md:px-8 mt-10">
-            <p className="font-mono text-[10px] uppercase tracking-[0.15em] text-inkFaint mb-4">
-              The route
-            </p>
-            <ol className="not-prose flex flex-col md:flex-row md:items-start gap-0 md:gap-2 rounded-xl border border-warmLine bg-parchment/60 p-4 md:p-6">
-              {map.map((item, i) => (
-                <li key={item.time} className="flex-1 flex md:flex-col items-center md:items-start gap-3 md:gap-2 py-2 md:py-0">
-                  <div className="flex md:flex-col items-center gap-3 md:gap-2 md:w-full">
-                    <span className="w-2 h-2 rounded-full bg-gold flex-shrink-0" />
-                    {i < map.length - 1 && (
-                      <span className="hidden md:block h-px flex-1 bg-gold/30 mt-0" />
-                    )}
-                  </div>
-                  <a
-                    href={item.href}
-                    className="group flex md:flex-col gap-2 md:gap-1 items-baseline md:items-start"
-                  >
-                    <time className="font-mono text-xs text-gold group-hover:underline">{item.time}</time>
-                    <span className="font-sans text-xs text-inkMid group-hover:text-gold transition-colors">
-                      {item.label}
-                    </span>
-                  </a>
-                </li>
-              ))}
-            </ol>
-          </div>
-        )}
       </FullBleed>
 
       <div ref={startSentinelRef} />
 
       {/* STAGES / FLIGHT PATH */}
-      <div className="relative max-w-3xl mx-auto px-6 md:px-8">
-        <div
-          ref={spineRef}
-          className="absolute top-0 bottom-0 left-4 w-px"
-          style={{
-            backgroundImage:
-              "repeating-linear-gradient(to bottom, #C49A3C 0, #C49A3C 3px, transparent 3px, transparent 9px)",
-          }}
-        />
-        <div
-          ref={fillRef}
-          className="absolute top-0 left-4 w-px bg-gold"
-          style={{ height: "0%" }}
-        />
+      <FullBleed>
+        <div className="relative max-w-3xl mx-auto px-6 md:px-8">
+          <div
+            ref={spineRef}
+            className="absolute top-0 bottom-0 left-[14px] md:left-5 w-px z-0"
+            style={{
+              backgroundImage:
+                "repeating-linear-gradient(to bottom, #C49A3C 0, #C49A3C 3px, transparent 3px, transparent 9px)",
+            }}
+          />
+          <div
+            ref={fillRef}
+            className="absolute top-0 left-[14px] md:left-5 w-px bg-gold z-0"
+            style={{ height: "0%" }}
+          />
 
-        {stages.map((stage, i) => {
-          const nextId = i < stages.length - 1 ? stages[i + 1].id : "closing";
-          return (
-            <FullBleed
-              key={stage.id}
-              className={`${stage.bg === "cream" ? "bg-cream" : "bg-parchment"} py-14 md:py-20`}
-            >
-              <div
-                id={stage.id}
-                ref={(el) => {
-                  stageRefs.current[stage.id] = el;
-                }}
-                data-stage-id={stage.id}
-                className="max-w-3xl mx-auto px-6 md:px-8 relative scroll-mt-32"
+          {stages.map((stage, i) => {
+            const nextId = i < stages.length - 1 ? stages[i + 1].id : "closing";
+            const isActive = stage.id === activeStage;
+            return (
+              <FullBleed
+                key={stage.id}
+                className={`${stage.bg === "cream" ? "bg-cream" : "bg-parchment"} py-14 md:py-20`}
               >
-                <span className="absolute left-4 top-2 -translate-x-1/2 w-2.5 h-2.5 rounded-full bg-gold ring-4 ring-cream" />
-                <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-gold mb-3">
-                  {stage.label}
-                </p>
-                <div className="prose-vela">{stage.children}</div>
-                <a
-                  href={`#${nextId}`}
-                  className="not-prose mt-8 inline-block font-mono text-[10px] uppercase tracking-[0.15em] text-gold hover:underline underline-offset-2"
+                <div
+                  id={stage.id}
+                  ref={(el) => {
+                    stageRefs.current[stage.id] = el;
+                  }}
+                  data-stage-id={stage.id}
+                  className="max-w-3xl mx-auto pl-7 pr-6 md:pl-10 md:pr-8 relative scroll-mt-32"
                 >
-                  {stage.nextLabel}
-                </a>
-              </div>
-            </FullBleed>
-          );
-        })}
-      </div>
+                  <span
+                    className={`absolute left-[14px] md:left-5 top-2 -translate-x-1/2 z-10 w-2.5 h-2.5 rounded-full ring-4 ring-cream transition-colors ${
+                      isActive ? "bg-gold" : "bg-cream border-2 border-gold"
+                    }`}
+                  />
+                  <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-gold mb-3">
+                    {stage.label}
+                  </p>
+                  <div className="prose-vela">{stage.children}</div>
+                  <a
+                    href={`#${nextId}`}
+                    className="not-prose mt-8 inline-block font-mono text-[10px] uppercase tracking-[0.15em] text-gold hover:underline underline-offset-2"
+                  >
+                    {stage.nextLabel}
+                  </a>
+                </div>
+              </FullBleed>
+            );
+          })}
+        </div>
+      </FullBleed>
 
       <div ref={endSentinelRef} />
 
