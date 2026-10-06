@@ -33,12 +33,13 @@ body {
   }
 }
 
-/* /preview only — scoped so it cannot affect swiper instances on any other page */
-.preview-gold-swiper .swiper-pagination-bullet {
+/* Scoped to .gold-swiper so it only affects the homepage's carousel,
+   not any other swiper instance on the site */
+.gold-swiper .swiper-pagination-bullet {
   background: #c49a3c;
   opacity: 0.35;
 }
-.preview-gold-swiper .swiper-pagination-bullet-active {
+.gold-swiper .swiper-pagination-bullet-active {
   background: #c49a3c;
   opacity: 1;
 }
