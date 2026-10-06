@@ -107,8 +107,8 @@ export default function PricingPage() {
 
       {/* PLAN CARDS */}
       <FullBleed className="bg-cream pb-16 md:pb-24">
-        <div className="max-w-5xl mx-auto px-6 md:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-6 md:items-stretch">
+        <div className="max-w-6xl mx-auto px-6 md:px-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-6 md:items-stretch">
             {plans.map((plan) => (
               <div key={plan.id} className={`${plan.order} h-full`}>
                 <div
@@ -119,7 +119,7 @@ export default function PricingPage() {
                   }`}
                 >
                   {plan.tag ? (
-                    <span className="self-start mb-4 inline-block rounded-full bg-gold px-3 py-1 font-mono text-xs uppercase tracking-[0.15em] text-ink font-semibold">
+                    <span className="self-start mb-4 inline-block whitespace-nowrap rounded-full bg-gold px-3 py-1 font-mono text-xs uppercase tracking-[0.05em] text-ink font-semibold">
                       {plan.tag}
                     </span>
                   ) : (
@@ -189,7 +189,7 @@ export default function PricingPage() {
 
                   <Link
                     href="/early-access"
-                    className={`mt-8 inline-flex min-h-11 items-center justify-center rounded-xl px-5 py-3 font-mono text-sm font-semibold uppercase tracking-[0.1em] transition-colors ${
+                    className={`mt-8 inline-flex min-h-11 items-center justify-center whitespace-nowrap rounded-xl px-4 py-3 font-mono text-sm font-semibold uppercase tracking-[0.03em] transition-colors ${
                       plan.style === "solid"
                         ? "bg-gold text-ink hover:bg-yellow-600"
                         : "border-2 border-gold text-ink hover:bg-gold"

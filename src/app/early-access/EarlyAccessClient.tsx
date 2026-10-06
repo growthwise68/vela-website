@@ -142,7 +142,7 @@ export default function EarlyAccessClient() {
                     >
                       {status === "loading" ? "Saving…" : "Let me know"}
                     </button>
-                    <p className="text-center font-mono text-[0.65rem] uppercase tracking-[0.1em] text-inkFaint">
+                    <p className="text-center font-mono text-xs uppercase tracking-[0.1em] text-inkFaint">
                       Unsubscribe anytime.
                     </p>
                   </form>

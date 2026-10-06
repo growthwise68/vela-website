@@ -280,7 +280,7 @@ export default function CrewSurvey2026() {
           </div>
         </div>
 
-        <div className="max-w-4xl mx-auto px-6 md:px-8 mt-10">
+        <div className="max-w-[1120px] mx-auto px-6 md:px-10 mt-10">
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
             {headlineStats.map((s, i) => (
               <StatCard key={i} value={s.value} label={s.label} href={s.href} />

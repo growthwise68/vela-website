@@ -133,14 +133,17 @@ export function Wave({
           <mask id={`${uid}-vmask`}>
             <rect x="0" y="0" width={WIDTH} height={HEIGHT} fill={`url(#${uid}-vfade)`} />
           </mask>
+          <filter id={`${uid}-soft`} x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur stdDeviation="18" />
+          </filter>
         </defs>
 
         <g mask={`url(#${uid}-vmask)`}>
           {showNightShading && (
-            <>
+            <g filter={`url(#${uid}-soft)`}>
               <rect x={x(0)} y={0} width={x(6) - x(0)} height={HEIGHT} fill={`url(#${uid}-night-l)`} />
               <rect x={x(20)} y={0} width={x(24) - x(20)} height={HEIGHT} fill={`url(#${uid}-night-r)`} />
-            </>
+            </g>
           )}
           <path d={areaPath} fill={`url(#${uid}-area)`} stroke="none" />
         </g>
