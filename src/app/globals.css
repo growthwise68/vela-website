@@ -8,7 +8,8 @@
 }
 
 body {
-  @apply bg-cream text-ink antialiased overflow-x-hidden;
+  @apply bg-cream text-ink antialiased;
+  overflow-x: clip;
 }
 
 @layer components {
