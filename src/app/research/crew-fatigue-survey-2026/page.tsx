@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { FullBleed } from "@/components/FullBleed";
+import { StatCard, CopyAnchorButton, CitationBox, ResultTable } from "@/components/ResearchBlocks";
 
 const URL = "https://velaforcrew.com/research/crew-fatigue-survey-2026";
 const N = 93;
@@ -40,9 +42,9 @@ type Finding = {
   sub?: string;
   options: Option[];
   multi?: boolean;
+  highlight: string[];
+  bg: "cream" | "parchment";
 };
-
-const pct = (n: number) => Math.round((n / N) * 100);
 
 const findings: Finding[] = [
   {
@@ -57,6 +59,8 @@ const findings: Finding[] = [
       { label: "Once or twice, kind of", n: 25 },
       { label: "Yes, properly", n: 3 },
     ],
+    highlight: ["Never", "Once or twice, kind of"],
+    bg: "cream",
   },
   {
     id: "leaving",
@@ -70,6 +74,12 @@ const findings: Finding[] = [
       { label: "I think about it more than I'd like to", n: 20 },
       { label: "No — I love the job despite it", n: 14 },
     ],
+    highlight: [
+      "It crosses my mind occasionally",
+      "Yes — I've actively looked at other options",
+      "I think about it more than I'd like to",
+    ],
+    bg: "parchment",
   },
   {
     id: "running-on-empty",
@@ -83,6 +93,8 @@ const findings: Finding[] = [
       { label: "Almost every duty", n: 16 },
       { label: "Rarely", n: 5 },
     ],
+    highlight: ["More often than not", "Almost every duty"],
+    bg: "cream",
   },
   {
     id: "recovery",
@@ -98,6 +110,8 @@ const findings: Finding[] = [
       { label: "Less than a day", n: 3 },
       { label: "Five days or more", n: 3 },
     ],
+    highlight: ["Three or four days", "I'm never fully back before the next trip", "Five days or more"],
+    bg: "parchment",
   },
   {
     id: "wrong-moment",
@@ -113,6 +127,8 @@ const findings: Finding[] = [
       { label: "It's just part of the job now", n: 25 },
       { label: "Never happens to me", n: 2 },
     ],
+    highlight: ["It's just part of the job now"],
+    bg: "cream",
   },
   {
     id: "episodes",
@@ -126,6 +142,8 @@ const findings: Finding[] = [
       { label: "I stopped counting", n: 18 },
       { label: "Honestly, zero", n: 3 },
     ],
+    highlight: ["I stopped counting"],
+    bg: "parchment",
   },
   {
     id: "body-clock",
@@ -140,6 +158,8 @@ const findings: Finding[] = [
       { label: "Roughly", n: 20 },
       { label: "Yeah, I track it", n: 7 },
     ],
+    highlight: ["Not really — I just know I'm tired", "Never even thought about it"],
+    bg: "cream",
   },
   {
     id: "roster-planning",
@@ -154,6 +174,8 @@ const findings: Finding[] = [
       { label: "Only when I know a trip's going to destroy me", n: 25 },
       { label: "Yes, I'm pretty deliberate about it", n: 6 },
     ],
+    highlight: ["No — I just show up and deal with it"],
+    bg: "parchment",
   },
   {
     id: "tools",
@@ -171,6 +193,8 @@ const findings: Finding[] = [
       { label: "Nothing ever connects to my actual roster", n: 30 },
       { label: "They track stuff but never tell me what to actually do", n: 27 },
     ],
+    highlight: ["There's genuinely nothing out there for crew", "They're made for people with normal schedules"],
+    bg: "cream",
   },
 ];
 
@@ -198,228 +222,215 @@ const roles: Option[] = [
   { label: "First", n: 4 },
 ];
 
-function Bar({ n, multi }: { n: number; multi?: boolean }) {
-  const w = multi ? Math.min(Math.round((n / N) * 100), 100) : pct(n);
-  return (
-    <div className="relative h-8 flex items-center">
-      <div
-        className="absolute inset-y-1 left-0 rounded bg-gold/20"
-        style={{ width: `${w}%` }}
-      />
-      <span className="relative font-mono text-[11px] text-inkMid pl-2">
-        {n} &nbsp;<span className="text-inkFaint">({w}%)</span>
-      </span>
-    </div>
-  );
-}
+const headlineStats: { value: string; label: string; href: string }[] = [
+  { value: "97%", label: "say their airline has never properly acknowledged their fatigue", href: "#airline-acknowledgment" },
+  { value: "85%", label: "have thought about leaving the job", href: "#leaving" },
+  { value: "57%", label: "are running on empty more often than not", href: "#running-on-empty" },
+  { value: "42%", label: "need three or more days to recover after a long-haul trip", href: "#recovery" },
+  { value: "13%", label: "are never fully recovered before their next trip", href: "#recovery" },
+  { value: "8%", label: "actively track their body clock", href: "#body-clock" },
+];
 
-function ResultTable({ options, caption, multi }: { options: Option[]; caption?: string; multi?: boolean }) {
+function HeadlineWithGoldPct({ text }: { text: string }) {
+  const match = text.match(/\d+%/);
+  if (!match || match.index === undefined) return <>{text}</>;
+  const start = match.index;
+  const end = start + match[0].length;
   return (
-    <div className="overflow-x-auto mt-4 mb-2">
-      <table className="w-full text-left border-collapse">
-        {caption && (
-          <caption className="font-mono text-[10px] uppercase tracking-[0.15em] text-inkFaint mb-2 text-left">
-            {caption}
-          </caption>
-        )}
-        <thead>
-          <tr className="border-b border-warmLine">
-            <th className="py-2 pr-4 font-mono text-[10px] uppercase tracking-[0.12em] text-inkFaint font-normal w-1/2">
-              Answer
-            </th>
-            <th className="py-2 font-mono text-[10px] uppercase tracking-[0.12em] text-inkFaint font-normal w-1/2">
-              Crew
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          {options.map((o) => (
-            <tr key={o.label} className="border-b border-warmLine/50">
-              <td className="py-2 pr-4 font-sans text-sm text-ink leading-snug">{o.label}</td>
-              <td className="py-1">
-                <Bar n={o.n} multi={multi} />
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
+    <>
+      {text.slice(0, start)}
+      <span className="text-gold">{match[0]}</span>
+      {text.slice(end)}
+    </>
   );
 }
 
 export default function CrewSurvey2026() {
   return (
-    <article className="max-w-2xl">
+    <div className="w-full">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-gold mb-4">
-        VÉLA Research · Crew Survey 2026
-      </p>
-      <h1 className="font-display text-3xl sm:text-4xl font-light text-ink mb-6 leading-tight">
-        What 93 cabin crew told us about fatigue
-      </h1>
+      {/* HEADER */}
+      <FullBleed className="pt-16 md:pt-24 pb-10 md:pb-12">
+        <div className="max-w-3xl mx-auto px-6 md:px-8">
+          <p className="font-mono text-[10px] md:text-xs uppercase tracking-[0.2em] text-gold font-semibold mb-4">
+            VÉLA Research · Crew Survey 2026
+          </p>
+          <h1 className="font-display text-5xl md:text-6xl font-light text-ink mb-6 leading-tight border-b-2 border-gold pb-4">
+            What 93 cabin crew told us about fatigue
+          </h1>
 
-      <div className="rounded-[14px] border border-warmLine bg-parchment/70 px-6 py-5 mb-8">
-        <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-inkFaint mb-3">
-          Key findings
-        </p>
-        <p className="font-sans text-[15px] leading-relaxed text-inkMid mb-4">
-          In an anonymous survey of 93 cabin crew run by VÉLA between 19 June and 30 July 2026,
-          97% said their airline has never properly acknowledged their fatigue, 85% have thought
-          about leaving the job, and 57% said they&apos;re running on empty more often than not.
-          42% need three days or more to recover after a long-haul trip, and 13% are never fully
-          recovered before their next one. Only 8% actively track their body clock, and 54% said
-          there&apos;s nothing out there built for crew.
-        </p>
-        <ul className="space-y-1.5">
-          {[
-            ["97%", "say their airline has never properly acknowledged their fatigue"],
-            ["85%", "have thought about leaving the job"],
-            ["57%", "are running on empty more often than not"],
-            ["42%", "need three or more days to recover after a long-haul trip"],
-            ["13%", "are never fully recovered before their next trip"],
-            ["8%", "actively track their body clock"],
-          ].map(([stat, text]) => (
-            <li key={stat} className="flex gap-3 items-baseline">
-              <span className="font-display text-xl font-light text-gold flex-shrink-0">{stat}</span>
-              <span className="font-sans text-sm text-inkMid">{text}</span>
-            </li>
-          ))}
-        </ul>
-      </div>
+          <div className="rounded-[14px] border border-warmLine bg-parchment/70 px-6 py-5">
+            <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-inkFaint mb-3">
+              Key findings
+            </p>
+            <p className="font-sans text-base leading-relaxed text-inkMid">
+              In an anonymous survey of 93 cabin crew run by VÉLA between 19 June and 30 July
+              2026, 97% said their airline has never properly acknowledged their fatigue, 85%
+              have thought about leaving the job, and 57% said they&apos;re running on empty more
+              often than not. 42% need three days or more to recover after a long-haul trip, and
+              13% are never fully recovered before their next one. Only 8% actively track their
+              body clock, and 54% said there&apos;s nothing out there built for crew.
+            </p>
+          </div>
+        </div>
 
+        <div className="max-w-4xl mx-auto px-6 md:px-8 mt-10">
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+            {headlineStats.map((s, i) => (
+              <StatCard key={i} value={s.value} label={s.label} href={s.href} />
+            ))}
+          </div>
+        </div>
+      </FullBleed>
+
+      {/* FINDINGS */}
       {findings.map((f) => (
-        <section key={f.id} id={f.id} className="mb-10">
-          <h2 className="font-display text-2xl font-light text-ink mb-2 leading-snug">
-            {f.heading}
-          </h2>
-          <p className="font-sans text-[15px] text-ink leading-relaxed mb-3">
-            <strong className="font-medium">{f.headline}</strong>
-          </p>
-          <p className="font-sans text-sm text-inkFaint mb-1">
-            <em>Question asked:</em>{" "}
-            &ldquo;{f.question}&rdquo;
-            {f.sub && <> <span className="text-inkFaint/70">{f.sub}</span></>}
-            {f.multi && (
-              <span className="text-inkFaint">
-                {" "}(crew could choose more than one answer, so percentages add up to more than 100%)
-              </span>
-            )}
-          </p>
-          <ResultTable options={f.options} multi={f.multi} />
-        </section>
+        <FullBleed key={f.id} className={`${f.bg === "cream" ? "bg-cream" : "bg-parchment"} py-14 md:py-20 scroll-mt-20`} id={f.id}>
+          <div className="max-w-3xl mx-auto px-6 md:px-8">
+            <h2 className="group font-display text-2xl md:text-3xl font-light text-ink mb-4 leading-snug">
+              {f.heading}
+              <CopyAnchorButton anchorId={f.id} />
+            </h2>
+            <p className="font-display text-2xl md:text-3xl text-ink leading-snug mb-4">
+              <HeadlineWithGoldPct text={f.headline} />
+            </p>
+            <p className="font-mono text-xs text-inkMid leading-relaxed mb-1">
+              Question asked: &ldquo;{f.question}&rdquo;
+              {f.sub && <> <span className="text-inkFaint">{f.sub}</span></>}
+              {f.multi && (
+                <span className="text-inkFaint">
+                  {" "}(crew could choose more than one answer, so percentages add up to more than 100%)
+                </span>
+              )}
+            </p>
+            <ResultTable options={f.options} total={N} highlight={f.highlight} multi={f.multi} />
+          </div>
+        </FullBleed>
       ))}
 
-      <section className="mb-10">
-        <h2 className="font-display text-2xl font-light text-ink mb-4 leading-snug">
-          In their own words
-        </h2>
-        <p className="font-sans text-[15px] text-inkMid leading-relaxed mb-6">
-          We asked crew what this job has taken from their life outside it, and what would
-          actually help. A few of their answers:
-        </p>
-        <div className="space-y-4">
-          {quotes.map((q) => (
-            <blockquote
-              key={q}
-              className="rounded-[14px] border-l-2 border-gold bg-parchment/60 px-6 py-4"
+      {/* IN THEIR OWN WORDS */}
+      <FullBleed className="bg-parchment py-14 md:py-20">
+        <div className="max-w-3xl mx-auto px-6 md:px-8">
+          <h2 className="font-display text-2xl md:text-3xl font-light text-ink mb-4 leading-snug">
+            In their own words
+          </h2>
+          <p className="font-sans text-base text-inkMid leading-relaxed mb-10">
+            We asked crew what this job has taken from their life outside it, and what would
+            actually help. A few of their answers:
+          </p>
+          <div className="space-y-10">
+            {quotes.map((q) => (
+              <blockquote key={q} className="pl-5 border-l-2 border-gold">
+                <p className="font-display text-xl md:text-2xl italic text-ink leading-relaxed">
+                  &ldquo;{q}&rdquo;
+                </p>
+                <footer className="mt-3 font-mono text-[10px] uppercase tracking-[0.12em] text-inkFaint">
+                  — Cabin crew member, VÉLA survey 2026
+                </footer>
+              </blockquote>
+            ))}
+          </div>
+        </div>
+      </FullBleed>
+
+      {/* WHO TOOK PART */}
+      <FullBleed className="bg-cream py-14 md:py-20">
+        <div className="max-w-3xl mx-auto px-6 md:px-8">
+          <h2 className="font-display text-2xl md:text-3xl font-light text-ink mb-4 leading-snug">
+            Who took part
+          </h2>
+          <p className="font-sans text-base text-inkMid leading-relaxed mb-4">
+            93 cabin crew answered the survey. Most had between one and seven years of flying
+            experience.
+          </p>
+          <div className="grid gap-8 md:grid-cols-2">
+            <ResultTable options={experience} total={N} caption="Flying experience" />
+            <ResultTable options={roles} total={N} caption="Cabin role" />
+          </div>
+        </div>
+      </FullBleed>
+
+      {/* METHOD */}
+      <FullBleed className="bg-parchment py-14 md:py-20">
+        <div className="max-w-3xl mx-auto px-6 md:px-8">
+          <h2 className="font-display text-2xl md:text-3xl font-light text-ink mb-4 leading-snug">
+            How the survey was run
+          </h2>
+          <div className="not-prose rounded-[14px] border border-warmLine border-l-4 border-l-gold bg-cream/70 px-6 py-5">
+            <ul className="space-y-3">
+              {[
+                ["Who", "93 cabin crew."],
+                ["When", "19 June – 30 July 2026."],
+                [
+                  "How",
+                  "A 15-question online survey, shared through VÉLA's Instagram, the Crew2Crew community and the VÉLA website.",
+                ],
+                ["Anonymity", "Fully anonymous. We didn't collect names, emails or airlines."],
+                [
+                  "Limits",
+                  "This is a self-selected sample, not a random one. Crew who chose to answer may feel more strongly about fatigue than crew who didn't, so the results describe the people who took part rather than every cabin crew member. Percentages are rounded to the nearest whole number.",
+                ],
+              ].map(([label, text]) => (
+                <li key={label} className="flex gap-3">
+                  <span className="font-mono text-[10px] uppercase tracking-[0.12em] text-gold flex-shrink-0 pt-0.5 w-20">
+                    {label}
+                  </span>
+                  <span className="font-sans text-sm text-inkMid leading-relaxed">{text}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </FullBleed>
+
+      {/* CLOSING */}
+      <FullBleed className="bg-gradient-to-b from-parchment/50 to-cream/50 py-14 md:py-20">
+        <div className="max-w-3xl mx-auto px-6 md:px-8">
+          <h2 className="font-display text-2xl md:text-3xl font-light text-ink mb-4 leading-snug">
+            Using these results
+          </h2>
+          <p className="font-sans text-base text-inkMid leading-relaxed mb-4">
+            You&apos;re welcome to quote or cite these findings. Please credit
+            &ldquo;VÉLA Crew Survey 2026 (n=93)&rdquo; and link to this page.
+          </p>
+          <div className="mb-10">
+            <CitationBox text={`VÉLA Crew Survey 2026 (n=93). ${URL}`} />
+          </div>
+
+          <h2 className="font-display text-2xl md:text-3xl font-light text-ink mb-4 leading-snug">
+            Why we ran it
+          </h2>
+          <p className="font-sans text-base text-inkMid leading-relaxed mb-10">
+            VÉLA is a body-clock planning app for long-haul cabin crew, built by crew. We ran this
+            survey to understand what fatigue actually looks like from the jumpseat, and these
+            answers shape how VÉLA gets built.{" "}
+            <Link href="/early-access" className="text-gold underline underline-offset-2 hover:opacity-80 transition-opacity">
+              Get early access
+            </Link>{" "}
+            or read our free{" "}
+            <Link href="/briefs" className="text-gold underline underline-offset-2 hover:opacity-80 transition-opacity">
+              Recovery Briefs
+            </Link>.
+          </p>
+
+          <p className="font-sans text-sm text-inkMid mb-10">
+            Sincerely,<br />A crew member who got tired of being tired
+          </p>
+
+          <nav className="pt-6 border-t border-warmLine">
+            <Link
+              href="/"
+              className="font-mono text-[10px] uppercase tracking-[0.18em] text-inkFaint hover:text-gold transition-colors"
             >
-              <p className="font-display text-lg italic text-ink leading-relaxed">
-                &ldquo;{q}&rdquo;
-              </p>
-              <footer className="mt-2 font-mono text-[10px] uppercase tracking-[0.12em] text-inkFaint">
-                — Cabin crew member, VÉLA survey 2026
-              </footer>
-            </blockquote>
-          ))}
+              ← Back to VÉLA
+            </Link>
+          </nav>
         </div>
-      </section>
-
-      <section className="mb-10">
-        <h2 className="font-display text-2xl font-light text-ink mb-4 leading-snug">
-          Who took part
-        </h2>
-        <p className="font-sans text-[15px] text-inkMid leading-relaxed mb-4">
-          93 cabin crew answered the survey. Most had between one and seven years of flying
-          experience.
-        </p>
-        <div className="grid gap-6 sm:grid-cols-2">
-          <ResultTable options={experience} caption="Flying experience" />
-          <ResultTable options={roles} caption="Cabin role" />
-        </div>
-      </section>
-
-      <section className="mb-10">
-        <h2 className="font-display text-2xl font-light text-ink mb-4 leading-snug">
-          How the survey was run
-        </h2>
-        <ul className="space-y-2">
-          {[
-            ["Who", "93 cabin crew."],
-            ["When", "19 June – 30 July 2026."],
-            [
-              "How",
-              "A 15-question online survey, shared through VÉLA's Instagram, the Crew2Crew community and the VÉLA website.",
-            ],
-            ["Anonymity", "Fully anonymous. We didn't collect names, emails or airlines."],
-            [
-              "Limits",
-              "This is a self-selected sample, not a random one. Crew who chose to answer may feel more strongly about fatigue than crew who didn't, so the results describe the people who took part rather than every cabin crew member. Percentages are rounded to the nearest whole number.",
-            ],
-          ].map(([label, text]) => (
-            <li key={label as string} className="flex gap-3">
-              <span className="font-mono text-[10px] uppercase tracking-[0.12em] text-gold flex-shrink-0 pt-0.5 w-20">
-                {label}
-              </span>
-              <span className="font-sans text-sm text-inkMid leading-relaxed">{text}</span>
-            </li>
-          ))}
-        </ul>
-      </section>
-
-      <section className="mb-10">
-        <h2 className="font-display text-2xl font-light text-ink mb-3 leading-snug">
-          Using these results
-        </h2>
-        <p className="font-sans text-[15px] text-inkMid leading-relaxed">
-          You&apos;re welcome to quote or cite these findings. Please credit
-          &ldquo;VÉLA Crew Survey 2026 (n=93)&rdquo; and link to this page.
-        </p>
-      </section>
-
-      <section className="mb-10">
-        <h2 className="font-display text-2xl font-light text-ink mb-3 leading-snug">
-          Why we ran it
-        </h2>
-        <p className="font-sans text-[15px] text-inkMid leading-relaxed">
-          VÉLA is a body-clock planning app for long-haul cabin crew, built by crew. We ran this
-          survey to understand what fatigue actually looks like from the jumpseat, and these
-          answers shape how VÉLA gets built.{" "}
-          <Link href="/early-access" className="text-gold underline underline-offset-2 hover:opacity-80 transition-opacity">
-            Get early access
-          </Link>{" "}
-          or read our free{" "}
-          <Link href="/briefs" className="text-gold underline underline-offset-2 hover:opacity-80 transition-opacity">
-            Recovery Briefs
-          </Link>.
-        </p>
-      </section>
-
-      <p className="font-sans text-sm text-inkMid">
-        Sincerely,<br />A crew member who got tired of being tired
-      </p>
-
-      <nav className="mt-10 pt-6 border-t border-warmLine">
-        <Link
-          href="/"
-          className="font-mono text-[10px] uppercase tracking-[0.18em] text-inkFaint hover:text-gold transition-colors"
-        >
-          ← Back to VÉLA
-        </Link>
-      </nav>
-    </article>
+      </FullBleed>
+    </div>
   );
 }

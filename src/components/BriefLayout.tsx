@@ -2,22 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-
-function FullBleed({
-  id,
-  className = "",
-  children,
-}: {
-  id?: string;
-  className?: string;
-  children: React.ReactNode;
-}) {
-  return (
-    <div id={id} className={`w-screen ml-[calc(50%-50vw)] mr-[calc(50%-50vw)] ${className}`}>
-      {children}
-    </div>
-  );
-}
+import { FullBleed } from "@/components/FullBleed";
 
 export type BriefStage = {
   id: string;

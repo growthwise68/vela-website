@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { FullBleed } from "@/components/FullBleed";
 
 const PAGE_URL = "https://velaforcrew.com/how-vela-works";
 
@@ -85,20 +86,6 @@ function ChapterDivider({ n, label }: { n: string; label: string }) {
         {n} &mdash; {label}
       </span>
       <span className="h-px flex-1 bg-gold/40" />
-    </div>
-  );
-}
-
-function FullBleed({
-  className = "",
-  children,
-}: {
-  className?: string;
-  children: React.ReactNode;
-}) {
-  return (
-    <div className={`w-screen ml-[calc(50%-50vw)] mr-[calc(50%-50vw)] ${className}`}>
-      {children}
     </div>
   );
 }
