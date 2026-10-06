@@ -114,7 +114,7 @@ export default function PricingPage() {
                 <div
                   className={`flex flex-col rounded-[18px] ${
                     plan.style === "solid"
-                      ? "p-7 md:p-9 border-2 border-gold bg-gradient-to-br from-goldPale/70 to-parchment shadow-[0_12px_32px_rgba(44,36,24,0.12)]"
+                      ? "p-7 md:p-9 border-2 border-gold bg-night shadow-[0_12px_32px_rgba(26,37,64,0.35)]"
                       : "p-6 md:p-7 border border-warmLine bg-parchment/50"
                   }`}
                 >
@@ -126,31 +126,47 @@ export default function PricingPage() {
                     <div className="h-[22px] mb-4" aria-hidden="true" />
                   )}
 
-                  <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-inkFaint">
+                  <p
+                    className={`font-mono text-[10px] uppercase tracking-[0.18em] ${
+                      plan.style === "solid" ? "text-cream/60" : "text-inkFaint"
+                    }`}
+                  >
                     {plan.label}
                   </p>
 
                   <div className="mt-3 flex items-baseline gap-2 flex-wrap">
                     <span
-                      className={`font-display font-light text-ink ${
-                        plan.style === "solid" ? "text-5xl md:text-6xl" : "text-4xl md:text-5xl"
+                      className={`font-display font-light ${
+                        plan.style === "solid"
+                          ? "text-cream text-5xl md:text-6xl"
+                          : "text-ink text-4xl md:text-5xl"
                       }`}
                     >
                       {plan.price}
                     </span>
                     {plan.strikePrice && (
-                      <span className="font-display text-lg text-inkFaint line-through">
+                      <span
+                        className={`font-display text-lg line-through ${
+                          plan.style === "solid" ? "text-cream/40" : "text-inkFaint"
+                        }`}
+                      >
                         {plan.strikePrice}
                       </span>
                     )}
-                    <span className="font-sans text-sm text-inkMid">{plan.period}</span>
+                    <span className={`font-sans text-sm ${plan.style === "solid" ? "text-cream/70" : "text-inkMid"}`}>
+                      {plan.period}
+                    </span>
                   </div>
 
                   {plan.sub && (
-                    <p className="mt-1 font-mono text-[11px] text-inkFaint">{plan.sub}</p>
+                    <p className={`mt-1 font-mono text-[11px] ${plan.style === "solid" ? "text-cream/60" : "text-inkFaint"}`}>
+                      {plan.sub}
+                    </p>
                   )}
                   {plan.note && (
-                    <p className="mt-2 font-sans text-xs text-inkMid">{plan.note}</p>
+                    <p className={`mt-2 font-sans text-xs ${plan.style === "solid" ? "text-cream/70" : "text-inkMid"}`}>
+                      {plan.note}
+                    </p>
                   )}
 
                   <span className="mt-4 self-start inline-block rounded-full border border-gold/50 px-3 py-1 font-mono text-[9px] uppercase tracking-[0.15em] text-gold">
@@ -159,7 +175,12 @@ export default function PricingPage() {
 
                   <ul className="mt-6 space-y-2.5 flex-1">
                     {plan.features.map((f) => (
-                      <li key={f} className="flex gap-2 font-sans text-sm text-inkMid leading-snug">
+                      <li
+                        key={f}
+                        className={`flex gap-2 font-sans text-sm leading-snug ${
+                          plan.style === "solid" ? "text-cream/80" : "text-inkMid"
+                        }`}
+                      >
                         <span className="text-gold flex-shrink-0">—</span>
                         <span>{f}</span>
                       </li>

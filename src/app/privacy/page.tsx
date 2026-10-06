@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { FullBleed } from "@/components/FullBleed";
+import { TableOfContents } from "@/components/ui/TableOfContents";
 
 export const metadata: Metadata = {
   title: "Privacy Policy",
@@ -6,15 +8,37 @@ export const metadata: Metadata = {
   alternates: { canonical: "https://velaforcrew.com/privacy" },
 };
 
+const tocItems = [
+  { id: "who-we-are", label: "Who we are" },
+  { id: "information-we-collect", label: "Information we collect" },
+  { id: "how-we-use", label: "How we use your information" },
+  { id: "subscriptions-payments", label: "Subscriptions & payments" },
+  { id: "ai", label: "Personalised advice & AI" },
+  { id: "sharing", label: "Information sharing" },
+  { id: "independence", label: "Independence from your airline" },
+  { id: "retention", label: "Data retention" },
+  { id: "your-choices", label: "Your choices" },
+  { id: "children", label: "Children" },
+  { id: "security", label: "Security" },
+  { id: "changes", label: "Changes to this policy" },
+  { id: "contact", label: "Contact" },
+];
+
 export default function PrivacyPage() {
   return (
-    <article className="prose-vela">
-      <h1 className="font-display text-3xl font-light text-ink">Privacy policy</h1>
-      <p className="mt-2 font-mono text-[10px] uppercase tracking-[0.18em] text-inkFaint">
+    <div className="w-full">
+      <TableOfContents items={tocItems} />
+      <FullBleed className="bg-cream py-16 md:py-20">
+        <div className="max-w-3xl mx-auto px-6 md:px-8">
+          <article className="prose-vela">
+      <h1 className="font-display text-5xl md:text-6xl font-light text-ink mb-4 leading-tight border-b-2 border-gold pb-4">
+        Privacy policy
+      </h1>
+      <p className="mt-2 font-mono text-[10px] uppercase tracking-[0.18em] text-inkFaint mb-8">
         Version 2.1 — 27 July 2026
       </p>
 
-      <h2>Who we are</h2>
+      <h2 id="who-we-are">Who we are</h2>
       <p>
         VÉLA is a <strong>personal lifestyle planning</strong> tool for people who work
         across time zones. It is operated by Vela4Crew Inc., a Delaware corporation
@@ -27,7 +51,7 @@ export default function PrivacyPage() {
         the VÉLA mobile application, how we use that information, and the choices you have.
       </p>
 
-      <h2>Information we collect</h2>
+      <h2 id="information-we-collect">Information we collect</h2>
 
       <h3>Information you provide</h3>
       <ul>
@@ -125,7 +149,7 @@ export default function PrivacyPage() {
         websites, and does <strong>not</strong> store full payment card numbers.
       </p>
 
-      <h2>How we use your information</h2>
+      <h2 id="how-we-use">How we use your information</h2>
       <ul>
         <li>To provide and operate the VÉLA service.</li>
         <li>To generate body-clock and sleep timing estimates based on your schedule.</li>
@@ -148,7 +172,7 @@ export default function PrivacyPage() {
         advice, diagnostic assessments, or safety-critical guidance.
       </p>
 
-      <h2>Subscriptions and payments</h2>
+      <h2 id="subscriptions-payments">Subscriptions and payments</h2>
       <p>
         VÉLA is free to download and offers paid subscriptions. <strong>We do not process
         payments ourselves and we never receive your full card number, CVC, or bank
@@ -187,7 +211,7 @@ export default function PrivacyPage() {
         .
       </p>
 
-      <h2>Personalised advice and AI</h2>
+      <h2 id="ai">Personalised advice and AI</h2>
       <p>
         Some of VÉLA&rsquo;s personalised guidance is produced with the help of a{" "}
         <strong>large language model (LLM)</strong>. This happens on our backend, hosted by{" "}
@@ -226,7 +250,7 @@ export default function PrivacyPage() {
         so we can investigate.
       </p>
 
-      <h2>Information sharing</h2>
+      <h2 id="sharing">Information sharing</h2>
       <p>
         We share your information only in the following limited circumstances:
       </p>
@@ -294,7 +318,7 @@ export default function PrivacyPage() {
         regulatory authority unless required by law.
       </p>
 
-      <h2>Independence from your airline</h2>
+      <h2 id="independence">Independence from your airline</h2>
       <p>
         VÉLA has no connection to your airline, employer, or any aviation authority — and
         that is by design.
@@ -312,7 +336,7 @@ export default function PrivacyPage() {
         is the same information available on any public flight tracker.
       </p>
 
-      <h2>Data retention</h2>
+      <h2 id="retention">Data retention</h2>
       <p>
         We retain your account information and schedule data for as long as your account is
         active. Survey responses are retained indefinitely in anonymised form for product
@@ -325,7 +349,7 @@ export default function PrivacyPage() {
         identify you individually may be retained for longer to support product improvement.
       </p>
 
-      <h2>Your choices</h2>
+      <h2 id="your-choices">Your choices</h2>
       <ul>
         <li>
           <strong>Account deletion</strong> — you can delete your account and associated data
@@ -363,28 +387,28 @@ export default function PrivacyPage() {
         </li>
       </ul>
 
-      <h2>Children</h2>
+      <h2 id="children">Children</h2>
       <p>
         VÉLA is intended for adults. We do not knowingly collect personal information from
         anyone under the age of 16. If you believe we have inadvertently collected such
         information, please contact us and we will delete it promptly.
       </p>
 
-      <h2>Security</h2>
+      <h2 id="security">Security</h2>
       <p>
         We take reasonable technical and organisational measures to protect your information.
         No system is completely secure; we encourage you to use a strong password and to
         contact us if you notice any suspicious activity related to your account.
       </p>
 
-      <h2>Changes to this policy</h2>
+      <h2 id="changes">Changes to this policy</h2>
       <p>
         We may update this policy from time to time. When we do, we will revise the date at
         the top of this page. For material changes, we will provide notice through the app or
         by email where we have your address.
       </p>
 
-      <h2>Contact</h2>
+      <h2 id="contact">Contact</h2>
       <p>
         For privacy-related questions, account deletion requests, or to exercise your data
         rights, contact us at{" "}
@@ -401,6 +425,9 @@ export default function PrivacyPage() {
       <p className="mt-8 font-mono text-[10px] uppercase tracking-[0.15em] text-inkFaint">
         Version 2.1 — 27 July 2026
       </p>
-    </article>
+          </article>
+        </div>
+      </FullBleed>
+    </div>
   );
 }

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { FullBleed } from "@/components/FullBleed";
 
 export const metadata: Metadata = {
   title: "Support",
@@ -103,62 +104,82 @@ const faqs: { q: string; a: React.ReactNode }[] = [
 
 export default function SupportPage() {
   return (
-    <div className="space-y-10">
-      <header className="space-y-3">
-        <h1 className="font-display text-3xl font-light text-ink">Support</h1>
-        <p className="font-sans text-inkMid">
-          Need a hand with VÉLA? Email us directly, or check the answers below. This page is the
-          public support contact listed in App Store Connect and Google Play.
-        </p>
-      </header>
-
-      <section className="rounded-[18px] border border-warmLine bg-parchment/80 p-6">
-        <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-inkFaint">Contact</p>
-        <p className="mt-2 font-sans text-base text-ink">Vela4Crew Inc.</p>
-        <p className="mt-2 font-sans text-sm text-inkMid">
-          Email:{" "}
-          <a className="text-gold underline decoration-gold/40" href={`mailto:${supportEmail}`}>
-            {supportEmail}
-          </a>
-        </p>
-        <p className="mt-3 font-sans text-sm text-inkMid">
-          We&rsquo;re a small team and read every message. We typically reply within{" "}
-          <strong>two business days</strong>. To help us help you faster, tell us the email on your
-          account, your device and OS, and what you were doing when the issue happened.
-        </p>
-      </section>
-
-      <section className="space-y-4">
-        <h2 className="font-display text-2xl font-light text-ink">Frequently asked questions</h2>
-        <div className="divide-y divide-warmLine border-y border-warmLine">
-          {faqs.map((faq) => (
-            <details key={faq.q} className="group py-4">
-              <summary className="flex cursor-pointer list-none items-center justify-between gap-4 font-sans text-base text-ink marker:content-none">
-                <span>{faq.q}</span>
-                <span
-                  aria-hidden
-                  className="font-mono text-lg text-inkFaint transition-transform duration-200 group-open:rotate-45"
-                >
-                  +
-                </span>
-              </summary>
-              <p className="mt-3 font-sans text-sm leading-relaxed text-inkMid">{faq.a}</p>
-            </details>
-          ))}
+    <div className="w-full">
+      {/* HEADER */}
+      <FullBleed className="pt-16 md:pt-24 pb-10 md:pb-12 bg-gradient-to-b from-parchment/50 to-cream/50">
+        <div className="max-w-3xl mx-auto px-6 md:px-8">
+          <h1 className="font-display text-5xl md:text-6xl font-light text-ink mb-6 leading-tight border-b-2 border-gold pb-4">
+            Support
+          </h1>
+          <p className="font-sans text-base md:text-lg text-inkMid leading-relaxed">
+            Need a hand with VÉLA? Email us directly, or check the answers below. This page is the
+            public support contact listed in App Store Connect and Google Play.
+          </p>
         </div>
-      </section>
+      </FullBleed>
 
-      <section className="rounded-[18px] border border-warmLine bg-parchment/50 p-6">
-        <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-inkFaint">Important</p>
-        <p className="mt-2 font-sans text-sm text-inkMid">
-          VÉLA is a lifestyle and wellness companion and is <strong>not a medical device</strong>. It
-          does not provide medical, health, or safety advice, and does not replace your
-          operator&rsquo;s fitness-for-duty requirements or professional medical advice.
-        </p>
-        <p className="mt-4 font-sans text-xs text-inkFaint">
-          Vela4Crew Inc., 131 Continental Dr, Suite 305, Newark, DE 19713, USA.
-        </p>
-      </section>
+      {/* CONTACT */}
+      <FullBleed className="bg-cream py-10 md:py-14">
+        <div className="max-w-3xl mx-auto px-6 md:px-8">
+          <div className="rounded-[14px] border border-warmLine border-l-4 border-l-gold bg-parchment/70 px-6 py-5">
+            <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-inkFaint mb-2">Contact</p>
+            <p className="font-sans text-base text-ink">Vela4Crew Inc.</p>
+            <p className="mt-2 font-sans text-sm text-inkMid">
+              Email:{" "}
+              <a className="text-gold underline decoration-gold/40" href={`mailto:${supportEmail}`}>
+                {supportEmail}
+              </a>
+            </p>
+            <p className="mt-3 font-sans text-sm text-inkMid">
+              We&rsquo;re a small team and read every message. We typically reply within{" "}
+              <strong>two business days</strong>. To help us help you faster, tell us the email on your
+              account, your device and OS, and what you were doing when the issue happened.
+            </p>
+          </div>
+        </div>
+      </FullBleed>
+
+      {/* FAQ — styled like the homepage FAQ */}
+      <FullBleed className="bg-parchment py-14 md:py-20">
+        <div className="max-w-3xl mx-auto px-6 md:px-8">
+          <h2 className="font-display text-4xl md:text-5xl font-light text-ink mb-10 border-b-2 border-gold pb-4">
+            Frequently asked questions
+          </h2>
+          <div className="space-y-3">
+            {faqs.map((faq) => (
+              <details
+                key={faq.q}
+                className="group rounded-[18px] border border-warmLine bg-cream/60 open:bg-cream/80 transition-colors"
+              >
+                <summary className="flex cursor-pointer items-center justify-between gap-4 px-6 py-5 list-none">
+                  <h3 className="font-display text-xl font-light text-ink">{faq.q}</h3>
+                  <span className="flex-shrink-0 font-mono text-lg text-gold transition-transform group-open:rotate-45">
+                    +
+                  </span>
+                </summary>
+                <p className="px-6 pb-5 font-sans text-base text-inkMid leading-relaxed">{faq.a}</p>
+              </details>
+            ))}
+          </div>
+        </div>
+      </FullBleed>
+
+      {/* IMPORTANT */}
+      <FullBleed className="bg-cream py-10 md:py-14">
+        <div className="max-w-3xl mx-auto px-6 md:px-8">
+          <div className="rounded-[14px] border border-warmLine bg-parchment/50 px-6 py-5">
+            <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-inkFaint">Important</p>
+            <p className="mt-2 font-sans text-sm text-inkMid">
+              VÉLA is a lifestyle and wellness companion and is <strong>not a medical device</strong>. It
+              does not provide medical, health, or safety advice, and does not replace your
+              operator&rsquo;s fitness-for-duty requirements or professional medical advice.
+            </p>
+            <p className="mt-4 font-sans text-xs text-inkFaint">
+              Vela4Crew Inc., 131 Continental Dr, Suite 305, Newark, DE 19713, USA.
+            </p>
+          </div>
+        </div>
+      </FullBleed>
     </div>
   );
 }

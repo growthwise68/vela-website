@@ -254,7 +254,7 @@ export default function Brief002() {
         ),
         paragraph: (
           <>
-            <h2 className="font-display text-2xl text-ink mb-3">
+            <h2 className="font-display text-2xl text-cream mb-3">
               Your gut resets when you eat like you mean it
             </h2>
             <p>

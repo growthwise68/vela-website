@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { FullBleed } from "@/components/FullBleed";
+import { TableOfContents } from "@/components/ui/TableOfContents";
 
 export const metadata: Metadata = {
   title: "Terms of Service",
@@ -6,15 +8,40 @@ export const metadata: Metadata = {
   alternates: { canonical: "https://velaforcrew.com/terms" },
 };
 
+const tocItems = [
+  { id: "agreement", label: "Agreement to these terms" },
+  { id: "what-vela-is", label: "What VÉLA is" },
+  { id: "no-medical-advice", label: "No medical advice" },
+  { id: "no-safety-guarantee", label: "No safety guarantee" },
+  { id: "independence", label: "Independence from your airline" },
+  { id: "accuracy", label: "Accuracy of estimates" },
+  { id: "your-account", label: "Your account" },
+  { id: "acceptable-use", label: "Acceptable use" },
+  { id: "ip", label: "Intellectual property" },
+  { id: "billing", label: "Subscriptions & billing" },
+  { id: "third-party", label: "Third-party services" },
+  { id: "liability", label: "Limitation of liability" },
+  { id: "changes-service", label: "Changes to the service" },
+  { id: "changes-terms", label: "Changes to these terms" },
+  { id: "governing-law", label: "Governing law" },
+  { id: "contact", label: "Contact" },
+];
+
 export default function TermsPage() {
   return (
-    <article className="prose-vela">
-      <h1 className="font-display text-3xl font-light text-ink">Terms of service</h1>
-      <p className="mt-2 font-mono text-[10px] uppercase tracking-[0.18em] text-inkFaint">
+    <div className="w-full">
+      <TableOfContents items={tocItems} />
+      <FullBleed className="bg-cream py-16 md:py-20">
+        <div className="max-w-3xl mx-auto px-6 md:px-8">
+          <article className="prose-vela">
+      <h1 className="font-display text-5xl md:text-6xl font-light text-ink mb-4 leading-tight border-b-2 border-gold pb-4">
+        Terms of service
+      </h1>
+      <p className="mt-2 font-mono text-[10px] uppercase tracking-[0.18em] text-inkFaint mb-8">
         Version 2.0 — 14 June 2026
       </p>
 
-      <h2>Agreement to these terms</h2>
+      <h2 id="agreement">Agreement to these terms</h2>
       <p>
         By accessing the VÉLA website or using the VÉLA mobile application, you agree to be
         bound by these terms of service. If you do not agree, please do not use VÉLA.
@@ -24,7 +51,7 @@ export default function TermsPage() {
         &ldquo;we&rdquo;, &ldquo;us&rdquo;, or &ldquo;our&rdquo;).
       </p>
 
-      <h2>What VÉLA is</h2>
+      <h2 id="what-vela-is">What VÉLA is</h2>
       <p>
         VÉLA is a <strong>personal lifestyle planning</strong> tool for people who work
         across time zones, primarily long-haul cabin crew. It uses published sleep science
@@ -36,14 +63,14 @@ export default function TermsPage() {
         determinations.
       </p>
 
-      <h2>No medical advice</h2>
+      <h2 id="no-medical-advice">No medical advice</h2>
       <p>
         VÉLA does not provide medical, health, or clinical advice. Nothing in the app or on
         this website should be interpreted as a medical recommendation. If you have concerns
         about fatigue, sleep, or your health, consult a qualified healthcare professional.
       </p>
 
-      <h2>No safety or operational guarantee</h2>
+      <h2 id="no-safety-guarantee">No safety or operational guarantee</h2>
       <p>
         VÉLA is <strong>not a safety system</strong>. You remain solely responsible for your
         own fitness for duty. The app&rsquo;s estimates do not replace your employer&rsquo;s
@@ -56,7 +83,7 @@ export default function TermsPage() {
         FRMS.
       </p>
 
-      <h2>Independence from your airline</h2>
+      <h2 id="independence">Independence from your airline</h2>
       <p>
         VÉLA operates entirely independently of your airline, employer, and any aviation
         authority. We do not access, request, or store internal airline systems data, crew
@@ -65,7 +92,7 @@ export default function TermsPage() {
         See our <a className="text-gold underline decoration-gold/40" href="/privacy">Privacy Policy</a> for full details.
       </p>
 
-      <h2>Accuracy of estimates</h2>
+      <h2 id="accuracy">Accuracy of estimates</h2>
       <p>
         The app&rsquo;s estimates are based on population-level sleep science
         models and the schedule information you enter. They reflect assumed patterns, not
@@ -73,14 +100,14 @@ export default function TermsPage() {
         not guarantees of actual alertness or performance.
       </p>
 
-      <h2>Your account</h2>
+      <h2 id="your-account">Your account</h2>
       <p>
         You are responsible for maintaining the security of your account credentials and for
         all activity that occurs under your account. Notify us promptly if you suspect
         unauthorised access. We reserve the right to suspend accounts that violate these terms.
       </p>
 
-      <h2>Acceptable use</h2>
+      <h2 id="acceptable-use">Acceptable use</h2>
       <p>You agree not to:</p>
       <ul>
         <li>Use VÉLA for any unlawful purpose or in violation of any applicable law.</li>
@@ -93,7 +120,7 @@ export default function TermsPage() {
         <li>Misrepresent VÉLA&rsquo;s capabilities to third parties, including employers or regulators.</li>
       </ul>
 
-      <h2>Intellectual property</h2>
+      <h2 id="ip">Intellectual property</h2>
       <p>
         The VÉLA name, logo, app design, and all content we create are our property or
         licensed to us. Your schedule data and preferences that you enter remain yours. We
@@ -105,7 +132,7 @@ export default function TermsPage() {
         <a className="text-gold underline decoration-gold/40" href="/privacy">Privacy Policy</a>.
       </p>
 
-      <h2>Subscriptions, billing and cancellation</h2>
+      <h2 id="billing">Subscriptions, billing and cancellation</h2>
       <p>
         VÉLA offers paid subscriptions on a monthly or annual basis. Prices are listed in USD on
         our{" "}
@@ -133,7 +160,7 @@ export default function TermsPage() {
         of the respective store.
       </p>
 
-      <h2>Third-party services</h2>
+      <h2 id="third-party">Third-party services</h2>
       <p>
         VÉLA uses third-party infrastructure (including Google Firebase, Supabase, MailerLite,
         and Vercel) to operate the service, and Paddle for payments made through this website.
@@ -141,7 +168,7 @@ export default function TermsPage() {
         responsible for the practices of third-party services we use to operate VÉLA.
       </p>
 
-      <h2>Limitation of liability</h2>
+      <h2 id="liability">Limitation of liability</h2>
       <p>
         To the maximum extent permitted by applicable law, Vela4Crew Inc. and its officers,
         employees, and contractors shall not be liable for any direct, indirect, incidental,
@@ -155,13 +182,13 @@ export default function TermsPage() {
         non-infringement.
       </p>
 
-      <h2>Changes to the service</h2>
+      <h2 id="changes-service">Changes to the service</h2>
       <p>
         We may modify, suspend, or discontinue any part of VÉLA at any time. We will
         endeavour to give reasonable notice of material changes where practicable.
       </p>
 
-      <h2>Changes to these terms</h2>
+      <h2 id="changes-terms">Changes to these terms</h2>
       <p>
         We may update these terms from time to time. When we do, we will revise the date at
         the top of this page. Continued use of VÉLA after changes take effect constitutes
@@ -169,14 +196,14 @@ export default function TermsPage() {
         through the app or by email.
       </p>
 
-      <h2>Governing law</h2>
+      <h2 id="governing-law">Governing law</h2>
       <p>
         These terms are governed by the laws of the State of Delaware, United States, without
         regard to its conflict of law provisions. Any disputes arising under these terms shall
         be subject to the exclusive jurisdiction of the courts located in Delaware.
       </p>
 
-      <h2>Contact</h2>
+      <h2 id="contact">Contact</h2>
       <p>
         Questions about these terms can be directed to{" "}
         <a className="text-gold underline decoration-gold/40" href="mailto:founder@velaforcrew.com">
@@ -192,6 +219,9 @@ export default function TermsPage() {
       <p className="mt-8 font-mono text-[10px] uppercase tracking-[0.15em] text-inkFaint">
         Version 2.0 — 14 June 2026
       </p>
-    </article>
+          </article>
+        </div>
+      </FullBleed>
+    </div>
   );
 }

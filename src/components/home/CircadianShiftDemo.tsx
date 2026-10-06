@@ -2,8 +2,12 @@
 
 import { useState } from "react";
 
-// Matches BodyClockTimeline's scale/weight so the two uses of the wave feel
-// like one system rather than a hero version and a smaller afterthought.
+// Matches the shared Wave component's scale/weight (see
+// src/components/ui/Wave.tsx) so the two uses of the wave feel like one
+// system rather than a hero version and a smaller afterthought. Kept as a
+// separate implementation (not built on Wave directly) because its own
+// dimensions (height/midY/amplitude) differ slightly and reusing Wave's
+// fixed layout here would shift this already-live homepage visual.
 const WIDTH = 640;
 const HEIGHT = 240;
 const MARGIN_X = 24;

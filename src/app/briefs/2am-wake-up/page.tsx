@@ -347,7 +347,7 @@ export default function Brief001() {
         ),
         paragraph: (
           <>
-            <h2 className="font-display text-2xl text-ink mb-3">Recovery starts the day before</h2>
+            <h2 className="font-display text-2xl text-cream mb-3">Recovery starts the day before</h2>
             <p>
               This is one report. Your roster has dozens. That&apos;s where VÉLA comes in.
               Inside VÉLA, your recovery plan updates automatically every time your roster

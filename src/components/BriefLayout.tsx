@@ -245,13 +245,13 @@ export function BriefLayout({
 
       <div ref={endSentinelRef} />
 
-      {/* CLOSING */}
-      <FullBleed id="closing" className="scroll-mt-32 bg-gradient-to-b from-parchment/50 to-cream/50 py-20 md:py-28">
+      {/* CLOSING — navy, for site-wide rhythm */}
+      <FullBleed id="closing" className="scroll-mt-32 bg-night py-20 md:py-28">
         <div className="max-w-3xl mx-auto px-6 md:px-8 text-center">
-          <p className="font-display text-3xl md:text-5xl font-light text-ink leading-tight mb-8">
+          <p className="font-display text-3xl md:text-5xl font-light text-cream leading-tight mb-8">
             {closing.bigLine}
           </p>
-          <div className="font-sans text-base md:text-lg text-inkMid leading-relaxed max-w-2xl mx-auto mb-10 text-left">
+          <div className="font-sans text-base md:text-lg text-cream/80 leading-relaxed max-w-2xl mx-auto mb-10 text-left">
             {closing.paragraph}
           </div>
 
@@ -265,13 +265,13 @@ export function BriefLayout({
             <a
               href={closing.pdfHref}
               download
-              className="font-mono text-[10px] uppercase tracking-[0.12em] text-inkMid underline underline-offset-2 hover:text-gold transition-colors"
+              className="font-mono text-[10px] uppercase tracking-[0.12em] text-cream/70 underline underline-offset-2 hover:text-gold transition-colors"
             >
               Download this brief as a PDF
             </a>
           </div>
 
-          <p className="font-sans text-sm text-inkFaint text-left max-w-2xl mx-auto">{closing.signOff}</p>
+          <p className="font-sans text-sm text-cream/50 text-left max-w-2xl mx-auto">{closing.signOff}</p>
         </div>
       </FullBleed>
 

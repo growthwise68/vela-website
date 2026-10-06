@@ -245,6 +245,10 @@ function HeadlineWithGoldPct({ text }: { text: string }) {
   );
 }
 
+function firstPct(text: string): string | null {
+  return text.match(/\d+%/)?.[0] ?? null;
+}
+
 export default function CrewSurvey2026() {
   return (
     <div className="w-full">
@@ -253,17 +257,29 @@ export default function CrewSurvey2026() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      {/* HEADER */}
+      {/* HEADER — H1 with an oversized gold stat beside it */}
       <FullBleed className="pt-16 md:pt-24 pb-10 md:pb-12">
-        <div className="max-w-3xl mx-auto px-6 md:px-8">
-          <p className="font-mono text-[10px] md:text-xs uppercase tracking-[0.2em] text-gold font-semibold mb-4">
-            VÉLA Research · Crew Survey 2026
-          </p>
-          <h1 className="font-display text-5xl md:text-6xl font-light text-ink mb-6 leading-tight border-b-2 border-gold pb-4">
-            What 93 cabin crew told us about fatigue
-          </h1>
+        <div className="max-w-[1120px] mx-auto px-6 md:px-10">
+          <div className="grid lg:grid-cols-[1.3fr_0.7fr] gap-10 lg:gap-12 items-center mb-10">
+            <div>
+              <p className="font-mono text-[10px] md:text-xs uppercase tracking-[0.2em] text-gold font-semibold mb-4">
+                VÉLA Research · Crew Survey 2026
+              </p>
+              <h1 className="font-display text-5xl md:text-6xl font-light text-ink mb-6 leading-tight border-b-2 border-gold pb-4">
+                What 93 cabin crew told us about fatigue
+              </h1>
+            </div>
+            <div className="text-center lg:text-right">
+              <p className="font-display text-7xl md:text-8xl font-light text-gold leading-none">
+                97%
+              </p>
+              <p className="font-mono text-[10px] uppercase tracking-[0.15em] text-inkFaint mt-2">
+                never properly acknowledged
+              </p>
+            </div>
+          </div>
 
-          <div className="rounded-[14px] border border-warmLine bg-parchment/70 px-6 py-5">
+          <div className="max-w-3xl rounded-[14px] border border-warmLine bg-parchment/70 px-6 py-5">
             <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-inkFaint mb-3">
               Key findings
             </p>
@@ -288,16 +304,25 @@ export default function CrewSurvey2026() {
       </FullBleed>
 
       {/* FINDINGS */}
-      {findings.map((f) => (
+      {findings.map((f) => {
+        const pct = firstPct(f.headline);
+        return (
         <FullBleed key={f.id} className={`${f.bg === "cream" ? "bg-cream" : "bg-parchment"} py-14 md:py-20 scroll-mt-20`} id={f.id}>
           <div className="max-w-3xl mx-auto px-6 md:px-8">
             <h2 className="group font-display text-2xl md:text-3xl font-light text-ink mb-4 leading-snug">
               {f.heading}
               <CopyAnchorButton anchorId={f.id} />
             </h2>
-            <p className="font-display text-2xl md:text-3xl text-ink leading-snug mb-4">
-              <HeadlineWithGoldPct text={f.headline} />
-            </p>
+            <div className="sm:flex sm:items-start sm:gap-6 mb-4">
+              {pct && (
+                <p className="font-display text-6xl md:text-7xl font-light text-gold leading-none flex-shrink-0 mb-2 sm:mb-0">
+                  {pct}
+                </p>
+              )}
+              <p className="font-display text-2xl md:text-3xl text-ink leading-snug">
+                <HeadlineWithGoldPct text={f.headline} />
+              </p>
+            </div>
             <p className="font-mono text-xs text-inkMid leading-relaxed mb-1">
               Question asked: &ldquo;{f.question}&rdquo;
               {f.sub && <> <span className="text-inkFaint">{f.sub}</span></>}
@@ -310,25 +335,26 @@ export default function CrewSurvey2026() {
             <ResultTable options={f.options} total={N} highlight={f.highlight} multi={f.multi} />
           </div>
         </FullBleed>
-      ))}
+        );
+      })}
 
-      {/* IN THEIR OWN WORDS */}
-      <FullBleed className="bg-parchment py-14 md:py-20">
+      {/* IN THEIR OWN WORDS — navy, cream-on-navy pull quotes */}
+      <FullBleed className="bg-night py-14 md:py-20">
         <div className="max-w-3xl mx-auto px-6 md:px-8">
-          <h2 className="font-display text-2xl md:text-3xl font-light text-ink mb-4 leading-snug">
+          <h2 className="font-display text-2xl md:text-3xl font-light text-cream mb-4 leading-snug">
             In their own words
           </h2>
-          <p className="font-sans text-base text-inkMid leading-relaxed mb-10">
+          <p className="font-sans text-base text-cream/70 leading-relaxed mb-10">
             We asked crew what this job has taken from their life outside it, and what would
             actually help. A few of their answers:
           </p>
           <div className="space-y-10">
             {quotes.map((q) => (
               <blockquote key={q} className="pl-5 border-l-2 border-gold">
-                <p className="font-display text-xl md:text-2xl italic text-ink leading-relaxed">
+                <p className="font-display text-xl md:text-2xl italic text-cream leading-relaxed">
                   &ldquo;{q}&rdquo;
                 </p>
-                <footer className="mt-3 font-mono text-[10px] uppercase tracking-[0.12em] text-inkFaint">
+                <footer className="mt-3 font-mono text-[10px] uppercase tracking-[0.12em] text-cream/50">
                   — Cabin crew member, VÉLA survey 2026
                 </footer>
               </blockquote>
@@ -337,13 +363,13 @@ export default function CrewSurvey2026() {
         </div>
       </FullBleed>
 
-      {/* WHO TOOK PART */}
-      <FullBleed className="bg-cream py-14 md:py-20">
+      {/* WHO TOOK PART — quieter, sand */}
+      <FullBleed className="bg-parchment py-12 md:py-16">
         <div className="max-w-3xl mx-auto px-6 md:px-8">
-          <h2 className="font-display text-2xl md:text-3xl font-light text-ink mb-4 leading-snug">
+          <h2 className="font-display text-xl md:text-2xl font-light text-ink mb-3 leading-snug">
             Who took part
           </h2>
-          <p className="font-sans text-base text-inkMid leading-relaxed mb-4">
+          <p className="font-sans text-sm text-inkMid leading-relaxed mb-4">
             93 cabin crew answered the survey. Most had between one and seven years of flying
             experience.
           </p>
@@ -354,10 +380,10 @@ export default function CrewSurvey2026() {
         </div>
       </FullBleed>
 
-      {/* METHOD */}
-      <FullBleed className="bg-parchment py-14 md:py-20">
+      {/* METHOD — quieter */}
+      <FullBleed className="bg-cream py-12 md:py-16">
         <div className="max-w-3xl mx-auto px-6 md:px-8">
-          <h2 className="font-display text-2xl md:text-3xl font-light text-ink mb-4 leading-snug">
+          <h2 className="font-display text-xl md:text-2xl font-light text-ink mb-3 leading-snug">
             How the survey was run
           </h2>
           <div className="not-prose rounded-[14px] border border-warmLine border-l-4 border-l-gold bg-cream/70 px-6 py-5">

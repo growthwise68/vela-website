@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { FullBleed } from "@/components/FullBleed";
+import { Wave } from "@/components/ui/Wave";
+import { TableOfContents } from "@/components/ui/TableOfContents";
 
 const PAGE_URL = "https://velaforcrew.com/how-vela-works";
 
@@ -97,6 +99,26 @@ const keyNumbers = [
   { value: "6 h", label: "Caffeine cut-off" },
 ];
 
+const tocItems = [
+  { id: "predicts", label: "What VÉLA predicts" },
+  { id: "model", label: "The model" },
+  { id: "adjustment-speed", label: "Adjustment speed" },
+  { id: "east-harder", label: "Why east is harder" },
+  { id: "personalise", label: "Personalisation" },
+  { id: "sleep", label: "Sleep" },
+  { id: "light", label: "Light" },
+  { id: "caffeine", label: "Caffeine" },
+  { id: "meals", label: "Meals" },
+  { id: "feedback", label: "Feedback" },
+  { id: "limits", label: "Limits" },
+  { id: "research", label: "Research" },
+];
+
+const eastWestPoints = [
+  { hour: 4, time: "1 h/day", label: "Flying east", side: "below" as const },
+  { hour: 20, time: "1.5 h/day", label: "Flying west", side: "above" as const },
+];
+
 export default function HowVelaWorks() {
   return (
     <div className="w-full">
@@ -105,30 +127,48 @@ export default function HowVelaWorks() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      {/* HEADER */}
-      <FullBleed className="pt-16 md:pt-24 pb-10 md:pb-12">
-        <div className="max-w-3xl mx-auto px-6 md:px-8">
-          <p className="font-mono text-[10px] md:text-xs uppercase tracking-[0.2em] text-gold font-semibold mb-4">
-            The science
-          </p>
-          <h1 className="font-display text-5xl md:text-6xl font-light text-ink mb-6 leading-tight border-b-2 border-gold pb-4">
-            How VÉLA works
-          </h1>
+      <TableOfContents items={tocItems} />
 
-          <div className="rounded-[14px] border border-warmLine bg-parchment/70 px-6 py-5">
-            <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-inkFaint mb-2">
-              The short version
-            </p>
-            <p className="font-sans text-base leading-relaxed text-inkMid">
-              VÉLA estimates where your body clock is from your roster, then plans sleep, light,
-              caffeine and meal timing to help it move where your next duty needs it. It&apos;s
-              built on the Three Process Model of alertness, which describes how your body clock,
-              your build-up of sleep pressure and your grogginess after waking combine to shape
-              how alert you feel.<Cite n={[1, 2, 3, 4]} /> VÉLA assumes your body clock can shift
-              by roughly 1 hour a day when flying east and 1.5 hours a day when flying west,
-              <Cite n={[6]} /> adjusted for your chronotype, age and feedback. Everything it shows
-              you is an estimate, not a measurement.
-            </p>
+      {/* HEADER — sand hero, wave on the right at desktop */}
+      <FullBleed className="bg-parchment pt-16 md:pt-24 pb-10 md:pb-12">
+        <div className="max-w-[1120px] mx-auto px-6 md:px-10">
+          <div className="grid lg:grid-cols-[1.1fr_0.9fr] gap-12 lg:gap-16 items-center">
+            <div>
+              <p className="font-mono text-[10px] md:text-xs uppercase tracking-[0.2em] text-gold font-semibold mb-4">
+                The science
+              </p>
+              <h1 className="font-display text-5xl md:text-6xl font-light text-ink mb-6 leading-tight border-b-2 border-gold pb-4">
+                How VÉLA works
+              </h1>
+
+              <div className="rounded-[14px] border border-warmLine border-l-4 border-l-gold bg-cream/70 px-6 py-5">
+                <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-inkFaint mb-2">
+                  The short version
+                </p>
+                <p className="font-sans text-base leading-relaxed text-inkMid">
+                  VÉLA estimates where your body clock is from your roster, then plans sleep, light,
+                  caffeine and meal timing to help it move where your next duty needs it. It&apos;s
+                  built on the Three Process Model of alertness, which describes how your body clock,
+                  your build-up of sleep pressure and your grogginess after waking combine to shape
+                  how alert you feel.<Cite n={[1, 2, 3, 4]} /> VÉLA assumes your body clock can shift
+                  by roughly 1 hour a day when flying east and 1.5 hours a day when flying west,
+                  <Cite n={[6]} /> adjusted for your chronotype, age and feedback. Everything it shows
+                  you is an estimate, not a measurement.
+                </p>
+              </div>
+            </div>
+
+            <div className="hidden lg:block">
+              <Wave
+                points={[
+                  { hour: 8, time: "08:00", label: "Light", side: "below" },
+                  { hour: 4, time: "04:00", label: "Low point", side: "above" },
+                  { hour: 16, time: "16:00", label: "Caffeine cut-off", side: "below" },
+                  { hour: 22, time: "22:00", label: "Sleep", side: "above" },
+                ]}
+                ariaLabel="A 24-hour body-clock wave marking light timing, the circadian low point, the caffeine cut-off and sleep window"
+              />
+            </div>
           </div>
         </div>
 
@@ -137,7 +177,7 @@ export default function HowVelaWorks() {
             {keyNumbers.map((k) => (
               <div
                 key={k.label}
-                className="rounded-xl border-l-4 border-gold bg-parchment/60 px-4 py-4"
+                className="rounded-xl border-l-4 border-gold bg-cream/60 px-4 py-4"
               >
                 <p className="font-display text-3xl md:text-4xl font-light text-ink whitespace-nowrap">
                   {k.value}
@@ -156,7 +196,7 @@ export default function HowVelaWorks() {
         <div className="max-w-3xl mx-auto px-6 md:px-8">
           <ChapterDivider n="01" label="The model" />
           <div className="prose-vela">
-            <h2>What does VÉLA actually predict?</h2>
+            <h2 id="predicts">What does VÉLA actually predict?</h2>
             <p>
               VÉLA keeps track of your <strong>body time</strong>: what time your body thinks it
               is, which after a few sectors is often very different from the clock on the wall. It
@@ -169,7 +209,7 @@ export default function HowVelaWorks() {
               between now and your next duty to close the gap.
             </p>
 
-            <h2>What model is VÉLA based on?</h2>
+            <h2 id="model">What model is VÉLA based on?</h2>
             <p>
               VÉLA is built on the <strong>Three Process Model of alertness</strong>, a
               well-established framework from sleep science.<Cite n={[1, 2, 3, 4]} /> It describes
@@ -213,7 +253,7 @@ export default function HowVelaWorks() {
               as SAFTE/FAST or the Boeing Alertness Model.
             </p>
 
-            <h2>How fast does VÉLA assume your body clock adjusts?</h2>
+            <h2 id="adjustment-speed">How fast does VÉLA assume your body clock adjusts?</h2>
             <p>
               By default, VÉLA assumes your body clock can move about{" "}
               <strong>1 hour per day when it needs to shift earlier</strong> (usually flying east)
@@ -228,7 +268,7 @@ export default function HowVelaWorks() {
               way there, it tells you, rather than pretending you&apos;ll be fully adjusted.
             </p>
 
-            <h2>Why is flying east harder?</h2>
+            <h2 id="east-harder">Why is flying east harder?</h2>
             <p>
               Shifting your body clock earlier (flying east) is slower than shifting it later
               (flying west), which is why VÉLA plans a slower rate for eastbound trips.
@@ -237,6 +277,14 @@ export default function HowVelaWorks() {
             </p>
           </div>
         </div>
+
+        <div className="max-w-2xl mx-auto px-6 md:px-8 mt-8">
+          <Wave
+            points={eastWestPoints}
+            showNightShading={false}
+            ariaLabel="A wave contrasting the eastward adjustment rate of 1 hour per day against the westward rate of 1.5 hours per day"
+          />
+        </div>
       </FullBleed>
 
       {/* CHAPTER 02 — YOUR PLAN */}
@@ -244,7 +292,7 @@ export default function HowVelaWorks() {
         <div className="max-w-3xl mx-auto px-6 md:px-8">
           <ChapterDivider n="02" label="Your plan" />
           <div className="prose-vela">
-            <h2>What does VÉLA personalise?</h2>
+            <h2 id="personalise">What does VÉLA personalise?</h2>
             <ul>
               <li>
                 <strong>Chronotype.</strong> VÉLA assumes your body clock&apos;s low point is
@@ -273,7 +321,7 @@ export default function HowVelaWorks() {
               or fit a model to your biology.
             </p>
 
-            <h2>How does VÉLA plan your sleep?</h2>
+            <h2 id="sleep">How does VÉLA plan your sleep?</h2>
             <p>
               VÉLA first works within the rest time your roster actually gives you, and deals with
               any urgent sleep debt. Then it aims for one main, unbroken sleep near your body
@@ -282,7 +330,7 @@ export default function HowVelaWorks() {
               you&apos;re next on duty.
             </p>
 
-            <h2>How does VÉLA time light exposure?</h2>
+            <h2 id="light">How does VÉLA time light exposure?</h2>
             <p>
               Light is the strongest signal your body clock responds to, and its effect depends on
               timing.<Cite n={[5, 6]} />
@@ -311,14 +359,14 @@ export default function HowVelaWorks() {
               you actually get.
             </p>
 
-            <h2>How does VÉLA time caffeine?</h2>
+            <h2 id="caffeine">How does VÉLA time caffeine?</h2>
             <p>
               VÉLA sets a caffeine cut-off before your next main sleep, so caffeine doesn&apos;t
               get in the way of it. By default that&apos;s <strong>6 hours before sleep</strong>,
               or 8 hours if you&apos;re sensitive to caffeine and 4 hours if you&apos;re not.
             </p>
 
-            <h2>How does VÉLA time meals?</h2>
+            <h2 id="meals">How does VÉLA time meals?</h2>
             <p>
               Meal guidance follows your body time, not local time. VÉLA suggests avoiding eating
               and focusing on hydration between about 20:00 and 05:00 body time, then gives
@@ -338,7 +386,7 @@ export default function HowVelaWorks() {
               brief goes into more detail.
             </p>
 
-            <h2>How does your feedback change the plan?</h2>
+            <h2 id="feedback">How does your feedback change the plan?</h2>
             <p>After a trip, you can tell VÉLA what actually happened:</p>
             <ul>
               <li>
@@ -363,7 +411,7 @@ export default function HowVelaWorks() {
         <div className="max-w-3xl mx-auto px-6 md:px-8">
           <ChapterDivider n="03" label="The honest part" />
           <div className="prose-vela">
-            <h2>What are VÉLA&apos;s limits?</h2>
+            <h2 id="limits">What are VÉLA&apos;s limits?</h2>
             <div className="not-prose rounded-[14px] border border-warmLine border-l-4 border-l-gold bg-parchment/70 px-6 py-5 my-6">
               <ul className="list-disc pl-5 space-y-2 font-sans text-[15px] leading-relaxed text-inkMid">
                 <li>
@@ -396,7 +444,7 @@ export default function HowVelaWorks() {
               </ul>
             </div>
 
-            <h2>What research is VÉLA built on?</h2>
+            <h2 id="research">What research is VÉLA built on?</h2>
             <p>
               VÉLA&apos;s model draws on the sleep and body-clock research below. Its sleep
               planning also draws on NASA research on planned rest during long-haul operations
@@ -440,22 +488,25 @@ export default function HowVelaWorks() {
                 </Link>
               </small>
             </p>
-
-            <nav className="not-prose mt-10 pt-6 border-t border-warmLine flex flex-wrap gap-4">
-              <Link
-                href="/early-access"
-                className="inline-block rounded-xl bg-night px-5 py-2.5 font-mono text-[10px] uppercase tracking-[0.12em] text-cream transition-colors hover:bg-gold hover:text-ink"
-              >
-                Get early access
-              </Link>
-              <Link
-                href="/research/crew-fatigue-survey-2026"
-                className="font-mono text-[10px] uppercase tracking-[0.12em] text-inkMid underline underline-offset-2 hover:text-gold transition-colors self-center"
-              >
-                Read what 93 crew told us →
-              </Link>
-            </nav>
           </div>
+        </div>
+      </FullBleed>
+
+      {/* CLOSING CTA — navy, for rhythm */}
+      <FullBleed className="bg-night py-16 md:py-20">
+        <div className="max-w-3xl mx-auto px-6 md:px-8 flex flex-wrap items-center gap-4">
+          <Link
+            href="/early-access"
+            className="inline-block rounded-xl bg-gold px-6 py-3 font-mono text-[10px] uppercase tracking-[0.12em] text-ink font-semibold transition-colors hover:bg-goldSoft"
+          >
+            Get early access
+          </Link>
+          <Link
+            href="/research/crew-fatigue-survey-2026"
+            className="font-mono text-[10px] uppercase tracking-[0.12em] text-cream/80 underline underline-offset-2 hover:text-gold transition-colors"
+          >
+            Read what 93 crew told us →
+          </Link>
         </div>
       </FullBleed>
     </div>

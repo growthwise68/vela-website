@@ -131,16 +131,21 @@ export function ResultTable({
           </tr>
         </thead>
         <tbody>
-          {options.map((o) => {
+          {options.map((o, i) => {
             const pct = multi
               ? Math.min(Math.round((o.n / total) * 100), 100)
               : Math.round((o.n / total) * 100);
             return (
-              <tr key={o.label} className="block md:table-row mb-4 md:mb-0 last:mb-0">
-                <td className="block md:table-cell md:w-2/5 md:pr-4 md:align-middle pb-1 md:pb-2 font-sans text-sm text-ink leading-snug">
+              <tr
+                key={o.label}
+                className={`block md:table-row mb-4 md:mb-0 last:mb-0 ${
+                  i > 0 ? "md:border-t md:border-ink/10" : ""
+                }`}
+              >
+                <td className="block md:table-cell md:w-2/5 md:pr-4 md:py-3 md:align-middle pb-1 font-sans text-sm text-ink leading-snug">
                   {o.label}
                 </td>
-                <td className="block md:table-cell md:w-3/5 md:align-middle pb-2">
+                <td className="block md:table-cell md:w-3/5 md:py-3 md:align-middle pb-2">
                   <Bar n={o.n} pct={pct} highlighted={highlight.includes(o.label)} />
                 </td>
               </tr>

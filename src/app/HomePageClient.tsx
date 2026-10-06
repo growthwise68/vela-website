@@ -7,7 +7,8 @@ import "swiper/css";
 import "swiper/css/pagination";
 import { organization, mobileApplication } from "@/lib/structured-data";
 import { FullBleed } from "@/components/FullBleed";
-import { BodyClockTimeline } from "@/components/home/BodyClockTimeline";
+import { Wave } from "@/components/ui/Wave";
+import { CtaButton } from "@/components/ui/CtaButton";
 import { PhoneFrame } from "@/components/home/PhoneFrame";
 import { CircadianShiftDemo } from "@/components/home/CircadianShiftDemo";
 
@@ -41,25 +42,20 @@ export default function HomePageClient() {
                 timezone by timezone — with sleep, light, caffeine and meal timing for every trip.
                 Built by crew, because someone had to.
               </p>
-              <Link
-                href="/early-access"
-                className="inline-block px-8 py-4 bg-gold text-ink font-semibold rounded-xl text-base hover:bg-yellow-600 transition-all hover:scale-105"
-              >
-                Get Early Access
-              </Link>
+              <CtaButton href="/early-access">Get Early Access</CtaButton>
               <p className="font-mono text-xs uppercase tracking-[0.15em] text-inkFaint mt-4">
                 VÉLA is currently in early access — join now to be first when it&rsquo;s ready.
               </p>
             </div>
 
             <div className="hidden md:block md:min-w-[480px]">
-              <BodyClockTimeline />
+              <Wave />
             </div>
           </div>
 
           {/* Mobile: timeline below the CTA */}
           <div className="md:hidden mt-14">
-            <BodyClockTimeline />
+            <Wave />
           </div>
         </div>
       </FullBleed>
@@ -345,12 +341,7 @@ export default function HomePageClient() {
           <p className="font-sans text-xl md:text-2xl text-cream/80 max-w-2xl mx-auto mb-10 leading-relaxed">
             Stop reacting. Start preparing. Use your layovers. Show up for your life outside the aircraft.
           </p>
-          <Link
-            href="/early-access"
-            className="inline-block px-8 py-4 bg-gold text-ink font-semibold rounded-xl text-base hover:bg-yellow-600 transition-all hover:scale-105"
-          >
-            Get Early Access
-          </Link>
+          <CtaButton href="/early-access">Get Early Access</CtaButton>
           <p className="font-mono text-xs uppercase tracking-[0.15em] text-cream/60 mt-4">
             VÉLA is currently in early access — join now to be first when it&rsquo;s ready.
           </p>

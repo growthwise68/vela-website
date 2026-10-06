@@ -2,11 +2,11 @@
 
 import { useEffect, useId, useRef, useState } from "react";
 
-type Point = { hour: number; time: string; label: string; side: "above" | "below" };
+export type WavePoint = { hour: number; time: string; label: string; side: "above" | "below" };
 
-// Adjacent points alternate above/below so close-together labels (Report at
-// 02:00, Low point at 04:00 — only 2 hours apart) never share a row.
-const points: Point[] = [
+// Default points match the homepage hero exactly, so existing callers that
+// don't pass `points` keep their current visual with no change.
+const defaultPoints: WavePoint[] = [
   { hour: 2, time: "02:00", label: "Report", side: "below" },
   { hour: 4, time: "04:00", label: "Low point", side: "above" },
   { hour: 8, time: "08:00", label: "Light", side: "below" },
@@ -27,41 +27,58 @@ function x(hour: number) {
   return MARGIN_X + (hour / 24) * (WIDTH - MARGIN_X * 2);
 }
 
-function y(hour: number) {
-  const elevation = Math.cos((2 * Math.PI * (hour - PEAK_HOUR)) / 24);
+function y(hour: number, peakHour: number) {
+  const elevation = Math.cos((2 * Math.PI * (hour - peakHour)) / 24);
   return MID_Y - AMPLITUDE * elevation;
 }
 
-function buildWavePath() {
+function buildWavePath(peakHour: number) {
   const steps = 96;
   let d = "";
   for (let i = 0; i <= steps; i++) {
     const hour = (i / steps) * 24;
     const cmd = i === 0 ? "M" : "L";
-    d += `${cmd} ${x(hour).toFixed(1)} ${y(hour).toFixed(1)} `;
+    d += `${cmd} ${x(hour).toFixed(1)} ${y(hour, peakHour).toFixed(1)} `;
   }
   return d.trim();
 }
 
-function buildAreaPath() {
-  return `${buildWavePath()} L ${x(24)} ${HEIGHT} L ${x(0)} ${HEIGHT} Z`;
+function buildAreaPath(peakHour: number) {
+  return `${buildWavePath(peakHour)} L ${x(24)} ${HEIGHT} L ${x(0)} ${HEIGHT} Z`;
 }
 
-const wavePath = buildWavePath();
-const areaPath = buildAreaPath();
-
-export function BodyClockTimeline({ className = "" }: { className?: string }) {
+/**
+ * The circadian wave: a thin gold line across a 24-hour axis, low at night
+ * and high in the day, with configurable labelled moments on the curve.
+ * Draws itself in once scrolled into view (respects prefers-reduced-motion).
+ */
+export function Wave({
+  points = defaultPoints,
+  peakHour = PEAK_HOUR,
+  showNightShading = true,
+  ariaLabel = "A circadian wave across a 24-hour axis, low at night and high in the day",
+  className = "",
+}: {
+  points?: WavePoint[];
+  peakHour?: number;
+  showNightShading?: boolean;
+  ariaLabel?: string;
+  className?: string;
+}) {
   const pathRef = useRef<SVGPathElement>(null);
   const wrapRef = useRef<HTMLDivElement>(null);
   const [drawn, setDrawn] = useState(false);
   const [pathLength, setPathLength] = useState(0);
   const uid = useId().replace(/:/g, "");
 
+  const wavePath = buildWavePath(peakHour);
+  const areaPath = buildAreaPath(peakHour);
+
   useEffect(() => {
     if (pathRef.current) {
       setPathLength(pathRef.current.getTotalLength());
     }
-  }, []);
+  }, [wavePath]);
 
   useEffect(() => {
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -89,15 +106,8 @@ export function BodyClockTimeline({ className = "" }: { className?: string }) {
 
   return (
     <div ref={wrapRef} className={className}>
-      <svg
-        viewBox={`0 0 ${WIDTH} ${HEIGHT}`}
-        className="w-full h-auto"
-        role="img"
-        aria-label="A circadian wave across a 24-hour axis, low at night and high in the day, marking report time, circadian low point, light exposure, layover and sleep window"
-      >
+      <svg viewBox={`0 0 ${WIDTH} ${HEIGHT}`} className="w-full h-auto" role="img" aria-label={ariaLabel}>
         <defs>
-          {/* Night tint fades out at dawn (left zone) and fades in at dusk
-              (right zone) instead of ending in a hard edge. */}
           <linearGradient id={`${uid}-night-l`} x1="0%" y1="0" x2="100%" y2="0">
             <stop offset="0%" stopColor="#1A2540" stopOpacity="0.07" />
             <stop offset="100%" stopColor="#1A2540" stopOpacity="0" />
@@ -106,17 +116,12 @@ export function BodyClockTimeline({ className = "" }: { className?: string }) {
             <stop offset="0%" stopColor="#1A2540" stopOpacity="0" />
             <stop offset="100%" stopColor="#1A2540" stopOpacity="0.07" />
           </linearGradient>
-          {/* Area fill under the curve fades at both horizontal edges so it
-              reads as a soft glow rather than a hard-edged block. */}
           <linearGradient id={`${uid}-area`} x1="0%" y1="0" x2="100%" y2="0">
             <stop offset="0%" stopColor="#C49A3C" stopOpacity="0" />
             <stop offset="14%" stopColor="#C49A3C" stopOpacity="0.07" />
             <stop offset="86%" stopColor="#C49A3C" stopOpacity="0.07" />
             <stop offset="100%" stopColor="#C49A3C" stopOpacity="0" />
           </linearGradient>
-          {/* Fades the night tint and area fill vertically too, so together
-              with their own horizontal fades the whole visual reads as a
-              soft glow with no visible rectangle edge on any side. */}
           <linearGradient id={`${uid}-vfade`} x1="0" y1="0%" x2="0" y2="100%">
             <stop offset="0%" stopColor="white" stopOpacity="0" />
             <stop offset="22%" stopColor="white" stopOpacity="1" />
@@ -129,8 +134,12 @@ export function BodyClockTimeline({ className = "" }: { className?: string }) {
         </defs>
 
         <g mask={`url(#${uid}-vmask)`}>
-          <rect x={x(0)} y={0} width={x(6) - x(0)} height={HEIGHT} fill={`url(#${uid}-night-l)`} />
-          <rect x={x(20)} y={0} width={x(24) - x(20)} height={HEIGHT} fill={`url(#${uid}-night-r)`} />
+          {showNightShading && (
+            <>
+              <rect x={x(0)} y={0} width={x(6) - x(0)} height={HEIGHT} fill={`url(#${uid}-night-l)`} />
+              <rect x={x(20)} y={0} width={x(24) - x(20)} height={HEIGHT} fill={`url(#${uid}-night-r)`} />
+            </>
+          )}
           <path d={areaPath} fill={`url(#${uid}-area)`} stroke="none" />
         </g>
 
@@ -156,12 +165,12 @@ export function BodyClockTimeline({ className = "" }: { className?: string }) {
 
         {points.map((p, i) => {
           const cx = x(p.hour);
-          const cy = y(p.hour);
+          const cy = y(p.hour, peakHour);
           const labelY = p.side === "above" ? cy - 34 : cy + 46;
           const timeY = p.side === "above" ? cy - 18 : cy + 28;
           return (
             <g
-              key={p.hour}
+              key={`${p.hour}-${p.label}`}
               style={{
                 opacity: drawn ? 1 : 0,
                 transition: drawn ? `opacity 0.5s ease-out ${0.4 + i * 0.15}s` : "none",
@@ -177,12 +186,7 @@ export function BodyClockTimeline({ className = "" }: { className?: string }) {
                 strokeWidth={1}
               />
               <circle cx={cx} cy={cy} r={5} className="fill-cream stroke-gold" strokeWidth={2} />
-              <text
-                x={cx}
-                y={timeY}
-                textAnchor="middle"
-                className="fill-ink font-mono text-[12px] md:text-[13px]"
-              >
+              <text x={cx} y={timeY} textAnchor="middle" className="fill-ink font-mono text-[12px] md:text-[13px]">
                 {p.time}
               </text>
               <text
