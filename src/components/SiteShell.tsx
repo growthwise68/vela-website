@@ -57,13 +57,13 @@ function FooterColumn({
 }) {
   return (
     <div>
-      <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-inkFaint mb-4">{title}</p>
-      <ul className="space-y-2.5">
+      <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-inkFaint mb-1 md:mb-2">{title}</p>
+      <ul>
         {items.map((item) => (
           <li key={item.href}>
             <Link
               href={item.href}
-              className="font-mono text-xs uppercase tracking-[0.1em] text-inkMid hover:text-gold transition-colors"
+              className="block py-3.5 md:py-1.5 font-mono text-[11px] md:text-xs uppercase tracking-[0.1em] text-inkMid hover:text-gold transition-colors"
             >
               {item.label}
             </Link>
@@ -95,13 +95,15 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
     return () => {
       document.body.style.overflow = prevOverflow;
       document.removeEventListener("keydown", onKey);
+      // Runs after the DOM has committed menuOpen=false, so the header
+      // is no longer inert and can actually receive focus here — doing
+      // this focus call eagerly (e.g. in the onClick handler) fails
+      // silently because the button is still inert at that instant.
+      menuButtonRef.current?.focus();
     };
   }, [menuOpen]);
 
-  const closeMenu = () => {
-    setMenuOpen(false);
-    menuButtonRef.current?.focus();
-  };
+  const closeMenu = () => setMenuOpen(false);
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -194,13 +196,13 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
 
             <div className="h-px bg-gold/40 my-6" />
 
-            <div className="flex flex-col gap-5">
+            <div className="flex flex-col">
               {mobileSecondaryNav.map((item) => (
                 <Link
                   key={item.href}
                   href={item.href}
                   onClick={closeMenu}
-                  className="font-mono text-xs uppercase tracking-[0.15em] text-inkMid hover:text-gold transition-colors"
+                  className="block py-3.5 font-mono text-xs uppercase tracking-[0.15em] text-inkMid hover:text-gold transition-colors"
                 >
                   {item.label}
                 </Link>
@@ -226,8 +228,8 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
         inert={menuOpen || undefined}
         className="w-full border-t border-warmLine bg-parchment"
       >
-        <div className="max-w-3xl mx-auto px-6 py-12">
-          <p className="font-sans text-xs text-inkFaint leading-relaxed mb-10">
+        <div className="max-w-3xl mx-auto px-6 py-8 md:py-12">
+          <p className="font-sans text-xs text-inkFaint leading-relaxed mb-6 md:mb-10">
             A note on V&Eacute;LA: it provides personal planning insights based on your roster. It isn&rsquo;t
             medical advice or a substitute for your airline&rsquo;s fatigue-management requirements.{" "}
             <Link href="/terms" className="underline underline-offset-2 hover:text-inkMid transition-colors">
@@ -235,8 +237,8 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
             </Link>
           </p>
 
-          <div className="grid gap-10 grid-cols-1 sm:grid-cols-2 md:grid-cols-[1.4fr_1fr_1fr_1fr]">
-            <div className="sm:col-span-2 md:col-span-1">
+          <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-6 md:gap-10">
+            <div className="md:max-w-[220px]">
               <Logo className="mb-3" />
               <p className="font-sans text-sm text-inkMid leading-relaxed mb-2">
                 VÉLA for Crew is a body-clock planning app for long-haul cabin crew.
@@ -246,12 +248,14 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
               </p>
             </div>
 
-            <FooterColumn title="Explore" items={footerExplore} />
-            <FooterColumn title="Crew" items={footerCrew} />
-            <FooterColumn title="Legal" items={footerLegal} />
+            <div className="grid grid-cols-3 gap-4 md:gap-12">
+              <FooterColumn title="Explore" items={footerExplore} />
+              <FooterColumn title="Crew" items={footerCrew} />
+              <FooterColumn title="Legal" items={footerLegal} />
+            </div>
           </div>
 
-          <div className="mt-12 pt-6 border-t border-warmLine flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+          <div className="mt-6 pt-5 md:mt-12 md:pt-6 border-t border-warmLine flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
             <p className="font-mono text-[10px] uppercase tracking-[0.15em] text-inkFaint">
               &copy; {new Date().getFullYear()} V&Eacute;LA &middot; Vela4Crew Inc., 131 Continental Dr, Suite 305, Newark, DE 19713, USA
             </p>
