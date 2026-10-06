@@ -112,7 +112,7 @@ const keyNumbers = [
 
 export default function HowVelaWorks() {
   return (
-    <div className="w-full overflow-x-hidden">
+    <div className="w-full">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
