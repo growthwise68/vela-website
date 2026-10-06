@@ -89,60 +89,83 @@ function ChapterDivider({ n, label }: { n: string; label: string }) {
   );
 }
 
+function FullBleed({
+  className = "",
+  children,
+}: {
+  className?: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <div className={`w-screen ml-[calc(50%-50vw)] mr-[calc(50%-50vw)] ${className}`}>
+      {children}
+    </div>
+  );
+}
+
 const keyNumbers = [
   { value: "1 h/day", label: "Flying east" },
   { value: "1.5 h/day", label: "Flying west" },
-  { value: "04:00", label: "Body-clock low point" },
-  { value: "6 h", label: "Caffeine cut-off before sleep" },
+  { value: "04:00", label: "Body-clock low" },
+  { value: "6 h", label: "Caffeine cut-off" },
 ];
 
 export default function HowVelaWorks() {
   return (
-    <div className="w-full">
+    <div className="w-full overflow-x-hidden">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
       {/* HEADER */}
-      <div className="max-w-3xl mx-auto px-6 md:px-8 pt-16 md:pt-24 pb-10 md:pb-12">
-        <p className="font-mono text-[10px] md:text-xs uppercase tracking-[0.2em] text-gold font-semibold mb-4">
-          The science
-        </p>
-        <h1 className="font-display text-5xl md:text-6xl font-light text-ink mb-6 leading-tight border-b-2 border-gold pb-4">
-          How VÉLA works
-        </h1>
+      <FullBleed className="pt-16 md:pt-24 pb-10 md:pb-12">
+        <div className="max-w-3xl mx-auto px-6 md:px-8">
+          <p className="font-mono text-[10px] md:text-xs uppercase tracking-[0.2em] text-gold font-semibold mb-4">
+            The science
+          </p>
+          <h1 className="font-display text-5xl md:text-6xl font-light text-ink mb-6 leading-tight border-b-2 border-gold pb-4">
+            How VÉLA works
+          </h1>
 
-        <div className="rounded-[14px] border border-warmLine bg-parchment/70 px-6 py-5 mb-10">
-          <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-inkFaint mb-2">
-            The short version
-          </p>
-          <p className="font-sans text-base leading-relaxed text-inkMid">
-            VÉLA estimates where your body clock is from your roster, then plans sleep, light,
-            caffeine and meal timing to help it move where your next duty needs it. It&apos;s built
-            on the Three Process Model of alertness, which describes how your body clock, your
-            build-up of sleep pressure and your grogginess after waking combine to shape how alert
-            you feel.<Cite n={[1, 2, 3, 4]} /> VÉLA assumes your body clock can shift by roughly
-            1 hour a day when flying east and 1.5 hours a day when flying west,
-            <Cite n={[6]} /> adjusted for your chronotype, age and feedback. Everything it shows
-            you is an estimate, not a measurement.
-          </p>
+          <div className="rounded-[14px] border border-warmLine bg-parchment/70 px-6 py-5">
+            <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-inkFaint mb-2">
+              The short version
+            </p>
+            <p className="font-sans text-base leading-relaxed text-inkMid">
+              VÉLA estimates where your body clock is from your roster, then plans sleep, light,
+              caffeine and meal timing to help it move where your next duty needs it. It&apos;s
+              built on the Three Process Model of alertness, which describes how your body clock,
+              your build-up of sleep pressure and your grogginess after waking combine to shape
+              how alert you feel.<Cite n={[1, 2, 3, 4]} /> VÉLA assumes your body clock can shift
+              by roughly 1 hour a day when flying east and 1.5 hours a day when flying west,
+              <Cite n={[6]} /> adjusted for your chronotype, age and feedback. Everything it shows
+              you is an estimate, not a measurement.
+            </p>
+          </div>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4" aria-hidden="false">
-          {keyNumbers.map((k) => (
-            <div key={k.label} className="rounded-xl border-l-4 border-gold bg-parchment/60 px-4 py-4">
-              <p className="font-display text-3xl md:text-4xl font-light text-ink">{k.value}</p>
-              <p className="font-mono text-[10px] uppercase tracking-[0.15em] text-gold mt-1">
-                {k.label}
-              </p>
-            </div>
-          ))}
+        <div className="max-w-4xl mx-auto px-6 md:px-8 mt-10">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4" aria-hidden="false">
+            {keyNumbers.map((k) => (
+              <div
+                key={k.label}
+                className="rounded-xl border-l-4 border-gold bg-parchment/60 px-4 py-4"
+              >
+                <p className="font-display text-3xl md:text-4xl font-light text-ink whitespace-nowrap">
+                  {k.value}
+                </p>
+                <p className="font-mono text-[10px] uppercase tracking-[0.15em] text-gold mt-1 whitespace-nowrap">
+                  {k.label}
+                </p>
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
+      </FullBleed>
 
       {/* CHAPTER 01 — THE MODEL */}
-      <section className="w-full bg-cream py-14 md:py-20">
+      <FullBleed className="bg-cream py-14 md:py-20">
         <div className="max-w-3xl mx-auto px-6 md:px-8">
           <ChapterDivider n="01" label="The model" />
           <div className="prose-vela">
@@ -165,30 +188,38 @@ export default function HowVelaWorks() {
               well-established framework from sleep science.<Cite n={[1, 2, 3, 4]} /> It describes
               alertness as the combination of three things:
             </p>
-            <div className="not-prose grid grid-cols-1 md:grid-cols-3 gap-4 my-6">
-              <div className="rounded-xl border border-warmLine bg-cream p-5">
-                <p className="font-display text-xl text-ink mb-2">
-                  Your body clock (circadian rhythm)
-                </p>
-                <p className="font-sans text-sm text-inkMid leading-relaxed">
-                  Your internal 24-hour cycle, with a natural low point in the early hours of your
-                  body&apos;s night.
-                </p>
-              </div>
-              <div className="rounded-xl border border-warmLine bg-cream p-5">
-                <p className="font-display text-xl text-ink mb-2">Sleep pressure</p>
-                <p className="font-sans text-sm text-inkMid leading-relaxed">
-                  The need for sleep that builds the longer you&apos;re awake and clears when you
-                  sleep. Being on duty adds to how quickly it builds.
-                </p>
-              </div>
-              <div className="rounded-xl border border-warmLine bg-cream p-5">
-                <p className="font-display text-xl text-ink mb-2">Sleep inertia</p>
-                <p className="font-sans text-sm text-inkMid leading-relaxed">
-                  The groggy period just after you wake up, before you&apos;re fully alert.
-                </p>
-              </div>
+          </div>
+        </div>
+
+        <div className="max-w-4xl mx-auto px-6 md:px-8">
+          <div className="not-prose grid grid-cols-1 md:grid-cols-3 gap-4 my-6">
+            <div className="rounded-xl border border-warmLine bg-cream p-5">
+              <p className="font-display text-xl text-ink mb-2">
+                Your body clock (circadian rhythm)
+              </p>
+              <p className="font-sans text-sm text-inkMid leading-relaxed">
+                Your internal 24-hour cycle, with a natural low point in the early hours of your
+                body&apos;s night.
+              </p>
             </div>
+            <div className="rounded-xl border border-warmLine bg-cream p-5">
+              <p className="font-display text-xl text-ink mb-2">Sleep pressure</p>
+              <p className="font-sans text-sm text-inkMid leading-relaxed">
+                The need for sleep that builds the longer you&apos;re awake and clears when you
+                sleep. Being on duty adds to how quickly it builds.
+              </p>
+            </div>
+            <div className="rounded-xl border border-warmLine bg-cream p-5">
+              <p className="font-display text-xl text-ink mb-2">Sleep inertia</p>
+              <p className="font-sans text-sm text-inkMid leading-relaxed">
+                The groggy period just after you wake up, before you&apos;re fully alert.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div className="max-w-3xl mx-auto px-6 md:px-8">
+          <div className="prose-vela">
             <p>
               VÉLA applies these principles with its own planning rules, designed around crew
               rosters. It doesn&apos;t use or reproduce proprietary commercial fatigue models such
@@ -219,10 +250,10 @@ export default function HowVelaWorks() {
             </p>
           </div>
         </div>
-      </section>
+      </FullBleed>
 
       {/* CHAPTER 02 — YOUR PLAN */}
-      <section className="w-full bg-parchment py-14 md:py-20">
+      <FullBleed className="bg-parchment py-14 md:py-20">
         <div className="max-w-3xl mx-auto px-6 md:px-8">
           <ChapterDivider n="02" label="Your plan" />
           <div className="prose-vela">
@@ -338,10 +369,10 @@ export default function HowVelaWorks() {
             </p>
           </div>
         </div>
-      </section>
+      </FullBleed>
 
       {/* CHAPTER 03 — THE HONEST PART */}
-      <section className="w-full bg-cream py-14 md:py-20">
+      <FullBleed className="bg-cream py-14 md:py-20">
         <div className="max-w-3xl mx-auto px-6 md:px-8">
           <ChapterDivider n="03" label="The honest part" />
           <div className="prose-vela">
@@ -439,7 +470,7 @@ export default function HowVelaWorks() {
             </nav>
           </div>
         </div>
-      </section>
+      </FullBleed>
     </div>
   );
 }
