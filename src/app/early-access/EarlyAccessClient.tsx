@@ -164,7 +164,7 @@ export default function EarlyAccessClient() {
           <ul className="space-y-4">
             {[
               { label: "First access at launch.", body: "You'll hear the moment VÉLA opens, before it's available to everyone." },
-              { label: "Founding Crew pricing.", body: "$99.99 a year instead of $179.99, locked in for as long as you stay subscribed. Available until VÉLA opens to everyone, then it's gone." },
+              { label: "Founding Crew pricing.", body: "$99.99 a year instead of $139.99, locked in for as long as you stay subscribed. Available until VÉLA opens to everyone, then it's gone." },
               { label: "A 14-day free trial.", body: "Try it on your real roster before you pay anything." },
               { label: "A few emails while you wait.", body: "How your body clock actually works, and what crew told us about fatigue. No spam, unsubscribe anytime." },
             ].map(({ label, body }) => (

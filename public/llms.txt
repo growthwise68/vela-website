@@ -6,7 +6,7 @@ Crew add each duty by entering the date and flight number; VÉLA looks up times 
 
 ## Product
 - [Home](https://velaforcrew.com/): What VÉLA is, how it works, and answers to common crew questions
-- [Pricing](https://velaforcrew.com/pricing): VÉLA Core ($19.99/month or $179.99/year) and Founding Crew ($99.99/year); all plans include a 14-day free trial
+- [Pricing](https://velaforcrew.com/pricing): VÉLA Core ($14.99/month or $139.99/year) and Founding Crew ($99.99/year); all plans include a 14-day free trial
 - [How VÉLA works](https://velaforcrew.com/how-vela-works): The model, research and limits behind VÉLA's sleep, light, caffeine and meal timing
 - [Early access](https://velaforcrew.com/early-access): Join the early access list
 

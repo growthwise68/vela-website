@@ -399,7 +399,7 @@ export default function HomePageClient() {
                 { "@type": "Question", name: "Is VÉLA medical advice?", acceptedAnswer: { "@type": "Answer", text: "No. VÉLA gives personal planning insights based on your roster. It isn't medical advice and doesn't replace your airline's fatigue-management requirements." } },
                 { "@type": "Question", name: "Can my airline see my data?", acceptedAnswer: { "@type": "Answer", text: "No. VÉLA is independent and not affiliated with any airline. You only enter dates and flight numbers, and your data stays private to your account." } },
                 { "@type": "Question", name: "Why is flying east harder than flying west?", acceptedAnswer: { "@type": "Answer", text: "Your body clock naturally runs slightly longer than 24 hours, so it finds it easier to stay up later (flying west) than to go to sleep earlier (flying east). Eastbound trips ask your body to shift in the direction it resists most." } },
-                { "@type": "Question", name: "How much does VÉLA cost?", acceptedAnswer: { "@type": "Answer", text: "VÉLA Core is $19.99 a month or $179.99 a year. Founding Crew members get the annual plan for $99.99 a year, locked in for as long as they stay subscribed. All plans include a 14-day free trial." } },
+                { "@type": "Question", name: "How much does VÉLA cost?", acceptedAnswer: { "@type": "Answer", text: "VÉLA Core is $14.99 a month or $139.99 a year. Founding Crew members get the annual plan for $99.99 a year, locked in for as long as they stay subscribed. All plans include a 14-day free trial." } },
                 { "@type": "Question", name: "When can I get VÉLA?", acceptedAnswer: { "@type": "Answer", text: "VÉLA is in early access now. Join the list to be first in when it opens to everyone." } },
               ],
             }),
@@ -449,7 +449,7 @@ export default function HomePageClient() {
               },
               {
                 q: "How much does VÉLA cost?",
-                a: <><Link href="/pricing" className="text-gold underline underline-offset-2 hover:opacity-80 transition-opacity">V&Eacute;LA Core</Link> is $19.99 a month or $179.99 a year. Founding Crew members get the annual plan for $99.99 a year, locked in for as long as they stay subscribed. All plans include a 14-day free trial.</>,
+                a: <><Link href="/pricing" className="text-gold underline underline-offset-2 hover:opacity-80 transition-opacity">V&Eacute;LA Core</Link> is $14.99 a month or $139.99 a year. Founding Crew members get the annual plan for $99.99 a year, locked in for as long as they stay subscribed. All plans include a 14-day free trial.</>,
               },
               {
                 q: "When can I get VÉLA?",

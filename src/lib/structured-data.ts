@@ -32,14 +32,14 @@ export const mobileApplication = {
     {
       "@type": "Offer",
       name: "VÉLA Core — Monthly",
-      price: "19.99",
+      price: "14.99",
       priceCurrency: "USD",
       description: "Full access to VÉLA Core, billed monthly. Includes a 14-day free trial.",
     },
     {
       "@type": "Offer",
       name: "VÉLA Core — Annual",
-      price: "179.99",
+      price: "139.99",
       priceCurrency: "USD",
       description: "Full access to VÉLA Core, billed annually. Includes a 14-day free trial.",
     },
