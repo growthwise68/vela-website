@@ -11,19 +11,24 @@ body {
   @apply bg-cream text-ink antialiased;
 }
 
-.prose-vela h2 {
-  @apply font-display text-2xl text-ink mt-10 mb-4;
-}
+@layer components {
+  .prose-vela :where(h2):not(:where(.not-prose, .not-prose *)) {
+    @apply font-display text-3xl md:text-4xl font-light text-ink mt-12 mb-5;
+  }
 
-.prose-vela h3 {
-  @apply font-display text-lg text-ink mt-7 mb-3;
-}
+  .prose-vela :where(h3):not(:where(.not-prose, .not-prose *)) {
+    @apply font-display text-lg text-ink mt-7 mb-3;
+  }
 
-.prose-vela p,
-.prose-vela li {
-  @apply font-sans text-[15px] leading-relaxed text-inkMid;
-}
+  .prose-vela :where(p):not(:where(.not-prose, .not-prose *)) {
+    @apply font-sans text-[15px] leading-relaxed text-inkMid max-w-[65ch] mb-4;
+  }
 
-.prose-vela ul {
-  @apply list-disc pl-5 space-y-2;
+  .prose-vela :where(li):not(:where(.not-prose, .not-prose *)) {
+    @apply font-sans text-[15px] leading-relaxed text-inkMid;
+  }
+
+  .prose-vela :where(ul):not(:where(.not-prose, .not-prose *)) {
+    @apply list-disc pl-5 space-y-2 max-w-[65ch];
+  }
 }
