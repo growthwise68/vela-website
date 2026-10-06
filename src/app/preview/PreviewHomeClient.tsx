@@ -35,7 +35,7 @@ export default function PreviewHomeClient() {
               <h1 className="font-display text-6xl md:text-7xl font-light leading-tight text-ink mb-6">
                 Your roster, mapped before you fly it.
               </h1>
-              <p className="font-sans text-xl md:text-2xl font-light text-inkMid mx-auto md:mx-0 max-w-[65ch] mb-8 leading-relaxed">
+              <p className="font-sans text-xl md:text-2xl font-light text-inkMid mx-auto md:mx-0 max-w-[640px] mb-8 leading-relaxed">
                 <strong className="font-medium text-ink">VÉLA is a body-clock planning app for long-haul cabin crew.</strong>{" "}
                 It turns your roster into a personalised body-clock plan, showing what your body clock will be doing — duty by duty,
                 timezone by timezone — with sleep, light, caffeine and meal timing for every trip.
@@ -115,12 +115,12 @@ export default function PreviewHomeClient() {
               <h2 className="font-display text-5xl md:text-6xl font-light text-cream mb-6 border-b-2 border-gold pb-4">
                 Your job breaks your body&rsquo;s clock
               </h2>
-              <p className="font-sans text-xl md:text-2xl text-cream/80 mb-6 leading-relaxed max-w-[65ch]">
+              <p className="font-sans text-xl md:text-2xl text-cream/80 mb-6 leading-relaxed max-w-[640px]">
                 The galley at 3am. The jumpseat during taxi. The layover that should have been a city but was
                 just blackout curtains and room service. You know the feeling. What&rsquo;s been missing is
                 something that tells you what to do about it — before you&rsquo;re already in it.
               </p>
-              <p className="font-sans text-xl md:text-2xl text-cream/80 leading-relaxed max-w-[65ch]">
+              <p className="font-sans text-xl md:text-2xl text-cream/80 leading-relaxed max-w-[640px]">
                 VÉLA reads your roster and shows you what your body clock will be doing, duty by duty.
                 Not after the fact. Before you even pack your bag.
               </p>
@@ -139,11 +139,11 @@ export default function PreviewHomeClient() {
           <h2 className="font-display text-5xl md:text-6xl font-light text-ink mb-6 border-b-2 border-gold pb-4 max-w-[900px]">
             Your body clock has a logic. VÉLA speaks it.
           </h2>
-          <p className="font-display text-2xl md:text-3xl italic text-gold mb-8 pl-4 border-l-2 border-gold leading-relaxed max-w-[65ch]">
+          <p className="font-display text-2xl md:text-3xl italic text-ink mb-8 pl-4 border-l-2 border-gold leading-relaxed max-w-[640px]">
             Every time you feel wrecked after a short trip, or strangely fine after a long one — that&rsquo;s
             your circadian rhythm doing something specific and predictable.
           </p>
-          <p className="font-sans text-xl md:text-2xl text-inkMid mb-10 leading-relaxed max-w-[65ch]">
+          <p className="font-sans text-xl md:text-2xl text-inkMid mb-10 leading-relaxed max-w-[640px]">
             It&rsquo;s not random. It&rsquo;s not just &ldquo;jet lag.&rdquo; And it&rsquo;s not something you have to keep
             figuring out alone. VÉLA combines your actual roster with published circadian science
             — and translates it into something you can actually use.
@@ -227,7 +227,7 @@ export default function PreviewHomeClient() {
               <h2 className="font-display text-5xl md:text-6xl font-light text-ink mb-6 border-b-2 border-gold pb-4">
                 Know what&rsquo;s coming. Know what to do.
               </h2>
-              <p className="font-sans text-xl text-inkMid leading-relaxed max-w-[65ch]">
+              <p className="font-sans text-xl text-inkMid leading-relaxed max-w-[640px]">
                 Most crew go into every trip reacting. VÉLA puts you a step ahead. Upload your roster and
                 VÉLA gives you a clear picture of what your body clock will need — and when. Simple,
                 specific, and built around your actual schedule. Not generic advice. Yours.
@@ -266,7 +266,7 @@ export default function PreviewHomeClient() {
           <h2 className="font-display text-5xl md:text-6xl font-light text-ink mb-6 border-b-2 border-gold pb-4">
             Built by crew.
           </h2>
-          <p className="font-sans text-xl md:text-2xl text-inkMid mb-10 leading-relaxed max-w-[65ch]">
+          <p className="font-sans text-xl md:text-2xl text-inkMid mb-10 leading-relaxed max-w-[640px]">
             This is where VÉLA came from. Not a strategy session. A crew member who got tired of
             asking the same questions as everyone else — and getting nothing back.
           </p>
@@ -301,7 +301,7 @@ export default function PreviewHomeClient() {
 
           {/* Survey CTA — continuation of founder quote */}
           <div className="pt-8">
-            <p className="font-sans text-xl md:text-2xl text-ink leading-relaxed mb-4 max-w-[65ch]">
+            <p className="font-sans text-xl md:text-2xl text-ink leading-relaxed mb-4 max-w-[640px]">
               VÉLA started with my own struggle — and it&rsquo;s kept growing because of yours too.
               That hasn&rsquo;t changed. It&rsquo;s still how VÉLA gets built.
             </p>

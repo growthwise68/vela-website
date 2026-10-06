@@ -1,13 +1,15 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 
 type Point = { hour: number; time: string; label: string; side: "above" | "below" };
 
+// Adjacent points alternate above/below so close-together labels (Report at
+// 02:00, Low point at 04:00 — only 2 hours apart) never share a row.
 const points: Point[] = [
   { hour: 2, time: "02:00", label: "Report", side: "below" },
-  { hour: 4, time: "04:00", label: "Low point", side: "below" },
-  { hour: 8, time: "08:00", label: "Light", side: "above" },
+  { hour: 4, time: "04:00", label: "Low point", side: "above" },
+  { hour: 8, time: "08:00", label: "Light", side: "below" },
   { hour: 14, time: "14:00", label: "Layover", side: "above" },
   { hour: 22, time: "22:00", label: "Sleep", side: "below" },
 ];
@@ -53,6 +55,7 @@ export function BodyClockTimeline({ className = "" }: { className?: string }) {
   const wrapRef = useRef<HTMLDivElement>(null);
   const [drawn, setDrawn] = useState(false);
   const [pathLength, setPathLength] = useState(0);
+  const uid = useId().replace(/:/g, "");
 
   useEffect(() => {
     if (pathRef.current) {
@@ -92,11 +95,31 @@ export function BodyClockTimeline({ className = "" }: { className?: string }) {
         role="img"
         aria-label="A circadian wave across a 24-hour axis, low at night and high in the day, marking report time, circadian low point, light exposure, layover and sleep window"
       >
-        {/* Night shading — wraps the 0–24 boundary, so two rects */}
-        <rect x={x(0)} y={0} width={x(6) - x(0)} height={HEIGHT} className="fill-ink/[0.035]" />
-        <rect x={x(20)} y={0} width={x(24) - x(20)} height={HEIGHT} className="fill-ink/[0.035]" />
+        <defs>
+          {/* Night tint fades out at dawn (left zone) and fades in at dusk
+              (right zone) instead of ending in a hard edge. */}
+          <linearGradient id={`${uid}-night-l`} x1="0%" y1="0" x2="100%" y2="0">
+            <stop offset="0%" stopColor="#1A2540" stopOpacity="0.07" />
+            <stop offset="100%" stopColor="#1A2540" stopOpacity="0" />
+          </linearGradient>
+          <linearGradient id={`${uid}-night-r`} x1="0%" y1="0" x2="100%" y2="0">
+            <stop offset="0%" stopColor="#1A2540" stopOpacity="0" />
+            <stop offset="100%" stopColor="#1A2540" stopOpacity="0.07" />
+          </linearGradient>
+          {/* Area fill under the curve fades at both horizontal edges so it
+              reads as a soft glow rather than a hard-edged block. */}
+          <linearGradient id={`${uid}-area`} x1="0%" y1="0" x2="100%" y2="0">
+            <stop offset="0%" stopColor="#C49A3C" stopOpacity="0" />
+            <stop offset="14%" stopColor="#C49A3C" stopOpacity="0.07" />
+            <stop offset="86%" stopColor="#C49A3C" stopOpacity="0.07" />
+            <stop offset="100%" stopColor="#C49A3C" stopOpacity="0" />
+          </linearGradient>
+        </defs>
 
-        <path d={areaPath} className="fill-gold/[0.06]" stroke="none" />
+        <rect x={x(0)} y={0} width={x(6) - x(0)} height={HEIGHT} fill={`url(#${uid}-night-l)`} />
+        <rect x={x(20)} y={0} width={x(24) - x(20)} height={HEIGHT} fill={`url(#${uid}-night-r)`} />
+
+        <path d={areaPath} fill={`url(#${uid}-area)`} stroke="none" />
 
         <path
           ref={pathRef}
@@ -154,7 +177,7 @@ export function BodyClockTimeline({ className = "" }: { className?: string }) {
                 y={labelY}
                 textAnchor="middle"
                 letterSpacing="0.05em"
-                className="fill-gold font-mono text-[11px] md:text-[12px] uppercase"
+                className="fill-ink font-mono text-[11px] md:text-[12px] uppercase"
               >
                 {p.label}
               </text>

@@ -46,10 +46,11 @@ export function PhoneFrame() {
 
   return (
     <div className="flex flex-col items-center">
-      {/* Phone — ink bezel (not navy) with a gold rim, so it reads as a
-          distinct object against the section's navy background */}
-      <div className="relative w-[300px] rounded-[2.5rem] border-[6px] border-ink bg-ink p-2 ring-1 ring-gold/30 shadow-[0_24px_60px_rgba(0,0,0,0.45)]">
-        <div className="absolute left-1/2 top-2 -translate-x-1/2 w-20 h-5 rounded-full bg-ink z-10" />
+      {/* Phone — near-black navy bezel (darker than the section's own
+          night background) with a gold rim, so it reads as a distinct
+          physical object rather than blending into the section */}
+      <div className="relative w-[300px] rounded-[2.5rem] border-[6px] border-navy bg-navy p-2 ring-1 ring-gold/30 shadow-[0_24px_60px_rgba(0,0,0,0.45)]">
+        <div className="absolute left-1/2 top-2 -translate-x-1/2 w-20 h-5 rounded-full bg-navy z-10" />
         <div className="rounded-[2rem] bg-cream overflow-hidden flex flex-col">
           <div className="px-5 pt-8 pb-4 border-b border-warmLine">
             <p className="font-mono text-[9px] uppercase tracking-[0.2em] text-gold font-semibold mb-1">
@@ -74,7 +75,7 @@ export function PhoneFrame() {
           </div>
 
           <div className="px-5 pb-6 pt-1">
-            <p className="font-sans text-[11px] text-inkFaint leading-relaxed">{screen.note}</p>
+            <p className="font-sans text-[13px] text-inkFaint leading-relaxed">{screen.note}</p>
           </div>
         </div>
       </div>
