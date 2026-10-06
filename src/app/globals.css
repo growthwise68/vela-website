@@ -33,6 +33,16 @@ body {
   }
 }
 
+/* /preview only — scoped so it cannot affect swiper instances on any other page */
+.preview-gold-swiper .swiper-pagination-bullet {
+  background: #c49a3c;
+  opacity: 0.35;
+}
+.preview-gold-swiper .swiper-pagination-bullet-active {
+  background: #c49a3c;
+  opacity: 1;
+}
+
 @layer components {
   .prose-vela :where(h2):not(:where(.not-prose, .not-prose *)) {
     @apply font-display text-3xl md:text-4xl font-light text-ink mt-12 mb-5;
