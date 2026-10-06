@@ -114,12 +114,25 @@ export function BodyClockTimeline({ className = "" }: { className?: string }) {
             <stop offset="86%" stopColor="#C49A3C" stopOpacity="0.07" />
             <stop offset="100%" stopColor="#C49A3C" stopOpacity="0" />
           </linearGradient>
+          {/* Fades the night tint and area fill vertically too, so together
+              with their own horizontal fades the whole visual reads as a
+              soft glow with no visible rectangle edge on any side. */}
+          <linearGradient id={`${uid}-vfade`} x1="0" y1="0%" x2="0" y2="100%">
+            <stop offset="0%" stopColor="white" stopOpacity="0" />
+            <stop offset="22%" stopColor="white" stopOpacity="1" />
+            <stop offset="78%" stopColor="white" stopOpacity="1" />
+            <stop offset="100%" stopColor="white" stopOpacity="0" />
+          </linearGradient>
+          <mask id={`${uid}-vmask`}>
+            <rect x="0" y="0" width={WIDTH} height={HEIGHT} fill={`url(#${uid}-vfade)`} />
+          </mask>
         </defs>
 
-        <rect x={x(0)} y={0} width={x(6) - x(0)} height={HEIGHT} fill={`url(#${uid}-night-l)`} />
-        <rect x={x(20)} y={0} width={x(24) - x(20)} height={HEIGHT} fill={`url(#${uid}-night-r)`} />
-
-        <path d={areaPath} fill={`url(#${uid}-area)`} stroke="none" />
+        <g mask={`url(#${uid}-vmask)`}>
+          <rect x={x(0)} y={0} width={x(6) - x(0)} height={HEIGHT} fill={`url(#${uid}-night-l)`} />
+          <rect x={x(20)} y={0} width={x(24) - x(20)} height={HEIGHT} fill={`url(#${uid}-night-r)`} />
+          <path d={areaPath} fill={`url(#${uid}-area)`} stroke="none" />
+        </g>
 
         <path
           ref={pathRef}

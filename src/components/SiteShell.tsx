@@ -109,7 +109,7 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
     <div className="min-h-screen flex flex-col">
       <header
         inert={menuOpen || undefined}
-        className="border-b border-warmLine bg-cream/90 backdrop-blur-sm sticky top-0 z-20"
+        className="border-b border-warmLine bg-cream sticky top-0 z-20"
       >
         <div className="mx-auto flex max-w-3xl items-center justify-between gap-4 px-6 py-3 md:py-4">
           <Logo />

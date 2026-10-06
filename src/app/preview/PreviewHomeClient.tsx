@@ -156,10 +156,11 @@ export default function PreviewHomeClient() {
               autoplay={{ delay: 8000, disableOnInteraction: false, pauseOnMouseEnter: true }}
               pagination={{ clickable: true, dynamicBullets: true }}
               loop={true}
+              autoHeight={true}
               className="rounded-lg overflow-hidden"
             >
               <SwiperSlide>
-                <div className="bg-gradient-to-br from-amber-100 to-amber-50 min-h-[320px] md:min-h-[420px] flex flex-col items-center justify-center py-8 text-inkMid px-6">
+                <div className="bg-gradient-to-br from-amber-100 to-amber-50 min-h-[300px] flex flex-col items-center justify-center py-10 text-inkMid px-6">
                   <h3 className="font-display text-3xl md:text-4xl text-ink mb-4">DXB&ndash;JFK</h3>
                   <p className="text-lg md:text-xl mb-6 max-w-md text-center">
                     Your DXB&ndash;JFK pattern pushes your low point to 04:00 body time on day two.
@@ -169,47 +170,56 @@ export default function PreviewHomeClient() {
                 </div>
               </SwiperSlide>
               <SwiperSlide>
-                <div className="bg-gradient-to-br from-amber-100 to-amber-50 min-h-[320px] md:min-h-[420px] flex flex-col items-center justify-center py-8 text-inkMid px-6">
+                <div className="bg-gradient-to-br from-amber-100 to-amber-50 min-h-[300px] flex flex-col items-center justify-center py-10 text-inkMid px-6">
                   <h3 className="font-display text-3xl md:text-4xl text-ink mb-4">Flying East</h3>
                   <p className="text-lg md:text-xl mb-6 max-w-md text-center">
                     Flying east is harder than flying west. Here&rsquo;s exactly why your Melbourne turns
                     always hit differently — and what to do before you land.
                   </p>
-                  <div className="w-full max-w-md bg-white rounded-lg shadow-sm p-4 space-y-3">
-                    <div className="border-l-4 border-gold pl-3">
-                      <p className="text-xs font-semibold text-ink">Optimal Sleep: 22:00&ndash;06:00</p>
-                      <p className="text-xs text-inkMid">Aligns with your rhythm on Day 3</p>
+                  <div className="w-full max-w-md divide-y divide-ink/15">
+                    <div className="py-3">
+                      <div className="flex items-baseline justify-between gap-4">
+                        <span className="font-sans text-base text-inkMid">Optimal Sleep</span>
+                        <span className="font-mono text-base text-ink">22:00&ndash;06:00</span>
+                      </div>
+                      <p className="font-sans text-sm text-inkMid/70 mt-1">Aligns with your rhythm on Day 3</p>
                     </div>
-                    <div className="border-l-4 border-gold pl-3">
-                      <p className="text-xs font-semibold text-ink">Light Exposure: 08:00</p>
-                      <p className="text-xs text-inkMid">Reset circadian rhythm eastward</p>
+                    <div className="py-3">
+                      <div className="flex items-baseline justify-between gap-4">
+                        <span className="font-sans text-base text-inkMid">Light Exposure</span>
+                        <span className="font-mono text-base text-ink">08:00</span>
+                      </div>
+                      <p className="font-sans text-sm text-inkMid/70 mt-1">Reset circadian rhythm eastward</p>
                     </div>
-                    <div className="border-l-4 border-gold pl-3">
-                      <p className="text-xs font-semibold text-ink">Recovery Priority: Sleep first</p>
-                      <p className="text-xs text-inkMid">Fatigue debt highest first 12 hours</p>
+                    <div className="py-3">
+                      <div className="flex items-baseline justify-between gap-4">
+                        <span className="font-sans text-base text-inkMid">Recovery Priority</span>
+                        <span className="font-mono text-base text-ink">Sleep first</span>
+                      </div>
+                      <p className="font-sans text-sm text-inkMid/70 mt-1">Fatigue debt highest first 12 hours</p>
                     </div>
                   </div>
                 </div>
               </SwiperSlide>
               <SwiperSlide>
-                <div className="bg-gradient-to-br from-amber-100 to-amber-50 min-h-[320px] md:min-h-[420px] flex flex-col items-center justify-center py-8 text-inkMid px-6">
+                <div className="bg-gradient-to-br from-amber-100 to-amber-50 min-h-[300px] flex flex-col items-center justify-center py-10 text-inkMid px-6">
                   <h3 className="font-display text-3xl md:text-4xl text-ink mb-4">Your Day Off</h3>
                   <p className="text-lg md:text-xl mb-6 max-w-md text-center">
                     Your body clock didn&rsquo;t reset on your day off. VÉLA shows you where it actually
                     is before your next duty starts.
                   </p>
-                  <div className="w-full max-w-md bg-white rounded-lg shadow-sm p-4 space-y-3">
-                    <div className="flex items-start gap-3">
-                      <div className="w-2 h-2 rounded-full bg-gold mt-2 flex-shrink-0"></div>
-                      <p className="text-xs text-inkMid"><strong>Body clock position:</strong> Still 4 hours behind home time</p>
+                  <div className="w-full max-w-md divide-y divide-ink/15">
+                    <div className="flex items-baseline justify-between gap-4 py-3">
+                      <span className="font-sans text-base text-inkMid">Body clock position</span>
+                      <span className="font-mono text-base text-ink text-right">Still 4 hours behind home time</span>
                     </div>
-                    <div className="flex items-start gap-3">
-                      <div className="w-2 h-2 rounded-full bg-gold mt-2 flex-shrink-0"></div>
-                      <p className="text-xs text-inkMid"><strong>Next duty in:</strong> 18 hours — partial recovery window</p>
+                    <div className="flex items-baseline justify-between gap-4 py-3">
+                      <span className="font-sans text-base text-inkMid">Next duty in</span>
+                      <span className="font-mono text-base text-ink text-right">18 hours &mdash; partial recovery window</span>
                     </div>
-                    <div className="flex items-start gap-3">
-                      <div className="w-2 h-2 rounded-full bg-gold mt-2 flex-shrink-0"></div>
-                      <p className="text-xs text-inkMid"><strong>Recommended:</strong> Sleep before 23:00, light at 07:30</p>
+                    <div className="flex items-baseline justify-between gap-4 py-3">
+                      <span className="font-sans text-base text-inkMid">Recommended</span>
+                      <span className="font-mono text-base text-ink text-right">Sleep before 23:00, light at 07:30</span>
                     </div>
                   </div>
                 </div>
