@@ -48,7 +48,7 @@ const jsonLd = {
 
 function Cite({ n }: { n: number[] }) {
   return (
-    <sup className="font-mono text-[9px] text-gold">
+    <sup className="font-mono text-xs text-gold">
       {n.map((x, i) => (
         <span key={x}>
           {i > 0 && <span className="text-inkFaint">,</span>}

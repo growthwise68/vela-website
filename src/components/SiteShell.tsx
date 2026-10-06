@@ -57,13 +57,13 @@ function FooterColumn({
 }) {
   return (
     <div>
-      <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-inkFaint mb-1 md:mb-2">{title}</p>
+      <p className="font-mono text-xs uppercase tracking-[0.18em] text-inkFaint mb-1 md:mb-2">{title}</p>
       <ul>
         {items.map((item) => (
           <li key={item.href}>
             <Link
               href={item.href}
-              className="block py-3.5 md:py-1.5 font-mono text-[11px] md:text-xs uppercase tracking-[0.1em] text-inkMid hover:text-gold transition-colors"
+              className="block py-3.5 md:py-1.5 font-mono text-xs md:text-xs uppercase tracking-[0.1em] text-inkMid hover:text-gold transition-colors"
             >
               {item.label}
             </Link>
@@ -243,7 +243,7 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
               <p className="font-sans text-sm text-inkMid leading-relaxed mb-2">
                 VÉLA for Crew is a body-clock planning app for long-haul cabin crew.
               </p>
-              <p className="font-mono text-[10px] uppercase tracking-[0.15em] text-inkFaint">
+              <p className="font-mono text-xs uppercase tracking-[0.15em] text-inkFaint">
                 Built by crew, for crew.
               </p>
             </div>
@@ -256,14 +256,14 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
           </div>
 
           <div className="mt-6 pt-5 md:mt-12 md:pt-6 border-t border-warmLine flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-            <p className="font-mono text-[10px] uppercase tracking-[0.15em] text-inkFaint">
+            <p className="font-mono text-xs uppercase tracking-[0.15em] text-inkFaint">
               &copy; {new Date().getFullYear()} V&Eacute;LA &middot; Vela4Crew Inc., 131 Continental Dr, Suite 305, Newark, DE 19713, USA
             </p>
             <a
               href="https://www.instagram.com/velaforcrew"
               target="_blank"
               rel="noreferrer"
-              className="font-mono text-[10px] uppercase tracking-[0.15em] text-inkFaint hover:text-gold transition-colors"
+              className="font-mono text-xs uppercase tracking-[0.15em] text-inkFaint hover:text-gold transition-colors"
             >
               Instagram
             </a>

@@ -91,7 +91,7 @@ export function CircadianShiftDemo() {
           y={cy - 18}
           textAnchor="middle"
           letterSpacing="0.05em"
-          className="fill-ink font-mono text-[11px] md:text-[12px] uppercase"
+          className="fill-ink font-mono text-xs md:text-[12px] uppercase"
         >
           Low point
         </text>
@@ -105,7 +105,7 @@ export function CircadianShiftDemo() {
             role="tab"
             aria-selected={i === active}
             onClick={() => setActive(i)}
-            className={`px-3 py-2 min-h-11 rounded-full font-mono text-[10px] uppercase tracking-[0.1em] transition-colors ${
+            className={`px-3 py-2 min-h-11 rounded-full font-mono text-xs uppercase tracking-[0.1em] transition-colors ${
               i === active ? "bg-gold text-ink font-semibold" : "text-inkFaint hover:text-gold"
             }`}
           >

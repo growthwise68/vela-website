@@ -74,7 +74,7 @@ export default function EarlyAccessClient() {
                 your body clock will be doing, duty by duty.
               </p>
               <p className="mt-4 text-center lg:text-left text-base leading-relaxed text-cream/70">
-                Add your details below and we&rsquo;ll bring you along as this gets built. A few emails from
+                Add your details here and we&rsquo;ll bring you along as this gets built. A few emails from
                 the crew member behind VÉLA, and a front-row seat when it&rsquo;s ready.
               </p>
             </div>
@@ -87,7 +87,7 @@ export default function EarlyAccessClient() {
                   </h3>
                   <form onSubmit={submit} className="mt-5 space-y-4">
                     <div>
-                      <label className="mb-1.5 block font-mono text-[10px] uppercase tracking-[0.18em] text-inkFaint">
+                      <label className="mb-1.5 block font-mono text-xs uppercase tracking-[0.18em] text-inkFaint">
                         First name
                       </label>
                       <input
@@ -101,7 +101,7 @@ export default function EarlyAccessClient() {
                       />
                     </div>
                     <div>
-                      <label className="mb-1.5 block font-mono text-[10px] uppercase tracking-[0.18em] text-inkFaint">
+                      <label className="mb-1.5 block font-mono text-xs uppercase tracking-[0.18em] text-inkFaint">
                         Email
                       </label>
                       <input
@@ -115,7 +115,7 @@ export default function EarlyAccessClient() {
                       />
                     </div>
                     <div>
-                      <label className="mb-1.5 block font-mono text-[10px] uppercase tracking-[0.18em] text-inkFaint">
+                      <label className="mb-1.5 block font-mono text-xs uppercase tracking-[0.18em] text-inkFaint">
                         Airline{" "}
                         <span className="font-sans normal-case tracking-normal text-inkFaint/90">(optional)</span>
                       </label>

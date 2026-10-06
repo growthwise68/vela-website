@@ -13,7 +13,7 @@ export function TimelineTrack({
         <li key={item.time} className="flex items-baseline gap-3 md:flex-col md:items-start md:gap-0">
           <span className="w-2 h-2 rounded-full bg-gold flex-shrink-0 md:mb-2" />
           <a href={item.href} className="group flex items-baseline gap-3 md:flex-col md:items-start md:gap-0">
-            <time className="font-mono text-[11px] uppercase tracking-[0.1em] text-gold flex-shrink-0 w-12 md:w-auto group-hover:underline">
+            <time className="font-mono text-xs uppercase tracking-[0.1em] text-gold flex-shrink-0 w-12 md:w-auto group-hover:underline">
               {item.time}
             </time>
             <span className="font-sans text-sm md:text-xs leading-snug text-inkMid group-hover:text-gold transition-colors">
@@ -30,7 +30,7 @@ export function CrewNote({ children }: { children: React.ReactNode }) {
   return (
     <aside className="not-prose relative rounded-[10px] border border-warmLine bg-parchment/80 px-6 py-5 my-8 shadow-sm md:-rotate-1">
       <span className="absolute -top-2 left-1/2 -translate-x-1/2 w-3 h-3 rounded-full bg-gold shadow-sm" />
-      <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-inkFaint mb-2">
+      <p className="font-mono text-xs uppercase tracking-[0.18em] text-inkFaint mb-2">
         ✈ Crew note
       </p>
       <div className="font-sans text-[15px] leading-relaxed text-inkMid">{children}</div>
@@ -53,7 +53,7 @@ export function BoardingPassCard({
     <div className="not-prose rounded-xl border border-warmLine bg-parchment/70 overflow-hidden my-8">
       <div className="flex items-center justify-between px-6 py-5 gap-4">
         <div>
-          <p className="font-mono text-[10px] uppercase tracking-[0.15em] text-inkFaint mb-1">Home</p>
+          <p className="font-mono text-xs uppercase tracking-[0.15em] text-inkFaint mb-1">Home</p>
           <p className="font-display text-3xl text-ink">{from}</p>
         </div>
         <div className="flex-1 border-t-2 border-dashed border-gold/50 relative">
@@ -62,7 +62,7 @@ export function BoardingPassCard({
           </span>
         </div>
         <div className="text-right">
-          <p className="font-mono text-[10px] uppercase tracking-[0.15em] text-inkFaint mb-1">To</p>
+          <p className="font-mono text-xs uppercase tracking-[0.15em] text-inkFaint mb-1">To</p>
           <p className="font-display text-3xl text-ink">{to}</p>
         </div>
       </div>

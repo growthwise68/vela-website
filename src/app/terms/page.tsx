@@ -37,7 +37,7 @@ export default function TermsPage() {
       <h1 className="font-display text-5xl md:text-6xl font-light text-ink mb-4 leading-tight border-b-2 border-gold pb-4">
         Terms of service
       </h1>
-      <p className="mt-2 font-mono text-[10px] uppercase tracking-[0.18em] text-inkFaint mb-8">
+      <p className="mt-2 font-mono text-xs uppercase tracking-[0.18em] text-inkFaint mb-8">
         Version 2.0 — 14 June 2026
       </p>
 
@@ -216,7 +216,7 @@ export default function TermsPage() {
         Vela4Crew Inc., 131 Continental Dr, Suite 305, Newark, DE 19713, USA.
       </p>
 
-      <p className="mt-8 font-mono text-[10px] uppercase tracking-[0.15em] text-inkFaint">
+      <p className="mt-8 font-mono text-xs uppercase tracking-[0.15em] text-inkFaint">
         Version 2.0 — 14 June 2026
       </p>
           </article>

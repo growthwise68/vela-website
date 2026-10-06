@@ -68,7 +68,7 @@ const jsonLd = {
 
 function Cite({ n }: { n: number[] }) {
   return (
-    <sup className="font-mono text-[9px] text-gold">
+    <sup className="font-mono text-xs text-gold">
       {n.map((x, i) => (
         <span key={x}>
           {i > 0 && <span className="text-inkFaint">,</span>}
@@ -127,14 +127,12 @@ export default function HowVelaWorks() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      <TableOfContents items={tocItems} />
-
       {/* HEADER — sand hero, wave on the right at desktop */}
       <FullBleed className="bg-parchment pt-16 md:pt-24 pb-10 md:pb-12">
         <div className="max-w-[1120px] mx-auto px-6 md:px-10">
           <div className="grid lg:grid-cols-[1.1fr_0.9fr] gap-12 lg:gap-16 items-center">
             <div>
-              <p className="font-mono text-[10px] md:text-xs uppercase tracking-[0.2em] text-gold font-semibold mb-4">
+              <p className="font-mono text-xs md:text-xs uppercase tracking-[0.2em] text-gold font-semibold mb-4">
                 The science
               </p>
               <h1 className="font-display text-5xl md:text-6xl font-light text-ink mb-6 leading-tight border-b-2 border-gold pb-4">
@@ -142,7 +140,7 @@ export default function HowVelaWorks() {
               </h1>
 
               <div className="rounded-[14px] border border-warmLine border-l-4 border-l-gold bg-cream/70 px-6 py-5">
-                <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-inkFaint mb-2">
+                <p className="font-mono text-xs uppercase tracking-[0.18em] text-inkFaint mb-2">
                   The short version
                 </p>
                 <p className="font-sans text-base leading-relaxed text-inkMid">
@@ -182,7 +180,7 @@ export default function HowVelaWorks() {
                 <p className="font-display text-3xl md:text-4xl font-light text-ink whitespace-nowrap">
                   {k.value}
                 </p>
-                <p className="font-mono text-[10px] uppercase tracking-[0.15em] text-gold mt-1 whitespace-nowrap">
+                <p className="font-mono text-xs uppercase tracking-[0.15em] text-gold mt-1 whitespace-nowrap">
                   {k.label}
                 </p>
               </div>
@@ -191,8 +189,22 @@ export default function HowVelaWorks() {
         </div>
       </FullBleed>
 
-      {/* CHAPTER 01 — THE MODEL */}
-      <FullBleed className="bg-cream py-14 md:py-20">
+      {/* CHAPTERS 01–03 — TOC sits in the left margin, starting here so it
+          never overlaps the wider hero above. The zero-width absolutely
+          positioned wrapper takes no layout space, so it doesn't affect the
+          FullBleed chapters' full-bleed math; the sticky child tracks
+          scroll across all three chapters since it shares this wrapper's
+          full height. */}
+      <div className="relative">
+        <div className="hidden xl:block absolute top-0 left-0 h-full w-0">
+          <TableOfContents
+            items={tocItems}
+            className="sticky top-28 -ml-[220px] w-[200px] max-h-[70vh] overflow-y-auto rounded-xl border border-warmLine bg-cream/95 backdrop-blur-sm px-4 py-5 z-10"
+          />
+        </div>
+
+        {/* CHAPTER 01 — THE MODEL */}
+        <FullBleed className="bg-cream py-14 md:py-20">
         <div className="max-w-3xl mx-auto px-6 md:px-8">
           <ChapterDivider n="01" label="The model" />
           <div className="prose-vela">
@@ -337,7 +349,7 @@ export default function HowVelaWorks() {
             </p>
             <div className="not-prose rounded-xl border border-warmLine bg-cream overflow-hidden my-6 grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-warmLine">
               <div className="p-5">
-                <p className="font-mono text-[10px] uppercase tracking-[0.15em] text-gold mb-2">
+                <p className="font-mono text-xs uppercase tracking-[0.15em] text-gold mb-2">
                   Shift earlier &mdash; usually flying east
                 </p>
                 <p className="font-sans text-sm text-inkMid leading-relaxed">
@@ -345,7 +357,7 @@ export default function HowVelaWorks() {
                 </p>
               </div>
               <div className="p-5">
-                <p className="font-mono text-[10px] uppercase tracking-[0.15em] text-gold mb-2">
+                <p className="font-mono text-xs uppercase tracking-[0.15em] text-gold mb-2">
                   Shift later &mdash; usually flying west
                 </p>
                 <p className="font-sans text-sm text-inkMid leading-relaxed">
@@ -490,20 +502,21 @@ export default function HowVelaWorks() {
             </p>
           </div>
         </div>
-      </FullBleed>
+        </FullBleed>
+      </div>
 
       {/* CLOSING CTA — navy, for rhythm */}
       <FullBleed className="bg-night py-16 md:py-20">
         <div className="max-w-3xl mx-auto px-6 md:px-8 flex flex-wrap items-center gap-4">
           <Link
             href="/early-access"
-            className="inline-block rounded-xl bg-gold px-6 py-3 font-mono text-[10px] uppercase tracking-[0.12em] text-ink font-semibold transition-colors hover:bg-goldSoft"
+            className="inline-block rounded-xl bg-gold px-6 py-3 font-mono text-xs uppercase tracking-[0.12em] text-ink font-semibold transition-colors hover:bg-goldSoft"
           >
             Get early access
           </Link>
           <Link
             href="/research/crew-fatigue-survey-2026"
-            className="font-mono text-[10px] uppercase tracking-[0.12em] text-cream/80 underline underline-offset-2 hover:text-gold transition-colors"
+            className="font-mono text-xs uppercase tracking-[0.12em] text-cream/80 underline underline-offset-2 hover:text-gold transition-colors"
           >
             Read what 93 crew told us →
           </Link>

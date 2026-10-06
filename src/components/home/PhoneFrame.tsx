@@ -53,10 +53,10 @@ export function PhoneFrame() {
         <div className="absolute left-1/2 top-2 -translate-x-1/2 w-20 h-5 rounded-full bg-navy z-10" />
         <div className="rounded-[2rem] bg-cream overflow-hidden flex flex-col">
           <div className="px-5 pt-8 pb-4 border-b border-warmLine">
-            <p className="font-mono text-[9px] uppercase tracking-[0.2em] text-gold font-semibold mb-1">
+            <p className="font-mono text-[13px] uppercase tracking-[0.15em] text-gold font-semibold mb-1">
               Tonight&rsquo;s plan
             </p>
-            <p className="font-mono text-[10px] text-inkFaint">{screen.context}</p>
+            <p className="font-mono text-[13px] text-inkFaint">{screen.context}</p>
           </div>
 
           <div className="px-5 py-5">
@@ -89,7 +89,7 @@ export function PhoneFrame() {
             role="tab"
             aria-selected={i === active}
             onClick={() => setActive(i)}
-            className={`px-4 py-2 min-h-11 rounded-full font-mono text-[10px] uppercase tracking-[0.12em] transition-colors ${
+            className={`px-4 py-2 min-h-11 rounded-full font-mono text-xs uppercase tracking-[0.12em] transition-colors ${
               i === active
                 ? "bg-gold text-ink font-semibold"
                 : "border border-cream/25 text-cream/70 hover:border-gold hover:text-gold"

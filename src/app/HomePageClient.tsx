@@ -91,7 +91,7 @@ export default function HomePageClient() {
               { label: "Availability", line: <>iPhone and Android, in early access</> },
             ].map((fact, i) => (
               <div key={i} className="px-4 py-5 border-b border-ink/10 md:border-b-0">
-                <dt className="font-mono text-[10px] md:text-xs uppercase tracking-[0.2em] text-gold">
+                <dt className="font-mono text-xs md:text-xs uppercase tracking-[0.2em] text-gold">
                   {fact.label}
                 </dt>
                 <dd className="font-sans text-sm md:text-base text-inkMid leading-snug mt-2">

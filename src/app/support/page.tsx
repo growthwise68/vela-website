@@ -122,7 +122,7 @@ export default function SupportPage() {
       <FullBleed className="bg-cream py-10 md:py-14">
         <div className="max-w-3xl mx-auto px-6 md:px-8">
           <div className="rounded-[14px] border border-warmLine border-l-4 border-l-gold bg-parchment/70 px-6 py-5">
-            <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-inkFaint mb-2">Contact</p>
+            <p className="font-mono text-xs uppercase tracking-[0.18em] text-inkFaint mb-2">Contact</p>
             <p className="font-sans text-base text-ink">Vela4Crew Inc.</p>
             <p className="mt-2 font-sans text-sm text-inkMid">
               Email:{" "}
@@ -168,7 +168,7 @@ export default function SupportPage() {
       <FullBleed className="bg-cream py-10 md:py-14">
         <div className="max-w-3xl mx-auto px-6 md:px-8">
           <div className="rounded-[14px] border border-warmLine bg-parchment/50 px-6 py-5">
-            <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-inkFaint">Important</p>
+            <p className="font-mono text-xs uppercase tracking-[0.2em] text-inkFaint">Important</p>
             <p className="mt-2 font-sans text-sm text-inkMid">
               VÉLA is a lifestyle and wellness companion and is <strong>not a medical device</strong>. It
               does not provide medical, health, or safety advice, and does not replace your

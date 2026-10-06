@@ -149,7 +149,7 @@ export function BriefLayout({
         aria-hidden={strip !== "visible"}
       >
         <div className="max-w-3xl mx-auto px-6 md:px-8 py-2 flex items-center gap-3">
-          <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-gold whitespace-nowrap">
+          <span className="font-mono text-xs uppercase tracking-[0.18em] text-gold whitespace-nowrap">
             {activeLabel}
           </span>
           <span className="h-px flex-1 bg-gold/30 relative overflow-hidden">
@@ -166,7 +166,7 @@ export function BriefLayout({
       {/* HEADER */}
       <FullBleed className="pt-16 md:pt-24 pb-10 md:pb-12">
         <div className="max-w-3xl mx-auto px-6 md:px-8">
-          <p className="font-mono text-[10px] md:text-xs uppercase tracking-[0.2em] text-gold font-semibold mb-4">
+          <p className="font-mono text-xs md:text-xs uppercase tracking-[0.2em] text-gold font-semibold mb-4">
             {briefLabel}
           </p>
           <h1 className="font-display text-5xl md:text-6xl font-light text-ink mb-6 leading-tight border-b-2 border-gold pb-4">
@@ -174,7 +174,7 @@ export function BriefLayout({
           </h1>
 
           <div className="rounded-[14px] border border-warmLine bg-parchment/70 px-6 py-5 mb-10">
-            <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-inkFaint mb-2">
+            <p className="font-mono text-xs uppercase tracking-[0.18em] text-inkFaint mb-2">
               The short version
             </p>
             <div className="font-sans text-base leading-relaxed text-inkMid">{shortVersion}</div>
@@ -226,13 +226,13 @@ export function BriefLayout({
                       isActive ? "bg-gold" : "bg-cream border-2 border-gold"
                     }`}
                   />
-                  <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-gold mb-3">
+                  <p className="font-mono text-xs uppercase tracking-[0.18em] text-gold mb-3">
                     {stage.label}
                   </p>
                   <div className="prose-vela">{stage.children}</div>
                   <a
                     href={`#${nextId}`}
-                    className="not-prose mt-8 inline-block font-mono text-[10px] uppercase tracking-[0.15em] text-gold hover:underline underline-offset-2"
+                    className="not-prose mt-8 inline-block font-mono text-xs uppercase tracking-[0.15em] text-gold hover:underline underline-offset-2"
                   >
                     {stage.nextLabel}
                   </a>
@@ -265,7 +265,7 @@ export function BriefLayout({
             <a
               href={closing.pdfHref}
               download
-              className="font-mono text-[10px] uppercase tracking-[0.12em] text-cream/70 underline underline-offset-2 hover:text-gold transition-colors"
+              className="font-mono text-xs uppercase tracking-[0.12em] text-cream/70 underline underline-offset-2 hover:text-gold transition-colors"
             >
               Download this brief as a PDF
             </a>
@@ -295,7 +295,7 @@ export function BriefLayout({
           <nav className="pt-6 border-t border-warmLine">
             <Link
               href="/briefs"
-              className="font-mono text-[10px] uppercase tracking-[0.18em] text-inkFaint hover:text-gold transition-colors"
+              className="font-mono text-xs uppercase tracking-[0.18em] text-inkFaint hover:text-gold transition-colors"
             >
               ← All Recovery Briefs
             </Link>

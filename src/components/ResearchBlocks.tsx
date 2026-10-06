@@ -17,7 +17,7 @@ export function StatCard({
       className="block rounded-xl border-l-4 border-gold bg-parchment/60 px-4 py-4 hover:bg-parchment transition-colors"
     >
       <p className="font-display text-3xl md:text-4xl font-light text-ink">{value}</p>
-      <p className="font-mono text-[10px] uppercase tracking-[0.15em] text-gold mt-1">{label}</p>
+      <p className="font-sans text-[15px] leading-snug text-ink mt-1">{label}</p>
     </a>
   );
 }
@@ -42,7 +42,7 @@ export function CopyAnchorButton({ anchorId }: { anchorId: string }) {
       className="not-prose inline-flex items-center align-middle ml-2 text-gold opacity-0 group-hover:opacity-100 focus-visible:opacity-100 transition-opacity"
     >
       {copied ? (
-        <span className="font-mono text-[9px] uppercase tracking-[0.1em]">Copied</span>
+        <span className="font-mono text-xs uppercase tracking-[0.1em]">Copied</span>
       ) : (
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
           <path d="M10 13a5 5 0 0 0 7.07 0l2.83-2.83a5 5 0 0 0-7.07-7.07l-1.5 1.5" />
@@ -58,7 +58,7 @@ export function CitationBox({ text }: { text: string }) {
 
   return (
     <div className="not-prose rounded-[14px] border border-warmLine bg-parchment/70 px-6 py-5">
-      <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-inkFaint mb-3">
+      <p className="font-mono text-xs uppercase tracking-[0.18em] text-inkFaint mb-3">
         Citation
       </p>
       <p className="font-mono text-sm text-ink leading-relaxed select-all mb-4">{text}</p>
@@ -73,7 +73,7 @@ export function CitationBox({ text }: { text: string }) {
             // clipboard unavailable — silently ignore
           }
         }}
-        className="inline-block rounded-lg border border-gold px-4 py-2 font-mono text-[10px] uppercase tracking-[0.12em] text-gold hover:bg-gold hover:text-ink transition-colors"
+        className="inline-block rounded-lg border border-gold px-4 py-2 font-mono text-xs uppercase tracking-[0.12em] text-gold hover:bg-gold hover:text-ink transition-colors"
       >
         {copied ? "Copied" : "Copy citation"}
       </button>
@@ -96,7 +96,7 @@ function Bar({
         className={`absolute inset-y-0 left-0 rounded ${highlighted ? "bg-gold" : "bg-ink/15"}`}
         style={{ width: `${pct}%` }}
       />
-      <span className="absolute inset-y-0 right-2 flex items-center font-mono text-[11px] text-ink">
+      <span className="absolute inset-y-0 right-2 flex items-center font-mono text-sm text-ink">
         {n} · {pct}%
       </span>
     </div>
@@ -120,7 +120,7 @@ export function ResultTable({
     <div className="not-prose overflow-x-auto mt-4 mb-2">
       <table className="w-full border-collapse">
         {caption && (
-          <caption className="font-mono text-[10px] uppercase tracking-[0.15em] text-inkFaint mb-3 text-left">
+          <caption className="font-mono text-xs uppercase tracking-[0.15em] text-inkFaint mb-3 text-left">
             {caption}
           </caption>
         )}

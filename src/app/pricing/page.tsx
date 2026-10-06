@@ -92,7 +92,7 @@ export default function PricingPage() {
       {/* HEADER */}
       <FullBleed className="pt-16 md:pt-24 pb-10 md:pb-14">
         <div className="max-w-3xl mx-auto px-6 md:px-8">
-          <p className="font-mono text-[10px] md:text-xs uppercase tracking-[0.2em] text-gold font-semibold mb-4">
+          <p className="font-mono text-xs md:text-xs uppercase tracking-[0.2em] text-gold font-semibold mb-4">
             Pricing
           </p>
           <h1 className="font-display text-5xl md:text-6xl font-light text-ink mb-6 leading-tight border-b-2 border-gold pb-4">
@@ -108,18 +108,18 @@ export default function PricingPage() {
       {/* PLAN CARDS */}
       <FullBleed className="bg-cream pb-16 md:pb-24">
         <div className="max-w-5xl mx-auto px-6 md:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-6 md:items-end">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-6 md:items-stretch">
             {plans.map((plan) => (
-              <div key={plan.id} className={plan.order}>
+              <div key={plan.id} className={`${plan.order} h-full`}>
                 <div
-                  className={`flex flex-col rounded-[18px] ${
+                  className={`h-full flex flex-col rounded-[18px] ${
                     plan.style === "solid"
                       ? "p-7 md:p-9 border-2 border-gold bg-night shadow-[0_12px_32px_rgba(26,37,64,0.35)]"
                       : "p-6 md:p-7 border border-warmLine bg-parchment/50"
                   }`}
                 >
                   {plan.tag ? (
-                    <span className="self-start mb-4 inline-block rounded-full bg-gold px-3 py-1 font-mono text-[9px] uppercase tracking-[0.15em] text-ink font-semibold">
+                    <span className="self-start mb-4 inline-block rounded-full bg-gold px-3 py-1 font-mono text-xs uppercase tracking-[0.15em] text-ink font-semibold">
                       {plan.tag}
                     </span>
                   ) : (
@@ -127,7 +127,7 @@ export default function PricingPage() {
                   )}
 
                   <p
-                    className={`font-mono text-[10px] uppercase tracking-[0.18em] ${
+                    className={`font-mono text-xs uppercase tracking-[0.18em] ${
                       plan.style === "solid" ? "text-cream/60" : "text-inkFaint"
                     }`}
                   >
@@ -159,7 +159,7 @@ export default function PricingPage() {
                   </div>
 
                   {plan.sub && (
-                    <p className={`mt-1 font-mono text-[11px] ${plan.style === "solid" ? "text-cream/60" : "text-inkFaint"}`}>
+                    <p className={`mt-1 font-mono text-xs ${plan.style === "solid" ? "text-cream/60" : "text-inkFaint"}`}>
                       {plan.sub}
                     </p>
                   )}
@@ -169,7 +169,7 @@ export default function PricingPage() {
                     </p>
                   )}
 
-                  <span className="mt-4 self-start inline-block rounded-full border border-gold/50 px-3 py-1 font-mono text-[9px] uppercase tracking-[0.15em] text-gold">
+                  <span className="mt-4 self-start inline-block rounded-full border border-gold/50 px-3 py-1 font-mono text-[13px] uppercase tracking-[0.12em] text-gold">
                     {plan.pill}
                   </span>
 
@@ -189,10 +189,10 @@ export default function PricingPage() {
 
                   <Link
                     href="/early-access"
-                    className={`mt-8 inline-flex min-h-11 items-center justify-center rounded-xl px-5 py-3 font-mono text-[10px] uppercase tracking-[0.15em] transition-colors ${
+                    className={`mt-8 inline-flex min-h-11 items-center justify-center rounded-xl px-5 py-3 font-mono text-sm font-semibold uppercase tracking-[0.1em] transition-colors ${
                       plan.style === "solid"
-                        ? "bg-gold text-ink font-semibold hover:bg-yellow-600"
-                        : "border border-gold text-gold hover:bg-gold hover:text-ink"
+                        ? "bg-gold text-ink hover:bg-yellow-600"
+                        : "border-2 border-gold text-ink hover:bg-gold"
                     }`}
                   >
                     {plan.cta}
@@ -208,7 +208,7 @@ export default function PricingPage() {
       <FullBleed className="bg-parchment py-14 md:py-20">
         <div className="max-w-3xl mx-auto px-6 md:px-8">
           <div className="not-prose rounded-[14px] border border-warmLine border-l-4 border-l-gold bg-cream/70 px-6 py-5">
-            <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-inkFaint mb-3">
+            <p className="font-mono text-xs uppercase tracking-[0.2em] text-inkFaint mb-3">
               Good to know
             </p>
             <div className="space-y-3">

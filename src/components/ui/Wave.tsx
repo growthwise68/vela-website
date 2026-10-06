@@ -109,12 +109,14 @@ export function Wave({
       <svg viewBox={`0 0 ${WIDTH} ${HEIGHT}`} className="w-full h-auto" role="img" aria-label={ariaLabel}>
         <defs>
           <linearGradient id={`${uid}-night-l`} x1="0%" y1="0" x2="100%" y2="0">
-            <stop offset="0%" stopColor="#1A2540" stopOpacity="0.07" />
+            <stop offset="0%" stopColor="#1A2540" stopOpacity="0" />
+            <stop offset="60%" stopColor="#1A2540" stopOpacity="0.07" />
             <stop offset="100%" stopColor="#1A2540" stopOpacity="0" />
           </linearGradient>
           <linearGradient id={`${uid}-night-r`} x1="0%" y1="0" x2="100%" y2="0">
             <stop offset="0%" stopColor="#1A2540" stopOpacity="0" />
-            <stop offset="100%" stopColor="#1A2540" stopOpacity="0.07" />
+            <stop offset="40%" stopColor="#1A2540" stopOpacity="0.07" />
+            <stop offset="100%" stopColor="#1A2540" stopOpacity="0" />
           </linearGradient>
           <linearGradient id={`${uid}-area`} x1="0%" y1="0" x2="100%" y2="0">
             <stop offset="0%" stopColor="#C49A3C" stopOpacity="0" />
@@ -194,7 +196,7 @@ export function Wave({
                 y={labelY}
                 textAnchor="middle"
                 letterSpacing="0.05em"
-                className="fill-ink font-mono text-[11px] md:text-[12px] uppercase"
+                className="fill-ink font-mono text-xs md:text-[12px] uppercase"
               >
                 {p.label}
               </text>
