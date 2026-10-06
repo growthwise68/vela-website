@@ -47,28 +47,45 @@ export default function HomePageClient() {
       </section>
 
       {/* KEY FACTS SECTION */}
-      <section className="w-full py-14 md:py-20 bg-night">
+      <section className="w-full py-10 md:py-14 bg-gradient-to-b from-parchment/50 to-cream/50">
         <div className="max-w-4xl mx-auto px-6 md:px-8">
-          <h2 className="font-display text-3xl md:text-4xl font-light text-cream mb-6">
-            V&Eacute;LA at a glance
+          <h2 className="font-mono text-xs md:text-sm uppercase tracking-[0.2em] text-gold font-semibold text-center mb-8">
+            At a glance
           </h2>
-          <ul className="space-y-3">
+          <dl className="grid grid-cols-2 md:grid-cols-4 divide-x divide-y md:divide-y-0 divide-ink/10 border-t border-ink/10 md:border-t-0">
             {[
-              <>A body-clock planning app for long-haul cabin crew, built by cabin crew</>,
-              <>Add each duty with just the date and flight number; works with any airline that uses public flight numbers</>,
-              <>Follows your body clock across your whole roster, including days off, not just one trip</>,
-              <>Plans sleep, light, caffeine and meal timing for every duty and layover</>,
-              <><Link href="/how-vela-works" className="text-gold underline underline-offset-2 hover:opacity-80 transition-opacity">Built on the Three Process Model of alertness</Link>, with adjustment rates from CDC jet lag guidance</>,
-              <>Gives estimates, not measurements; not a medical device</>,
-              <>Independent of any airline</>,
-              <>On iPhone and Android, currently in early access</>,
+              { label: "Who it's for", line: <>Long-haul cabin crew, built by cabin crew</> },
+              { label: "Adding duties", line: <>Date and flight number. Any airline with public flight numbers</> },
+              { label: "What it follows", line: <>Your whole roster, days off included, not just one trip</> },
+              { label: "What it plans", line: <>Sleep, light, caffeine and meals for every duty and layover</> },
+              {
+                label: "The science",
+                line: (
+                  <>
+                    <Link
+                      href="/how-vela-works"
+                      className="text-inkMid underline decoration-gold/50 underline-offset-2 hover:opacity-80 transition-opacity"
+                    >
+                      Three Process Model of alertness
+                    </Link>
+                    , CDC adjustment rates
+                  </>
+                ),
+              },
+              { label: "What you get", line: <>Estimates, not measurements. Not a medical device</> },
+              { label: "Your data", line: <>Independent of any airline. Private to your account</> },
+              { label: "Availability", line: <>iPhone and Android, in early access</> },
             ].map((fact, i) => (
-              <li key={i} className="flex gap-3 items-baseline">
-                <span className="text-gold font-mono text-xs flex-shrink-0">—</span>
-                <span className="font-sans text-base md:text-lg text-cream/80 leading-relaxed">{fact}</span>
-              </li>
+              <div key={i} className="px-4 py-5 border-b border-ink/10 md:border-b-0">
+                <dt className="font-mono text-[10px] md:text-xs uppercase tracking-[0.15em] text-gold">
+                  {fact.label}
+                </dt>
+                <dd className="font-sans text-sm md:text-base text-inkMid leading-snug mt-2">
+                  {fact.line}
+                </dd>
+              </div>
             ))}
-          </ul>
+          </dl>
         </div>
       </section>
 
