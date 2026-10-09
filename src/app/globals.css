@@ -44,6 +44,28 @@ body {
   opacity: 1;
 }
 
+/* Scoped to the how-vela-works hero: rotates the gold "body time" ring
+   into its out-of-sync offset once on load. Reduced-motion users get the
+   final offset directly, no animation. */
+@keyframes velaRingOffset {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(42deg);
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .vela-ring-inner {
+    animation: velaRingOffset 1.4s cubic-bezier(0.22, 1, 0.36, 1) 0.3s both;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .vela-ring-inner {
+    transform: rotate(42deg);
+  }
+}
+
 @layer components {
   .prose-vela :where(h2):not(:where(.not-prose, .not-prose *)) {
     @apply font-display text-3xl md:text-4xl font-light text-ink mt-12 mb-5;
