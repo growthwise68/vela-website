@@ -9,12 +9,12 @@ const PAGE_URL = "https://velaforcrew.com/how-vela-works";
 export const metadata: Metadata = {
   title: "How VÉLA Works: The Science Behind Your Body-Clock Plan",
   description:
-    "How VÉLA estimates your body clock from your roster: the Three Process Model of alertness, how fast it assumes you adapt east and west, how sleep, light, caffeine and meals are timed, and its limits.",
+    "How VÉLA estimates your body clock from your roster: the sleep science behind it, how it plans sleep, light, caffeine and meals for crew, and what it can and can't do.",
   alternates: { canonical: PAGE_URL },
   openGraph: {
     title: "How VÉLA Works — The Science Behind Your Body-Clock Plan",
     description:
-      "The model, the research and the limits behind VÉLA's sleep, light, caffeine and meal timing for cabin crew.",
+      "How VÉLA estimates your body clock from your roster: the sleep science behind it, how it plans sleep, light, caffeine and meals for crew, and what it can and can't do.",
     url: PAGE_URL,
     type: "article",
   },
@@ -54,7 +54,7 @@ const jsonLd = {
   "@type": "Article",
   headline: "How VÉLA Works: The Science Behind Your Body-Clock Plan",
   description:
-    "How VÉLA estimates a cabin crew member's body clock from their roster, and how it times sleep, light, caffeine and meals.",
+    "How VÉLA estimates a cabin crew member's body clock from their roster, and the sleep science behind its sleep, light, caffeine and meal guidance.",
   url: PAGE_URL,
   datePublished: "2026-10-03",
   author: { "@type": "Organization", name: "VÉLA", url: "https://velaforcrew.com" },
@@ -93,10 +93,10 @@ function ChapterDivider({ n, label }: { n: string; label: string }) {
 }
 
 const keyNumbers = [
-  { value: "1 h/day", label: "Flying east" },
-  { value: "1.5 h/day", label: "Flying west" },
-  { value: "04:00", label: "Body-clock low" },
-  { value: "6 h", label: "Caffeine cut-off" },
+  { value: "3", label: "Processes of alertness" },
+  { value: "4", label: "Levers: sleep, light, caffeine, meals" },
+  { value: "Every", label: "Duty, layover and day off" },
+  { value: "0", label: "Wearables needed" },
 ];
 
 const tocItems = [
@@ -112,11 +112,6 @@ const tocItems = [
   { id: "feedback", label: "Feedback" },
   { id: "limits", label: "Limits" },
   { id: "research", label: "Research" },
-];
-
-const eastWestPoints = [
-  { hour: 4, time: "1 h/day", label: "Flying east", side: "below" as const },
-  { hour: 20, time: "1.5 h/day", label: "Flying west", side: "above" as const },
 ];
 
 export default function HowVelaWorks() {
@@ -145,13 +140,13 @@ export default function HowVelaWorks() {
                 </p>
                 <p className="font-sans text-base leading-relaxed text-inkMid">
                   VÉLA estimates where your body clock is from your roster, then plans sleep, light,
-                  caffeine and meal timing to help it move where your next duty needs it. It&apos;s
+                  caffeine and meal timing to help it get where your next duty needs it. It&apos;s
                   built on the Three Process Model of alertness, which describes how your body clock,
                   your build-up of sleep pressure and your grogginess after waking combine to shape
-                  how alert you feel.<Cite n={[1, 2, 3, 4]} /> VÉLA assumes your body clock can shift
-                  by roughly 1 hour a day when flying east and 1.5 hours a day when flying west,
-                  <Cite n={[6]} /> adjusted for your chronotype, age and feedback. Everything it shows
-                  you is an estimate, not a measurement.
+                  how alert you feel.<Cite n={[1, 2, 3, 4]} /> It starts from typical adjustment
+                  rates from jet lag research,<Cite n={[6]} /> then adapts to you and to what
+                  actually happens on your trips. Everything it shows you is an estimate, not a
+                  measurement.
                 </p>
               </div>
             </div>
@@ -180,7 +175,7 @@ export default function HowVelaWorks() {
                 <p className="font-display text-3xl md:text-4xl font-light text-ink whitespace-nowrap">
                   {k.value}
                 </p>
-                <p className="font-mono text-xs uppercase tracking-[0.15em] text-gold mt-1 whitespace-nowrap">
+                <p className="font-mono text-xs uppercase tracking-[0.15em] text-gold mt-1">
                   {k.label}
                 </p>
               </div>
@@ -260,42 +255,30 @@ export default function HowVelaWorks() {
         <div className="max-w-3xl mx-auto px-6 md:px-8">
           <div className="prose-vela">
             <p>
-              VÉLA applies these principles with its own planning rules, designed around crew
-              rosters. It doesn&apos;t use or reproduce proprietary commercial fatigue models such
-              as SAFTE/FAST or the Boeing Alertness Model.
+              VÉLA applies these principles with its own planning approach, designed around crew
+              rosters.
             </p>
 
             <h2 id="adjustment-speed">How fast does VÉLA assume your body clock adjusts?</h2>
             <p>
-              By default, VÉLA assumes your body clock can move about{" "}
-              <strong>1 hour per day when it needs to shift earlier</strong> (usually flying east)
-              and about <strong>1.5 hours per day when it needs to shift later</strong> (usually
-              flying west). These are the average rates in the CDC&apos;s jet lag guidance.
-              <Cite n={[6]} />
+              Research suggests most people&apos;s body clock can shift by roughly an hour a day
+              when it needs to move earlier (usually flying east), and a little faster when it
+              needs to move later (usually flying west).<Cite n={[6]} /> VÉLA uses typical rates
+              like these as a starting point, then adapts them to you.
             </p>
             <p>
-              They&apos;re starting points, not a promise that your body will adapt at exactly
-              that speed. VÉLA also looks at how much time you have before your next duty and how
-              far your body clock needs to move. If there isn&apos;t enough time to get all the
-              way there, it tells you, rather than pretending you&apos;ll be fully adjusted.
+              It also looks at how much time you have before your next duty and how far your body
+              clock needs to move. If there isn&apos;t enough time to get all the way there, it
+              tells you, rather than pretending you&apos;ll be fully adjusted.
             </p>
 
             <h2 id="east-harder">Why is flying east harder?</h2>
             <p>
               Shifting your body clock earlier (flying east) is slower than shifting it later
-              (flying west), which is why VÉLA plans a slower rate for eastbound trips.
-              <Cite n={[6]} /> Going to sleep earlier than your body expects is harder than staying
-              up later.
+              (flying west).<Cite n={[6]} /> Going to sleep earlier than your body expects is
+              harder than staying up later, so VÉLA gives eastbound trips more time to adjust.
             </p>
           </div>
-        </div>
-
-        <div className="max-w-2xl mx-auto px-6 md:px-8 mt-8">
-          <Wave
-            points={eastWestPoints}
-            showNightShading={false}
-            ariaLabel="A wave contrasting the eastward adjustment rate of 1 hour per day against the westward rate of 1.5 hours per day"
-          />
         </div>
       </FullBleed>
 
@@ -305,41 +288,24 @@ export default function HowVelaWorks() {
           <ChapterDivider n="02" label="Your plan" />
           <div className="prose-vela">
             <h2 id="personalise">What does VÉLA personalise?</h2>
+            <p>VÉLA adjusts your plan for:</p>
             <ul>
-              <li>
-                <strong>Chronotype.</strong> VÉLA assumes your body clock&apos;s low point is
-                around 04:00 body time. If you&apos;re an early bird it moves that to around
-                02:00, and if you&apos;re a night owl to around 06:00.
-              </li>
-              <li>
-                <strong>Age.</strong> From age 40, VÉLA gradually assumes your body clock shifts a
-                little more slowly, by up to 20% at most.
-              </li>
-              <li>
-                <strong>Sleep preferences.</strong> How long you like to sleep and when shape your
-                sleep plan, within what your roster allows.
-              </li>
-              <li>
-                <strong>Your own adjustment limits.</strong> If you know you adjust faster or
-                slower than average, you can change the east and west rates.
-              </li>
-              <li>
-                <strong>Caffeine sensitivity.</strong> This sets how early your last caffeine
-                should be before sleep (see below).
-              </li>
+              <li>Whether you&apos;re an early bird or a night owl</li>
+              <li>Your age</li>
+              <li>How long you like to sleep, and when</li>
+              <li>How quickly you know you tend to adjust</li>
+              <li>How sensitive you are to caffeine</li>
             </ul>
             <p>
-              This is broad personalisation. VÉLA doesn&apos;t measure your individual body clock
-              or fit a model to your biology.
+              Your plan becomes more personal as you tell VÉLA how your trips actually went.
             </p>
 
             <h2 id="sleep">How does VÉLA plan your sleep?</h2>
             <p>
-              VÉLA first works within the rest time your roster actually gives you, and deals with
-              any urgent sleep debt. Then it aims for one main, unbroken sleep near your body
-              clock&apos;s low point, adding a nap where it helps. Where you place that sleep also
-              depends on which way your body clock needs to move and how long you have before
-              you&apos;re next on duty.
+              VÉLA plans your sleep within the rest your roster actually gives you. It considers
+              how much sleep you&apos;ve been missing, when your body is most ready to sleep,
+              which way your body clock needs to move and how long you have before your next
+              duty, then suggests when to sleep and when a nap would help.
             </p>
 
             <h2 id="light">How does VÉLA time light exposure?</h2>
@@ -366,29 +332,22 @@ export default function HowVelaWorks() {
               </div>
             </div>
             <p>
-              VÉLA gives you roughly two-hour windows to seek or avoid light, fitted around your
-              planned sleep. It&apos;s timing guidance. VÉLA doesn&apos;t measure how much light
-              you actually get.
+              VÉLA turns this into specific times to seek or avoid light, fitted around your sleep
+              and duties.
             </p>
 
             <h2 id="caffeine">How does VÉLA time caffeine?</h2>
             <p>
-              VÉLA sets a caffeine cut-off before your next main sleep, so caffeine doesn&apos;t
-              get in the way of it. By default that&apos;s <strong>6 hours before sleep</strong>,
-              or 8 hours if you&apos;re sensitive to caffeine and 4 hours if you&apos;re not.
+              Caffeine stays in your system for hours, so when you have it matters as much as how
+              much. VÉLA suggests when to have your last caffeine so it doesn&apos;t get in the
+              way of your next sleep, adjusted for how sensitive you are to it.
             </p>
 
             <h2 id="meals">How does VÉLA time meals?</h2>
             <p>
-              Meal guidance follows your body time, not local time. VÉLA suggests avoiding eating
-              and focusing on hydration between about 20:00 and 05:00 body time, then gives
-              breakfast, lunch and dinner windows that fit around your sleep and duties.
-            </p>
-            <p>
-              To be clear about what this does: research links meal timing to your metabolism and
-              to rhythms in organs like your gut, but not to resetting your main body clock. So in
-              VÉLA, meal times support how you feel and digest. They don&apos;t move your body
-              clock estimate. Our{" "}
+              Meal guidance follows your body time, not local time. VÉLA suggests when to eat and
+              when to simply hydrate, so your meals fit around your body clock, your sleep and
+              your duties. Our{" "}
               <Link
                 href="/briefs/eating-across-time-zones"
                 className="text-gold underline underline-offset-2 hover:opacity-80 transition-opacity"
@@ -399,20 +358,11 @@ export default function HowVelaWorks() {
             </p>
 
             <h2 id="feedback">How does your feedback change the plan?</h2>
-            <p>After a trip, you can tell VÉLA what actually happened:</p>
-            <ul>
-              <li>
-                <strong>Sleep:</strong> how long you slept, and whether you went to sleep earlier,
-                on time or later than planned.
-              </li>
-              <li>
-                <strong>Light:</strong> whether you followed the light advice (none, some, mostly
-                or all of it).
-              </li>
-            </ul>
             <p>
-              VÉLA then recalculates your body clock, your fatigue estimate and your upcoming plan
-              from what really happened, rather than assuming everything went to plan.
+              After a trip, you can tell VÉLA how your sleep actually went and whether you
+              managed to follow the light advice. VÉLA then updates your body clock estimate and
+              your upcoming plan from what really happened, rather than assuming everything went
+              to plan.
             </p>
           </div>
         </div>
@@ -427,26 +377,13 @@ export default function HowVelaWorks() {
             <div className="not-prose rounded-[14px] border border-warmLine border-l-4 border-l-gold bg-parchment/70 px-6 py-5 my-6">
               <ul className="list-disc pl-5 space-y-2 font-sans text-[15px] leading-relaxed text-inkMid">
                 <li>
-                  Your body clock and sleep are <strong>estimated</strong>, not measured. VÉLA
-                  doesn&apos;t use blood tests, wearables or live sleep tracking.
+                  Your body clock is estimated from your roster and what you tell VÉLA, not
+                  measured. VÉLA doesn&apos;t need blood tests or a wearable.
                 </li>
                 <li>
-                  It assumes the sleep it plans is possible, even when in reality it might be
-                  shorter or more broken.
-                </li>
-                <li>
-                  Personalisation is broad (chronotype and age). It isn&apos;t fitted to your
-                  individual biology.
-                </li>
-                <li>
-                  Real light levels, cabin conditions, medication, genetics and many
-                  route-specific factors aren&apos;t fully modelled, and all of these can affect
-                  how you adjust.
-                  <Cite n={[6]} />
-                </li>
-                <li>
-                  Your feedback improves the estimate, but can&apos;t verify your sleep stages,
-                  light exposure or true body-clock position.
+                  Everyone adjusts differently. Light, cabin conditions, medication, genetics and
+                  the route itself all play a part,<Cite n={[6]} /> so treat VÉLA&apos;s plan as
+                  guidance and listen to your body.
                 </li>
                 <li>
                   VÉLA follows the same principles as aviation fatigue management, but it
@@ -458,11 +395,7 @@ export default function HowVelaWorks() {
 
             <h2 id="research">What research is VÉLA built on?</h2>
             <p>
-              VÉLA&apos;s model draws on the sleep and body-clock research below. Its sleep
-              planning also draws on NASA research on planned rest during long-haul operations
-              (Rosekind and colleagues), research on sleep inertia (Tassi and Muzet) and sleep
-              consolidation (Skorucak and colleagues). Light guidance also draws on Duffy and
-              Czeisler, and meal guidance on Wehrens, Chellappa and Manoogian and their colleagues.
+              VÉLA&apos;s approach draws on established sleep and body-clock research, including:
             </p>
             <ol id="sources" className="not-prose mt-3 divide-y divide-warmLine">
               {sources.map((s) => (
