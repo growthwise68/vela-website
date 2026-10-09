@@ -18,9 +18,9 @@ const screens: Screen[] = [
   },
   {
     tab: "Layover",
-    context: "MEL layover · Day 2",
+    context: "SIN layover · Day 2",
     title: "The Layover",
-    note: "30 hours in Melbourne. Your body clock is sitting somewhere over the Indian Ocean. VÉLA shows you when rest will help most, so you can actually use this layover.",
+    note: "30 hours in Singapore. Your body clock is still back in London. VÉLA shows you when rest will help most, so you can actually use this layover.",
   },
   {
     tab: "Return",

@@ -62,7 +62,7 @@ export const THANK_YOU_COPY_V1: ThankYouCopyBundle = {
   placeholders: {
     firstName: "Your first name",
     email: "you@example.com",
-    airline: "e.g. Emirates, United, Qantas",
+    airline: "e.g. your airline",
   },
   airlineHelper:
     "If you tell us, we can let you know when VÉLA is upgraded with features relevant to your airline.",
