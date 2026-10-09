@@ -229,13 +229,15 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
         className="w-full border-t border-warmLine bg-parchment"
       >
         <div className="max-w-3xl mx-auto px-6 py-8 md:py-12">
-          <p className="font-sans text-xs text-inkFaint leading-relaxed mb-6 md:mb-10">
-            A note on V&Eacute;LA: it provides personal planning insights based on your roster. It isn&rsquo;t
-            medical advice or a substitute for your airline&rsquo;s fatigue-management requirements.{" "}
-            <Link href="/terms" className="underline underline-offset-2 hover:text-inkMid transition-colors">
-              Full details &rarr;
-            </Link>
-          </p>
+          {pathname !== "/how-vela-works" && (
+            <p className="font-sans text-xs text-inkFaint leading-relaxed mb-6 md:mb-10">
+              A note on V&Eacute;LA: it provides personal planning insights based on your roster. It isn&rsquo;t
+              medical advice or a substitute for your airline&rsquo;s fatigue-management requirements.{" "}
+              <Link href="/terms" className="underline underline-offset-2 hover:text-inkMid transition-colors">
+                Full details &rarr;
+              </Link>
+            </p>
+          )}
 
           <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-6 md:gap-10">
             <div className="md:max-w-[220px]">

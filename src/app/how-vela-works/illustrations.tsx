@@ -56,20 +56,29 @@ export function RevealOnView({
   );
 }
 
-/** Section 1 — hero: two concentric 24-hour rings, out of sync. */
+/** Section 1 — hero: two clock hands out of sync, with the gap between them shaded. */
 export function HeroRings() {
-  const cx = 130;
-  const cy = 130;
-  const outerR = 104;
-  const innerR = 66;
+  const cx = 160;
+  const cy = 150;
+  const outerR = 120;
+  const innerR = 78;
+  const arcR = 99;
+  const gapDeg = 42; // kept in sync with the .vela-ring-inner CSS rotation
+  const localAngle = -Math.PI / 2;
+  const bodyAngle = localAngle + (gapDeg * Math.PI) / 180;
+  const midAngle = (localAngle + bodyAngle) / 2;
+  const pt = (angle: number, r: number) => [cx + r * Math.cos(angle), cy + r * Math.sin(angle)] as const;
+  const [arcX1, arcY1] = pt(localAngle, arcR);
+  const [arcX2, arcY2] = pt(bodyAngle, arcR);
+  const [gapLabelX, gapLabelY] = pt(midAngle, arcR + 20);
 
   return (
-    <RevealOnView className="mx-auto w-[230px] sm:w-[260px]">
+    <RevealOnView className="mx-auto w-[260px] sm:w-[340px]">
       <figure>
         <svg
-          viewBox="0 0 260 280"
+          viewBox="0 0 320 340"
           role="img"
-          aria-label="Two concentric 24-hour clock rings: an ink outer ring for local time and a gold inner ring for body time, shown out of sync, with a small plane marking your flight on the outer ring."
+          aria-label="Two concentric 24-hour clock rings with two hands: an ink hand pointing straight up for local time, and a gold hand pointing several hours away for body time, with the gap between them shaded gold, and a small plane marking your flight on the outer ring."
           className="w-full h-auto"
         >
           <circle cx={cx} cy={cy} r={outerR} fill="none" stroke="currentColor" className="text-ink/60" strokeWidth={1.5} />
@@ -93,35 +102,46 @@ export function HeroRings() {
               />
             );
           })}
+          <circle cx={cx} cy={cy} r={innerR} fill="none" stroke="currentColor" className="text-gold/50" strokeWidth={1.5} />
+
+          {/* shaded gap between the two hands */}
+          <path
+            d={`M ${cx} ${cy} L ${arcX1.toFixed(1)} ${arcY1.toFixed(1)} A ${arcR} ${arcR} 0 0 1 ${arcX2.toFixed(1)} ${arcY2.toFixed(1)} Z`}
+            className="fill-gold/15"
+          />
+          <text
+            x={gapLabelX}
+            y={gapLabelY}
+            textAnchor="middle"
+            className="fill-gold font-mono text-[11px] italic lowercase tracking-[0.04em]"
+          >
+            the gap
+          </text>
 
           <g transform={`translate(${cx} ${cy - outerR}) rotate(90)`}>
             <path d="M-7 3 L9 -3 L0 3 L9 9 Z" className="fill-ink" />
           </g>
 
-          <text x={cx} y={cy - outerR - 16} textAnchor="middle" className="fill-ink font-mono text-[11px] uppercase tracking-[0.12em]">
-            Local time
-          </text>
+          {/* local-time hand: ink, fixed pointing to 12 */}
+          <line x1={cx} y1={cy} x2={cx} y2={cy - (outerR - 12)} stroke="currentColor" className="text-ink" strokeWidth={3} strokeLinecap="round" />
+          <circle cx={cx} cy={cy} r={5} className="fill-ink" />
 
+          {/* body-time hand: gold, drawn pointing to 12 then rotated into its offset via CSS */}
           <g className="vela-ring-inner" style={{ transformOrigin: `${cx}px ${cy}px` }}>
-            <circle cx={cx} cy={cy} r={innerR} fill="none" stroke="currentColor" className="text-gold" strokeWidth={2} />
-            {Array.from({ length: 12 }, (_, i) => {
-              const angle = (i / 12) * 2 * Math.PI - Math.PI / 2;
-              const x1 = cx + (innerR - 6) * Math.cos(angle);
-              const y1 = cy + (innerR - 6) * Math.sin(angle);
-              const x2 = cx + innerR * Math.cos(angle);
-              const y2 = cy + innerR * Math.sin(angle);
-              return (
-                <line key={`i-${i}`} x1={x1} y1={y1} x2={x2} y2={y2} stroke="currentColor" className="text-gold/70" strokeWidth={1.5} />
-              );
-            })}
-            <circle cx={cx} cy={cy - innerR} r={4.5} className="fill-gold" />
+            <line x1={cx} y1={cy} x2={cx} y2={cy - (innerR - 8)} stroke="currentColor" className="text-gold" strokeWidth={3} strokeLinecap="round" />
           </g>
-
-          <text x={cx} y={cy + innerR + 28} textAnchor="middle" className="fill-gold font-mono text-[11px] uppercase tracking-[0.12em]">
-            Body time
-          </text>
         </svg>
-        <figcaption className="mt-5 text-center font-sans text-base text-inkMid leading-relaxed">
+        <div className="mt-4 flex items-center justify-center gap-6 font-mono text-[11px] uppercase tracking-[0.1em]">
+          <span className="inline-flex items-center gap-1.5 text-ink">
+            <span className="inline-block w-2 h-2 rounded-full bg-ink" aria-hidden="true" />
+            Local time
+          </span>
+          <span className="inline-flex items-center gap-1.5 text-gold">
+            <span className="inline-block w-2 h-2 rounded-full bg-gold" aria-hidden="true" />
+            Body time
+          </span>
+        </div>
+        <figcaption className="mt-3 text-center font-sans text-base text-inkMid leading-relaxed">
           After a few sectors, your body clock and the clock on the wall disagree. VÉLA tracks the gap.
         </figcaption>
       </figure>
@@ -192,12 +212,15 @@ export function HowItWorksSteps() {
         <StepConnector />
 
         <StepFigure ariaLabel="A plan card showing tonight's sleep and light timing" caption="Get your plan">
-          <rect x="15" y="25" width="170" height="70" rx="12" className="fill-night" />
-          <text x="100" y="52" textAnchor="middle" className="fill-gold font-mono text-[10px] uppercase tracking-[0.18em]">
+          <rect x="15" y="20" width="170" height="80" rx="12" className="fill-night" />
+          <text x="100" y="42" textAnchor="middle" className="fill-gold font-mono text-[10px] uppercase tracking-[0.18em]">
             Tonight
           </text>
-          <text x="100" y="74" textAnchor="middle" className="fill-cream font-mono text-[13px]">
-            Sleep 22:00 · Light 07:30
+          <text x="100" y="64" textAnchor="middle" className="fill-cream font-mono text-[13px]">
+            Sleep 22:00
+          </text>
+          <text x="100" y="82" textAnchor="middle" className="fill-cream font-mono text-[13px]">
+            Light 07:30
           </text>
         </StepFigure>
       </div>
@@ -226,13 +249,19 @@ export function ScienceChart() {
     sinePath += `${i === 0 ? "M" : "L"} ${hourX(h).toFixed(1)} ${y.toFixed(1)} `;
   }
 
+  // Night bands are hours 0-8 and 24-32 (matching the gold wave's troughs).
+  // Sleep pressure must rise through each day (8-24, 32-36) and fall through
+  // each night (0-8, 24-32) — the opposite of the gold wave's phase.
+  const PRESSURE_HIGH = 150;
+  const PRESSURE_LOW = 222;
   const sawPoints: [number, number][] = [
-    [0, 222],
-    [16, 150],
-    [24, 222],
-    [36, 168],
+    [0, PRESSURE_HIGH],
+    [8, PRESSURE_LOW],
+    [24, PRESSURE_HIGH],
+    [32, PRESSURE_LOW],
+    [36, PRESSURE_LOW + (PRESSURE_HIGH - PRESSURE_LOW) * 0.25],
   ];
-  const sawPath = sawPoints.map(([h, y], i) => `${i === 0 ? "M" : "L"} ${hourX(h).toFixed(1)} ${y}`).join(" ");
+  const sawPath = sawPoints.map(([h, y], i) => `${i === 0 ? "M" : "L"} ${hourX(h).toFixed(1)} ${y.toFixed(1)}`).join(" ");
 
   return (
     <RevealOnView>
@@ -240,26 +269,33 @@ export function ScienceChart() {
         <svg
           viewBox={`0 0 ${W} ${H}`}
           role="img"
-          aria-label="A chart over a day and a half showing a gold body-clock wave, an ink sleep-pressure line that rises while you're awake and drops while you sleep, and a small shaded dip marking grogginess just after waking."
+          aria-label="A chart over a day and a half showing a gold body-clock wave dipping during each shaded night band, an ink sleep-pressure line that rises through each day and falls during each night, and a small shaded dip marking grogginess just after the first waking."
           className="w-full h-auto"
         >
           <rect x={hourX(0)} y={0} width={hourX(8) - hourX(0)} height={H} className="fill-night/[0.05]" />
           <rect x={hourX(24)} y={0} width={hourX(32) - hourX(24)} height={H} className="fill-night/[0.05]" />
+          <text x={hourX(4)} y={H - 12} textAnchor="middle" className="fill-inkFaint font-mono text-[10px] uppercase tracking-[0.1em]">
+            Night
+          </text>
+          <text x={hourX(28)} y={H - 12} textAnchor="middle" className="fill-inkFaint font-mono text-[10px] uppercase tracking-[0.1em]">
+            Night
+          </text>
 
+          {/* grogginess: a brief dip right after the first wake, at the end of the first night band */}
           <path
-            d={`M ${hourX(24)} 222 Q ${hourX(25)} 248 ${hourX(26)} 222`}
+            d={`M ${hourX(8)} ${PRESSURE_LOW} Q ${hourX(9)} ${PRESSURE_LOW + 24} ${hourX(10)} ${PRESSURE_LOW}`}
             fill="none"
             stroke="currentColor"
             className="text-inkFaint"
             strokeWidth={1.5}
             strokeDasharray="3 3"
           />
-          <text x={hourX(25)} y={272} textAnchor="middle" className="fill-inkFaint font-mono text-[11px] uppercase tracking-[0.08em]">
+          <text x={hourX(9)} y={PRESSURE_LOW + 42} textAnchor="middle" className="fill-inkFaint font-mono text-[11px] uppercase tracking-[0.08em]">
             Grogginess
           </text>
 
           <path d={sawPath} fill="none" stroke="currentColor" className="text-ink" strokeWidth={2} strokeLinejoin="round" />
-          <text x={hourX(16) + 8} y={142} className="fill-ink font-mono text-[12px] uppercase tracking-[0.08em]">
+          <text x={hourX(2)} y={PRESSURE_HIGH - 10} className="fill-ink font-mono text-[12px] uppercase tracking-[0.08em]">
             Sleep pressure
           </text>
 
@@ -286,15 +322,15 @@ export function ScienceChart() {
 
 /** Section 4 — a clock face with two curved arrows: east (harder) vs west (easier). */
 export function EastWestClock() {
-  const cx = 180;
-  const cy = 120;
-  const r = 85;
+  const cx = 195;
+  const cy = 135;
+  const r = 100;
 
   return (
-    <RevealOnView className="mx-auto w-[280px] sm:w-[320px]">
+    <RevealOnView className="mx-auto w-[320px] sm:w-[380px]">
       <figure>
         <svg
-          viewBox="0 0 360 260"
+          viewBox="0 0 390 300"
           role="img"
           aria-label="A clock face with two curved arrows: a gold arrow curving left, labelled east, shift earlier, harder; and an ink arrow curving right, labelled west, shift later, easier."
           className="w-full h-auto"
@@ -345,16 +381,16 @@ export function EastWestClock() {
             <path d="M-7 3 L9 -3 L0 3 L9 9 Z" className="fill-ink" />
           </g>
 
-          <text x={cx - 90} y={cy + r + 30} textAnchor="middle" className="fill-gold font-mono text-[10px] uppercase tracking-[0.06em]">
+          <text x={cx - 95} y={cy + r + 32} textAnchor="middle" className="fill-gold font-mono text-[13px] uppercase tracking-[0.04em]">
             East · shift earlier
           </text>
-          <text x={cx - 90} y={cy + r + 46} textAnchor="middle" className="fill-gold font-mono text-[10px] uppercase tracking-[0.06em]">
+          <text x={cx - 95} y={cy + r + 50} textAnchor="middle" className="fill-gold font-mono text-[13px] uppercase tracking-[0.04em]">
             Harder
           </text>
-          <text x={cx + 90} y={cy + r + 30} textAnchor="middle" className="fill-ink font-mono text-[10px] uppercase tracking-[0.06em]">
+          <text x={cx + 95} y={cy + r + 32} textAnchor="middle" className="fill-ink font-mono text-[13px] uppercase tracking-[0.04em]">
             West · shift later
           </text>
-          <text x={cx + 90} y={cy + r + 46} textAnchor="middle" className="fill-ink font-mono text-[10px] uppercase tracking-[0.06em]">
+          <text x={cx + 95} y={cy + r + 50} textAnchor="middle" className="fill-ink font-mono text-[13px] uppercase tracking-[0.04em]">
             Easier
           </text>
         </svg>
@@ -442,8 +478,8 @@ export function LightStrip() {
             Pulls earlier
           </text>
 
-          <g transform={`translate(${hourX(20)} 60)`}>
-            <path d="M6 -10a10 10 0 1 0 0 20 8 8 0 0 1 0-20z" className="fill-ink" />
+          <g transform={`translate(${hourX(20) - 12} 48) scale(1.1)`}>
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" className="fill-ink" />
           </g>
           <line
             x1={hourX(20) + 24}

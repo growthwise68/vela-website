@@ -272,7 +272,7 @@ export default function HowVelaWorks() {
       />
 
       {/* HERO */}
-      <FullBleed className="bg-parchment pt-16 md:pt-24 pb-14 md:pb-20">
+      <FullBleed className="bg-parchment pt-14 md:pt-20 pb-12 md:pb-16">
         <div className="max-w-3xl mx-auto px-6 md:px-8 text-center">
           <p className="font-mono text-xs uppercase tracking-[0.2em] text-gold font-semibold mb-4">
             The science
@@ -284,15 +284,15 @@ export default function HowVelaWorks() {
             VÉLA turns your roster into a plan for your body clock.
           </p>
         </div>
-        <div className="mt-10 md:mt-12">
+        <div className="mt-8 md:mt-10">
           <HeroRings />
         </div>
       </FullBleed>
 
       {/* HOW IT WORKS */}
-      <FullBleed className="bg-cream py-14 md:py-20">
+      <FullBleed className="bg-cream py-12 md:py-16">
         <div className="max-w-3xl mx-auto px-6 md:px-8">
-          <p className="text-center font-mono text-xs uppercase tracking-[0.2em] text-gold font-semibold mb-10">
+          <p className="text-center font-mono text-xs uppercase tracking-[0.2em] text-gold font-semibold mb-6">
             How it works
           </p>
           <HowItWorksSteps />
@@ -300,9 +300,9 @@ export default function HowVelaWorks() {
       </FullBleed>
 
       {/* THE SCIENCE */}
-      <FullBleed className="bg-parchment py-14 md:py-20">
+      <FullBleed className="bg-parchment py-12 md:py-16">
         <div className="max-w-3xl mx-auto px-6 md:px-8">
-          <p className="text-center font-sans text-base text-inkMid mb-10">
+          <p className="text-center font-sans text-base text-inkMid mb-6">
             Built on the Three Process Model of alertness.
             <Cite n={[1, 2, 3, 4]} />
           </p>
@@ -311,23 +311,23 @@ export default function HowVelaWorks() {
       </FullBleed>
 
       {/* EAST VS WEST */}
-      <FullBleed className="bg-cream py-14 md:py-20">
+      <FullBleed className="bg-cream py-12 md:py-16">
         <div className="max-w-3xl mx-auto px-6 md:px-8">
           <EastWestClock />
         </div>
       </FullBleed>
 
       {/* LIGHT */}
-      <FullBleed className="bg-parchment py-14 md:py-20">
+      <FullBleed className="bg-parchment py-12 md:py-16">
         <div className="max-w-3xl mx-auto px-6 md:px-8">
           <LightStrip />
         </div>
       </FullBleed>
 
       {/* WHAT IT PLANS */}
-      <FullBleed className="bg-cream py-14 md:py-20">
+      <FullBleed className="bg-cream py-12 md:py-16">
         <div className="max-w-3xl mx-auto px-6 md:px-8">
-          <p className="text-center font-mono text-xs uppercase tracking-[0.2em] text-gold font-semibold mb-10">
+          <p className="text-center font-mono text-xs uppercase tracking-[0.2em] text-gold font-semibold mb-6">
             What it plans
           </p>
           <PlanTiles />
@@ -335,7 +335,7 @@ export default function HowVelaWorks() {
       </FullBleed>
 
       {/* QUESTIONS ABOUT THE SCIENCE */}
-      <FullBleed className="bg-parchment py-14 md:py-20">
+      <FullBleed className="bg-parchment py-12 md:py-16">
         <div className="max-w-3xl mx-auto px-6 md:px-8">
           <p className="font-mono text-xs uppercase tracking-[0.2em] text-gold font-semibold mb-8">
             Questions about the science
@@ -359,7 +359,7 @@ export default function HowVelaWorks() {
       </FullBleed>
 
       {/* SMALL PRINT */}
-      <FullBleed className="bg-cream py-14 md:py-20">
+      <FullBleed className="bg-cream py-12 md:py-16">
         <div className="max-w-3xl mx-auto px-6 md:px-8">
           <div className="not-prose rounded-[14px] border border-warmLine border-l-4 border-l-gold bg-parchment/50 px-6 py-6">
             <h2 className="font-display text-xl font-light text-ink mb-3">
