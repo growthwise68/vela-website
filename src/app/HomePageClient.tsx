@@ -205,8 +205,8 @@ export default function HomePageClient() {
           </div>
         </div>
 
-        {/* AT A GLANCE */}
-        <div className="max-w-5xl mx-auto px-6 md:px-10 mt-10 md:mt-12">
+        {/* AT A GLANCE — same container/max-width/padding as the hero above, so their left edges align */}
+        <div className="max-w-[1120px] mx-auto px-6 md:px-10 mt-10 md:mt-12">
           <h2 className="font-mono text-xs md:text-sm uppercase tracking-[0.25em] text-gold font-semibold text-center mb-6 md:mb-8">
             VÉLA at a glance
           </h2>
@@ -219,7 +219,7 @@ export default function HomePageClient() {
               return (
                 <div
                   key={fact.label}
-                  className={`group flex flex-col items-start gap-2 px-4 md:px-2 py-6 md:py-8 min-h-[128px] border-ink/10 ${
+                  className={`group flex flex-col items-start gap-2 px-4 md:px-2 py-6 md:py-5 min-h-[110px] md:min-h-[96px] border-ink/10 ${
                     mobileLeft ? "max-md:border-l" : ""
                   } ${mobileTop ? "max-md:border-t" : ""} ${desktopLeft ? "md:border-l" : ""} ${
                     desktopTop ? "md:border-t" : ""
