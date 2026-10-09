@@ -168,6 +168,40 @@ function StepFigure({
   );
 }
 
+/**
+ * A label positioned over an SVG by percentage of its viewBox, rendered as
+ * real HTML text so its font-size stays fixed in real pixels regardless of
+ * how small the SVG itself is scaled down (e.g. on a narrow phone) — SVG
+ * <text> sized in viewBox units shrinks right along with the graphic and
+ * becomes unreadable on mobile, which plain HTML text does not.
+ */
+function ChartLabel({
+  xPct,
+  yPct,
+  align = "center",
+  className = "",
+  children,
+}: {
+  xPct: number;
+  yPct: number;
+  align?: "center" | "left";
+  className?: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <span
+      className={`absolute whitespace-nowrap font-mono ${className}`}
+      style={{
+        left: `${xPct}%`,
+        top: `${yPct}%`,
+        transform: align === "center" ? "translate(-50%, -50%)" : "translate(0, -50%)",
+      }}
+    >
+      {children}
+    </span>
+  );
+}
+
 function StepConnector() {
   return (
     <div className="hidden sm:flex flex-1 items-center justify-center px-2 self-center" aria-hidden="true">
@@ -234,7 +268,7 @@ export function HowItWorksSteps() {
 /** Section 3 — one combined chart: body clock, sleep pressure, grogginess. */
 export function ScienceChart() {
   const W = 640;
-  const H = 300;
+  const H = 360;
   const MX = 24;
   const hourX = (h: number) => MX + (h / 36) * (W - 2 * MX);
 
@@ -263,47 +297,56 @@ export function ScienceChart() {
   ];
   const sawPath = sawPoints.map(([h, y], i) => `${i === 0 ? "M" : "L"} ${hourX(h).toFixed(1)} ${y.toFixed(1)}`).join(" ");
 
+  const pct = (x: number, y: number) => ({ xPct: (x / W) * 100, yPct: (y / H) * 100 });
+  const nightLeft = pct(hourX(4), H - 12);
+  const nightRight = pct(hourX(28), H - 12);
+  const grogginess = pct(hourX(9), PRESSURE_LOW + 42);
+  const sleepPressureLabel = pct(hourX(2), PRESSURE_HIGH - 10);
+  const bodyClockLabel = pct(hourX(16) + 8, sineMidY - sineAmp - 10);
+
   return (
     <RevealOnView>
       <figure>
-        <svg
-          viewBox={`0 0 ${W} ${H}`}
-          role="img"
-          aria-label="A chart over a day and a half showing a gold body-clock wave dipping during each shaded night band, an ink sleep-pressure line that rises through each day and falls during each night, and a small shaded dip marking grogginess just after the first waking."
-          className="w-full h-auto"
-        >
-          <rect x={hourX(0)} y={0} width={hourX(8) - hourX(0)} height={H} className="fill-night/[0.05]" />
-          <rect x={hourX(24)} y={0} width={hourX(32) - hourX(24)} height={H} className="fill-night/[0.05]" />
-          <text x={hourX(4)} y={H - 12} textAnchor="middle" className="fill-inkFaint font-mono text-[10px] uppercase tracking-[0.1em]">
-            Night
-          </text>
-          <text x={hourX(28)} y={H - 12} textAnchor="middle" className="fill-inkFaint font-mono text-[10px] uppercase tracking-[0.1em]">
-            Night
-          </text>
+        <div className="relative">
+          <svg
+            viewBox={`0 0 ${W} ${H}`}
+            role="img"
+            aria-label="A chart over a day and a half showing a gold body-clock wave dipping during each shaded night band, an ink sleep-pressure line that rises through each day and falls during each night, and a small shaded dip marking grogginess just after the first waking."
+            className="w-full h-auto"
+          >
+            <rect x={hourX(0)} y={0} width={hourX(8) - hourX(0)} height={H} className="fill-night/[0.05]" />
+            <rect x={hourX(24)} y={0} width={hourX(32) - hourX(24)} height={H} className="fill-night/[0.05]" />
 
-          {/* grogginess: a brief dip right after the first wake, at the end of the first night band */}
-          <path
-            d={`M ${hourX(8)} ${PRESSURE_LOW} Q ${hourX(9)} ${PRESSURE_LOW + 24} ${hourX(10)} ${PRESSURE_LOW}`}
-            fill="none"
-            stroke="currentColor"
-            className="text-inkFaint"
-            strokeWidth={1.5}
-            strokeDasharray="3 3"
-          />
-          <text x={hourX(9)} y={PRESSURE_LOW + 42} textAnchor="middle" className="fill-inkFaint font-mono text-[11px] uppercase tracking-[0.08em]">
+            {/* grogginess: a brief dip right after the first wake, at the end of the first night band */}
+            <path
+              d={`M ${hourX(8)} ${PRESSURE_LOW} Q ${hourX(9)} ${PRESSURE_LOW + 24} ${hourX(10)} ${PRESSURE_LOW}`}
+              fill="none"
+              stroke="currentColor"
+              className="text-inkFaint"
+              strokeWidth={1.5}
+              strokeDasharray="3 3"
+            />
+
+            <path d={sawPath} fill="none" stroke="currentColor" className="text-ink" strokeWidth={2} strokeLinejoin="round" />
+            <path d={sinePath} fill="none" stroke="currentColor" className="text-gold" strokeWidth={2.5} strokeLinecap="round" />
+          </svg>
+
+          <ChartLabel {...nightLeft} className="text-[11px] text-inkFaint uppercase tracking-[0.1em]">
+            Night
+          </ChartLabel>
+          <ChartLabel {...nightRight} className="text-[11px] text-inkFaint uppercase tracking-[0.1em]">
+            Night
+          </ChartLabel>
+          <ChartLabel {...grogginess} className="text-[12px] text-inkFaint uppercase tracking-[0.08em]">
             Grogginess
-          </text>
-
-          <path d={sawPath} fill="none" stroke="currentColor" className="text-ink" strokeWidth={2} strokeLinejoin="round" />
-          <text x={hourX(2)} y={PRESSURE_HIGH - 10} className="fill-ink font-mono text-[12px] uppercase tracking-[0.08em]">
+          </ChartLabel>
+          <ChartLabel {...sleepPressureLabel} align="left" className="text-[13px] text-ink uppercase tracking-[0.08em]">
             Sleep pressure
-          </text>
-
-          <path d={sinePath} fill="none" stroke="currentColor" className="text-gold" strokeWidth={2.5} strokeLinecap="round" />
-          <text x={hourX(16) + 8} y={sineMidY - sineAmp - 10} className="fill-gold font-mono text-[12px] uppercase tracking-[0.08em]">
+          </ChartLabel>
+          <ChartLabel {...bodyClockLabel} align="left" className="text-[13px] text-gold uppercase tracking-[0.08em]">
             Body clock
-          </text>
-        </svg>
+          </ChartLabel>
+        </div>
         <figcaption className="mt-6 space-y-2 font-sans text-sm text-inkMid leading-relaxed max-w-2xl mx-auto">
           <span className="block">
             Your body clock has a natural low point in the early hours of your body&apos;s night.
@@ -409,10 +452,14 @@ export function LightStrip() {
   const H = 150;
   const MX = 20;
   const hourX = (h: number) => MX + (h / 24) * (W - 2 * MX);
+  const pct = (x: number, y: number) => ({ xPct: (x / W) * 100, yPct: (y / H) * 100 });
+  const pullsLabel = pct(hourX(8), 102);
+  const pushesLabel = pct(hourX(20), 102);
 
   return (
     <RevealOnView>
       <figure>
+        <div className="relative">
         <svg
           viewBox={`0 0 ${W} ${H}`}
           role="img"
@@ -474,9 +521,6 @@ export function LightStrip() {
             strokeWidth={2}
             markerEnd="url(#hvw-arrow-gold-2)"
           />
-          <text x={hourX(8)} y={102} textAnchor="middle" className="fill-gold font-mono text-[11px] uppercase tracking-[0.06em]">
-            Pulls earlier
-          </text>
 
           <g transform={`translate(${hourX(20) - 12} 48) scale(1.1)`}>
             <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" className="fill-ink" />
@@ -491,10 +535,14 @@ export function LightStrip() {
             strokeWidth={2}
             markerEnd="url(#hvw-arrow-ink-2)"
           />
-          <text x={hourX(20)} y={102} textAnchor="middle" className="fill-ink font-mono text-[11px] uppercase tracking-[0.06em]">
-            Pushes later
-          </text>
         </svg>
+        <ChartLabel {...pullsLabel} className="text-[13px] text-gold uppercase tracking-[0.06em]">
+          Pulls earlier
+        </ChartLabel>
+        <ChartLabel {...pushesLabel} className="text-[13px] text-ink uppercase tracking-[0.06em]">
+          Pushes later
+        </ChartLabel>
+        </div>
         <figcaption className="mt-4 text-center font-sans text-base text-inkMid leading-relaxed">
           Light is the strongest signal your body clock follows, and timing decides which way it moves.
           <Cite n={[5, 6]} />
