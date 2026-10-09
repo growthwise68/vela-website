@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { FullBleed } from "@/components/FullBleed";
-import { StatCard, CopyAnchorButton, CitationBox, ResultTable } from "@/components/ResearchBlocks";
+import { StatCard, CopyAnchorButton, CitationBox, ResultTable, AutoOpenFromHash } from "@/components/ResearchBlocks";
 
 const URL = "https://velaforcrew.com/research/crew-fatigue-survey-2026";
 const N = 93;
@@ -225,11 +225,23 @@ const roles: Option[] = [
 const headlineStats: { value: string; label: string; href: string }[] = [
   { value: "97%", label: "say their airline has never properly acknowledged their fatigue", href: "#airline-acknowledgment" },
   { value: "85%", label: "have thought about leaving the job", href: "#leaving" },
-  { value: "57%", label: "are running on empty more often than not", href: "#running-on-empty" },
   { value: "42%", label: "need three or more days to recover after a long-haul trip", href: "#recovery" },
   { value: "13%", label: "are never fully recovered before their next trip", href: "#recovery" },
-  { value: "8%", label: "actively track their body clock", href: "#body-clock" },
+  { value: "57%", label: "are running on empty more often than not", href: "#running-on-empty" },
+  { value: "54%", label: "say there's nothing built for crew", href: "#tools" },
 ];
+
+const featuredOrder = ["airline-acknowledgment", "leaving", "recovery", "running-on-empty", "tools"];
+const accordionOrder = ["wrong-moment", "episodes", "body-clock", "roster-planning"];
+const accordionKeyFigure: Record<string, string> = {
+  "wrong-moment": "27%",
+  episodes: "19%",
+  "body-clock": "71%",
+  "roster-planning": "6%",
+};
+
+const featuredFindings = featuredOrder.map((id) => findings.find((f) => f.id === id)!);
+const accordionFindings = accordionOrder.map((id) => findings.find((f) => f.id === id)!);
 
 function firstPct(text: string): string | null {
   return text.match(/\d+%/)?.[0] ?? null;
@@ -289,11 +301,11 @@ export default function CrewSurvey2026() {
         </div>
       </FullBleed>
 
-      {/* FINDINGS */}
-      {findings.map((f) => {
+      {/* FEATURED FINDINGS — five in full, alternating cream/parchment */}
+      {featuredFindings.map((f, i) => {
         const pct = firstPct(f.headline);
         return (
-        <FullBleed key={f.id} className={`${f.bg === "cream" ? "bg-cream" : "bg-parchment"} py-14 md:py-20 scroll-mt-20`} id={f.id}>
+        <FullBleed key={f.id} className={`${i % 2 === 0 ? "bg-cream" : "bg-parchment"} py-14 md:py-20 scroll-mt-20`} id={f.id}>
           <div className="max-w-3xl mx-auto px-6 md:px-8">
             <h2 className="group font-display text-2xl md:text-3xl font-light text-ink mb-4 leading-snug">
               {f.heading}
@@ -323,6 +335,50 @@ export default function CrewSurvey2026() {
         </FullBleed>
         );
       })}
+
+      {/* MORE FROM THE SURVEY — remaining four as an accordion */}
+      <FullBleed className="bg-parchment py-14 md:py-20">
+        <div className="max-w-3xl mx-auto px-6 md:px-8">
+          <AutoOpenFromHash ids={accordionOrder} />
+          <p className="font-mono text-xs uppercase tracking-[0.2em] text-gold font-semibold mb-6">
+            More from the survey
+          </p>
+          <div className="divide-y divide-warmLine">
+            {accordionFindings.map((f) => (
+              <details key={f.id} id={f.id} className="group py-1 scroll-mt-20">
+                <summary className="flex items-center justify-between gap-4 py-5 cursor-pointer list-none min-h-11">
+                  <h2 className="font-display text-xl md:text-2xl font-light text-ink leading-snug">
+                    {f.heading}
+                  </h2>
+                  <span className="flex items-center gap-3 flex-shrink-0">
+                    <span className="font-display text-2xl font-light text-gold">
+                      {accordionKeyFigure[f.id]}
+                    </span>
+                    <span className="font-mono text-xl text-gold transition-transform group-open:rotate-45">
+                      +
+                    </span>
+                  </span>
+                </summary>
+                <div className="pb-6">
+                  <p className="font-display text-xl md:text-2xl text-ink leading-snug mb-4">
+                    {f.headline}
+                  </p>
+                  <p className="font-mono text-[13px] text-inkMid leading-relaxed mb-1">
+                    Question asked: &ldquo;{f.question}&rdquo;
+                    {f.sub && <> <span className="text-inkFaint">{f.sub}</span></>}
+                    {f.multi && (
+                      <span className="text-inkFaint">
+                        {" "}(crew could choose more than one answer, so percentages add up to more than 100%)
+                      </span>
+                    )}
+                  </p>
+                  <ResultTable options={f.options} total={N} highlight={f.highlight} multi={f.multi} />
+                </div>
+              </details>
+            ))}
+          </div>
+        </div>
+      </FullBleed>
 
       {/* IN THEIR OWN WORDS — navy, cream-on-navy pull quotes */}
       <FullBleed className="bg-night py-14 md:py-20">

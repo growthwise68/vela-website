@@ -1,6 +1,25 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+
+/**
+ * On mount, if the page's URL hash matches one of the given accordion
+ * ids, forces that <details> open so the content a visitor landed on is
+ * actually visible (a closed <details> still gets the browser's native
+ * anchor scroll, but its content stays hidden unless opened).
+ */
+export function AutoOpenFromHash({ ids }: { ids: string[] }) {
+  useEffect(() => {
+    const hash = window.location.hash.replace("#", "");
+    if (!ids.includes(hash)) return;
+    const el = document.getElementById(hash);
+    if (el instanceof HTMLDetailsElement) {
+      el.open = true;
+      el.scrollIntoView({ block: "start" });
+    }
+  }, [ids]);
+  return null;
+}
 
 export function StatCard({
   value,
@@ -93,7 +112,7 @@ function Bar({
   return (
     <div className="relative h-7 rounded bg-ink/[0.04] overflow-hidden">
       <div
-        className={`absolute inset-y-0 left-0 rounded ${highlighted ? "bg-gold" : "bg-ink/15"}`}
+        className={`absolute inset-y-0 left-0 rounded ${highlighted ? "bg-gold" : "bg-gold/50"}`}
         style={{ width: `${pct}%` }}
       />
       <span className="absolute inset-y-0 right-2 flex items-center font-mono text-sm text-ink">
