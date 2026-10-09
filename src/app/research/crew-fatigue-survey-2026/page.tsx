@@ -311,9 +311,9 @@ export default function CrewSurvey2026() {
               {f.heading}
               <CopyAnchorButton anchorId={f.id} />
             </h2>
-            <div className="sm:flex sm:items-start sm:gap-6 mb-4">
+            <div className="mb-4">
               {pct && (
-                <p className="font-display text-6xl md:text-7xl font-light text-gold leading-none flex-shrink-0 mb-2 sm:mb-0">
+                <p aria-hidden="true" className="font-display text-6xl md:text-7xl font-light text-gold leading-none mb-2">
                   {pct}
                 </p>
               )}
@@ -330,7 +330,7 @@ export default function CrewSurvey2026() {
                 </span>
               )}
             </p>
-            <ResultTable options={f.options} total={N} highlight={f.highlight} multi={f.multi} />
+            <ResultTable options={f.options} total={N} multi={f.multi} />
           </div>
         </FullBleed>
         );
@@ -372,7 +372,7 @@ export default function CrewSurvey2026() {
                       </span>
                     )}
                   </p>
-                  <ResultTable options={f.options} total={N} highlight={f.highlight} multi={f.multi} />
+                  <ResultTable options={f.options} total={N} multi={f.multi} />
                 </div>
               </details>
             ))}

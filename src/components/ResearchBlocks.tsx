@@ -100,21 +100,10 @@ export function CitationBox({ text }: { text: string }) {
   );
 }
 
-function Bar({
-  n,
-  pct,
-  highlighted,
-}: {
-  n: number;
-  pct: number;
-  highlighted: boolean;
-}) {
+function Bar({ n, pct }: { n: number; pct: number }) {
   return (
     <div className="relative h-7 rounded bg-ink/[0.04] overflow-hidden">
-      <div
-        className={`absolute inset-y-0 left-0 rounded ${highlighted ? "bg-gold" : "bg-gold/50"}`}
-        style={{ width: `${pct}%` }}
-      />
+      <div className="absolute inset-y-0 left-0 rounded bg-gold" style={{ width: `${pct}%` }} />
       <span className="absolute inset-y-0 right-2 flex items-center font-mono text-sm text-ink">
         {n} · {pct}%
       </span>
@@ -125,13 +114,11 @@ function Bar({
 export function ResultTable({
   options,
   total,
-  highlight = [],
   multi,
   caption,
 }: {
   options: { label: string; n: number }[];
   total: number;
-  highlight?: string[];
   multi?: boolean;
   caption?: string;
 }) {
@@ -165,7 +152,7 @@ export function ResultTable({
                   {o.label}
                 </td>
                 <td className="block md:table-cell md:w-3/5 md:py-3 md:align-middle pb-2">
-                  <Bar n={o.n} pct={pct} highlighted={highlight.includes(o.label)} />
+                  <Bar n={o.n} pct={pct} />
                 </td>
               </tr>
             );
