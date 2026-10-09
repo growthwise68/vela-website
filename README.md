@@ -13,6 +13,8 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000). Routes: `/`, `/privacy`, `/terms`, `/support`.
 
+Only public-facing assets go in `/public` — everything there is live on velaforcrew.com. Internal docs and notes belong at the repo root instead.
+
 ## Environment
 
 | Variable | Purpose |

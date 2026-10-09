@@ -13,6 +13,20 @@ const nextConfig: NextConfig = {
     // this without re-running `npx tsc --noEmit` to confirm it's actually gone.
     ignoreBuildErrors: true,
   },
+  async redirects() {
+    return [
+      {
+        source: "/survey-standalone.html",
+        destination: "/survey",
+        permanent: true,
+      },
+      {
+        source: "/vela-crew-survey.html",
+        destination: "/survey",
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default nextConfig;

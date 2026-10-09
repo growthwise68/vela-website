@@ -1,6 +1,6 @@
 /**
  * Live survey: 15 questions (excludes intro; email is on thank-you page).
- * Copy source: /public/vela_crew_survey_v2.md
+ * Copy source: /vela_crew_survey_v2.md (repo root)
  */
 export type SurveyQuestion = {
   id: string;
