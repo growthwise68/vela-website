@@ -12,6 +12,152 @@ import { CtaButton } from "@/components/ui/CtaButton";
 import { PhoneFrame } from "@/components/home/PhoneFrame";
 import { CircadianShiftDemo } from "@/components/home/CircadianShiftDemo";
 
+// "At a glance" icons: 20px, ~1.5 stroke, gold outline by default. Each
+// icon's main silhouette also carries `group-hover:fill-gold` so it shifts
+// to a solid gold fill on hover (the cell div is the `group`); the wave's
+// squiggle and the lock's shackle stay stroke-only and swap to cream so
+// they stay visible once their badge shape fills.
+function GlancePlaneIcon() {
+  return (
+    <svg viewBox="0 0 20 20" className="w-5 h-5" aria-hidden="true">
+      <path
+        d="M2 11l16-7-6.5 16-2-7-7.5-2z"
+        stroke="currentColor"
+        strokeWidth={1.5}
+        strokeLinejoin="round"
+        className="text-gold fill-none group-hover:fill-gold transition-colors duration-200"
+      />
+    </svg>
+  );
+}
+function GlanceStarIcon() {
+  return (
+    <svg viewBox="0 0 20 20" className="w-5 h-5" aria-hidden="true">
+      <path
+        d="M10 1.5l2.5 5.8 6.2.5-4.7 4.1 1.5 6.1L10 14.9 4.5 18l1.5-6.1-4.7-4.1 6.2-.5L10 1.5z"
+        stroke="currentColor"
+        strokeWidth={1.5}
+        strokeLinejoin="round"
+        className="text-gold fill-none group-hover:fill-gold transition-colors duration-200"
+      />
+    </svg>
+  );
+}
+function GlanceCalendarIcon() {
+  return (
+    <svg viewBox="0 0 20 20" className="w-5 h-5" aria-hidden="true">
+      <g stroke="currentColor" strokeWidth={1.5} strokeLinejoin="round" className="text-gold fill-none group-hover:fill-gold transition-colors duration-200">
+        <rect x="3" y="5" width="14" height="12" rx="2" />
+        <rect x="6.3" y="2.3" width="1.4" height="4" rx="0.7" />
+        <rect x="12.3" y="2.3" width="1.4" height="4" rx="0.7" />
+      </g>
+    </svg>
+  );
+}
+function GlanceRouteIcon() {
+  return (
+    <svg viewBox="0 0 20 20" className="w-5 h-5" aria-hidden="true">
+      <path
+        d="M10 19s7-7.2 7-12a7 7 0 1 0-14 0c0 4.8 7 12 7 12z"
+        stroke="currentColor"
+        strokeWidth={1.5}
+        strokeLinejoin="round"
+        className="text-gold fill-none group-hover:fill-gold transition-colors duration-200"
+      />
+    </svg>
+  );
+}
+function GlanceMoonIcon() {
+  return (
+    <svg viewBox="0 0 24 24" className="w-5 h-5" aria-hidden="true">
+      <path
+        d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"
+        stroke="currentColor"
+        strokeWidth={1.3}
+        strokeLinejoin="round"
+        className="text-gold fill-none group-hover:fill-gold transition-colors duration-200"
+      />
+    </svg>
+  );
+}
+function GlanceWaveIcon() {
+  return (
+    <svg viewBox="0 0 20 20" className="w-5 h-5" aria-hidden="true">
+      <circle
+        cx="10"
+        cy="10"
+        r="8"
+        stroke="currentColor"
+        strokeWidth={1.5}
+        className="text-gold fill-none group-hover:fill-gold transition-colors duration-200"
+      />
+      <path
+        d="M5 10c1-2 2-2 3 0s2 2 3 0 2-2 3 0"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth={1.3}
+        strokeLinecap="round"
+        className="text-gold group-hover:text-cream transition-colors duration-200"
+      />
+    </svg>
+  );
+}
+function GlanceLockIcon() {
+  return (
+    <svg viewBox="0 0 20 20" className="w-5 h-5" aria-hidden="true">
+      <path
+        d="M6 8.5V6a4 4 0 1 1 8 0v2.5"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth={1.5}
+        className="text-gold"
+      />
+      <rect
+        x="4"
+        y="8.5"
+        width="12"
+        height="9"
+        rx="1.5"
+        stroke="currentColor"
+        strokeWidth={1.5}
+        className="text-gold fill-none group-hover:fill-gold transition-colors duration-200"
+      />
+    </svg>
+  );
+}
+function GlancePhoneIcon() {
+  return (
+    <svg viewBox="0 0 20 20" className="w-5 h-5" aria-hidden="true">
+      <g stroke="currentColor" strokeWidth={1.5} strokeLinejoin="round" className="text-gold fill-none group-hover:fill-gold transition-colors duration-200">
+        <rect x="5" y="2.5" width="10" height="15" rx="2" />
+        <rect x="8.5" y="1.5" width="3" height="1.2" rx="0.6" />
+      </g>
+    </svg>
+  );
+}
+
+const glanceFacts: { icon: () => React.ReactElement; label: string; value: React.ReactNode }[] = [
+  { icon: GlancePlaneIcon, label: "For", value: "Long-haul cabin crew" },
+  { icon: GlanceStarIcon, label: "Built by", value: "Cabin crew" },
+  { icon: GlanceCalendarIcon, label: "You add", value: "Date + flight number" },
+  { icon: GlanceRouteIcon, label: "It follows", value: "Your whole roster" },
+  { icon: GlanceMoonIcon, label: "It plans", value: "Sleep · light · caffeine · meals" },
+  {
+    icon: GlanceWaveIcon,
+    label: "The science",
+    value: (
+      <Link
+        href="/how-vela-works"
+        className="underline decoration-gold/50 underline-offset-2 hover:text-gold transition-colors"
+      >
+        Three Process Model
+      </Link>
+    ),
+  },
+  { icon: GlanceLockIcon, label: "Privacy", value: "Independent of any airline" },
+  { icon: GlancePhoneIcon, label: "Available on", value: "iPhone & Android · early access" },
+];
+
 export default function HomePageClient() {
   return (
     <div className="w-full">
@@ -25,8 +171,8 @@ export default function HomePageClient() {
         }}
       />
 
-      {/* HERO SECTION — split layout: copy left, timeline right on desktop */}
-      <FullBleed className="py-20 md:py-28 bg-gradient-to-b from-parchment/50 to-cream/50">
+      {/* HERO + AT A GLANCE — one continuous band, no seam between them */}
+      <FullBleed className="pt-20 md:pt-28 pb-10 md:pb-12 bg-gradient-to-b from-parchment/50 to-cream/50">
         <div className="max-w-[1120px] mx-auto px-6 md:px-10">
           <div className="grid md:grid-cols-[55fr_45fr] gap-12 md:gap-16 items-center">
             <div className="text-center md:text-left">
@@ -58,47 +204,37 @@ export default function HomePageClient() {
             <Wave />
           </div>
         </div>
-      </FullBleed>
 
-      {/* KEY FACTS SECTION */}
-      <FullBleed className="py-10 md:py-14 bg-gradient-to-b from-parchment/50 to-cream/50">
-        <div className="max-w-[1120px] mx-auto px-6 md:px-10">
-          <h2 className="font-mono text-xs md:text-sm uppercase tracking-[0.25em] text-gold font-semibold text-center mb-8">
-            At a glance
+        {/* AT A GLANCE */}
+        <div className="max-w-5xl mx-auto px-6 md:px-10 mt-10 md:mt-12">
+          <h2 className="font-mono text-xs md:text-sm uppercase tracking-[0.25em] text-gold font-semibold text-center mb-6 md:mb-8">
+            VÉLA at a glance
           </h2>
-          <dl className="grid grid-cols-2 md:grid-cols-4 divide-x divide-y md:divide-y-0 divide-ink/10 border-t border-ink/10 md:border-t-0">
-            {[
-              { label: "Who it's for", line: <>Long-haul cabin crew, built by cabin crew</> },
-              { label: "Adding duties", line: <>Date and flight number. Any airline with public flight numbers</> },
-              { label: "What it follows", line: <>Your whole roster, days off included, not just one trip</> },
-              { label: "What it plans", line: <>Sleep, light, caffeine and meals for every duty and layover</> },
-              {
-                label: "The science",
-                line: (
-                  <>
-                    <Link
-                      href="/how-vela-works"
-                      className="text-inkMid underline decoration-gold/50 underline-offset-2 hover:text-gold hover:opacity-100 transition-colors"
-                    >
-                      Three Process Model of alertness
-                    </Link>
-                    , CDC adjustment rates
-                  </>
-                ),
-              },
-              { label: "What you get", line: <>Estimates, not measurements. Not a medical device</> },
-              { label: "Your data", line: <>Independent of any airline. Private to your account</> },
-              { label: "Availability", line: <>iPhone and Android, in early access</> },
-            ].map((fact, i) => (
-              <div key={i} className="px-4 py-5 border-b border-ink/10 md:border-b-0">
-                <dt className="font-mono text-xs md:text-xs uppercase tracking-[0.2em] text-gold">
-                  {fact.label}
-                </dt>
-                <dd className="font-sans text-sm md:text-base text-inkMid leading-snug mt-2">
-                  {fact.line}
-                </dd>
-              </div>
-            ))}
+          <dl className="grid grid-cols-2 md:grid-cols-4">
+            {glanceFacts.map((fact, i) => {
+              const mobileLeft = i % 2 === 1;
+              const mobileTop = i >= 2;
+              const desktopLeft = i % 4 !== 0;
+              const desktopTop = i >= 4;
+              return (
+                <div
+                  key={fact.label}
+                  className={`group flex flex-col items-start gap-2 px-4 md:px-2 py-6 md:py-8 min-h-[128px] border-ink/10 ${
+                    mobileLeft ? "max-md:border-l" : ""
+                  } ${mobileTop ? "max-md:border-t" : ""} ${desktopLeft ? "md:border-l" : ""} ${
+                    desktopTop ? "md:border-t" : ""
+                  }`}
+                >
+                  <fact.icon />
+                  <dt className="font-mono text-[11px] uppercase tracking-[0.15em] text-gold">
+                    {fact.label}
+                  </dt>
+                  <dd className="font-sans text-base text-ink md:whitespace-nowrap">
+                    {fact.value}
+                  </dd>
+                </div>
+              );
+            })}
           </dl>
         </div>
       </FullBleed>
