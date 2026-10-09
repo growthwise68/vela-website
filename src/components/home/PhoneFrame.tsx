@@ -12,7 +12,7 @@ type Screen = {
 const screens: Screen[] = [
   {
     tab: "Departure",
-    context: "DXB → MEL · Day 1",
+    context: "LHR → SIN · Day 1",
     title: "The Departure",
     note: "Your report time is 02:00. Your body thinks it’s the middle of the night — because it is. VÉLA saw this coming three days ago.",
   },

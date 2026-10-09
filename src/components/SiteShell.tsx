@@ -63,7 +63,7 @@ function FooterColumn({
           <li key={item.href}>
             <Link
               href={item.href}
-              className="block py-3.5 md:py-1.5 font-mono text-xs md:text-xs uppercase tracking-[0.1em] text-inkMid hover:text-gold transition-colors"
+              className="block py-3.5 md:py-1.5 font-mono text-xs md:text-xs uppercase tracking-[0.1em] text-inkMid hover:text-gold transition-colors md:whitespace-nowrap"
             >
               {item.label}
             </Link>
@@ -228,7 +228,7 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
         inert={menuOpen || undefined}
         className="w-full border-t border-warmLine bg-parchment"
       >
-        <div className="max-w-3xl mx-auto px-6 py-8 md:py-12">
+        <div className="max-w-6xl mx-auto px-6 md:px-8 py-8 md:py-12">
           {pathname !== "/how-vela-works" && (
             <p className="font-sans text-xs text-inkFaint leading-relaxed mb-6 md:mb-10">
               A note on V&Eacute;LA: it provides personal planning insights based on your roster. It isn&rsquo;t
@@ -239,8 +239,8 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
             </p>
           )}
 
-          <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-6 md:gap-10">
-            <div className="md:max-w-[220px]">
+          <div className="flex flex-col gap-6 md:grid md:grid-cols-[1.5fr_1fr_1fr_1fr] md:gap-12">
+            <div className="md:max-w-[260px]">
               <Logo className="mb-3" />
               <p className="font-sans text-sm text-inkMid leading-relaxed mb-2">
                 VÉLA for Crew is a body-clock planning app for long-haul cabin crew.
@@ -250,7 +250,12 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
               </p>
             </div>
 
-            <div className="grid grid-cols-3 gap-4 md:gap-12">
+            {/* On mobile this renders as its own 3-column grid (unchanged from
+                before); at md+ it dissolves via `contents` so its three
+                FooterColumns become direct children of the outer grid,
+                sitting in the three equal columns beside the wider brand
+                column. */}
+            <div className="grid grid-cols-3 gap-4 md:contents">
               <FooterColumn title="Explore" items={footerExplore} />
               <FooterColumn title="Crew" items={footerCrew} />
               <FooterColumn title="Legal" items={footerLegal} />
@@ -258,14 +263,14 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
           </div>
 
           <div className="mt-6 pt-5 md:mt-12 md:pt-6 border-t border-warmLine flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-            <p className="font-mono text-xs uppercase tracking-[0.15em] text-inkFaint">
+            <p className="font-mono text-xs uppercase tracking-[0.15em] text-inkFaint md:whitespace-nowrap">
               &copy; {new Date().getFullYear()} V&Eacute;LA &middot; Vela4Crew Inc., 131 Continental Dr, Suite 305, Newark, DE 19713, USA
             </p>
             <a
               href="https://www.instagram.com/velaforcrew"
               target="_blank"
               rel="noreferrer"
-              className="font-mono text-xs uppercase tracking-[0.15em] text-inkFaint hover:text-gold transition-colors"
+              className="font-mono text-xs uppercase tracking-[0.15em] text-inkFaint hover:text-gold transition-colors md:whitespace-nowrap"
             >
               Instagram
             </a>

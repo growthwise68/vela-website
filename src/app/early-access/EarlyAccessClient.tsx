@@ -124,7 +124,7 @@ export default function EarlyAccessClient() {
                         type="text"
                         value={airline}
                         onChange={(e) => setAirline(e.target.value)}
-                        placeholder="e.g. Emirates, United, Qantas"
+                        placeholder="e.g. your airline"
                         autoComplete="organization"
                         disabled={status === "loading"}
                       />

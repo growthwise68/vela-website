@@ -218,10 +218,10 @@ export function HowItWorksSteps() {
   return (
     <RevealOnView>
       <div className="flex flex-col sm:flex-row sm:items-center gap-8 sm:gap-0">
-        <StepFigure ariaLabel="A roster chip showing a flight entry: EK 201 on 14 October" caption="Add your duties">
+        <StepFigure ariaLabel="A roster chip showing a flight entry: FLT 204 on 14 October" caption="Add your duties">
           <rect x="20" y="35" width="160" height="50" rx="12" className="fill-cream stroke-warmLine" strokeWidth={1} />
           <text x="100" y="58" textAnchor="middle" className="fill-ink font-mono text-[14px] font-semibold">
-            EK 201
+            FLT 204
           </text>
           <text x="100" y="76" textAnchor="middle" className="fill-inkFaint font-mono text-[11px] uppercase tracking-[0.1em]">
             14 Oct
@@ -301,7 +301,11 @@ export function ScienceChart() {
   const nightLeft = pct(hourX(4), H - 12);
   const nightRight = pct(hourX(28), H - 12);
   const grogginess = pct(hourX(9), PRESSURE_LOW + 42);
-  const sleepPressureLabel = pct(hourX(2), PRESSURE_HIGH - 10);
+  // Positioned at the midpoint of the first full day (hour 16), where the
+  // gold wave is at its peak and the ink line is roughly midway through its
+  // climb — the widest vertical gap between the two lines on the whole
+  // chart, so the label can sit clear of both.
+  const sleepPressureLabel = pct(hourX(16), 150);
   const bodyClockLabel = pct(hourX(16) + 8, sineMidY - sineAmp - 10);
 
   return (
@@ -340,7 +344,7 @@ export function ScienceChart() {
           <ChartLabel {...grogginess} className="text-[12px] text-inkFaint uppercase tracking-[0.08em]">
             Grogginess
           </ChartLabel>
-          <ChartLabel {...sleepPressureLabel} align="left" className="text-[13px] text-ink uppercase tracking-[0.08em]">
+          <ChartLabel {...sleepPressureLabel} className="text-[13px] text-ink uppercase tracking-[0.08em]">
             Sleep pressure
           </ChartLabel>
           <ChartLabel {...bodyClockLabel} align="left" className="text-[13px] text-gold uppercase tracking-[0.08em]">

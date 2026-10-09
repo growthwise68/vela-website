@@ -157,9 +157,9 @@ export default function HomePageClient() {
             >
               <SwiperSlide>
                 <div className="bg-gradient-to-br from-amber-100 to-amber-50 min-h-[300px] flex flex-col items-center justify-center py-10 text-inkMid px-6">
-                  <h3 className="font-display text-3xl md:text-4xl text-ink mb-4">DXB&ndash;JFK</h3>
+                  <h3 className="font-display text-3xl md:text-4xl text-ink mb-4">LHR&ndash;JFK</h3>
                   <p className="text-lg md:text-xl mb-6 max-w-md text-center">
-                    Your DXB&ndash;JFK pattern pushes your low point to 04:00 body time on day two.
+                    Your LHR&ndash;JFK pattern pushes your low point to 04:00 body time on day two.
                     Here&rsquo;s what that means for your layover.
                   </p>
                   <CircadianShiftDemo />
