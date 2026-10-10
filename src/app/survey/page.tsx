@@ -204,6 +204,7 @@ export default function SurveyPage() {
   const selectedMultiCount = q.type === "multi" ? ((answers[q.id] as number[]) || []).length : 0;
 
   return (
+    <div className="max-w-3xl mx-auto px-6 py-12">
     <div className="survey-wrapper" style={{ minHeight: "100vh", display: "flex", flexDirection: "column", position: "relative", overflowY: "auto" }}>
       <div className="stars" id="stars"></div>
       <div className="arc-bg"></div>
@@ -389,6 +390,7 @@ export default function SurveyPage() {
         </div>
 
       </div>
+    </div>
     </div>
   );
 }

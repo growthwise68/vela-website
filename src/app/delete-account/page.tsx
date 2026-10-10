@@ -10,6 +10,7 @@ const supportEmail = "founder@velaforcrew.com";
 
 export default function DeleteAccountPage() {
   return (
+    <div className="max-w-3xl mx-auto px-6 py-12">
     <article className="prose-vela">
       <h1 className="font-display text-3xl font-light text-ink">Delete your account</h1>
       <p className="mt-2 font-mono text-[10px] uppercase tracking-[0.18em] text-inkFaint">
@@ -103,5 +104,6 @@ export default function DeleteAccountPage() {
         Vela4Crew Inc., 131 Continental Dr, Suite 305, Newark, DE 19713, USA.
       </p>
     </article>
+    </div>
   );
 }

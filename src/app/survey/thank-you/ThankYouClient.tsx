@@ -60,6 +60,7 @@ export default function ThankYouClient() {
   };
 
   return (
+    <div className="max-w-3xl mx-auto px-6 py-12">
     <div className="w-full max-w-lg mx-auto pb-8 -mt-4">
       <div className="mb-6 flex justify-center">
         <div
@@ -187,6 +188,7 @@ export default function ThankYouClient() {
           {rid && status !== "success" ? copy.linkSkip : copy.linkBack}
         </Link>
       </div>
+    </div>
     </div>
   );
 }

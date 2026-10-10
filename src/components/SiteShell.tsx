@@ -224,7 +224,7 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
         </div>
       )}
 
-      <main inert={menuOpen || undefined} className="mx-auto w-full max-w-3xl flex-1 px-6 py-12">
+      <main inert={menuOpen || undefined} className="w-full flex-1">
         {children}
       </main>
 
