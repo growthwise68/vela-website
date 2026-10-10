@@ -177,7 +177,7 @@ export default function HomePageClient() {
           <div className="grid md:grid-cols-[55fr_45fr] gap-12 md:gap-16 items-center">
             <div className="text-center md:text-left">
               <p className="font-mono text-xs md:text-sm uppercase tracking-[0.25em] text-gold mb-6 font-semibold">
-                By crew, for crew
+                Rest and recovery for long-haul crew
               </p>
               <h1 className="font-display text-6xl md:text-7xl font-light leading-tight text-ink mb-6">
                 Your roster, mapped before you fly it.
@@ -186,7 +186,7 @@ export default function HomePageClient() {
                 Your roster is built by the airline, for the airline. VÉLA is built by crew, for crew.
               </p>
               <p className="font-sans text-xl md:text-2xl font-light text-inkMid mx-auto md:mx-0 max-w-[640px] mb-8 leading-relaxed">
-                It turns that roster into a plan you can actually follow, giving you back control of your duty preparation, layovers, recovery and days off.
+                It turns your roster into a plan for rest and recovery, empowering you to show up ready for every duty, layover, and day off.
               </p>
               <CtaButton href="/early-access">Get Early Access</CtaButton>
               <p className="font-mono text-xs uppercase tracking-[0.15em] text-inkFaint mt-4">
