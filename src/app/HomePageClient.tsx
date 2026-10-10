@@ -182,11 +182,11 @@ export default function HomePageClient() {
               <h1 className="font-display text-6xl md:text-7xl font-light leading-tight text-ink mb-6">
                 Your roster, mapped before you fly it.
               </h1>
+              <p className="font-sans text-2xl md:text-3xl font-light text-ink mx-auto md:mx-0 max-w-[640px] mb-4 leading-relaxed">
+                Your roster is built by the airline, for the airline. VÉLA is built by crew, for crew.
+              </p>
               <p className="font-sans text-xl md:text-2xl font-light text-inkMid mx-auto md:mx-0 max-w-[640px] mb-8 leading-relaxed">
-                <strong className="font-medium text-ink">VÉLA is a body-clock planning app for long-haul cabin crew.</strong>{" "}
-                It turns your roster into a personalised body-clock plan, showing what your body clock will be doing — duty by duty,
-                timezone by timezone — with sleep, light, caffeine and meal timing for every trip.
-                Built by crew, because someone had to.
+                It turns that roster into a plan you can actually follow, giving you back control of your duty preparation, layovers, recovery and days off.
               </p>
               <CtaButton href="/early-access">Get Early Access</CtaButton>
               <p className="font-mono text-xs uppercase tracking-[0.15em] text-inkFaint mt-4">
