@@ -5,9 +5,9 @@ import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 
 const mainNav = [
-  { href: "/briefs", label: "Briefs" },
   { href: "/how-vela-works", label: "How it works" },
   { href: "/research/crew-fatigue-survey-2026", label: "Research" },
+  { href: "/briefs", label: "Briefs" },
   { href: "/pricing", label: "Pricing" },
 ];
 
@@ -17,9 +17,9 @@ const mobileSecondaryNav = [
 ];
 
 const footerExplore = [
-  { href: "/briefs", label: "Briefs" },
   { href: "/how-vela-works", label: "How it works" },
   { href: "/research/crew-fatigue-survey-2026", label: "Research" },
+  { href: "/briefs", label: "Briefs" },
   { href: "/pricing", label: "Pricing" },
   { href: "/early-access", label: "Early access" },
 ];
@@ -40,7 +40,7 @@ function Logo({ onClick, className = "" }: { onClick?: () => void; className?: s
     <Link
       href="/"
       onClick={onClick}
-      className={`flex items-center gap-2 font-display text-3xl md:text-4xl font-medium tracking-tight text-ink hover:text-gold transition-colors ${className}`}
+      className={`inline-flex items-center gap-2 leading-none font-display text-3xl md:text-4xl font-medium tracking-tight text-ink hover:text-gold transition-colors ${className}`}
     >
       <span className="text-gold text-2xl md:text-3xl">★</span>
       <span>VÉLA</span>
@@ -112,7 +112,7 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
         className="border-b border-warmLine bg-cream sticky top-0 z-20"
       >
         <div className="mx-auto flex max-w-3xl items-center justify-between gap-4 px-6 py-3 md:py-4">
-          <Logo />
+          <Logo className="h-10" />
 
           {/* Desktop nav */}
           <nav className="hidden md:flex items-center gap-6 font-mono text-xs uppercase tracking-[0.15em] text-inkMid">
@@ -123,19 +123,19 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
                   key={item.href}
                   href={item.href}
                   aria-current={active ? "page" : undefined}
-                  className={`pb-1 border-b-2 transition-colors hover:text-gold ${
-                    active ? "border-gold text-ink" : "border-transparent"
+                  className={`relative h-10 inline-flex items-center transition-colors hover:text-gold after:absolute after:-bottom-1 after:left-0 after:right-0 after:h-[2px] after:transition-colors ${
+                    active ? "text-ink after:bg-gold" : "text-inkMid after:bg-transparent"
                   }`}
                 >
-                  {item.label}
+                  <span className="leading-none translate-y-[1px]">{item.label}</span>
                 </Link>
               );
             })}
             <Link
               href="/early-access"
-              className="inline-block px-4 py-2 bg-gold text-ink font-semibold rounded-lg text-xs hover:bg-yellow-600 transition-colors"
+              className="h-10 inline-flex items-center justify-center px-4 bg-gold text-ink font-semibold rounded-lg text-xs hover:bg-yellow-600 transition-colors"
             >
-              Get early access
+              <span className="leading-none">Get early access</span>
             </Link>
           </nav>
 
