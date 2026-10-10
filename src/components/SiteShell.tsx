@@ -111,11 +111,11 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
         inert={menuOpen || undefined}
         className="border-b border-warmLine bg-cream sticky top-0 z-20"
       >
-        <div className="mx-auto flex max-w-3xl items-center justify-between gap-4 px-6 py-3 md:py-4">
+        <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-6 md:px-8 py-3 md:py-4">
           <Logo className="h-10" />
 
-          {/* Desktop nav */}
-          <nav className="hidden md:flex items-center gap-6 font-mono text-xs uppercase tracking-[0.15em] text-inkMid">
+          {/* Desktop nav — links grouped in the middle, button pinned far right */}
+          <nav className="hidden md:flex items-center gap-10 lg:gap-12 font-mono text-xs uppercase tracking-[0.15em] text-inkMid">
             {mainNav.map((item) => {
               const active = pathname === item.href;
               return (
@@ -131,13 +131,14 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
                 </Link>
               );
             })}
-            <Link
-              href="/early-access"
-              className="h-10 inline-flex items-center justify-center px-4 bg-gold text-ink font-semibold rounded-lg text-xs hover:bg-yellow-600 transition-colors"
-            >
-              <span className="leading-none">Get early access</span>
-            </Link>
           </nav>
+
+          <Link
+            href="/early-access"
+            className="hidden md:inline-flex h-10 items-center justify-center px-4 bg-gold text-ink font-semibold rounded-lg text-xs hover:bg-yellow-600 transition-colors"
+          >
+            <span className="leading-none">Get early access</span>
+          </Link>
 
           {/* Mobile controls */}
           <div className="flex md:hidden items-center gap-2">
