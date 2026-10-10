@@ -1,0 +1,13 @@
+<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    .star { fill: #C49A3C; }
+    @media (prefers-color-scheme: dark) {
+      /* Same gold on dark browser-tab backgrounds — it reads on both. */
+      .star { fill: #C49A3C; }
+    }
+  </style>
+  <path
+    class="star"
+    d="M50,18 L58.5,38.3 L80.4,40.1 L63.7,54.4 L68.8,75.9 L50,64.4 L31.2,75.9 L36.3,54.4 L19.6,40.1 L41.5,38.3 Z"
+  />
+</svg>
