@@ -1,5 +1,7 @@
 # C11 — Website checkout — REPORT
 
+**Helen REVISE (this tip):** Stripped sandbox-demo success copy only (`PaySuccessActions` when App Store URL unset).
+
 **Node:** C11 website pay landing only. **Map position:** main@f77d804f (PR #276). **Not touched:** C12/C5 Redeem, Rachel C13, P6b rewards, deploy.
 
 **Signed intent:** `SIGN_PAGE.md` — pay on web → open Véla (or email) → sign in → Core on; referral QR/messenger → same on-site `/pay` URL.

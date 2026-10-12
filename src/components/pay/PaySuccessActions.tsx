@@ -44,13 +44,7 @@ export function PaySuccessActions() {
             >
               Download on the App Store
             </a>
-          ) : (
-            <p className="font-sans text-sm text-inkMid">
-              App Store link — set{" "}
-              <span className="font-mono text-xs">NEXT_PUBLIC_IOS_APP_STORE_URL</span> for
-              sandbox demos.
-            </p>
-          )}
+          ) : null}
           {ANDROID_PLAY_STORE_URL ? (
             <a
               href={ANDROID_PLAY_STORE_URL}
