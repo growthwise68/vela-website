@@ -24,19 +24,6 @@ export function pickAttributionFromSearchParams(
   return out;
 }
 
-/** Merge incoming params into stored; existing keys are not overwritten (first-touch). */
-export function mergeAttributionFirstTouch(
-  stored: PayAttribution,
-  incoming: PayAttribution
-): PayAttribution {
-  const merged: PayAttribution = { ...stored };
-  for (const key of ATTRIBUTION_PARAM_KEYS) {
-    const value = incoming[key];
-    if (value && !merged[key]) merged[key] = value;
-  }
-  return merged;
-}
-
 export function attributionToQuery(attribution: PayAttribution): string {
   const q = new URLSearchParams();
   for (const key of ATTRIBUTION_PARAM_KEYS) {
@@ -44,16 +31,4 @@ export function attributionToQuery(attribution: PayAttribution): string {
     if (value) q.set(key, value);
   }
   return q.toString();
-}
-
-export function parseAttributionJson(json: string | null): PayAttribution {
-  if (!json) return {};
-  try {
-    const parsed = JSON.parse(json) as PayAttribution;
-    return pickAttributionFromSearchParams(
-      new URLSearchParams(attributionToQuery(parsed))
-    );
-  } catch {
-    return {};
-  }
 }

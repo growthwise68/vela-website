@@ -7,7 +7,7 @@ import { SITE_URL } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Get VÉLA Core",
   description:
-    "Pay on the website with Stripe, then open VÉLA — Core unlocks when you sign in. Sandbox checkout for crew early access.",
+    "Pay on the website with Stripe, then open VÉLA — Core unlocks when you sign in.",
   alternates: {
     canonical: "https://velaforcrew.com/pay",
   },

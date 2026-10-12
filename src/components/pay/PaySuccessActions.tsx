@@ -25,7 +25,7 @@ export function PaySuccessActions() {
         </a>
         <p className="mt-4 font-sans text-sm text-cream/75 leading-relaxed max-w-md mx-auto">
           Sign in with the same account you used at checkout. Core should already be on — no
-          code to paste. Check your email if you need an open link.
+          code to paste.
         </p>
       </div>
 

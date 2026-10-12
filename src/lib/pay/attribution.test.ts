@@ -1,30 +1,19 @@
 import { describe, it } from "node:test";
 import assert from "node:assert/strict";
 import {
-  mergeAttributionFirstTouch,
   pickAttributionFromSearchParams,
   attributionToQuery,
 } from "./attribution";
 
 describe("pay attribution", () => {
-  it("picks only known UTM/ref keys", () => {
+  it("picks only site pay URL keys (ignores extra params)", () => {
     const params = new URLSearchParams(
-      "utm_source=qr&ref=crew42&foo=bar&utm_medium=messenger"
+      "utm_source=qr&ref=crew42&foo=bar&utm_medium=messenger&utm_campaign=spring&referral=other"
     );
     assert.deepEqual(pickAttributionFromSearchParams(params), {
       utm_source: "qr",
       utm_medium: "messenger",
       ref: "crew42",
-    });
-  });
-
-  it("first-touch merge does not overwrite stored keys", () => {
-    const stored = { utm_source: "organic", ref: "a" };
-    const incoming = { utm_source: "qr", utm_campaign: "spring" };
-    assert.deepEqual(mergeAttributionFirstTouch(stored, incoming), {
-      utm_source: "organic",
-      ref: "a",
-      utm_campaign: "spring",
     });
   });
 
