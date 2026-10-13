@@ -1,8 +1,12 @@
 "use client";
 
-import { useMemo } from "react";
+import React, { useMemo } from "react";
 import { useSearchParams } from "next/navigation";
 import { pickAttributionFromSearchParams } from "@/lib/pay/attribution";
+import {
+  ANDROID_PLAY_STORE_URL,
+  IOS_APP_STORE_URL,
+} from "@/lib/pay/config";
 import { buildRevenueCatCheckoutUrl } from "@/lib/pay/checkout-url";
 import { buildPayPageUrl } from "@/lib/pay/pay-page-url";
 import { ReferralSharePanel } from "@/components/pay/ReferralSharePanel";
@@ -26,7 +30,18 @@ export function PayCheckoutClient({ siteOrigin }: PayCheckoutClientProps) {
     [siteOrigin, attribution]
   );
 
-  const checkoutReady = Boolean(checkoutUrl);
+  const checkoutReady =
+    Boolean(checkoutUrl) &&
+    Boolean(IOS_APP_STORE_URL) &&
+    Boolean(ANDROID_PLAY_STORE_URL);
+
+  if (!checkoutReady) {
+    return (
+      <p className="font-sans text-sm text-inkMid" data-testid="pay-not-available">
+        Not available yet
+      </p>
+    );
+  }
 
   return (
     <div className="space-y-10">
@@ -39,23 +54,12 @@ export function PayCheckoutClient({ siteOrigin }: PayCheckoutClientProps) {
           Core should be ready. Pasting a redeem code is only a rare backup.
         </p>
         <a
-          href={checkoutReady ? checkoutUrl : undefined}
-          aria-disabled={!checkoutReady}
-          className={`inline-flex min-h-12 w-full sm:w-auto items-center justify-center rounded-xl px-8 py-3 font-mono text-sm font-semibold uppercase tracking-[0.03em] transition-colors ${
-            checkoutReady
-              ? "bg-gold text-ink hover:bg-yellow-600"
-              : "bg-warmLine text-inkFaint pointer-events-none"
-          }`}
+          href={checkoutUrl}
+          className="inline-flex min-h-12 w-full sm:w-auto items-center justify-center rounded-xl px-8 py-3 font-mono text-sm font-semibold uppercase tracking-[0.03em] transition-colors bg-gold text-ink hover:bg-yellow-600"
           data-testid="pay-checkout-cta"
         >
           Continue to secure checkout
         </a>
-        {!checkoutReady ? (
-          <p className="mt-4 font-sans text-xs text-inkFaint">
-            Checkout link is not configured yet — set{" "}
-            <span className="font-mono">NEXT_PUBLIC_RC_WEB_PURCHASE_URL</span>.
-          </p>
-        ) : null}
       </div>
 
       <ReferralSharePanel payPageUrl={sharePayUrl} />
