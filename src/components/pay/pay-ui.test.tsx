@@ -1,7 +1,9 @@
 import { describe, it, mock, afterEach, beforeEach } from "node:test";
 import assert from "node:assert/strict";
-import React from "react";
+import React, { act } from "react";
+import { createRoot } from "react-dom/client";
 import { renderToStaticMarkup } from "react-dom/server";
+import { Window } from "happy-dom";
 
 let mockSearchParams = new URLSearchParams();
 let mockIosStoreUrl = "";
@@ -64,6 +66,12 @@ function w5PageUrlFixture(): string {
     encodeURIComponent(redeem) +
     "&app_user_id=user-1"
   );
+}
+
+function setupBrowserDom(pageUrl: string): void {
+  const browserWindow = new Window({ url: pageUrl });
+  globalThis.window = browserWindow as unknown as Window & typeof globalThis;
+  globalThis.document = browserWindow.document;
 }
 
 function assertBodyOmitsJwtSegments(serialized: string): void {
@@ -260,7 +268,7 @@ describe("sendPaySuccessRedeemUrlFault (W5)", () => {
     assert.equal(fetchCalls.length, 0);
   });
 
-  it("W5 — valid redeem URL path does not invoke sendPaySuccessRedeemUrlFault via render", async () => {
+  it("W5 — valid redeem URL does not POST (sendPaySuccessRedeemUrlFault)", async () => {
     process.env.NEXT_PUBLIC_VELA_FAIL_OPEN_SUPABASE_ANON_KEY = "fake-anon-key";
     const fetchCalls: unknown[] = [];
     globalThis.fetch = (async (...args: unknown[]) => {
@@ -270,13 +278,54 @@ describe("sendPaySuccessRedeemUrlFault (W5)", () => {
 
     const redeem =
       "rc-bed9aa89d1://redeem_web_purchase?redemption_token=valid_token";
+    const { sendPaySuccessRedeemUrlFault } = await import(
+      `./PaySuccessActions.tsx?w5-valid-fn=${Date.now()}`
+    );
+
+    await sendPaySuccessRedeemUrlFault({
+      raw: redeem,
+      appUserId: "user-1",
+      pageUrl: w5PageUrlFixture(),
+    });
+
+    assert.equal(fetchCalls.length, 0);
+  });
+
+  it("W5 — valid redeem URL client path runs useEffect without fetch", async () => {
+    process.env.NEXT_PUBLIC_VELA_FAIL_OPEN_SUPABASE_ANON_KEY = "fake-anon-key";
+    const fetchCalls: unknown[] = [];
+    globalThis.fetch = (async (...args: unknown[]) => {
+      fetchCalls.push(args);
+      return new Response(null, { status: 201 });
+    }) as typeof fetch;
+
+    setupBrowserDom("https://preview.example/pay/success");
+
+    const redeem =
+      "rc-bed9aa89d1://redeem_web_purchase?redemption_token=valid_token";
     mockSearchParams = new URLSearchParams({ redeem_url: redeem });
 
     const { PaySuccessActions } = await import(
-      `./PaySuccessActions.tsx?w5-valid=${Date.now()}`
+      `./PaySuccessActions.tsx?w5-valid-client=${Date.now()}`
     );
-    renderToStaticMarkup(<PaySuccessActions />);
+
+    const container = document.createElement("div");
+    document.body.appendChild(container);
+    const root = createRoot(container);
+
+    await act(async () => {
+      root.render(<PaySuccessActions />);
+    });
+    await act(async () => {
+      await new Promise((resolve) => setTimeout(resolve, 0));
+    });
+
     assert.equal(fetchCalls.length, 0);
+
+    await act(async () => {
+      root.unmount();
+    });
+    container.remove();
   });
 });
 

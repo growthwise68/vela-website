@@ -14,22 +14,6 @@ const FAIL_OPEN_REPORTS_URL =
 const INSTALL_EMAIL_SENTENCE =
   "If the app is not installed yet, install it, then open the purchase confirmation email from RevenueCat.";
 
-function isValidRedeemUrl(raw: string): boolean {
-  try {
-    const parsed = new URL(raw);
-    if (parsed.protocol.toLowerCase() !== "rc-bed9aa89d1:") {
-      return false;
-    }
-    if (parsed.hostname !== "redeem_web_purchase") {
-      return false;
-    }
-    const token = parsed.searchParams.get("redemption_token");
-    return Boolean(token && token.length > 0);
-  } catch {
-    return false;
-  }
-}
-
 function redactRedeemUrlRaw(raw: string | null): string {
   if (raw === null) {
     return "";
@@ -62,33 +46,30 @@ function redactPageUrlForFailOpenReport(pageUrl: string): string {
 
 type RedeemUrlFaultReason = "missing" | "unparseable" | "invalid_shape";
 
-function classifyRedeemUrlFaultReason(raw: string | null): RedeemUrlFaultReason {
+type RedeemUrlDecision =
+  | { valid: true }
+  | { valid: false; reason: RedeemUrlFaultReason };
+
+function decideRedeemUrl(raw: string | null): RedeemUrlDecision {
   if (raw === null || raw.trim() === "") {
-    return "missing";
+    return { valid: false, reason: "missing" };
   }
   try {
     const parsed = new URL(raw);
     if (parsed.protocol.toLowerCase() !== "rc-bed9aa89d1:") {
-      return "invalid_shape";
+      return { valid: false, reason: "invalid_shape" };
     }
     if (parsed.hostname !== "redeem_web_purchase") {
-      return "invalid_shape";
+      return { valid: false, reason: "invalid_shape" };
     }
     const token = parsed.searchParams.get("redemption_token");
     if (!token || token.length === 0) {
-      return "invalid_shape";
+      return { valid: false, reason: "invalid_shape" };
     }
-    return "invalid_shape";
+    return { valid: true };
   } catch {
-    return "unparseable";
+    return { valid: false, reason: "unparseable" };
   }
-}
-
-function shouldReportRedeemUrlFault(raw: string | null): boolean {
-  if (raw === null || raw.trim() === "") {
-    return true;
-  }
-  return !isValidRedeemUrl(raw);
 }
 
 export async function sendPaySuccessRedeemUrlFault({
@@ -106,7 +87,11 @@ export async function sendPaySuccessRedeemUrlFault({
     return;
   }
 
-  const reason = classifyRedeemUrlFaultReason(raw);
+  const decision = decideRedeemUrl(raw);
+  if (decision.valid) {
+    return;
+  }
+  const reason = decision.reason;
   const redactedRaw = redactRedeemUrlRaw(raw);
   const redeemUrlTruncated =
     raw === null ? "" : truncateRedeemUrlRedacted(redactedRaw);
@@ -149,17 +134,17 @@ export function PaySuccessActions() {
   const raw = searchParams?.get("redeem_url") ?? null;
   const appUserId = searchParams?.get("app_user_id") ?? null;
 
+  const redeemDecision = useMemo(() => decideRedeemUrl(raw), [raw]);
+
   const openAppHref = useMemo(() => {
-    if (raw !== null && raw.trim() !== "" && isValidRedeemUrl(raw)) {
-      return raw;
+    if (redeemDecision.valid) {
+      return raw as string;
     }
     return VELA_OPEN_APP_URL;
-  }, [raw]);
-
-  const reportFault = useMemo(() => shouldReportRedeemUrlFault(raw), [raw]);
+  }, [redeemDecision, raw]);
 
   useEffect(() => {
-    if (!reportFault) {
+    if (redeemDecision.valid) {
       return;
     }
     void sendPaySuccessRedeemUrlFault({
@@ -167,7 +152,7 @@ export function PaySuccessActions() {
       appUserId,
       pageUrl: window.location.href,
     }).catch(() => {});
-  }, [reportFault, raw, appUserId]);
+  }, [redeemDecision, raw, appUserId]);
 
   return (
     <div className="space-y-8" data-testid="pay-success-actions">
