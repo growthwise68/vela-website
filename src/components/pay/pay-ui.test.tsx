@@ -70,8 +70,9 @@ function w5PageUrlFixture(): string {
 
 function setupBrowserDom(pageUrl: string): void {
   const browserWindow = new Window({ url: pageUrl });
-  globalThis.window = browserWindow as unknown as Window & typeof globalThis;
-  globalThis.document = browserWindow.document;
+  globalThis.window = browserWindow as unknown as typeof globalThis.window;
+  globalThis.document =
+    browserWindow.document as unknown as typeof globalThis.document;
 }
 
 function assertBodyOmitsJwtSegments(serialized: string): void {
