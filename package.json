@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "test": "tsx --test src/lib/pay/attribution.test.ts src/lib/pay/checkout-url.test.ts src/lib/pay/pay-cta.test.ts src/components/pay/pay-ui.test.tsx"
+    "test": "node --experimental-test-module-mocks --import tsx --test src/lib/pay/attribution.test.ts src/lib/pay/checkout-url.test.ts src/lib/pay/pay-cta.test.ts src/components/pay/pay-ui.test.tsx"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.39.0",
