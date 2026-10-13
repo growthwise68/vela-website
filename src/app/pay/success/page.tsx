@@ -16,10 +16,7 @@ export const metadata: Metadata = {
 
 function PaySuccessActionsFallback() {
   return (
-    <div
-      className="rounded-[18px] border border-warmLine bg-parchment/50 p-8 font-sans text-sm text-inkMid text-center"
-      data-testid="pay-success-actions-loading"
-    >
+    <div className="rounded-[18px] border border-warmLine bg-parchment/50 p-8 font-sans text-sm text-inkMid">
       Loading…
     </div>
   );
