@@ -3,10 +3,6 @@
 import React, { useMemo } from "react";
 import { useSearchParams } from "next/navigation";
 import { pickAttributionFromSearchParams } from "@/lib/pay/attribution";
-import {
-  ANDROID_PLAY_STORE_URL,
-  IOS_APP_STORE_URL,
-} from "@/lib/pay/config";
 import { buildRevenueCatCheckoutUrl } from "@/lib/pay/checkout-url";
 import { buildPayPageUrl } from "@/lib/pay/pay-page-url";
 import { ReferralSharePanel } from "@/components/pay/ReferralSharePanel";
@@ -30,12 +26,7 @@ export function PayCheckoutClient({ siteOrigin }: PayCheckoutClientProps) {
     [siteOrigin, attribution]
   );
 
-  const checkoutReady =
-    Boolean(checkoutUrl) &&
-    Boolean(IOS_APP_STORE_URL) &&
-    Boolean(ANDROID_PLAY_STORE_URL);
-
-  if (!checkoutReady) {
+  if (!checkoutUrl) {
     return (
       <p className="font-sans text-sm text-inkMid" data-testid="pay-not-available">
         Not available yet

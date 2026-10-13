@@ -10,6 +10,19 @@ mock.module("next/navigation", {
   },
 });
 
+let mockWebPurchaseUrl = "";
+mock.module("@/lib/pay/checkout-url", {
+  namedExports: {
+    buildRevenueCatCheckoutUrl: () => mockWebPurchaseUrl,
+  },
+});
+
+mock.module("@/components/pay/ReferralSharePanel", {
+  namedExports: {
+    ReferralSharePanel: () => null,
+  },
+});
+
 describe("PaySuccessActions markup", () => {
   it("renders Open Véla CTA and success test hooks", () => {
     const html = renderToStaticMarkup(<PaySuccessActions />);
@@ -20,8 +33,11 @@ describe("PaySuccessActions markup", () => {
 });
 
 describe("PayCheckoutClient markup", () => {
-  it("shows customer copy when checkout env is not configured", async () => {
-    const { PayCheckoutClient } = await import("./PayCheckoutClient");
+  it("shows Not available yet when the web purchase URL is missing", async () => {
+    mockWebPurchaseUrl = "";
+    const { PayCheckoutClient } = await import(
+      `./PayCheckoutClient.tsx?missing-purchase=${Date.now()}`
+    );
     const html = renderToStaticMarkup(
       <PayCheckoutClient siteOrigin="https://velaforcrew.com" />
     );
@@ -29,5 +45,17 @@ describe("PayCheckoutClient markup", () => {
     assert.match(html, /Not available yet/);
     assert.doesNotMatch(html, /NEXT_PUBLIC_/);
     assert.doesNotMatch(html, /pay-checkout-cta/);
+  });
+
+  it("renders checkout when the web purchase URL is set and store URLs are blank", async () => {
+    mockWebPurchaseUrl = "https://pay.rev.cat/sandbox/example/wpl";
+    const { PayCheckoutClient } = await import(
+      `./PayCheckoutClient.tsx?purchase-set=${Date.now()}`
+    );
+    const html = renderToStaticMarkup(
+      <PayCheckoutClient siteOrigin="https://velaforcrew.com" />
+    );
+    assert.match(html, /data-testid="pay-checkout-cta"/);
+    assert.doesNotMatch(html, /Not available yet/);
   });
 });
