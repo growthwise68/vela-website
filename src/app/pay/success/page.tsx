@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { Suspense } from "react";
 import { FullBleed } from "@/components/FullBleed";
 import { PaySuccessActions } from "@/components/pay/PaySuccessActions";
 
@@ -12,6 +13,17 @@ export const metadata: Metadata = {
   },
   robots: { index: false, follow: false },
 };
+
+function PaySuccessActionsFallback() {
+  return (
+    <div
+      className="rounded-[18px] border border-warmLine bg-parchment/50 p-8 font-sans text-sm text-inkMid text-center"
+      data-testid="pay-success-actions-loading"
+    >
+      Loading…
+    </div>
+  );
+}
 
 export default function PaySuccessPage() {
   return (
@@ -36,7 +48,9 @@ export default function PaySuccessPage() {
 
       <FullBleed className="bg-cream pb-16 md:pb-24">
         <div className="max-w-xl mx-auto px-6 md:px-8">
-          <PaySuccessActions />
+          <Suspense fallback={<PaySuccessActionsFallback />}>
+            <PaySuccessActions />
+          </Suspense>
           <p className="mt-10 text-center font-sans text-sm text-inkMid">
             Wrong page?{" "}
             <Link href="/pay" className="text-gold underline underline-offset-2">

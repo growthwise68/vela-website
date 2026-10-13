@@ -1,6 +1,7 @@
 "use client";
 
-import React from "react";
+import React, { useMemo } from "react";
+import { useSearchParams } from "next/navigation";
 import {
   ANDROID_PLAY_STORE_URL,
   IOS_APP_STORE_URL,
@@ -8,7 +9,12 @@ import {
 } from "@/lib/pay/config";
 
 export function PaySuccessActions() {
-  const openAppHref = VELA_OPEN_APP_URL;
+  const searchParams = useSearchParams();
+
+  const openAppHref = useMemo(() => {
+    const redeemUrl = searchParams?.get("redeem_url")?.trim();
+    return redeemUrl || VELA_OPEN_APP_URL;
+  }, [searchParams]);
 
   return (
     <div className="space-y-8" data-testid="pay-success-actions">

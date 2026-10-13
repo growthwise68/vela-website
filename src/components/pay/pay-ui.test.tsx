@@ -2,11 +2,11 @@ import { describe, it, mock } from "node:test";
 import assert from "node:assert/strict";
 import React from "react";
 import { renderToStaticMarkup } from "react-dom/server";
-import { PaySuccessActions } from "./PaySuccessActions";
+let mockSearchParams = new URLSearchParams();
 
 mock.module("next/navigation", {
   namedExports: {
-    useSearchParams: () => new URLSearchParams(),
+    useSearchParams: () => mockSearchParams,
   },
 });
 
@@ -24,11 +24,35 @@ mock.module("@/components/pay/ReferralSharePanel", {
 });
 
 describe("PaySuccessActions markup", () => {
-  it("renders Open Véla CTA and success test hooks", () => {
+  it("renders Open Véla CTA and success test hooks", async () => {
+    mockSearchParams = new URLSearchParams();
+    const { PaySuccessActions } = await import(
+      `./PaySuccessActions.tsx?hooks=${Date.now()}`
+    );
     const html = renderToStaticMarkup(<PaySuccessActions />);
     assert.match(html, /data-testid="pay-success-actions"/);
     assert.match(html, /data-testid="open-vela-cta"/);
     assert.match(html, /Open Véla/);
+  });
+
+  it("uses redeem_url on Open Véla when RevenueCat passes it on the success redirect", async () => {
+    const redeem =
+      "rc-bed9aa89d1://redeem_web_purchase?redemption_token=sandbox_test_token";
+    mockSearchParams = new URLSearchParams({ redeem_url: redeem });
+    const { PaySuccessActions } = await import(
+      `./PaySuccessActions.tsx?redeem=${Date.now()}`
+    );
+    const html = renderToStaticMarkup(<PaySuccessActions />);
+    assert.match(html, /href="rc-bed9aa89d1:\/\/redeem_web_purchase\?redemption_token=sandbox_test_token"/);
+  });
+
+  it("falls back to the configured open-app URL when redeem_url is missing", async () => {
+    mockSearchParams = new URLSearchParams();
+    const { PaySuccessActions } = await import(
+      `./PaySuccessActions.tsx?fallback=${Date.now()}`
+    );
+    const html = renderToStaticMarkup(<PaySuccessActions />);
+    assert.match(html, /href="vela:\/\/open"/);
   });
 });
 
