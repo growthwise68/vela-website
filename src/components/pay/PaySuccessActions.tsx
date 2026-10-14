@@ -1,14 +1,158 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useMemo } from "react";
+import { useSearchParams } from "next/navigation";
 import {
   ANDROID_PLAY_STORE_URL,
   IOS_APP_STORE_URL,
   VELA_OPEN_APP_URL,
 } from "@/lib/pay/config";
 
+const FAIL_OPEN_REPORTS_URL =
+  "https://zajrtrwhqjsyfyskyftp.supabase.co/rest/v1/fail_open_reports";
+
+const INSTALL_EMAIL_SENTENCE =
+  "If the app is not installed yet, install it, then open the purchase confirmation email from RevenueCat.";
+
+function redactRedeemUrlRaw(raw: string | null): string {
+  if (raw === null) {
+    return "";
+  }
+  const marker = "redemption_token=";
+  const index = raw.indexOf(marker);
+  if (index === -1) {
+    return raw;
+  }
+  const valueStart = index + marker.length;
+  const ampIndex = raw.indexOf("&", valueStart);
+  const end = ampIndex === -1 ? raw.length : ampIndex;
+  return `${raw.slice(0, valueStart)}[redacted]${raw.slice(end)}`;
+}
+
+function truncateRedeemUrlRedacted(redacted: string): string {
+  return redacted.slice(0, 120);
+}
+
+function redactPageUrlForFailOpenReport(pageUrl: string): string {
+  const url = new URL(pageUrl);
+  url.searchParams.delete("redeem_url");
+  for (const key of [...url.searchParams.keys()]) {
+    if (key === "redemption_token") {
+      url.searchParams.set(key, "[redacted]");
+    }
+  }
+  return url.toString();
+}
+
+type RedeemUrlFaultReason = "missing" | "unparseable" | "invalid_shape";
+
+type RedeemUrlDecision =
+  | { valid: true }
+  | { valid: false; reason: RedeemUrlFaultReason };
+
+function decideRedeemUrl(raw: string | null): RedeemUrlDecision {
+  if (raw === null || raw.trim() === "") {
+    return { valid: false, reason: "missing" };
+  }
+  try {
+    const parsed = new URL(raw);
+    if (parsed.protocol.toLowerCase() !== "rc-bed9aa89d1:") {
+      return { valid: false, reason: "invalid_shape" };
+    }
+    if (parsed.hostname !== "redeem_web_purchase") {
+      return { valid: false, reason: "invalid_shape" };
+    }
+    const token = parsed.searchParams.get("redemption_token");
+    if (!token || token.length === 0) {
+      return { valid: false, reason: "invalid_shape" };
+    }
+    return { valid: true };
+  } catch {
+    return { valid: false, reason: "unparseable" };
+  }
+}
+
+export async function sendPaySuccessRedeemUrlFault({
+  raw,
+  appUserId,
+  pageUrl,
+}: {
+  raw: string | null;
+  appUserId: string | null;
+  pageUrl: string;
+}): Promise<void> {
+  const anonKey =
+    process.env.NEXT_PUBLIC_VELA_FAIL_OPEN_SUPABASE_ANON_KEY?.trim() || "";
+  if (!anonKey) {
+    return;
+  }
+
+  const decision = decideRedeemUrl(raw);
+  if (decision.valid) {
+    return;
+  }
+  const reason = decision.reason;
+  const redactedRaw = redactRedeemUrlRaw(raw);
+  const redeemUrlTruncated =
+    raw === null ? "" : truncateRedeemUrlRedacted(redactedRaw);
+  const sanitizedPageUrl = redactPageUrlForFailOpenReport(pageUrl);
+
+  const observed: Record<string, string> = {
+    reason,
+    redeem_url_truncated: redeemUrlTruncated,
+    page_url: sanitizedPageUrl,
+  };
+  if (appUserId) {
+    observed.app_user_id = appUserId;
+  }
+
+  const body = {
+    report_id: crypto.randomUUID(),
+    install_id: crypto.randomUUID(),
+    check_id: "pay_success_redeem_url",
+    occurred_at: new Date().toISOString(),
+    result: "invalid",
+    work_state: "continued",
+    account_id: appUserId ?? null,
+    observed,
+  };
+
+  await fetch(FAIL_OPEN_REPORTS_URL, {
+    method: "POST",
+    headers: {
+      apikey: anonKey,
+      Authorization: `Bearer ${anonKey}`,
+      "Content-Type": "application/json",
+      Prefer: "return=minimal",
+    },
+    body: JSON.stringify(body),
+  });
+}
+
 export function PaySuccessActions() {
-  const openAppHref = VELA_OPEN_APP_URL;
+  const searchParams = useSearchParams();
+  const raw = searchParams?.get("redeem_url") ?? null;
+  const appUserId = searchParams?.get("app_user_id") ?? null;
+
+  const redeemDecision = useMemo(() => decideRedeemUrl(raw), [raw]);
+
+  const openAppHref = useMemo(() => {
+    if (redeemDecision.valid) {
+      return raw as string;
+    }
+    return VELA_OPEN_APP_URL;
+  }, [redeemDecision, raw]);
+
+  useEffect(() => {
+    if (redeemDecision.valid) {
+      return;
+    }
+    void sendPaySuccessRedeemUrlFault({
+      raw,
+      appUserId,
+      pageUrl: window.location.href,
+    }).catch(() => {});
+  }, [redeemDecision, raw, appUserId]);
 
   return (
     <div className="space-y-8" data-testid="pay-success-actions">
@@ -24,8 +168,8 @@ export function PaySuccessActions() {
           Open Véla
         </a>
         <p className="mt-4 font-sans text-sm text-cream/75 leading-relaxed max-w-md mx-auto">
-          Sign in with the same account you used at checkout. Core should already be on — no
-          code to paste.
+          Sign in on your phone. Core attaches to the account you confirm — it does
+          not have to be the checkout email, and there is no code to paste.
         </p>
       </div>
 
@@ -57,6 +201,9 @@ export function PaySuccessActions() {
             </a>
           ) : null}
         </div>
+        <p className="mt-4 font-sans text-sm text-inkMid leading-relaxed">
+          {INSTALL_EMAIL_SENTENCE}
+        </p>
       </div>
 
       <p className="font-sans text-xs text-inkFaint text-center">
