@@ -370,7 +370,7 @@ export default function HomePageClient() {
                 Know what&rsquo;s coming. Know what to do.
               </h2>
               <p className="font-sans text-xl text-inkMid leading-relaxed max-w-[640px]">
-                Most crew go into every trip reacting. VÉLA puts you a step ahead. Upload your roster and
+                Most crew go into every trip reacting. VÉLA puts you a step ahead. Add your duties and
                 VÉLA gives you a clear picture of what your body clock will need — and when. Simple,
                 specific, and built around your actual schedule. Not generic advice. Yours.
               </p>
@@ -493,7 +493,7 @@ export default function HomePageClient() {
               "@context": "https://schema.org",
               "@type": "FAQPage",
               mainEntity: [
-                { "@type": "Question", name: "What is VÉLA?", acceptedAnswer: { "@type": "Answer", text: "VÉLA is a body-clock planning app for long-haul cabin crew. It turns your roster into a personalised body-clock plan, showing what your body clock will be doing on every duty, layover and day off, with sleep, light, caffeine and meal timing for every trip." } },
+                { "@type": "Question", name: "What is VÉLA?", acceptedAnswer: { "@type": "Answer", text: "VÉLA is the rest and recovery app for long-haul cabin crew. It reads your roster and plans your sleep, light and caffeine across every duty, layover and day off, so you stop starting every trip already exhausted." } },
                 { "@type": "Question", name: "Who is VÉLA for?", acceptedAnswer: { "@type": "Answer", text: "Long-haul cabin crew whose rosters cross time zones, with early reports, night sectors and back-to-back trips. It's built around how crew actually work, not around a single holiday flight." } },
                 { "@type": "Question", name: "How is VÉLA different from a jet lag app?", acceptedAnswer: { "@type": "Answer", text: "Jet lag apps plan one trip and assume you recover afterwards. Crew rarely do: the next trip starts before your body clock has caught up. VÉLA follows your body clock across your whole roster, including days off, so each plan starts from where your body actually is." } },
                 { "@type": "Question", name: "How does VÉLA get my roster?", acceptedAnswer: { "@type": "Answer", text: "You add each duty by entering the date and flight number. VÉLA looks up the departure and arrival times and airports automatically, so there's no need to upload your full roster." } },
@@ -516,7 +516,7 @@ export default function HomePageClient() {
             {[
               {
                 q: "What is VÉLA?",
-                a: <>VÉLA is a body-clock planning app for long-haul cabin crew. It turns your roster into a personalised body-clock plan, showing what your body clock will be doing on every duty, layover and day off, with sleep, light, caffeine and meal timing for every trip.</>,
+                a: <>VÉLA is the rest and recovery app for long-haul cabin crew. It reads your roster and plans your sleep, light and caffeine across every duty, layover and day off, so you stop starting every trip already exhausted.</>,
               },
               {
                 q: "Who is VÉLA for?",

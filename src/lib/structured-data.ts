@@ -23,7 +23,7 @@ export const mobileApplication = {
   name: "VÉLA",
   alternateName: ["VÉLA for Crew", "Vela for Crew", "Vela4Crew"],
   description:
-    "VÉLA is a body-clock planning app for long-haul cabin crew. It reads your roster and shows you what your body clock will be doing — duty by duty, timezone by timezone — with sleep, light, caffeine and meal timing for every trip.",
+    "VÉLA is the rest and recovery app for long-haul cabin crew. It reads your roster and plans your sleep, light and caffeine across every duty, layover and day off, so you stop starting every trip already exhausted.",
   applicationCategory: "HealthApplication",
   operatingSystem: "iOS, Android",
   url: SITE,
