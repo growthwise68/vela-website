@@ -166,9 +166,9 @@ export default function EarlyAccessClient() {
             What is VÉLA?
           </h2>
           <p className="font-sans text-base text-inkMid leading-relaxed mt-3">
-            VÉLA is a body-clock planning app for long-haul cabin crew. It turns your roster into a
-            personalised body-clock plan, with sleep, light, caffeine and meal timing for every duty,
-            layover and day off.
+            VÉLA is the rest and recovery app for long-haul cabin crew. It reads your roster and plans
+            your sleep, light and caffeine across every duty, layover and day off, so you stop starting
+            every trip already exhausted.
           </p>
         </div>
       </FullBleed>
