@@ -19,15 +19,13 @@ Plan only. No application code, no migration applied, no workflow, no Vercel dep
 
 ## Intent (verbatim)
 
-When someone signs up in the app, they see an unticked box: "Yes, email me practical tips for managing fatigue on the roster, early access to new VÉLA features, and member-only offers. About twice a month." Under it: "Unsubscribe any time with one click. See our Privacy Policy." On the website waitlist, the unticked box reads: "Send me early access and crew-tested tips for rest and recovery between duties. No spam, about twice a month.", with "Unsubscribe any time. Privacy Policy" under it. The box is never pre-ticked and sits separately from the terms. Each person's choice is saved with a timestamp and the exact wording they saw. Only people who tick it are added to the right MailerLite group: app users go to an "App users" group with their account id, and waitlist sign-ups go to the existing group. A failed MailerLite add is reported and never blocks sign-up. There's no backfill of the existing 666 contacts.
+On the website waitlist, the unticked box reads: "Send me early access and crew-tested tips for rest and recovery between duties. No spam, about twice a month.", with "Unsubscribe any time. Privacy Policy" under it. The box is never pre-ticked and sits separately from the terms. Each person's choice is saved with a timestamp and the exact wording they saw. Only people who tick it are added to the right MailerLite group: waitlist sign-ups go to the existing group. A failed MailerLite add is reported and never blocks sign-up. There's no backfill of the existing 666 contacts.
 
 ## North star (verbatim)
 
 every new user who consents reaches the correct MailerLite list, linked to their account, and nobody is emailed without consent.
 
 ## Website slice this plan implements
-
-The sentences above are the whole signed intent. This plan implements only the website waitlist half:
 
 - Unticked box, exact label: `Send me early access and crew-tested tips for rest and recovery between duties. No spam, about twice a month.`
 - Helper under that box: `Unsubscribe any time. Privacy Policy`, with `Privacy Policy` linking to the existing privacy page.
@@ -37,7 +35,7 @@ The sentences above are the whole signed intent. This plan implements only the w
 - A failed MailerLite add is reported and the signup still succeeds.
 - Do not backfill the existing 666 contacts.
 
-The app half is not in this plan: the in-app unticked box, its wording, the "App users" MailerLite group, and linking that subscriber to an account id. "Linked to their account" in the north star is that app half. A waitlist signup has no app account id. Do not invent one.
+The in-app box is out of scope. A waitlist signup has no app account id and this plan must not invent one.
 
 ## Where the 666 rows are
 
@@ -64,10 +62,11 @@ Fail-open reporting already exists on the pay success page, not on this form. `s
 
 The privacy page is `src/app/privacy/page.tsx` (`/privacy`). Link there. Do not edit the policy text.
 
+Flow A in `src/app/api/subscribe/route.ts` today updates `survey_responses` when a `responseId` is posted, then calls MailerLite. No current page sends `responseId`. This plan keeps the survey update and the 200, and removes the MailerLite call. The route header comment that both flows add the subscriber to MailerLite is updated to match.
+
 Other writers, left unchanged:
 
-- Flow A in `src/app/api/subscribe/route.ts` (a `responseId` updates `survey_responses`, then always calls MailerLite). No current page sends `responseId`. `src/app/survey/thank-you/ThankYouClient.tsx` posts to `/api/survey/waitlist` instead (line 40).
-- `src/app/api/survey/waitlist/route.ts` inserts `source: "survey_waitlist"` and does not call MailerLite.
+- `src/app/survey/thank-you/ThankYouClient.tsx` posts to `/api/survey/waitlist` (line 40). `src/app/api/survey/waitlist/route.ts` inserts `source: "survey_waitlist"` and does not call MailerLite.
 - `src/app/api/subscribe-briefs/route.ts` is the briefs list, a different group.
 
 ## Files to touch
@@ -76,7 +75,7 @@ Other writers, left unchanged:
 |------|------|
 | `src/app/early-access/consent-copy.ts` | **New.** The signed label and the helper strings, exported once. The form renders them. The API stores the same label constant. The client does not get to send a different sentence. |
 | `src/app/early-access/EarlyAccessClient.tsx` | Unticked checkbox and helper. Post `emailConsent` as a boolean. No other copy changes. |
-| `src/app/api/subscribe/route.ts` | Flow B only: write the three columns; call MailerLite only when the boolean is `true`; report a failed add. Flow A still calls MailerLite as it does today. |
+| `src/app/api/subscribe/route.ts` | Flow B: write the three columns; call MailerLite only when the boolean is `true`; report a failed add. Flow A still updates `survey_responses` and returns 200, and does not call MailerLite. Update the header comment that both flows add the subscriber to MailerLite so it matches. |
 | `src/app/api/early-access/route.ts` | **Delete.** |
 | `supabase/migrations/0003_waitlist_email_consent.sql` | **New.** Nullable columns. No `UPDATE`. No defaults. |
 | `src/app/api/subscribe/subscribe-consent.test.ts` | **New.** Route behaviour below. |
@@ -135,12 +134,14 @@ alter table public.waitlist_signups
   add column email_consent_wording text;
 
 comment on column public.waitlist_signups.email_consent is
-  'Early-access checkbox. NULL means the row predates the box. Never backfilled.';
+  'Early-access checkbox. NULL means no choice was recorded.';
 comment on column public.waitlist_signups.email_consent_at is
-  'Server time the choice was recorded. NULL on rows from before the box.';
+  'Server time the choice was recorded. NULL means no choice was recorded.';
 comment on column public.waitlist_signups.email_consent_wording is
-  'Exact checkbox sentence shown. NULL on rows from before the box.';
+  'Exact checkbox sentence shown. NULL means no choice was recorded.';
 ```
+
+NULL means no choice was recorded. That covers the existing 666 and any later insert that does not ask, including `/api/survey/waitlist`. This plan does not add the early-access box to the survey form.
 
 No `DEFAULT`. A volatile default such as `now()` would rewrite the existing 666 rows. That is a backfill.
 
@@ -161,9 +162,9 @@ No policy change. Policy `public insert` on `waitlist_signups` is insert-for-ano
 8. If `email_consent` was stored `true`, call the existing `addToMailerLite` helper with `process.env.MAILERLITE_GROUP_ID`. Then return 200 whether that call worked or not.
 9. The page's success line and the redirect home stay as they are.
 
-`addToMailerLite` keeps using `https://connect.mailerlite.com/api/subscribers`, the same payload (`email`, `fields.name`, `fields.company` for airline, `status: "active"`, `groups` when a group id is present). Flow B must not call it when the group id is missing or blank: a subscriber POST with no group would put them on the account outside the existing group. Treat that as a failed add (below) and skip the POST.
+`addToMailerLite` keeps using `https://connect.mailerlite.com/api/subscribers`, the same payload (`email`, `fields.name`, `fields.company` for airline, `status: "active"`, `groups` when a group id is present). Flow B treats a group id whose trim is empty as blank, including a whitespace-only value. Flow B must not call MailerLite when the group id is missing or blank after trim: a subscriber POST with no group would put them on the account outside the existing group. Treat that as a failed add (below) and skip the POST.
 
-Flow A still calls `addToMailerLite` on its current path and still returns 200 if MailerLite throws. Do not add a consent column to `survey_responses`. Do not make Flow A read `emailConsent`.
+Flow A still updates `survey_responses` when a real `responseId` is posted, still returns 200, and does not call MailerLite. It does not read `emailConsent`, and it does not gain a consent column or a fail-open report.
 
 ## Failure handling
 
@@ -174,18 +175,18 @@ Report one row when the box was ticked and the add did not happen:
 | Situation | MailerLite POST | `observed.reason` |
 |-----------|-----------------|-------------------|
 | `MAILERLITE_API_KEY` missing or blank | do not call | `not_configured` |
-| `MAILERLITE_GROUP_ID` missing or blank | do not call | `missing_group` |
+| `MAILERLITE_GROUP_ID` missing or blank after trim, including whitespace only | do not call | `missing_group` |
 | HTTP response not OK | called | `http_error`, plus `http_status` |
-| `fetch` throws | called | `exception` |
+| `fetch` throws | called | `exception`, plus the error name and message |
 
-Change `addToMailerLite` so it returns that outcome instead of only logging it. Flow A may ignore the return value. Keep Flow A's current non-blocking `.catch`. Do not make a non-OK response throw in a way that changes Flow A's response status (it is already 200).
+Change `addToMailerLite` so it returns that outcome instead of only logging it. Flow B uses the return value. Flow A does not call it.
 
 The report is one server-side POST, after the insert, before the 200 response:
 
 - URL: `https://zajrtrwhqjsyfyskyftp.supabase.co/rest/v1/fail_open_reports`
 - Headers: same four as `sendPaySuccessRedeemUrlFault` in `PaySuccessActions.tsx`.
 - Key: `NEXT_PUBLIC_VELA_FAIL_OPEN_SUPABASE_ANON_KEY`. If that key is empty, do not POST. `console.error` once and still return 200. Do not add a new key and do not use the website anon key (wrong project).
-- Body: `report_id` and `install_id` each `crypto.randomUUID()`; `check_id` `early_access_mailerlite_add`; `occurred_at` UTC ISO; `result` `invalid`; `work_state` `continued`; `account_id` null. `observed` is only `reason` and, for `http_error`, `http_status`.
+- Body: `report_id` and `install_id` each `crypto.randomUUID()`; `check_id` `early_access_mailerlite_add`; `occurred_at` UTC ISO; `result` `invalid`; `work_state` `continued`; `account_id` null. For `http_error`, `observed` is `reason` plus `http_status`, and the MailerLite response body is left out. For `exception`, `observed` includes the error name and the error message. If that message contains an email-shaped substring, store the reason and omit the message.
 - Do not put email, name, airline, the MailerLite response body, or the API key in the row. The waitlist row already holds who consented. The MailerLite error body echoes the email address.
 - If the fail-open POST itself throws or returns non-OK, swallow it and still return 200. One attempt. No retry loop.
 
@@ -210,14 +211,14 @@ Route (`subscribe-consent.test.ts`), with `fetch` and the Supabase client mocked
 | Case | Expect |
 |------|--------|
 | Flow B, `emailConsent: false` | Insert payload has `email_consent: false`, `email_consent_wording` equal to the label constant, and a non-empty `email_consent_at`. No request to `connect.mailerlite.com`. No request to `fail_open_reports`. Status 200. |
-| Flow B, `emailConsent: true`, MailerLite 200 | One MailerLite POST whose `groups` array is exactly `[MAILERLITE_GROUP_ID]`. No fail-open POST. Status 200. |
-| Flow B, `emailConsent: true`, MailerLite 500 | Status 200. One fail-open POST. `check_id` `early_access_mailerlite_add`, `result` `invalid`, `work_state` `continued`. `observed` has no email. |
-| Flow B, `emailConsent: true`, MailerLite `fetch` rejects | Status 200. One fail-open POST with `reason` `exception`. |
+| Flow B, `emailConsent: true`, MailerLite 200 | Insert payload has `email_consent: true`, `email_consent_wording` equal to the label constant, and a non-empty `email_consent_at`. One MailerLite POST whose `groups` array is exactly `[MAILERLITE_GROUP_ID]`. No fail-open POST. Status 200. |
+| Flow B, `emailConsent: true`, MailerLite 500 | Status 200. One fail-open POST. `check_id` `early_access_mailerlite_add`, `result` `invalid`, `work_state` `continued`. `observed` is `reason` `http_error` plus `http_status`. `observed` has no email and no MailerLite response body. |
+| Flow B, `emailConsent: true`, MailerLite `fetch` rejects | Status 200. One fail-open POST with `reason` `exception`, plus the error name and the error message. If that message contains an email-shaped substring, the message is omitted. |
 | Flow B, `emailConsent: true`, API key unset | Status 200. No MailerLite POST. One fail-open POST with `reason` `not_configured`. |
-| Flow B, `emailConsent: true`, group id blank | Status 200. No MailerLite POST. One fail-open POST with `reason` `missing_group`. |
+| Flow B, `emailConsent: true`, `MAILERLITE_GROUP_ID` set to spaces | Status 200. No MailerLite POST. One fail-open POST with `reason` `missing_group`. |
 | Flow B, `emailConsent` missing or the string `"true"` | Stored `email_consent` is `false`. No MailerLite POST. Status 200. |
 | Flow B, duplicate insert code `23505` | Status 409. No MailerLite POST. |
-| Flow A, `responseId` set, survey update succeeds | Still calls MailerLite. Status 200. Does not write `waitlist_signups`. |
+| Flow A, `responseId` set, survey update succeeds | Status 200. No `waitlist_signups` write. No request to `connect.mailerlite.com`. |
 
 The migration file is asserted, in the route test or a one-file read, to contain no `UPDATE` and no `DEFAULT`.
 
@@ -243,7 +244,7 @@ People already added to MailerLite are not removed by this rollback. Unsubscribi
 - The in-app signup box, the "App users" group, and storing an account id on a MailerLite subscriber.
 - Backfill or a one-off push of the existing 666 rows.
 - An update path for someone who is already on the list and later wants to tick the box. Anon has no update policy. The duplicate response stays 409.
-- Survey thank-you (`/api/survey/waitlist`) and Flow A. They are not the early-access form. Survey thank-you does not call MailerLite today.
+- Survey thank-you (`/api/survey/waitlist`). It is not the early-access form, it does not call MailerLite, and this plan does not add the early-access box to it.
 - Recovery Briefs (`/api/subscribe-briefs`, `MAILERLITE_BRIEFS_GROUP_ID`).
 - Editing the privacy policy or the terms page. The new helper only links to `/privacy`.
 - A new env var, a new Supabase table, a new API route, or a new MailerLite group.
