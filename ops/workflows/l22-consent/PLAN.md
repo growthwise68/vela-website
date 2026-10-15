@@ -19,7 +19,7 @@ Plan only. No application code, no migration applied, no workflow, no Vercel dep
 
 ## Intent (verbatim)
 
-On the website waitlist, the unticked box reads: "Send me early access and crew-tested tips for rest and recovery between duties. No spam, about twice a month.", with "Unsubscribe any time. Privacy Policy" under it. The box is never pre-ticked and sits separately from the terms. Each person's choice is saved with a timestamp and the exact wording they saw. Only people who tick it are added to the right MailerLite group: waitlist sign-ups go to the existing group. A failed MailerLite add is reported and never blocks sign-up. There's no backfill of the existing 666 contacts.
+The waitlist box reads "Send me early access and crew-tested tips for rest and recovery between duties. No spam, about twice a month." with "Unsubscribe any time. Privacy Policy". It is never pre-ticked and kept separate from the terms. Each choice is saved with a timestamp and the exact wording shown. Only people who tick it are added to MailerLite; waitlist sign-ups go to the existing group. A failed add is reported and never blocks sign-up. There is no backfill of the existing 666.
 
 ## North star (verbatim)
 
