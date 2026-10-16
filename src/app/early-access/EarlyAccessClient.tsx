@@ -1,9 +1,15 @@
 "use client";
 
+import React, { useState } from "react";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
 import Link from "next/link";
 import { FullBleed } from "@/components/FullBleed";
+import {
+  WAITLIST_EMAIL_CONSENT_HELPER_LEAD,
+  WAITLIST_EMAIL_CONSENT_LABEL,
+  WAITLIST_EMAIL_CONSENT_PRIVACY_HREF,
+  WAITLIST_EMAIL_CONSENT_PRIVACY_LINK_TEXT,
+} from "@/app/early-access/consent-copy";
 
 export default function EarlyAccessClient() {
   const router = useRouter();
@@ -12,6 +18,7 @@ export default function EarlyAccessClient() {
   const [airline, setAirline] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [message, setMessage] = useState<string | null>(null);
+  const [emailConsent, setEmailConsent] = useState(false);
 
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -35,6 +42,7 @@ export default function EarlyAccessClient() {
           email: email.trim(),
           name: name.trim(),
           airline: airline.trim() || null,
+          emailConsent,
         }),
       });
       const data = await res.json();
@@ -131,6 +139,33 @@ export default function EarlyAccessClient() {
                       <p className="mt-2 text-[0.8rem] leading-snug text-inkMid">
                         If you tell us, we can let you know when VÉLA adds features relevant to your airline.
                       </p>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <input
+                        id="early-access-email-consent"
+                        className="mt-1 h-4 w-4 shrink-0 accent-night"
+                        type="checkbox"
+                        checked={emailConsent}
+                        onChange={(e) => setEmailConsent(e.target.checked)}
+                        disabled={status === "loading"}
+                      />
+                      <div>
+                        <label
+                          htmlFor="early-access-email-consent"
+                          className="block text-[0.8rem] leading-snug text-inkMid"
+                        >
+                          {WAITLIST_EMAIL_CONSENT_LABEL}
+                        </label>
+                        <p className="mt-2 text-[0.8rem] leading-snug text-inkMid">
+                          {WAITLIST_EMAIL_CONSENT_HELPER_LEAD}
+                          <Link
+                            href={WAITLIST_EMAIL_CONSENT_PRIVACY_HREF}
+                            className="text-gold underline underline-offset-2 hover:opacity-80"
+                          >
+                            {WAITLIST_EMAIL_CONSENT_PRIVACY_LINK_TEXT}
+                          </Link>
+                        </p>
+                      </div>
                     </div>
                     {message && status === "error" && (
                       <p className="text-sm text-coral">{message}</p>
