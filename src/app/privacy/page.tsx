@@ -188,13 +188,12 @@ export default function PrivacyPage() {
           <strong>Apple App Store billing</strong> — for subscriptions bought inside the iOS
           app, on the same basis, under Apple&rsquo;s privacy policy.
         </li>
-        <li>
-          <strong>Paddle</strong> — our authorised reseller and merchant of record for
-          subscriptions bought directly on this website, under Paddle&rsquo;s privacy policy.
-        </li>
       </ul>
       <p>
-        <strong>RevenueCat</strong> sits behind all of these. It is a subscription-management
+        <strong>Stripe</strong> — processes card payments for subscriptions bought directly on this
+        website, under Stripe&apos;s privacy policy. Stripe holds your payment details; we do not.
+        Vela4Crew Inc. is the seller of these subscriptions. <strong>RevenueCat</strong> sits
+        behind all of these. It is a subscription-management
         service that tells the app whether your subscription is active so the right features
         unlock. To do that it receives an account identifier for you, the device platform, and
         the purchase and renewal events reported by the store — <strong>not</strong> your card
@@ -283,7 +282,7 @@ export default function PrivacyPage() {
               payments&rdquo; above.
             </li>
             <li>
-              <strong>Google Play Billing, Apple App Store billing, and Paddle</strong> — the
+              <strong>Google Play Billing, Apple App Store billing, and Stripe (through RevenueCat)</strong> — the
               payment platforms that process subscription purchases. They hold your payment
               details; we do not.
             </li>

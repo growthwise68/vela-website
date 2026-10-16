@@ -157,6 +157,92 @@ describe("PaySuccessActions markup", () => {
     assert.match(html, /data-testid="open-vela-cta"/);
     assert.match(html, /Open Véla/);
   });
+
+  it("W6 — live RC scheme redeem_url uses raw link and does not call fetch", async () => {
+    process.env.NEXT_PUBLIC_VELA_FAIL_OPEN_SUPABASE_ANON_KEY = "fake-anon-key";
+    const fetchCalls: unknown[] = [];
+    globalThis.fetch = (async (...args: unknown[]) => {
+      fetchCalls.push(args);
+      return new Response(null, { status: 201 });
+    }) as typeof fetch;
+
+    setupBrowserDom("https://preview.example/pay/success");
+
+    const redeem =
+      "rc-c809f0a40e://redeem_web_purchase?redemption_token=live_rc_test_token";
+    mockSearchParams = new URLSearchParams({ redeem_url: redeem });
+
+    const { PaySuccessActions } = await import(
+      `./PaySuccessActions.tsx?w6=${Date.now()}`
+    );
+
+    const container = document.createElement("div");
+    document.body.appendChild(container);
+    const root = createRoot(container);
+
+    await act(async () => {
+      root.render(<PaySuccessActions />);
+    });
+    await act(async () => {
+      await new Promise((resolve) => setTimeout(resolve, 0));
+    });
+
+    const html = container.innerHTML;
+    assert.match(
+      html,
+      new RegExp(`href="${redeem.replace(/\?/g, "\\?")}"`)
+    );
+    assert.equal(fetchCalls.length, 0);
+
+    await act(async () => {
+      root.unmount();
+    });
+    container.remove();
+  });
+
+  it("W6b — upper-case live RC scheme redeem_url is accepted", async () => {
+    const redeem =
+      "RC-C809F0A40E://redeem_web_purchase?redemption_token=live_upper_case";
+    mockSearchParams = new URLSearchParams({ redeem_url: redeem });
+    const { PaySuccessActions } = await import(
+      `./PaySuccessActions.tsx?w6b=${Date.now()}`
+    );
+    const html = renderToStaticMarkup(<PaySuccessActions />);
+    assert.match(
+      html,
+      new RegExp(`href="${redeem.replace(/\?/g, "\\?")}"`)
+    );
+  });
+
+  it("W7 — unknown rc-* scheme is invalid_shape and reported", async () => {
+    process.env.NEXT_PUBLIC_VELA_FAIL_OPEN_SUPABASE_ANON_KEY = "fake-anon-key";
+    const pageUrl = w5PageUrlFixture();
+    const fetchCalls: { url: string; init: RequestInit }[] = [];
+    globalThis.fetch = (async (url: string | URL | Request, init?: RequestInit) => {
+      fetchCalls.push({
+        url: String(url),
+        init: init ?? {},
+      });
+      return new Response(null, { status: 201 });
+    }) as typeof fetch;
+
+    const { sendPaySuccessRedeemUrlFault } = await import(
+      `./PaySuccessActions.tsx?w7=${Date.now()}`
+    );
+
+    await sendPaySuccessRedeemUrlFault({
+      raw: "rc-ffffffffff://redeem_web_purchase?redemption_token=x",
+      appUserId: "user-1",
+      pageUrl,
+    });
+
+    assert.equal(fetchCalls.length, 1);
+    const body = JSON.parse(String(fetchCalls[0].init.body)) as {
+      observed: { reason: string; redeem_url_truncated: string };
+    };
+    assert.equal(body.observed.reason, "invalid_shape");
+    assert.match(body.observed.redeem_url_truncated, /\[redacted\]/);
+  });
 });
 
 describe("sendPaySuccessRedeemUrlFault (W5)", () => {
