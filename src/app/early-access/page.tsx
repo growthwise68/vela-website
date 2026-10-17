@@ -11,7 +11,7 @@ function Fallback() {
 
 export const metadata = {
   title: "Get Early Access",
-  description: "Join the early access list for VÉLA, the body-clock planning app for long-haul cabin crew, and be first in when it opens to everyone. Built by crew, for crew.",
+  description: "Join VÉLA early access. The rest and recovery app for long-haul cabin crew: it reads your roster and plans your sleep, light and caffeine across every duty, layover and day off.",
   alternates: {
     canonical: "https://velaforcrew.com/early-access",
   },

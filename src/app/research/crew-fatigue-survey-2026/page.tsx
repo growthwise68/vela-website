@@ -429,7 +429,7 @@ export default function CrewSurvey2026() {
             Why we ran it
           </h2>
           <p className="font-sans text-base text-inkMid leading-relaxed mb-10">
-            VÉLA is a body-clock planning app for long-haul cabin crew, built by crew. We ran this
+            VÉLA is the rest and recovery app for long-haul cabin crew, built by crew. We ran this
             survey to understand what fatigue actually looks like from the jumpseat, and these
             answers shape how VÉLA gets built.{" "}
             <Link href="/early-access" className="text-gold underline underline-offset-2 hover:opacity-80 transition-opacity">

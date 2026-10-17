@@ -247,7 +247,7 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
             <div className="md:max-w-[260px]">
               <Logo className="mb-3" />
               <p className="font-sans text-sm text-inkMid leading-relaxed mb-2">
-                VÉLA for Crew is a body-clock planning app for long-haul cabin crew.
+                VÉLA is the rest and recovery app for long-haul cabin crew.
               </p>
               <p className="font-mono text-xs uppercase tracking-[0.15em] text-inkFaint">
                 Built by crew, for crew.
