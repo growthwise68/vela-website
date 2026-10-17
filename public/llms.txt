@@ -1,4 +1,4 @@
-# VÉLA (VÉLA for Crew)
+# VÉLA
 
 > VÉLA is the rest and recovery app for long-haul cabin crew. It reads your roster and plans your sleep, light and caffeine across every duty, layover and day off, so you stop starting every trip already exhausted. Built by crew, for crew. VÉLA is a lifestyle planning tool, not a medical device, and is independent of any airline.
 
