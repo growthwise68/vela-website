@@ -230,17 +230,10 @@ export default function PricingPage() {
               </p>
               <p className="font-sans text-sm text-inkMid leading-relaxed">
                 VÉLA subscriptions are available through the App Store, Google Play, or directly
-                at velaforcrew.com. Purchases made directly through this site are processed
-                securely by{" "}
-                <a
-                  className="text-gold underline decoration-gold/40"
-                  href="https://www.paddle.com"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  Paddle.com
-                </a>
-                , our authorized reseller and merchant of record.
+                at velaforcrew.com. Purchases made directly through this site are sold by
+                Vela4Crew Inc., the seller and merchant of record, and processed securely by
+                Stripe. Prices are in US dollars and are shown at checkout before you pay; the
+                amount shown at checkout is the total you are charged.
               </p>
               <p className="font-sans text-sm text-inkMid leading-relaxed">
                 Questions about pricing or billing? See our{" "}

@@ -106,6 +106,19 @@ export default function PrivacyPage() {
           or email.
         </li>
       </ul>
+      <p>
+        <strong>How you found us.</strong> When you first sign up, we keep a note of how you
+        reached VÉLA: the campaign tags on the link you used (such as its source, medium and
+        campaign name) and any referral code, along with the date you signed up. We link this
+        to your account so we can see which channels and referrals work. We do not store your IP
+        address, device details or email address as part of this record. We keep it for 24 months,
+        and we delete it if you delete your account.
+      </p>
+      <p>
+        If you join our early-access waitlist, we store the same campaign tags and referral code
+        alongside the email address you give us, so we know how you heard about VÉLA. We keep them
+        for up to 24 months, and delete them sooner if your waitlist entry is removed.
+      </p>
 
       <h3>Information collected automatically</h3>
       <ul>
@@ -188,13 +201,12 @@ export default function PrivacyPage() {
           <strong>Apple App Store billing</strong> — for subscriptions bought inside the iOS
           app, on the same basis, under Apple&rsquo;s privacy policy.
         </li>
-        <li>
-          <strong>Paddle</strong> — our authorised reseller and merchant of record for
-          subscriptions bought directly on this website, under Paddle&rsquo;s privacy policy.
-        </li>
       </ul>
       <p>
-        <strong>RevenueCat</strong> sits behind all of these. It is a subscription-management
+        <strong>Stripe</strong> — processes card payments for subscriptions bought directly on this
+        website, under Stripe&apos;s privacy policy. Stripe holds your payment details; we do not.
+        Vela4Crew Inc. is the seller of these subscriptions. <strong>RevenueCat</strong> sits
+        behind all of these. It is a subscription-management
         service that tells the app whether your subscription is active so the right features
         unlock. To do that it receives an account identifier for you, the device platform, and
         the purchase and renewal events reported by the store — <strong>not</strong> your card
@@ -283,7 +295,7 @@ export default function PrivacyPage() {
               payments&rdquo; above.
             </li>
             <li>
-              <strong>Google Play Billing, Apple App Store billing, and Paddle</strong> — the
+              <strong>Google Play Billing, Apple App Store billing, and Stripe (through RevenueCat)</strong> — the
               payment platforms that process subscription purchases. They hold your payment
               details; we do not.
             </li>
