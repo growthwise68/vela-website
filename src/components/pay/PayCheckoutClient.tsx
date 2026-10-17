@@ -19,7 +19,10 @@ export function PayCheckoutClient({ siteOrigin }: PayCheckoutClientProps) {
     [searchParams]
   );
 
-  const checkoutUrl = useMemo(() => buildRevenueCatCheckoutUrl(), []);
+  const checkoutUrl = useMemo(
+    () => buildRevenueCatCheckoutUrl(attribution),
+    [attribution]
+  );
 
   const sharePayUrl = useMemo(
     () => buildPayPageUrl(siteOrigin, attribution),
