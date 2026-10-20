@@ -208,10 +208,6 @@ export function PaySuccessActions() {
           {INSTALL_EMAIL_SENTENCE}
         </p>
       </div>
-
-      <p className="font-sans text-xs text-inkFaint text-center">
-        Profile → Redeem is only a rare backup if something went wrong — not the normal path.
-      </p>
     </div>
   );
 }
