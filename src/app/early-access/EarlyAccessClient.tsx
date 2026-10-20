@@ -1,7 +1,11 @@
 "use client";
 
-import React, { useState } from "react";
-import { useRouter } from "next/navigation";
+import React, { useMemo, useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import {
+  attributionToWaitlistColumns,
+  pickAttributionFromSearchParams,
+} from "@/lib/pay/attribution";
 import Link from "next/link";
 import { FullBleed } from "@/components/FullBleed";
 import {
@@ -13,6 +17,11 @@ import {
 
 export default function EarlyAccessClient() {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const visitAttribution = useMemo(
+    () => attributionToWaitlistColumns(pickAttributionFromSearchParams(searchParams)),
+    [searchParams]
+  );
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [airline, setAirline] = useState("");
@@ -43,6 +52,7 @@ export default function EarlyAccessClient() {
           name: name.trim(),
           airline: airline.trim() || null,
           emailConsent,
+          ...visitAttribution,
         }),
       });
       const data = await res.json();

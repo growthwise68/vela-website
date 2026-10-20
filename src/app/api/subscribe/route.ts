@@ -1,6 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
 import { WAITLIST_EMAIL_CONSENT_LABEL } from "@/app/early-access/consent-copy";
+import {
+  attributionToWaitlistColumns,
+  pickAttributionFromJsonBody,
+} from "@/lib/pay/attribution";
 
 /**
  * POST /api/subscribe
@@ -78,7 +82,7 @@ async function addToMailerLite(
   };
 
   try {
-    console.log(`[subscribe] MailerLite request — email=${email} groupId=${gid}`);
+    console.log(`[subscribe] MailerLite request — groupId=${gid}`);
 
     const res = await fetch("https://connect.mailerlite.com/api/subscribers", {
       method: "POST",
@@ -90,13 +94,13 @@ async function addToMailerLite(
       body: JSON.stringify(payload),
     });
 
-    const body = await res.json().catch(() => ({}));
-
     if (!res.ok) {
-      console.error(`[subscribe] MailerLite error ${res.status}:`, JSON.stringify(body));
+      await res.json().catch(() => ({}));
+      console.error(`[subscribe] MailerLite error ${res.status}`);
       return { ok: false, status: res.status, reason: "http_error" };
     }
 
+    await res.json().catch(() => ({}));
     console.log(`[subscribe] MailerLite ok — status=${res.status} groups=${JSON.stringify([gid])}`);
     return { ok: true, status: res.status };
   } catch (error) {
@@ -266,6 +270,9 @@ export async function POST(req: NextRequest) {
     // cannot pre-check for duplicates. Instead we rely on the UNIQUE constraint
     // on the email column and handle the violation (code 23505) as a 409.
     const emailConsent = body.emailConsent === true;
+    const waitlistAttribution = attributionToWaitlistColumns(
+      pickAttributionFromJsonBody(body as Record<string, unknown>)
+    );
     const { error: insertErr } = await supabase.from("waitlist_signups").insert({
       email: emailNorm,
       name: nameNorm,
@@ -274,6 +281,7 @@ export async function POST(req: NextRequest) {
       email_consent: emailConsent,
       email_consent_at: new Date().toISOString(),
       email_consent_wording: WAITLIST_EMAIL_CONSENT_LABEL,
+      ...waitlistAttribution,
     });
 
     if (insertErr) {

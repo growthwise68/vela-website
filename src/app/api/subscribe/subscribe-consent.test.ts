@@ -16,6 +16,7 @@ let inserts: InsertCall[] = [];
 let insertError: { code: string; message: string } | null = null;
 let fetchCalls: FetchCall[] = [];
 let mailerMode: "ok" | "http" | "throw" | "throw-email" = "ok";
+const originalFetch = globalThis.fetch;
 
 const savedEnv = {
   url: process.env.NEXT_PUBLIC_SUPABASE_URL,
@@ -131,6 +132,7 @@ beforeEach(() => {
 
 afterEach(() => {
   restoreEnv();
+  globalThis.fetch = originalFetch;
 });
 
 async function post(payload: Record<string, unknown>) {
@@ -266,6 +268,31 @@ describe("early-access consent subscribe", () => {
     assert.equal(mailerCalls().length, 0);
   });
 
+  it("stores first-touch attribution columns and nulls when tags are absent", async () => {
+    const tagged = await post({
+      ...baseFields,
+      emailConsent: false,
+      utm_source: "ig",
+      utm_medium: "social",
+      utm_campaign: "launch",
+      ref: "crew99",
+    });
+    assert.equal(tagged.status, 200);
+    assert.equal(inserts[0].payload.utm_source, "ig");
+    assert.equal(inserts[0].payload.utm_medium, "social");
+    assert.equal(inserts[0].payload.utm_campaign, "launch");
+    assert.equal(inserts[0].payload.ref, "crew99");
+
+    inserts = [];
+    fetchCalls = [];
+    const untagged = await post({ ...baseFields, emailConsent: false });
+    assert.equal(untagged.status, 200);
+    assert.equal(inserts[0].payload.utm_source, null);
+    assert.equal(inserts[0].payload.utm_medium, null);
+    assert.equal(inserts[0].payload.utm_campaign, null);
+    assert.equal(inserts[0].payload.ref, null);
+  });
+
   it("returns 409 for a duplicate email and does not call MailerLite", async () => {
     insertError = { code: "23505", message: "duplicate key" };
     const res = await post({ ...baseFields, emailConsent: true });
@@ -284,18 +311,32 @@ describe("early-access consent subscribe", () => {
     assert.equal(mailerCalls().length, 0);
   });
 
-  it("migration file has no UPDATE and no DEFAULT statement", () => {
-    const sql = readFileSync(
+  it("migration files have no UPDATE and no DEFAULT statement", () => {
+    for (const file of [
+      "0003_waitlist_email_consent.sql",
+      "0004_waitlist_attribution.sql",
+    ]) {
+      const sql = readFileSync(
+        path.join(process.cwd(), "supabase/migrations", file),
+        "utf8"
+      );
+      const executable = sql
+        .split("\n")
+        .filter((line) => !line.trim().startsWith("--"))
+        .join("\n");
+      assert.equal(executable.includes("UPDATE"), false, file);
+      assert.equal(executable.includes("DEFAULT"), false, file);
+    }
+    const consentSql = readFileSync(
       path.join(process.cwd(), "supabase/migrations/0003_waitlist_email_consent.sql"),
       "utf8"
     );
-    const executable = sql
-      .split("\n")
-      .filter((line) => !line.trim().startsWith("--"))
-      .join("\n");
-    assert.equal(executable.includes("UPDATE"), false);
-    assert.equal(executable.includes("DEFAULT"), false);
-    assert.equal(sql.includes("email_consent"), true);
-    assert.equal(sql.includes("NULL means no choice was recorded."), true);
+    assert.equal(consentSql.includes("NULL means no choice was recorded."), true);
+    const attributionSql = readFileSync(
+      path.join(process.cwd(), "supabase/migrations/0004_waitlist_attribution.sql"),
+      "utf8"
+    );
+    assert.equal(attributionSql.includes("utm_source"), true);
+    assert.equal(attributionSql.includes("waitlist_signups"), true);
   });
 });

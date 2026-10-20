@@ -26,7 +26,13 @@ mock.module("@/lib/pay/config", {
       return mockAndroidStoreUrl;
     },
     VELA_OPEN_APP_URL: "vela://open",
-    ATTRIBUTION_PARAM_KEYS: ["utm_source", "utm_medium", "ref"],
+    ATTRIBUTION_PARAM_KEYS: [
+      "utm_source",
+      "utm_medium",
+      "utm_campaign",
+      "utm_content",
+      "ref",
+    ],
   },
 });
 
