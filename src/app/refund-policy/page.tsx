@@ -48,18 +48,11 @@ export default function RefundPolicyPage() {
 
             <h2 id="direct">Purchased directly through velaforcrew.com</h2>
             <p>
-              Subscriptions purchased directly through this website are processed by{" "}
-              <a
-                className="text-gold underline decoration-gold/40"
-                href="https://www.paddle.com"
-                target="_blank"
-                rel="noreferrer"
-              >
-                Paddle.com
-              </a>
-              , our authorized reseller and merchant of record. If you contact us within{" "}
-              <strong>14 days</strong> of purchase, we&rsquo;ll issue a full refund to your original
-              payment method, processed by Paddle.
+              Subscriptions purchased directly through this website are sold by Vela4Crew Inc.,
+              the seller and merchant of record, and paid through Stripe. Your free trial costs
+              nothing. If you contact us within <strong>14 days of your first charge</strong> —
+              the first payment taken after your free trial ends — we&apos;ll issue a full refund
+              of that charge to your original payment method.
             </p>
 
             <h2 id="how-to-request">How to request one</h2>
@@ -77,12 +70,13 @@ export default function RefundPolicyPage() {
             <p>
               You can cancel your subscription at any time. If you subscribed through the App Store or
               Google Play, cancel from your device&rsquo;s subscription settings. If you subscribed
-              directly on this site, use the manage-subscription link in the receipt Paddle emailed you,
-              or contact us at{" "}
+              directly on this site, use the manage-subscription link in your emailed purchase
+              receipt, or contact us at{" "}
               <a href="mailto:founder@velaforcrew.com">founder@velaforcrew.com</a> and we will cancel it
               for you. Cancelling stops future renewals; it does not itself trigger a refund for the
               current billing period unless approved per the policy above.
             </p>
+            {/* [MISSING: the sender name/address shown on live RC Billing receipt emails — unknown until the first live purchase; confirm it reads as Vela4Crew/VÉLA so "your emailed purchase receipt" is recognisable.] */}
 
             <p className="mt-8 font-sans text-xs text-inkFaint">
               Vela4Crew Inc., 131 Continental Dr, Suite 305, Newark, DE 19713, USA.

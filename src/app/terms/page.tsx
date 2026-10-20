@@ -152,18 +152,22 @@ export default function TermsPage() {
       </p>
       <p>
         Purchases made directly through this website are sold by{" "}
-        <strong>Paddle.com</strong>, our authorised reseller and{" "}
-        <strong>merchant of record</strong>. Paddle handles payment processing, invoicing and
-        applicable sales tax or VAT for those purchases, and appears as the seller on your
-        statement and receipt. Those transactions are additionally subject to Paddle&rsquo;s own
-        buyer terms. Purchases made through the App Store or Google Play are governed by the terms
-        of the respective store.
+        <strong>Vela4Crew Inc.</strong>, the seller and{" "}
+        <strong>merchant of record</strong> (Vela4Crew Inc., a Delaware corporation, 131
+        Continental Dr, Suite 305, Newark, DE 19713, USA). Payments are processed securely by
+        Stripe through RevenueCat, our subscription platform; we never see or store your full card
+        details. Prices are in US dollars and are shown at checkout before you pay; the amount
+        shown at checkout is the total you are charged. Vela4Crew Inc. is responsible for any sales
+        tax or VAT that applies to these purchases, and issues the receipt for each payment. No
+        sales tax or VAT is added at checkout. Purchases made through the App Store or Google Play
+        are governed by the terms of the respective store.
       </p>
 
       <h2 id="third-party">Third-party services</h2>
       <p>
         VÉLA uses third-party infrastructure (including Google Firebase, Supabase, MailerLite,
-        and Vercel) to operate the service, and Paddle for payments made through this website.
+        and Vercel) to operate the service, and RevenueCat and Stripe for payments made through
+        this website.
         Those services are governed by their own terms and privacy policies. We are not
         responsible for the practices of third-party services we use to operate VÉLA.
       </p>
