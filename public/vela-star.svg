@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="36 36 328 328" role="img" aria-label="VÉLA">
+  <defs>
+    <linearGradient id="vs-g" gradientUnits="userSpaceOnUse" x1="80" y1="40" x2="320" y2="360">
+      <stop offset="0" stop-color="#E9C982"/>
+      <stop offset="0.5" stop-color="#C49A3C"/>
+      <stop offset="1" stop-color="#9A7226"/>
+    </linearGradient>
+    <clipPath id="vs-c"><path d="M200 40 Q230 170 340 200 Q230 230 200 360 Q170 230 60 200 Q170 170 200 40 Z"/></clipPath>
+  </defs>
+  <g clip-path="url(#vs-c)" fill="none" stroke="url(#vs-g)" stroke-width="9" stroke-linejoin="round">
+    <polyline points="130,200 200,40 270,200"/>
+    <polyline points="130,200 200,360 270,200"/>
+    <polyline points="200,130 60,200 200,270"/>
+    <polyline points="200,130 340,200 200,270"/>
+    <polygon points="200,130 270,200 200,270 130,200"/>
+  </g>
+  <path d="M200 40 Q230 170 340 200 Q230 230 200 360 Q170 230 60 200 Q170 170 200 40 Z" fill="none" stroke="url(#vs-g)" stroke-width="18" stroke-linejoin="round"/>
+  <polygon points="200,180 220,200 200,220 180,200" fill="url(#vs-g)"/>
+</svg>

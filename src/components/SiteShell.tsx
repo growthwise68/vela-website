@@ -42,7 +42,7 @@ function Logo({ onClick, className = "" }: { onClick?: () => void; className?: s
       onClick={onClick}
       className={`inline-flex items-center gap-2 leading-none font-display text-3xl md:text-4xl font-medium tracking-tight text-ink hover:text-gold transition-colors ${className}`}
     >
-      <span className="text-gold text-2xl md:text-3xl">★</span>
+      <img src="/vela-star.svg" alt="" aria-hidden="true" className="h-[1em] w-[1em] flex-shrink-0" />
       <span>VÉLA</span>
     </Link>
   );

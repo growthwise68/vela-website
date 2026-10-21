@@ -1,13 +1,10 @@
-<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-  <style>
-    .star { fill: #C49A3C; }
-    @media (prefers-color-scheme: dark) {
-      /* Same gold on dark browser-tab backgrounds — it reads on both. */
-      .star { fill: #C49A3C; }
-    }
-  </style>
-  <path
-    class="star"
-    d="M50,5.3 L61.8,33.7 L92.5,36.2 L69.1,56.2 L76.3,86.2 L50,70.1 L23.7,86.2 L30.9,56.2 L7.5,36.2 L38.2,33.7 Z"
-  />
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="36 36 328 328">
+  <defs>
+    <linearGradient id="g" gradientUnits="userSpaceOnUse" x1="80" y1="40" x2="320" y2="360">
+      <stop offset="0" stop-color="#E9C982"/>
+      <stop offset="0.5" stop-color="#C49A3C"/>
+      <stop offset="1" stop-color="#9A7226"/>
+    </linearGradient>
+  </defs>
+  <path d="M200 40 Q230 170 340 200 Q230 230 200 360 Q170 230 60 200 Q170 170 200 40 Z" fill="url(#g)" stroke="url(#g)" stroke-width="8" stroke-linejoin="round"/>
 </svg>
