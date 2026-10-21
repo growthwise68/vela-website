@@ -43,7 +43,7 @@ export default function BriefsClient() {
       {/* Hero */}
       <FullBleed className="pt-16 md:pt-20 pb-10 md:pb-14 bg-gradient-to-b from-parchment/50 to-cream/50">
         <div className="max-w-2xl mx-auto px-6 md:px-8 text-center">
-          <span className="block text-2xl text-gold mb-6">★</span>
+          <img src="/vela-star.svg" alt="" aria-hidden="true" className="block mx-auto h-6 w-6 mb-6" />
           <p className="font-mono text-xs md:text-sm uppercase tracking-[0.25em] text-gold font-semibold mb-5">
             VÉLA Recovery Briefs
           </p>
