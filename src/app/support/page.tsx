@@ -80,11 +80,10 @@ const faqs: { q: string; a: React.ReactNode }[] = [
       <>
         VÉLA is free to start. Paid plans can be bought through the App Store, Google Play, or
         directly on this site. Subscriptions bought through a store are managed in your
-        device&rsquo;s subscription settings. Subscriptions bought directly on this site are
-        processed by Paddle, our merchant of record &mdash; use the manage-subscription link in your
-        purchase receipt, or email us and we will cancel it for you. Prices are shown in USD; sales
-        tax or VAT may be added at checkout depending on your country, and the exact total is always
-        shown before you pay.
+        device&rsquo;s subscription settings. Subscriptions bought directly on this site are sold by
+        Vela4Crew Inc. and paid through Stripe &mdash; use the manage-subscription link in your
+        emailed purchase receipt, or email us and we will cancel it for you. Prices are in USD and
+        are shown at checkout; the amount shown at checkout is the total you pay.
       </>
     ),
   },

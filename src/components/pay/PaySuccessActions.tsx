@@ -50,13 +50,16 @@ type RedeemUrlDecision =
   | { valid: true }
   | { valid: false; reason: RedeemUrlFaultReason };
 
+// RC web configs: appbed9aa89d1 (sandbox), appc809f0a40e (live)
+const RC_REDEEM_PROTOCOLS = new Set(["rc-bed9aa89d1:", "rc-c809f0a40e:"]);
+
 function decideRedeemUrl(raw: string | null): RedeemUrlDecision {
   if (raw === null || raw.trim() === "") {
     return { valid: false, reason: "missing" };
   }
   try {
     const parsed = new URL(raw);
-    if (parsed.protocol.toLowerCase() !== "rc-bed9aa89d1:") {
+    if (!RC_REDEEM_PROTOCOLS.has(parsed.protocol.toLowerCase())) {
       return { valid: false, reason: "invalid_shape" };
     }
     if (parsed.hostname !== "redeem_web_purchase") {
@@ -205,10 +208,6 @@ export function PaySuccessActions() {
           {INSTALL_EMAIL_SENTENCE}
         </p>
       </div>
-
-      <p className="font-sans text-xs text-inkFaint text-center">
-        Profile → Redeem is only a rare backup if something went wrong — not the normal path.
-      </p>
     </div>
   );
 }

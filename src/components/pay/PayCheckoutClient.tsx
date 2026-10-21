@@ -19,7 +19,10 @@ export function PayCheckoutClient({ siteOrigin }: PayCheckoutClientProps) {
     [searchParams]
   );
 
-  const checkoutUrl = useMemo(() => buildRevenueCatCheckoutUrl(), []);
+  const checkoutUrl = useMemo(
+    () => buildRevenueCatCheckoutUrl(attribution),
+    [attribution]
+  );
 
   const sharePayUrl = useMemo(
     () => buildPayPageUrl(siteOrigin, attribution),
@@ -42,7 +45,7 @@ export function PayCheckoutClient({ siteOrigin }: PayCheckoutClientProps) {
         </p>
         <p className="font-sans text-sm text-inkMid leading-relaxed mb-6">
           Pay with Stripe via RevenueCat. After payment, open VÉLA on your phone and sign in —
-          Core should be ready. Pasting a redeem code is only a rare backup.
+          Core should be ready.
         </p>
         <a
           href={checkoutUrl}

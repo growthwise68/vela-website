@@ -73,8 +73,9 @@ export default function DeleteAccountPage() {
           <strong>Subscription and transaction records</strong> — if you have a paid subscription,
           our payment platforms and RevenueCat retain billing records as required for tax,
           accounting, and fraud-prevention purposes. Deleting your VÉLA account does{" "}
-          <strong>not</strong> cancel an active subscription — cancel it separately in your App
-          Store, Google Play, or Paddle subscription settings first, or ask us to help.
+          <strong>not</strong> cancel an active subscription — cancel it separately first in your
+          App Store or Google Play subscription settings, or with the manage-subscription link in your
+          website purchase receipt, or ask us to help.
         </li>
         <li>
           <strong>Aggregated or anonymised analytics</strong> — usage data that has already been
