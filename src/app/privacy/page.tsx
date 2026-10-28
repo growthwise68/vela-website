@@ -13,7 +13,7 @@ const tocItems = [
   { id: "information-we-collect", label: "Information we collect" },
   { id: "how-we-use", label: "How we use your information" },
   { id: "subscriptions-payments", label: "Subscriptions & payments" },
-  { id: "ai", label: "Personalised advice & AI" },
+  { id: "ai", label: "AI processing" },
   { id: "sharing", label: "Information sharing" },
   { id: "independence", label: "Independence from your airline" },
   { id: "retention", label: "Data retention" },
@@ -35,7 +35,7 @@ export default function PrivacyPage() {
         Privacy policy
       </h1>
       <p className="mt-2 font-mono text-xs uppercase tracking-[0.18em] text-inkFaint mb-8">
-        Version 2.1 — 27 July 2026
+        Version 2.2 — 28 October 2026
       </p>
 
       <h2 id="who-we-are">Who we are</h2>
@@ -75,9 +75,9 @@ export default function PrivacyPage() {
         <li>
           <strong>Adherence feedback</strong> — the app allows you to optionally record how
           well you followed guidance (for example, sleep timing, light exposure, or nutrition
-          suggestions). This information is stored in your private account and is used solely
-          to update your personal planning estimates within the app. It is not shared, sold,
-          or used for any other purpose.
+          suggestions). In the current app version, this feedback is stored on your device only;
+          it is not uploaded to VÉLA or stored with your account. It may be used within the app
+          to update your personal planning estimates.
         </li>
         <li>
           <strong>Survey responses</strong> — if you complete our cabin crew survey, your answers
@@ -167,10 +167,7 @@ export default function PrivacyPage() {
         <li>To provide and operate the VÉLA service.</li>
         <li>To generate body-clock and sleep timing estimates based on your schedule.</li>
         <li>To respond to support requests and communications.</li>
-        <li>
-          To generate personalised advice, including advice written with the help of a language
-          model (see &ldquo;Personalised advice and AI&rdquo; below).
-        </li>
+        <li>To provide personalised planning suggestions based on your schedule and preferences.</li>
         <li>
           To sell and manage subscriptions, unlock the features you paid for, restore purchases,
           and handle billing support.
@@ -223,43 +220,13 @@ export default function PrivacyPage() {
         .
       </p>
 
-      <h2 id="ai">Personalised advice and AI</h2>
+      <h2 id="ai">AI processing</h2>
       <p>
-        Some of VÉLA&rsquo;s personalised guidance is produced with the help of a{" "}
-        <strong>large language model (LLM)</strong>. This happens on our backend, hosted by{" "}
-        <strong>Supabase</strong>: the app sends your planning context to our own secure
-        function, which builds a prompt and calls an LLM provider — currently{" "}
-        <strong>Google (Gemini)</strong>, with <strong>Anthropic (Claude)</strong> as an
-        alternative — and returns the wording to your app.
-      </p>
-      <p>
-        <strong>What is sent.</strong> Only the context needed to write the advice: your
-        roster and schedule context (flight times, airports, duty and rest periods, time-zone
-        shifts) and your planning preferences (for example chronotype, target sleep hours, and
-        caffeine cut-off), together with the app&rsquo;s own calculated body-clock estimates.
-      </p>
-      <p>
-        <strong>What is not sent.</strong> Your password, or any password (we never have access
-        to your password in any form), your name, your email address, your payment details, and
-        your account identifier are <strong>not</strong> included in the prompt sent to the LLM
-        provider. Your account is checked for a valid session and an active subscription before
-        the request runs, but that check happens on our backend and the identifier used is
-        stored only in one-way hashed form in our own logs. We do not permit the LLM provider to
-        use your content to train its models.
-      </p>
-      <p>
-        <strong>The output is generated, not human-written.</strong> Advice text produced this
-        way is generated automatically by a language model. It is general lifestyle and
-        wellness information based on your schedule and published sleep science — it is{" "}
-        <strong>not medical advice</strong>, not a diagnosis, not written or reviewed by a
-        clinician before you see it, and not operational or regulatory guidance. Generated text
-        can be wrong or incomplete. Always use your own judgement, follow your airline&rsquo;s
-        procedures, and consult a qualified professional for medical concerns. If a piece of
-        generated advice looks wrong, offensive, or unsafe, please tell us at{" "}
-        <a className="text-gold underline decoration-gold/40" href="mailto:founder@velaforcrew.com">
-          founder@velaforcrew.com
-        </a>{" "}
-        so we can investigate.
+        The current iOS version of the VÉLA app does not send roster or preference data to an AI
+        provider. The VÉLA website does not currently generate AI advice. If a future version
+        introduces AI processing, we will update this policy and the relevant app privacy
+        disclosures before release, and provide notice and obtain consent where required before
+        sharing personal data with an AI provider.
       </p>
 
       <h2 id="sharing">Information sharing</h2>
@@ -278,16 +245,9 @@ export default function PrivacyPage() {
               Monitoring) for the mobile app.
             </li>
             <li>
-              <strong>Supabase</strong> — our backend. It hosts the advice function described
-              above (including the call to the LLM provider), roster enrichment and lookup
-              services, product-usage analytics for the app, and storage of survey responses
-              and waitlist sign-ups from the website.
-            </li>
-            <li>
-              <strong>Google (Gemini) / Anthropic (Claude)</strong> — the large language model
-              providers our backend calls to write personalised advice. They receive the
-              roster and preference context described in &ldquo;Personalised advice and
-              AI&rdquo; above, and no account, contact, or payment details.
+              <strong>Supabase</strong> — backend services for the mobile app, roster
+              enrichment and lookup, product-usage analytics for the app, and storage of survey
+              responses and waitlist sign-ups from the website.
             </li>
             <li>
               <strong>RevenueCat</strong> — subscription status and entitlement management, so
@@ -435,7 +395,7 @@ export default function PrivacyPage() {
       </p>
 
       <p className="mt-8 font-mono text-xs uppercase tracking-[0.15em] text-inkFaint">
-        Version 2.1 — 27 July 2026
+        Version 2.2 — 28 October 2026
       </p>
           </article>
         </div>

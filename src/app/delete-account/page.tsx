@@ -14,7 +14,7 @@ export default function DeleteAccountPage() {
     <article className="prose-vela">
       <h1 className="font-display text-3xl font-light text-ink">Delete your account</h1>
       <p className="mt-2 font-mono text-[10px] uppercase tracking-[0.18em] text-inkFaint">
-        Version 1.0 — 27 July 2026
+        Version 1.1 — 28 October 2026
       </p>
 
       <p>
@@ -62,8 +62,11 @@ export default function DeleteAccountPage() {
         <li>Your account itself (email, sign-in credentials, display name).</li>
         <li>Your roster and schedule data, and any assembled duty/flight information.</li>
         <li>Your profile, preferences, and planning settings (chronotype, sleep targets, and similar).</li>
-        <li>Adherence feedback and any other data tied to your account.</li>
       </ul>
+      <p>
+        Adherence feedback is stored only on your device in the current app version. It is not
+        part of the account data removed through this process.
+      </p>
       <p>
         Some information cannot be deleted immediately or is kept for a limited time for legal,
         billing, or security reasons even after your account is gone:
