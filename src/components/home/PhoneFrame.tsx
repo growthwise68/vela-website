@@ -1,13 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 
 type Screen = {
   tab: string;
-  context: string;
-  title: string;
-  note: string;
   image: string;
   alt: string;
 };
@@ -15,32 +12,37 @@ type Screen = {
 const screens: Screen[] = [
   {
     tab: "Departure",
-    context: "LHR → SIN · Day 1",
-    title: "The Departure",
-    note: "Your report time is 02:00. Your body thinks it’s the middle of the night — because it is. VÉLA saw this coming three days ago.",
-    image: "/images/app/app-home.webp",
-    alt: "VÉLA home screen showing tonight's plan: sleep and wake times, caffeine cutoff, light timing and a wellness score",
+    image: "/images/app/app-build-roster.webp",
+    alt: "VÉLA roster builder screen showing a flight being added before departure",
   },
   {
     tab: "Layover",
-    context: "SIN layover · Day 2",
-    title: "The Layover",
-    note: "30 hours in Singapore. Your body clock is still back in London. VÉLA shows you when rest will help most, so you can actually use this layover.",
     image: "/images/app/app-rest-plan.webp",
-    alt: "VÉLA rest plan showing a timeline of meals, sleep, wake-up and departure for the next duty",
+    alt: "VÉLA rest plan screen showing sleep and nap windows for a layover",
   },
   {
     tab: "Return",
-    context: "Home · Day 1 off",
-    title: "The Return",
-    note: "You’re home. Your days off start now. VÉLA shows you why the first 24 hours matter most — and what to do with them.",
-    image: "/images/app/app-home.webp",
-    alt: "VÉLA home screen showing tonight's plan: sleep and wake times, caffeine cutoff, light timing and a wellness score",
+    image: "/images/app/app-insights.webp",
+    alt: "VÉLA insights screen comparing body clock time with local time after returning home",
   },
 ];
 
+const ROTATE_MS = 6000;
+
 export function PhoneFrame() {
   const [active, setActive] = useState(0);
+
+  // Auto-rotates through the slides; restarts its timer whenever `active`
+  // changes for any reason, so a manual tab click doesn't get immediately
+  // overridden by the next tick. Respects prefers-reduced-motion.
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const id = setInterval(() => {
+      setActive((i) => (i + 1) % screens.length);
+    }, ROTATE_MS);
+    return () => clearInterval(id);
+  }, [active]);
+
   const screen = screens[active];
 
   return (
@@ -57,7 +59,7 @@ export function PhoneFrame() {
             fill
             sizes="300px"
             className="object-cover"
-            priority={screen.image === screens[0].image}
+            priority={active === 0}
           />
         </div>
       </div>
@@ -80,15 +82,6 @@ export function PhoneFrame() {
             {s.tab}
           </button>
         ))}
-      </div>
-
-      {/* Caption — keeps the per-stage story that used to live inside the mock screen */}
-      <div className="mt-5 max-w-[300px] text-center">
-        <p className="font-mono text-[11px] uppercase tracking-[0.15em] text-gold font-semibold mb-1">
-          {screen.context}
-        </p>
-        <h3 className="font-display text-lg font-light text-cream mb-2">{screen.title}</h3>
-        <p className="font-sans text-[13px] text-cream/70 leading-relaxed">{screen.note}</p>
       </div>
     </div>
   );

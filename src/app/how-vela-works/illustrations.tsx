@@ -161,10 +161,16 @@ function StepFigure({
 }) {
   return (
     <figure className="flex flex-col items-center">
-      <div className="relative w-[130px] rounded-[1.6rem] border-[4px] border-navy bg-navy p-1.5 ring-1 ring-gold/30 shadow-[0_12px_30px_rgba(0,0,0,0.25)]">
+      <div className="relative w-[150px] md:w-[200px] rounded-[1.6rem] border-[4px] border-navy bg-navy p-1.5 ring-1 ring-gold/30 shadow-[0_12px_30px_rgba(0,0,0,0.25)]">
         <div className="absolute left-1/2 top-1.5 -translate-x-1/2 w-9 h-2 rounded-full bg-navy z-10" />
         <div className="relative rounded-[1.2rem] overflow-hidden" style={{ aspectRatio: "924 / 2000" }}>
-          <Image src={src} alt={alt} fill sizes="130px" className="object-cover" />
+          <Image
+            src={src}
+            alt={alt}
+            fill
+            sizes="(min-width: 768px) 200px, 150px"
+            className="object-cover"
+          />
         </div>
       </div>
       <figcaption className="mt-3 font-sans text-sm text-inkMid text-center">{caption}</figcaption>
@@ -208,7 +214,7 @@ function ChartLabel({
 
 function StepConnector() {
   return (
-    <div className="hidden sm:flex flex-1 items-center justify-center px-2 self-center" aria-hidden="true">
+    <div className="hidden md:flex flex-1 items-center justify-center px-2 self-center" aria-hidden="true">
       <svg viewBox="0 0 100 10" className="w-full h-[10px]" preserveAspectRatio="none">
         <line x1="0" y1="5" x2="100" y2="5" stroke="currentColor" className="text-gold/50" strokeWidth={2} strokeDasharray="6 6" />
         <circle cx="50" cy="5" r="3" className="fill-gold" />
@@ -221,7 +227,7 @@ function StepConnector() {
 export function HowItWorksSteps() {
   return (
     <RevealOnView>
-      <div className="flex flex-col sm:flex-row sm:items-center gap-8 sm:gap-0">
+      <div className="flex flex-col items-center md:flex-row md:items-center gap-8 md:gap-0">
         <StepFigure
           src="/images/app/app-build-roster.webp"
           alt="VÉLA roster builder: adding a flight by airline, flight number and date"
