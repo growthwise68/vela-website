@@ -7,9 +7,9 @@ import "swiper/css";
 import "swiper/css/pagination";
 import { organization, mobileApplication } from "@/lib/structured-data";
 import { FullBleed } from "@/components/FullBleed";
-import { Wave } from "@/components/ui/Wave";
 import { CtaButton } from "@/components/ui/CtaButton";
 import { PhoneFrame } from "@/components/home/PhoneFrame";
+import { HeroPhone } from "@/components/home/HeroPhone";
 import { CircadianShiftDemo } from "@/components/home/CircadianShiftDemo";
 
 // "At a glance" icons: 20px, ~1.5 stroke, gold outline by default. Each
@@ -195,13 +195,13 @@ export default function HomePageClient() {
             </div>
 
             <div className="hidden md:block md:min-w-[480px]">
-              <Wave />
+              <HeroPhone />
             </div>
           </div>
 
-          {/* Mobile: timeline below the CTA */}
+          {/* Mobile: phone below the CTA */}
           <div className="md:hidden mt-14">
-            <Wave />
+            <HeroPhone />
           </div>
         </div>
 
