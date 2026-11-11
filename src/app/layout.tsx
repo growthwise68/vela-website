@@ -30,11 +30,11 @@ const dmMono = DM_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "VÉLA — Body-Clock Planning App for Long-Haul Cabin Crew",
+    default: "VÉLA — Rest & Recovery App for Long-Haul Cabin Crew",
     template: "%s — VÉLA",
   },
   description:
-    "VÉLA reads your roster and maps your body clock duty by duty, with sleep, light, caffeine and meal timing for every trip. Built by crew, for long-haul cabin crew.",
+    "VÉLA is the rest and recovery app for long-haul cabin crew. It reads your roster and plans your sleep, light and caffeine across every duty, layover and day off. Built by crew, for crew.",
 };
 
 export default function RootLayout({
