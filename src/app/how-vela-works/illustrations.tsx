@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import { Cite } from "./Cite";
 
 /**
@@ -150,19 +151,28 @@ export function HeroRings() {
 }
 
 function StepFigure({
-  ariaLabel,
+  src,
+  alt,
   caption,
-  children,
 }: {
-  ariaLabel: string;
+  src: string;
+  alt: string;
   caption: string;
-  children: React.ReactNode;
 }) {
   return (
     <figure className="flex flex-col items-center">
-      <svg viewBox="0 0 200 110" role="img" aria-label={ariaLabel} className="w-full max-w-[200px] h-auto">
-        {children}
-      </svg>
+      <div className="relative w-[150px] md:w-[200px] rounded-[1.6rem] border-[4px] border-navy bg-navy p-1.5 ring-1 ring-gold/30 shadow-[0_12px_30px_rgba(0,0,0,0.25)]">
+        <div className="absolute left-1/2 top-1.5 -translate-x-1/2 w-9 h-2 rounded-full bg-navy z-10" />
+        <div className="relative rounded-[1.2rem] overflow-hidden" style={{ aspectRatio: "924 / 2000" }}>
+          <Image
+            src={src}
+            alt={alt}
+            fill
+            sizes="(min-width: 768px) 200px, 150px"
+            className="object-cover"
+          />
+        </div>
+      </div>
       <figcaption className="mt-3 font-sans text-sm text-inkMid text-center">{caption}</figcaption>
     </figure>
   );
@@ -204,7 +214,7 @@ function ChartLabel({
 
 function StepConnector() {
   return (
-    <div className="hidden sm:flex flex-1 items-center justify-center px-2 self-center" aria-hidden="true">
+    <div className="hidden md:flex flex-1 items-center justify-center px-2 self-center" aria-hidden="true">
       <svg viewBox="0 0 100 10" className="w-full h-[10px]" preserveAspectRatio="none">
         <line x1="0" y1="5" x2="100" y2="5" stroke="currentColor" className="text-gold/50" strokeWidth={2} strokeDasharray="6 6" />
         <circle cx="50" cy="5" r="3" className="fill-gold" />
@@ -217,46 +227,28 @@ function StepConnector() {
 export function HowItWorksSteps() {
   return (
     <RevealOnView>
-      <div className="flex flex-col sm:flex-row sm:items-center gap-8 sm:gap-0">
-        <StepFigure ariaLabel="A roster chip showing a flight entry: FLT 204 on 14 October" caption="Add your duties">
-          <rect x="20" y="35" width="160" height="50" rx="12" className="fill-cream stroke-warmLine" strokeWidth={1} />
-          <text x="100" y="58" textAnchor="middle" className="fill-ink font-mono text-[14px] font-semibold">
-            FLT 204
-          </text>
-          <text x="100" y="76" textAnchor="middle" className="fill-inkFaint font-mono text-[11px] uppercase tracking-[0.1em]">
-            14 Oct
-          </text>
-        </StepFigure>
+      <div className="flex flex-col items-center md:flex-row md:items-center gap-8 md:gap-0">
+        <StepFigure
+          src="/images/app/app-build-roster.webp"
+          alt="VÉLA roster builder: adding a flight by airline, flight number and date"
+          caption="Add your duties"
+        />
 
         <StepConnector />
 
-        <StepFigure ariaLabel="A small gold wave representing your body clock curve" caption="VÉLA maps your body clock">
-          <path
-            d="M15 72 Q50 25 85 72 T155 72"
-            fill="none"
-            stroke="currentColor"
-            className="text-gold"
-            strokeWidth={3}
-            strokeLinecap="round"
-          />
-          <circle cx="50" cy="48.5" r="4" className="fill-cream stroke-gold" strokeWidth={2} />
-          <circle cx="120" cy="48.5" r="4" className="fill-cream stroke-gold" strokeWidth={2} />
-        </StepFigure>
+        <StepFigure
+          src="/images/app/app-insights.webp"
+          alt="VÉLA insights screen comparing body clock time with local time, with wellness, body clock strain and sleep need"
+          caption="VÉLA maps your body clock"
+        />
 
         <StepConnector />
 
-        <StepFigure ariaLabel="A plan card showing tonight's sleep and light timing" caption="Get your plan">
-          <rect x="15" y="20" width="170" height="80" rx="12" className="fill-night" />
-          <text x="100" y="42" textAnchor="middle" className="fill-gold font-mono text-[10px] uppercase tracking-[0.18em]">
-            Tonight
-          </text>
-          <text x="100" y="64" textAnchor="middle" className="fill-cream font-mono text-[13px]">
-            Sleep 22:00
-          </text>
-          <text x="100" y="82" textAnchor="middle" className="fill-cream font-mono text-[13px]">
-            Light 07:30
-          </text>
-        </StepFigure>
+        <StepFigure
+          src="/images/app/app-rest-plan.webp"
+          alt="VÉLA rest plan showing a timeline of meals, sleep, wake-up and departure for the next duty"
+          caption="Get your plan"
+        />
       </div>
       <p className="mt-8 text-center font-sans text-sm text-inkFaint">
         Just a date and flight number per duty.
