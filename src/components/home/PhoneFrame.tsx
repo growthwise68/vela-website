@@ -11,19 +11,19 @@ type Screen = {
 
 const screens: Screen[] = [
   {
-    tab: "Departure",
+    tab: "Roster",
     image: "/images/app/app-build-roster.webp",
-    alt: "VÉLA roster builder screen showing a flight being added before departure",
+    alt: "VÉLA roster builder screen showing a flight being added by airline, flight number and date",
   },
   {
-    tab: "Layover",
+    tab: "Rest Plan",
     image: "/images/app/app-rest-plan.webp",
-    alt: "VÉLA rest plan screen showing sleep and nap windows for a layover",
+    alt: "VÉLA rest plan screen showing sleep and nap windows across a trip",
   },
   {
-    tab: "Return",
+    tab: "Insights",
     image: "/images/app/app-insights.webp",
-    alt: "VÉLA insights screen comparing body clock time with local time after returning home",
+    alt: "VÉLA insights screen comparing body clock time with local time",
   },
 ];
 
@@ -64,8 +64,10 @@ export function PhoneFrame() {
         </div>
       </div>
 
-      {/* Tabs */}
-      <div className="flex gap-2 mt-6" role="tablist" aria-label="Trip stage">
+      {/* Tabs — px-3/tracking-[0.08em] (tighter than a typical pill here)
+          so all three, including the longer "Rest Plan", stay on one line
+          down to a 375px viewport instead of wrapping. */}
+      <div className="flex gap-1.5 mt-6" role="tablist" aria-label="App screen">
         {screens.map((s, i) => (
           <button
             key={s.tab}
@@ -73,7 +75,7 @@ export function PhoneFrame() {
             role="tab"
             aria-selected={i === active}
             onClick={() => setActive(i)}
-            className={`px-4 py-2 min-h-11 rounded-full font-mono text-xs uppercase tracking-[0.12em] transition-colors ${
+            className={`px-3 py-2 min-h-11 rounded-full font-mono text-xs uppercase tracking-[0.08em] whitespace-nowrap transition-colors ${
               i === active
                 ? "bg-gold text-ink font-semibold"
                 : "border border-cream/25 text-cream/70 hover:border-gold hover:text-gold"
