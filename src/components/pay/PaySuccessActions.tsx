@@ -50,8 +50,9 @@ type RedeemUrlDecision =
   | { valid: true }
   | { valid: false; reason: RedeemUrlFaultReason };
 
-// RC web configs: appbed9aa89d1 (sandbox), appc809f0a40e (live)
-const RC_REDEEM_PROTOCOLS = new Set(["rc-bed9aa89d1:", "rc-c809f0a40e:"]);
+// Live /pay/success accepts production RC redeem only (appc809f0a40e → rc-c809f0a40e).
+// Sandbox scheme rc-bed9aa89d1 is rejected here; the app may still accept both.
+const RC_REDEEM_PROTOCOLS = new Set(["rc-c809f0a40e:"]);
 
 function decideRedeemUrl(raw: string | null): RedeemUrlDecision {
   if (raw === null || raw.trim() === "") {
