@@ -1,12 +1,14 @@
+import React from "react";
 import type { Metadata } from "next";
 import Link from "next/link";
+import { pricingCopy } from "@/lib/pricing";
 import { mobileApplication } from "@/lib/structured-data";
 import { FullBleed } from "@/components/FullBleed";
 
 export const metadata: Metadata = {
   title: "Pricing and Free Trial",
   description:
-    "VÉLA Core is $14.99/month or $139.99/year. Founding Crew is $99.99/year, locked in for as long as you stay. Every plan starts with a 14-day free trial.",
+    `VÉLA Core is ${pricingCopy.monthly}/month or ${pricingCopy.annual}/year. Founding Crew is ${pricingCopy.foundingAnnual}/year, locked in for as long as you stay. Every plan starts with a 14-day free trial.`,
   alternates: {
     canonical: "https://velaforcrew.com/pricing",
   },
@@ -32,7 +34,7 @@ const plans: Plan[] = [
   {
     id: "monthly",
     label: "Core — Monthly",
-    price: "$14.99",
+    price: pricingCopy.monthly,
     period: "/ month",
     pill: "14 days free",
     features: [
@@ -49,16 +51,16 @@ const plans: Plan[] = [
     id: "founding",
     label: "Founding Crew — Annual",
     tag: "Founding rate · ends at launch",
-    price: "$99.99",
-    strikePrice: "$139.99",
+    price: pricingCopy.foundingAnnual,
+    strikePrice: pricingCopy.annual,
     period: "/ year",
-    sub: "$8.33/month, billed yearly",
+    sub: `${pricingCopy.foundingMonthlyEquivalent}/month, billed yearly`,
     note: "Locked in for as long as you stay subscribed.",
     pill: "14 days free",
     features: [
       "Everything in Core Annual",
-      "$40 less than Core Annual, every year",
-      "44% less than paying monthly",
+      `${pricingCopy.foundingSavingVsAnnual} (${pricingCopy.foundingDiscountVsAnnual}%) less than Core Annual, every year`,
+      `${pricingCopy.foundingDiscountVsMonthly}% less than paying monthly`,
       "Founding member status",
     ],
     cta: "Claim the founding rate",
@@ -68,11 +70,14 @@ const plans: Plan[] = [
   {
     id: "annual",
     label: "Core — Annual",
-    price: "$139.99",
+    price: pricingCopy.annual,
     period: "/ year",
-    sub: "$11.67/month, billed yearly",
+    sub: `${pricingCopy.annualMonthlyEquivalent}/month, billed yearly`,
     pill: "14 days free",
-    features: ["Everything in Core Monthly", "Save $39.89 a year versus monthly"],
+    features: [
+      "Everything in Core Monthly",
+      `Save ${pricingCopy.annualSavingVsMonthly} a year versus monthly (about ${pricingCopy.annualDiscountVsMonthly}%)`,
+    ],
     cta: "Start free trial",
     style: "outline",
     order: "order-3 md:order-3",

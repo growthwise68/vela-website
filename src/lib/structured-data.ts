@@ -1,3 +1,5 @@
+import { PRICES_USD_CENTS } from "./pricing";
+
 const SITE = "https://velaforcrew.com";
 
 export const organization = {
@@ -32,21 +34,21 @@ export const mobileApplication = {
     {
       "@type": "Offer",
       name: "VÉLA Core — Monthly",
-      price: "14.99",
+      price: (PRICES_USD_CENTS.monthly / 100).toFixed(2),
       priceCurrency: "USD",
       description: "Full access to VÉLA Core, billed monthly. Includes a 14-day free trial.",
     },
     {
       "@type": "Offer",
       name: "VÉLA Core — Annual",
-      price: "139.99",
+      price: (PRICES_USD_CENTS.annual / 100).toFixed(2),
       priceCurrency: "USD",
       description: "Full access to VÉLA Core, billed annually. Includes a 14-day free trial.",
     },
     {
       "@type": "Offer",
       name: "Founding Crew — Annual",
-      price: "99.99",
+      price: (PRICES_USD_CENTS.foundingAnnual / 100).toFixed(2),
       priceCurrency: "USD",
       description:
         "Founding Crew annual plan, locked in for as long as you stay subscribed. Includes a 14-day free trial.",
