@@ -7,6 +7,7 @@ import {
   pickAttributionFromSearchParams,
 } from "@/lib/pay/attribution";
 import Link from "next/link";
+import { pricingCopy } from "@/lib/pricing";
 import { FullBleed } from "@/components/FullBleed";
 import {
   WAITLIST_EMAIL_CONSENT_HELPER_LEAD,
@@ -227,7 +228,7 @@ export default function EarlyAccessClient() {
           <div className="grid sm:grid-cols-2 gap-4 mt-6">
             {[
               { label: "First access at launch.", body: "You'll hear the moment VÉLA opens, before it's available to everyone." },
-              { label: "Founding Crew pricing.", body: "$99.99 a year instead of $139.99, locked in for as long as you stay subscribed. Available until VÉLA opens to everyone, then it's gone." },
+              { label: "Founding Crew pricing.", body: `${pricingCopy.foundingAnnual} a year instead of ${pricingCopy.annual}, locked in for as long as you stay subscribed. Available until VÉLA opens to everyone, then it's gone.` },
               { label: "A 14-day free trial.", body: "Try it on your real roster before you pay anything." },
               { label: "A few emails while you wait.", body: "How your body clock actually works, and what crew told us about fatigue. No spam, unsubscribe anytime." },
             ].map(({ label, body }) => (

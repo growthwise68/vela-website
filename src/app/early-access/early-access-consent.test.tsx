@@ -188,3 +188,13 @@ describe("early-access consent checkbox", () => {
     assert.equal(html.toLowerCase().includes(">terms<"), false);
   });
 });
+
+describe("early-access founding price", () => {
+  it("compares the founding rate with the current standard annual rate", async () => {
+    mockSearchParams = new URLSearchParams();
+    const { default: EarlyAccessClient } = await import("./EarlyAccessClient");
+    const html = renderToStaticMarkup(React.createElement(EarlyAccessClient));
+    assert.match(html, /\$99\.99 a year instead of \$149\.99/);
+    assert.doesNotMatch(html, /139\.99/);
+  });
+});
