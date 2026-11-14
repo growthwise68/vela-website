@@ -6,7 +6,8 @@ import crypto from "crypto";
  * survey_responses legacy columns:
  * - For answers.survey_version "15q_v2", `app_utility` stores the Q6 tiredness worry scale (1–5);
  *   `route_type`, `timezone_crossings`, and `willingness_to_pay` use placeholder strings.
- * Full question labels and open text live in `answers` JSON.
+ * Full question labels and open text live in `answers` JSON. The two open-text
+ * answers are also copied into their dedicated columns when inserting a response.
  */
 
 function hashIP(ip: string): string {
@@ -22,6 +23,10 @@ function getClientIP(req: NextRequest): string {
 function validateEmail(email: string): boolean {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   return emailRegex.test(email);
+}
+
+function openTextColumn(value: unknown): string | null {
+  return typeof value === "string" ? value.trim() || null : null;
 }
 
 export async function POST(req: NextRequest) {
@@ -132,6 +137,8 @@ export async function POST(req: NextRequest) {
           name: hasContact ? nameTrimmed : null,
           ip_hash,
           answers: answers ?? {},
+          job_taken_from_life: openTextColumn(answers?.job_taken_from_life),
+          one_thing_energy_help: openTextColumn(answers?.one_thing_energy_help),
         },
       ])
       .select("id");
