@@ -99,9 +99,9 @@ describe("PaySuccessActions markup", () => {
     delete process.env.NEXT_PUBLIC_VELA_FAIL_OPEN_SUPABASE_ANON_KEY;
   });
 
-  it("W1 — RC success shape with sibling app_user_id", async () => {
+  it("W1 — live RC success shape with sibling app_user_id", async () => {
     const redeem =
-      "rc-bed9aa89d1://redeem_web_purchase?redemption_token=rc_test_token_value";
+      "rc-c809f0a40e://redeem_web_purchase?redemption_token=rc_test_token_value";
     mockSearchParams = new URLSearchParams([
       ["redeem_url", redeem],
       ["app_user_id", "user-1"],
@@ -128,6 +128,10 @@ describe("PaySuccessActions markup", () => {
         redeem_url: "https://example.com/not-rc",
       }),
       new URLSearchParams({ redeem_url: "not-a-url" }),
+      new URLSearchParams({
+        redeem_url:
+          "rc-bed9aa89d1://redeem_web_purchase?redemption_token=sandbox_token",
+      }),
     ];
 
     for (const params of cases) {
@@ -361,7 +365,7 @@ describe("sendPaySuccessRedeemUrlFault (W5)", () => {
     assert.equal(fetchCalls.length, 0);
   });
 
-  it("W5 — valid redeem URL does not POST (sendPaySuccessRedeemUrlFault)", async () => {
+  it("W5 — valid live redeem URL does not POST (sendPaySuccessRedeemUrlFault)", async () => {
     process.env.NEXT_PUBLIC_VELA_FAIL_OPEN_SUPABASE_ANON_KEY = "fake-anon-key";
     const fetchCalls: unknown[] = [];
     globalThis.fetch = (async (...args: unknown[]) => {
@@ -370,7 +374,7 @@ describe("sendPaySuccessRedeemUrlFault (W5)", () => {
     }) as typeof fetch;
 
     const redeem =
-      "rc-bed9aa89d1://redeem_web_purchase?redemption_token=valid_token";
+      "rc-c809f0a40e://redeem_web_purchase?redemption_token=valid_token";
     const { sendPaySuccessRedeemUrlFault } = await import(
       `./PaySuccessActions.tsx?w5-valid-fn=${Date.now()}`
     );
@@ -384,7 +388,37 @@ describe("sendPaySuccessRedeemUrlFault (W5)", () => {
     assert.equal(fetchCalls.length, 0);
   });
 
-  it("W5 — valid redeem URL client path runs useEffect without fetch", async () => {
+  it("W5 — sandbox redeem URL on live success is invalid_shape and POSTs", async () => {
+    process.env.NEXT_PUBLIC_VELA_FAIL_OPEN_SUPABASE_ANON_KEY = "fake-anon-key";
+    const fetchCalls: { url: string; init: RequestInit }[] = [];
+    globalThis.fetch = (async (url: string | URL | Request, init?: RequestInit) => {
+      fetchCalls.push({
+        url: String(url),
+        init: init ?? {},
+      });
+      return new Response(null, { status: 201 });
+    }) as typeof fetch;
+
+    const sandboxRedeem =
+      "rc-bed9aa89d1://redeem_web_purchase?redemption_token=sandbox_only";
+    const { sendPaySuccessRedeemUrlFault } = await import(
+      `./PaySuccessActions.tsx?w5-sandbox-reject=${Date.now()}`
+    );
+
+    await sendPaySuccessRedeemUrlFault({
+      raw: sandboxRedeem,
+      appUserId: "user-1",
+      pageUrl: w5PageUrlFixture(),
+    });
+
+    assert.equal(fetchCalls.length, 1);
+    const body = JSON.parse(String(fetchCalls[0].init.body)) as {
+      observed: { reason: string };
+    };
+    assert.equal(body.observed.reason, "invalid_shape");
+  });
+
+  it("W5 — valid live redeem URL client path runs useEffect without fetch", async () => {
     process.env.NEXT_PUBLIC_VELA_FAIL_OPEN_SUPABASE_ANON_KEY = "fake-anon-key";
     const fetchCalls: unknown[] = [];
     globalThis.fetch = (async (...args: unknown[]) => {
@@ -395,7 +429,7 @@ describe("sendPaySuccessRedeemUrlFault (W5)", () => {
     setupBrowserDom("https://preview.example/pay/success");
 
     const redeem =
-      "rc-bed9aa89d1://redeem_web_purchase?redemption_token=valid_token";
+      "rc-c809f0a40e://redeem_web_purchase?redemption_token=valid_token";
     mockSearchParams = new URLSearchParams({ redeem_url: redeem });
 
     const { PaySuccessActions } = await import(
