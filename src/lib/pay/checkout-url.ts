@@ -7,13 +7,20 @@ function setUtmIfPresent(url: URL, key: string, value?: string): void {
   }
 }
 
+export type CheckoutIdentity = {
+  appUserId?: string | null;
+  email?: string | null;
+};
+
 /**
- * RC Web Purchase Link with allow-listed checkout attribution merged onto the query.
+ * RC Web Purchase Link with optional identified appUserId path segment,
+ * email prefill, and allow-listed checkout attribution merged onto the query.
  * Visitor utm_content is forwarded when present; otherwise ref becomes utm_content.
  */
 export function buildRevenueCatCheckoutUrl(
   attribution: PayAttribution = {},
-  baseUrl: string = RC_WEB_PURCHASE_URL
+  baseUrl: string = RC_WEB_PURCHASE_URL,
+  identity?: CheckoutIdentity
 ): string {
   const trimmedBase = baseUrl.trim();
   if (!trimmedBase) {
@@ -21,6 +28,17 @@ export function buildRevenueCatCheckoutUrl(
   }
 
   const url = new URL(trimmedBase);
+
+  const appUserId = identity?.appUserId?.trim();
+  if (appUserId) {
+    const cleanPath = url.pathname.replace(/\/+$/, "");
+    url.pathname = `${cleanPath}/${encodeURIComponent(appUserId)}`;
+  }
+
+  const email = identity?.email?.trim();
+  if (email) {
+    url.searchParams.set("email", email);
+  }
 
   setUtmIfPresent(url, "utm_source", attribution.utm_source);
   setUtmIfPresent(url, "utm_medium", attribution.utm_medium);
