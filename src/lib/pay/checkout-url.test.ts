@@ -68,4 +68,17 @@ describe("buildRevenueCatCheckoutUrl", () => {
   it("returns base when empty after trim", () => {
     assert.equal(buildRevenueCatCheckoutUrl({}, "  "), "");
   });
+
+  it("appends encoded Firebase UID and email when identity is provided", () => {
+    const url = buildRevenueCatCheckoutUrl(
+      { utm_source: "ig", ref: "crew42" },
+      "https://pay.rev.cat/osvxmwaqqcojdxqs/",
+      { appUserId: "uid_abc123", email: "crew@example.com" }
+    );
+    const parsed = new URL(url);
+    assert.equal(parsed.pathname, "/osvxmwaqqcojdxqs/uid_abc123");
+    assert.equal(parsed.searchParams.get("email"), "crew@example.com");
+    assert.equal(parsed.searchParams.get("utm_source"), "ig");
+    assert.equal(parsed.searchParams.get("utm_content"), "crew42");
+  });
 });

@@ -1,12 +1,17 @@
 "use client";
 
-import React, { useEffect, useMemo } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import {
   ANDROID_PLAY_STORE_URL,
   IOS_APP_STORE_URL,
   VELA_OPEN_APP_URL,
 } from "@/lib/pay/config";
+import {
+  isFirebaseWebAuthConfigured,
+  subscribeFirebaseUser,
+  type PayFirebaseUser,
+} from "@/lib/pay/firebase-auth";
 
 const FAIL_OPEN_REPORTS_URL =
   "https://zajrtrwhqjsyfyskyftp.supabase.co/rest/v1/fail_open_reports";
@@ -133,12 +138,31 @@ export async function sendPaySuccessRedeemUrlFault({
   });
 }
 
+function isIdentifiedAppUserId(appUserId: string | null): boolean {
+  const trimmed = appUserId?.trim() || "";
+  return trimmed.length > 0 && !trimmed.startsWith("$RCAnonymousID:");
+}
+
 export function PaySuccessActions() {
   const searchParams = useSearchParams();
   const raw = searchParams?.get("redeem_url") ?? null;
   const appUserId = searchParams?.get("app_user_id") ?? null;
 
+  const [firebaseUser, setFirebaseUser] = useState<PayFirebaseUser | null>(null);
+
+  useEffect(() => {
+    if (!isFirebaseWebAuthConfigured()) {
+      return;
+    }
+    return subscribeFirebaseUser(setFirebaseUser);
+  }, []);
+
   const redeemDecision = useMemo(() => decideRedeemUrl(raw), [raw]);
+  const isIdentifiedBuyer = useMemo(
+    () => isIdentifiedAppUserId(appUserId),
+    [appUserId]
+  );
+  const hasConfirmedActivation = redeemDecision.valid || isIdentifiedBuyer;
 
   const openAppHref = useMemo(() => {
     if (redeemDecision.valid) {
@@ -148,7 +172,7 @@ export function PaySuccessActions() {
   }, [redeemDecision, raw]);
 
   useEffect(() => {
-    if (redeemDecision.valid) {
+    if (redeemDecision.valid || isIdentifiedBuyer) {
       return;
     }
     void sendPaySuccessRedeemUrlFault({
@@ -156,24 +180,30 @@ export function PaySuccessActions() {
       appUserId,
       pageUrl: window.location.href,
     }).catch(() => {});
-  }, [redeemDecision, raw, appUserId]);
+  }, [redeemDecision, isIdentifiedBuyer, raw, appUserId]);
+
+  const signedInEmail = firebaseUser?.email?.trim() || null;
 
   return (
     <div className="space-y-8" data-testid="pay-success-actions">
       <div className="text-center">
         <p className="font-mono text-xs uppercase tracking-[0.2em] text-gold font-semibold mb-4">
-          {redeemDecision.valid ? "Payment received" : "Activation link missing"}
+          {hasConfirmedActivation ? "Payment received" : "Activation link missing"}
         </p>
         <h1
           className="font-display text-4xl md:text-5xl font-light text-ink mb-4 leading-tight"
           data-testid="pay-success-heading"
         >
-          {redeemDecision.valid ? "You\u2019re in" : "Finish activating VÉLA Core"}
+          {hasConfirmedActivation ? "You\u2019re in" : "Finish activating VÉLA Core"}
         </h1>
         <p className="font-sans text-base md:text-lg text-inkMid leading-relaxed">
           {redeemDecision.valid
             ? "Thanks for supporting VÉLA. Tap Open Véla below to attach Core to your account."
-            : "We could not find an activation link in this page URL. If you just completed checkout, open the confirmation email from RevenueCat and tap its activation link."}
+            : isIdentifiedBuyer
+              ? signedInEmail
+                ? `Thanks for supporting VÉLA. Open or download the app and sign in with ${signedInEmail} — Core is already attached.`
+                : "Thanks for supporting VÉLA. Open or download the app and sign in with the account you used at checkout — Core is already attached."
+              : "We could not find an activation link in this page URL. If you just completed checkout, open the confirmation email from RevenueCat and tap its activation link."}
         </p>
       </div>
 
