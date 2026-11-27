@@ -160,6 +160,23 @@ export function PaySuccessActions() {
 
   return (
     <div className="space-y-8" data-testid="pay-success-actions">
+      <div className="text-center">
+        <p className="font-mono text-xs uppercase tracking-[0.2em] text-gold font-semibold mb-4">
+          {redeemDecision.valid ? "Payment received" : "Activation link missing"}
+        </p>
+        <h1
+          className="font-display text-4xl md:text-5xl font-light text-ink mb-4 leading-tight"
+          data-testid="pay-success-heading"
+        >
+          {redeemDecision.valid ? "You\u2019re in" : "Finish activating VÉLA Core"}
+        </h1>
+        <p className="font-sans text-base md:text-lg text-inkMid leading-relaxed">
+          {redeemDecision.valid
+            ? "Thanks for supporting VÉLA. Tap Open Véla below to attach Core to your account."
+            : "We could not find an activation link in this page URL. If you just completed checkout, open the confirmation email from RevenueCat and tap its activation link."}
+        </p>
+      </div>
+
       <div className="rounded-[18px] border-2 border-gold bg-night p-6 md:p-8 text-center">
         <p className="font-mono text-xs uppercase tracking-[0.18em] text-cream/60 mb-3">
           Next step
